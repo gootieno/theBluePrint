@@ -26,3 +26,5 @@ frontend/yarn-error.log*
 #BACKEND
 /backend/.env
 /backend/.flaskenv
+
+.gitignore
