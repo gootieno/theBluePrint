@@ -1,11 +1,33 @@
-import LandingPage from './Components/LandingPage'
+import { useState } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
-function App() {
-	return (
-		<div>
-			<LandingPage />
-		</div>
-	)
-}
+import LandingPage from "./Components/Pages/LandingPage";
+import LoginPage from "./Components/Pages/LoginPage";
 
-export default App
+const App = () => {
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
+
+  const handleCredentials = (e) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value,
+    });
+  };
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
+        <Route path="/login">
+          <LoginPage
+            credentials={credentials}
+            handleCredentials={handleCredentials}
+          />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
+export default App;
