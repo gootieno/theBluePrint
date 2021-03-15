@@ -1,0 +1,51 @@
+.landingPage {
+  background: rgb(9, 9, 9);
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 9, 1) 0%,
+    rgba(117, 117, 117, 1) 13%,
+    rgba(201, 198, 198, 1) 24%,
+    rgba(252, 252, 252, 1) 31%,
+    rgba(252, 252, 252, 1) 69%,
+    rgba(201, 198, 198, 1) 76%,
+    rgba(117, 117, 117, 1) 87%,
+    rgba(9, 9, 9, 1) 100%
+  );
+  height: 100vh;
+}
+
+#home {
+  cursor: pointer;
+  width: 8%;
+  padding-left: 30px;
+  padding-top: 20px;
+  margin: 0;
+}
+
+.landingPage-banner-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.landingPage-feed {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  margin: 0 auto;
+  align-self: center;
+}
+
+.landingPage-banner-images {
+  display: flex;
+  width: 100%;
+}
+.landingPage-banner-images-evo {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.landingPage-login {
+  width: 30%;
+  margin: 0 auto;
+  align-self: center;
+}
