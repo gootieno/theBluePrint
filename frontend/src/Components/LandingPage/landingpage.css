@@ -1,0 +1,32 @@
+.landing-page {
+  width: 100%;
+}
+
+.landingPage-banner-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.landingPage-feed {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  margin: 0 auto;
+  align-self: center;
+}
+
+.landingPage-banner-images {
+  display: flex;
+  width: 100%;
+}
+.landingPage-banner-images-evo {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.landingPage-login {
+  width: 30%;
+  margin: 0 auto;
+  align-self: center;
+}
