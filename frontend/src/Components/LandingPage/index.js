@@ -16,9 +16,7 @@ const LandingPage = () => {
   };
 
   const handleClick = (e) => {
-    e.target.id === "login-button"
-      ? setLogin((prevState) => !prevState)
-      : setLogin(false);
+    alert("login works");
   };
 
   return (
@@ -31,23 +29,26 @@ const LandingPage = () => {
       </div>
       <div className="landingPage-banner-container">
         <div className="landingPage-feed">
-          <button className="feed-button">Feed</button>
+          <div
+            onClick={() => alert("feed need to be wired")}
+            className="feed-button landingPage-buttons"
+          >
+            FEED
+          </div>
         </div>
         <div className="landingPage-banner-images">
           <img className="landingPage-banner-images-evo" src={jdm} />
         </div>
-        <div id="login-button" className="landingPage-login">
-          {!login && (
-            <button
-              id="login-button"
-              value={login}
-              onClick={handleClick}
-              className="login-button"
-            >
-              Enter
-            </button>
-          )}
-          {login && <Login credentials={credentials} />}
+        <div className="landingPage-login">
+          <div
+            type="button"
+            id="login-button"
+            value={login}
+            onClick={handleClick}
+            className="login-button landingPage-buttons"
+          >
+            <span className="blinking">ENTER</span>
+          </div>
         </div>
       </div>
     </div>
