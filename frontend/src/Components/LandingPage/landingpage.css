@@ -19,7 +19,7 @@
   width: 8%;
   padding-left: 30px;
   padding-top: 20px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .landingPage-banner-container {
@@ -35,6 +35,15 @@
   align-self: center;
 }
 
+.feed-button {
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s width;
+  padding: 3px;
+}
+
 .landingPage-banner-images {
   display: flex;
   width: 100%;
@@ -48,4 +57,30 @@
   width: 30%;
   margin: 0 auto;
   align-self: center;
+}
+
+.login-button {
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.5s width;
+  padding: 3px;
+}
+
+@keyframes blinking {
+  50% {
+    background-color: #df982e;
+    box-shadow: 1px 1px 25px 20px #df982e;
+  }
+  100% {
+    background-color: rgb(126, 126, 126);
+    box-shadow: none;
+  }
+}
+
+.landingPage-buttons:hover {
+  box-shadow: 1px 1px 15px #df982e;
+  width: 30%;
+  animation: blinking infinite 0.7s;
 }
