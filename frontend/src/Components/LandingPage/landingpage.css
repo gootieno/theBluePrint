@@ -1,10 +1,29 @@
-.landing-page {
-  width: 100%;
+.landingPage {
+  background: rgb(9, 9, 9);
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 9, 1) 0%,
+    rgba(117, 117, 117, 1) 13%,
+    rgba(201, 198, 198, 1) 24%,
+    rgba(252, 252, 252, 1) 31%,
+    rgba(252, 252, 252, 1) 69%,
+    rgba(201, 198, 198, 1) 76%,
+    rgba(117, 117, 117, 1) 87%,
+    rgba(9, 9, 9, 1) 100%
+  );
+  height: 100vh;
+}
+
+#home {
+  cursor: pointer;
+  width: 8%;
+  padding-left: 30px;
+  padding-top: 20px;
+  margin: 0;
 }
 
 .landingPage-banner-container {
   display: flex;
-  width: 100%;
   justify-content: space-around;
 }
 
