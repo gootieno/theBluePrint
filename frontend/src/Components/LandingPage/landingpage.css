@@ -27,6 +27,80 @@
   justify-content: space-around;
 }
 
+#turbo {
+  height: 7%;
+  top: 20%;
+  left: 70%;
+  animation: float 7s ease-in infinite;
+}
+
+#turbo-2 {
+  height: 7%;
+  bottom: 45%;
+  left: 35.5%;
+  animation: float 6s infinite ease-in-out;
+}
+
+#exhaust {
+  height: 15%;
+  left: 50%;
+  bottom: 75%;
+  animation: float 10s infinite ease-in-out;
+}
+
+#piston-1 {
+  height: 10%;
+  left: 35%;
+  bottom: 70%;
+  animation: float 10s infinite ease-in-out;
+}
+#piston-2 {
+  height: 7%;
+  right: 35%;
+  top: 61%;
+  animation: float 10s infinite ease-in-out;
+}
+
+#evo {
+  height: 45%;
+  top: 27.5%;
+  left: 20.5%;
+}
+#rotor {
+  height: 10%;
+  bottom: 50%;
+  left: 60%;
+  animation: float 7s ease-in-out infinite;
+}
+
+#rotor-2 {
+  height: 5%;
+  bottom: 55%;
+  left: 25%;
+  animation: float 6s ease infinite;
+}
+
+#rx7 {
+  height: 45%;
+  right: 20%;
+  top: 29%;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-30px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
+.landingPage-banner-icons {
+  position: absolute;
+}
 .landingPage-feed {
   display: flex;
   justify-content: flex-end;
@@ -48,8 +122,10 @@
   display: flex;
   width: 100%;
 }
-.landingPage-banner-images-evo {
-  width: 60%;
+.landingPage-banner-image {
+  position: relative;
+  height: 110%;
+  top: 5%;
   margin: 0 auto;
 }
 
