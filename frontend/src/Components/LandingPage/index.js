@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import jdm from "../../media/jdm.jpeg";
-import evo from "../../media/evoWallpaper.jpeg";
+import jdm from "../../media/jdm.png";
+import evo from "../../media/evo9-image-revised.png";
+import turbo from "../../media/turbo.png";
+import rotor from "../../media/rotor.png";
+import exhaust from "../../media/exhaust.png";
+import rx7 from "../../media/rx7.png";
+import piston from "../../media/piston.png";
 import Login from "../Login";
 import "./landingpage.css";
 
@@ -36,9 +41,36 @@ const LandingPage = () => {
             FEED
           </div>
         </div>
+
         <div className="landingPage-banner-images">
-          <img className="landingPage-banner-images-evo" src={jdm} />
+          <img id="turbo" className="landingPage-banner-icons" src={turbo} />
+          <img
+            id="piston-1"
+            className="landingPage-banner-icons"
+            src={piston}
+          />
+          <img
+            id="exhaust"
+            className="landingPage-banner-icons"
+            src={exhaust}
+          />
+          <img id="rotor-2" className="landingPage-banner-icons" src={rotor} />
+          <img id="evo" className="landingPage-banner-icons" src={evo} />
+          <img id="rotor" className="landingPage-banner-icons" src={rotor} />
+          <img id="rx7" className="landingPage-banner-icons" src={rx7} />
+          <img
+            id="turbo-2"
+            className="landingPage-banner-icons"
+            src={turbo}
+          />{" "}
+          <img
+            id="piston-2"
+            className="landingPage-banner-icons"
+            src={piston}
+          />
+          <img className="landingPage-banner-image" src={jdm} />{" "}
         </div>
+
         <div className="landingPage-login">
           <div
             type="button"
