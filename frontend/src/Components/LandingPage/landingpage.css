@@ -142,6 +142,7 @@
   cursor: pointer;
   transition: 0.5s width;
   padding: 3px;
+  padding-right: 7px;
 }
 
 @keyframes blinking {

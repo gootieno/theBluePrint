@@ -21,7 +21,7 @@ const LandingPage = () => {
   };
 
   const handleClick = (e) => {
-    alert("login works");
+    history.push("/garage");
   };
 
   return (
@@ -77,9 +77,9 @@ const LandingPage = () => {
             id="login-button"
             value={login}
             onClick={handleClick}
-            className="login-button landingPage-buttons"
+            className="login-button blinking landingPage-buttons"
           >
-            <span className="blinking">ENTER</span>
+            ENTER
           </div>
         </div>
       </div>
