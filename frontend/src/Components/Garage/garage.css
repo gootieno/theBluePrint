@@ -7,14 +7,14 @@
 }
 
 .build-list-container {
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
   border-left: 1px solid black;
 }
 
 .blueprint-container {
   border-left: 1px solid black;
-  height: 100vh;
+  height: 80vh;
   width: 100vw;
 }
 
