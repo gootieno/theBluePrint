@@ -38,7 +38,7 @@ const LandingPage = () => {
             onClick={() => alert("feed need to be wired")}
             className="feed-button landingPage-buttons"
           >
-            FEED
+            STORE
           </div>
         </div>
 
