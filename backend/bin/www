@@ -1,17 +1,15 @@
 #!/usr/bin/env node
 
-const { port } = require('../config')
-const app = require('../app')
-const db = require('../db/models')
+const {port} = require('../config')
+const app = require('app')
+const db = require('../db/models)
 
-db.sequelize
-	.authenticate()
-	.then(() => {
-		console.log('YOU IN THE DB LOAD IT UP!')
+db.sequelize.authenticate().then(()=> {
+    console.log('YOU IN THE DB LOAD IT UP!')
 
-		app.listen(port, () => console.log(`Listening on port ${port}..`))
-	})
-	.catch((err) => {
-		console.log('FIX THE DB CONNECTION..')
-		console.error(err)
-	})
+    app.listen(port, ()=> console.log(`Listening on port ${port}..`))
+}).catch((err)=> {
+    console.log('FIX THE DB CONNECTION..')
+    console.error(err)
+})
+

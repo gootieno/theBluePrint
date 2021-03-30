@@ -10,7 +10,7 @@ frontend/coverage
 frontend/src/media
 
 # production
-Fronend/build
+frontend/build
 
 # misc
 frontend/.DS_Store
