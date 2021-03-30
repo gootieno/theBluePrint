@@ -1,36 +1,38 @@
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const csurf = require("csurf");
-const helmet = require("helmet");
-const cookieParser = require("cookie-parser");
+const express = require('express')
+const morgan = require('morgan')
+const cors = require('cors')
+const csurf = require('csurf')
+const helmet = require('helmet')
+const cookieParser = require('cookie-parser')
 
-const { environment } = require("./config");
-const isProduction = environment === "production";
+const routes = require('./routes')
 
-const app = express();
+const { environment } = require('./config')
+const isProduction = environment === 'production'
 
-app.use(morgan("dev"));
+const app = express()
 
-app.use(cookieParser());
-app.use(express.json());
+app.use(morgan('dev'))
+
+app.use(cookieParser())
+app.use(express.json())
 
 if (!isProduction) {
-  app.use(cors());
+	app.use(cors())
 }
 
-app.use(helmet({ contentSecurityPolicy: false }));
+app.use(helmet({ contentSecurityPolicy: false }))
 
 app.use(
-  csurf({
-    cookie: {
-      secure: isProduction,
-      sameSite: isProduction && "LAX",
-      httpOnly: true,
-    },
-  })
-);
+	csurf({
+		cookie: {
+			secure: isProduction,
+			sameSite: isProduction && 'LAX',
+			httpOnly: true,
+		},
+	})
+)
 
-app.use(routes);
+app.use(routes)
 
-module.exports = app;
+module.exports = app
