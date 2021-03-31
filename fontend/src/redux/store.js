@@ -1,7 +1,11 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-const rootReducer = combineReducers({})
+import userReducer from './user'
+
+const rootReducer = combineReducers({
+	user: userReducer,
+})
 
 let enhancer
 

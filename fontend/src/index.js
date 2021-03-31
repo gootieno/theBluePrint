@@ -8,9 +8,6 @@ import App from './App'
 import { restoreCSRF, csrfFetch } from './redux/csrf'
 import configureStore from './redux/store'
 
-if (process.env.NODE_ENV !== 'production') {
-	restoreCSRF()
-}
 const store = configureStore()
 
 const Root = () => {

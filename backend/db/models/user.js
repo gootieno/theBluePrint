@@ -33,7 +33,21 @@ module.exports = (sequelize, DataTypes) => {
 				},
 			},
 		},
-		{}
+		{
+			defaultScope: {
+				attributes: {
+					exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+				},
+			},
+			scopes: {
+				currentUser: {
+					attributes: { exclude: ['hashedPassword'] },
+				},
+				loginUser: {
+					attributes: {},
+				},
+			},
+		}
 	)
 
 	User.prototype.toSafeObject = function () {
@@ -50,16 +64,12 @@ module.exports = (sequelize, DataTypes) => {
 		return await User.scope('currentUser').findByPk(id)
 	}
 
-	User.login = async function ({ credential, password }) {
+	User.login = async function ({ email, password }) {
 		const { Op } = require('sequelize')
 		const user = await User.scope('loginUser').findOne({
-			where: {
-				[Op.or]: {
-					username: credential,
-					email: credential,
-				},
-			},
+			where: { email },
 		})
+		// && user.validatePassword(password)
 		if (user && user.validatePassword(password)) {
 			return await User.scope('currentUser').findByPk(user.id)
 		}
