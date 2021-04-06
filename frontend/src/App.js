@@ -1,11 +1,22 @@
 import { useState } from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import * as sessionActions from './redux/user'
 import LandingPage from './components/LandingPage'
-import Garage from './components/Garage'
 import './index.css'
 import Login from './components/Login'
+import Garage from './components/Garage'
 
 const App = () => {
+	const [isLoaded, setIsLoaded] = useState(false)
+
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
+	}, [dispatch])
+
 	return (
 		<BrowserRouter>
 			<Switch>

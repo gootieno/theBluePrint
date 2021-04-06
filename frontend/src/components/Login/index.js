@@ -9,6 +9,8 @@ const Login = () => {
 		email: '',
 		password: '',
 	})
+
+	const history = useHistory()
 	const dispatch = useDispatch()
 
 	const handleInputChange = (e) => {
@@ -18,6 +20,7 @@ const Login = () => {
 	const handleLogin = (e) => {
 		e.preventDefault()
 		dispatch(loginUser(credentials))
+		history.push('/garage')
 	}
 
 	return (
