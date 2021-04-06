@@ -24,8 +24,6 @@ const validateSignup = [
 	handleValidationErrors,
 ]
 
-const router = express.Router()
-
 // Sign up
 router.post(
 	'',
