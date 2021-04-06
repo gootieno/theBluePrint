@@ -16,6 +16,7 @@ const LandingPage = () => {
   const [login, setLogin] = useState(false);
 
   const history = useHistory();
+  
   const handleCredentials = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.name });
   };
