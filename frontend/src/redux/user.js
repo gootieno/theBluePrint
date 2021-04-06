@@ -12,6 +12,13 @@ const removeUser = () => ({
 	type: USER_REMOVED,
 })
 
+export const restoreUser = () => async (dispatch) => {
+	const response = await csrfFetch('/api/session')
+	const data = await response.json()
+	dispatch(addUser(data.user))
+	return response
+}
+
 export const loginUser = ({ email, password }) => async (dispatch) => {
 	const response = await csrfFetch('/api/session', {
 		method: 'POST',
