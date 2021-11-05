@@ -35,13 +35,15 @@ const LandingPage = () => {
   return (
     <div id="landing-page" className="landing-page-container">
       <NavBar handleLoginModal={handleLoginModal} loginModal={loginModal} />
-      <Modal>
-        <Login
-          handleLogin={handleLogin}
-          credentials={credentials}
-          handleInputChange={handleInputChange}
-        />
-      </Modal>
+      {loginModal && (
+        <Modal>
+          <Login
+            handleLogin={handleLogin}
+            credentials={credentials}
+            handleInputChange={handleInputChange}
+          />
+        </Modal>
+      )}
     </div>
   );
 };
