@@ -17,10 +17,10 @@ const Login = () => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value })
 	}
 
-	const handleLogin = (e) => {
+	const handleLogin = async (e) => {
 		e.preventDefault()
-		dispatch(loginUser(credentials))
-		history.push('/garage')
+		const success = await dispatch(loginUser(credentials))
+		if(success)history.push('/garage')
 	}
 
 	return (
