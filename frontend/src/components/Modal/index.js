@@ -1,7 +1,5 @@
-import React from "react";
-
-function Modal() {
-  return <div></div>;
+function Modal({ children }) {
+  return <div>{children}</div>;
 }
 
 export default Modal;

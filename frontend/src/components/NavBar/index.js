@@ -1,8 +1,7 @@
-import React from "react";
+import { useState } from "react";
 import "./navbar.css";
 
-function NavBar() {
-  //navbar should take session token to conditionally render
+function NavBar({ handleLoginModal, loginModal }) {
   return (
     <div id="navbar" className="navbar-container">
       <div id="landing-page-feed-button">
@@ -19,7 +18,12 @@ function NavBar() {
       <h2 id="landing-page-title">theBluePrint</h2>
 
       <div id="landing-page-login-button">
-        <div type="button" id="login-button" className="landing-page-buttons">
+        <div
+          type="button"
+          id="login-button"
+          className="landing-page-buttons"
+          onClick={handleLoginModal}
+        >
           LOGIN
         </div>
       </div>
