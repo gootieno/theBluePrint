@@ -5,7 +5,7 @@ function NavBar() {
   //navbar should take session token to conditionally render
   return (
     <div id="navbar" className="navbar-container">
-      <div className="landing-page-feed-button">
+      <div id="landing-page-feed-button">
         <div
           id="feed-button"
           type="button"
@@ -18,7 +18,7 @@ function NavBar() {
 
       <h2 id="landing-page-title">theBluePrint</h2>
 
-      <div className="landing-page-login-button">
+      <div id="landing-page-login-button">
         <div type="button" id="login-button" className="landing-page-buttons">
           LOGIN
         </div>
