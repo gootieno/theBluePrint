@@ -1,7 +1,14 @@
 import { useState } from "react";
+import LoginModal from "../LoginModal";
+
 import "./navbar.css";
 
-function NavBar({ handleLoginModal, loginModal }) {
+function NavBar() {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleShowModal = () => {
+    setShowModal((prevState) => !prevState);
+  };
   return (
     <div id="navbar" className="navbar-container">
       <div id="landing-page-feed-button">
@@ -22,11 +29,12 @@ function NavBar({ handleLoginModal, loginModal }) {
           type="button"
           id="login-button"
           className="landing-page-buttons"
-          onClick={handleLoginModal}
+          onClick={handleShowModal}
         >
           LOGIN
         </div>
       </div>
+      <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 }
