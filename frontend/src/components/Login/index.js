@@ -1,6 +1,11 @@
 import "./login.css";
 
-const Login = ({ handleInputChange, credentials, handleLogin }) => {
+const Login = ({
+  handleInputChange,
+  credentials,
+  handleLogin,
+  handleLoginModal,
+}) => {
   return (
     <form className="form-container" onSubmit={handleLogin}>
       <input
@@ -18,6 +23,9 @@ const Login = ({ handleInputChange, credentials, handleLogin }) => {
         onChange={handleInputChange}
       />
       <button onClick={handleLogin}>login</button>
+      <button id="cancel-button" onClick={handleLoginModal}>
+        cancel
+      </button>
     </form>
   );
 };

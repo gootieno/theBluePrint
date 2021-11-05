@@ -23,8 +23,11 @@ const LandingPage = () => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
-  const handleLoginModal = () => {
+  const handleLoginModal = (e) => {
     setLoginModal((prevState) => !prevState);
+    if (e.target.id === "cancel-button") {
+      setLoginModal(false);
+    }
   };
 
   const handleLogin = async (e) => {
@@ -35,15 +38,14 @@ const LandingPage = () => {
   return (
     <div id="landing-page" className="landing-page-container">
       <NavBar handleLoginModal={handleLoginModal} loginModal={loginModal} />
-      {loginModal && (
-        <Modal>
-          <Login
-            handleLogin={handleLogin}
-            credentials={credentials}
-            handleInputChange={handleInputChange}
-          />
-        </Modal>
-      )}
+      <Modal loginModal={loginModal}>
+        <Login
+          handleLogin={handleLogin}
+          credentials={credentials}
+          handleInputChange={handleInputChange}
+          handleLoginModal={handleLoginModal}
+        />
+      </Modal>
     </div>
   );
 };
