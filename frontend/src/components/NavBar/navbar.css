@@ -1,0 +1,81 @@
+/* navbar */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  background: rgb(9, 9, 9);
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 9, 1) 0%,
+    rgba(117, 117, 117, 1) 13%,
+    rgba(201, 198, 198, 1) 24%,
+    rgba(252, 252, 252, 1) 31%,
+    rgba(252, 252, 252, 1) 69%,
+    rgba(201, 198, 198, 1) 76%,
+    rgba(117, 117, 117, 1) 87%,
+    rgba(9, 9, 9, 1) 100%
+  );
+}
+
+/* feed */
+#landing-page-feed-button {
+  display: flex;
+  justify-content: flex-end;
+  width: 30%;
+  transition: 0.5s width;
+  margin: 0 auto;
+  align-self: center;
+}
+
+#feed-button {
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+  padding: 3px;
+}
+
+/* login */
+
+#landing-page-login-button {
+  display: flex;
+  width: 30%;
+  margin: 0 auto;
+  align-self: center;
+}
+
+#login-button {
+  border: 1px solid black;
+  width: 20%;
+  text-align: center;
+  cursor: pointer;
+  padding: 3px;
+  padding-right: 7px;
+}
+/* landing page buttons */
+
+.landing-page-buttons:hover {
+  flex-grow: 0.1;
+  box-shadow: 1px 1px 15px #df982e;
+  width: 30%;
+  animation: blinking infinite 0.7s;
+  transition: 0.8s all;
+}
+
+@keyframes blinking {
+  50% {
+    background-color: #df982e;
+    box-shadow: 1px 1px 25px 20px #df982e;
+  }
+  100% {
+    background-color: rgba(248, 248, 248, 0);
+    box-shadow: none;
+  }
+}
+
+/* landing page title */
+
+#landing-page-title {
+  cursor: pointer;
+  margin: 0 auto;
+}
