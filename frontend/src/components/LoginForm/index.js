@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../../redux/user";
@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import "./login.css";
 
-const LoginForm = () => {
+const LoginForm = ({ setShowModal }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -47,11 +47,11 @@ const LoginForm = () => {
         className="login-input-fields"
         onChange={handleInputChange}
       />
-      <div id="login-submit-container" onClick={handleLogin}>
-        <div id="login-close">
+      <div id="login-submit-container">
+        <div type="button" id="login-close" onClick={() => setShowModal(false)}>
           <CloseIcon />
         </div>
-        <div id="login-submit">
+        <div type="button" id="login-submit" onClick={handleLogin}>
           <DoubleArrowIcon />
         </div>
       </div>
