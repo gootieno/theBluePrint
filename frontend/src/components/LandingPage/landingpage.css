@@ -27,6 +27,12 @@
 
 #registration-signup {
   text-align: center;
+  color: #45818e;
+  cursor: pointer;
+}
+
+#registration-signup:hover {
+  color: blue;
 }
 
 #registration-demo {
@@ -34,6 +40,10 @@
   cursor: pointer;
   text-align: center;
   padding-top: 5px;
+}
+
+#registration-demo:hover {
+  color: #1c353b;
 }
 
 #registration-container {

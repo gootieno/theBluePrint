@@ -9,6 +9,11 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import "./landingpage.css";
 
 const LandingPage = () => {
+  const history = useHistory();
+  const handleSignUp = () => {
+    history.push("/register");
+  };
+
   return (
     <>
       <div id="landing-page" className="landing-page-container">
@@ -24,8 +29,12 @@ const LandingPage = () => {
             <h2 className="registration-text">
               Browsing around? Try the demo account!
             </h2>
-            <h3 id="registration-signup" className="registration-text">
-              create an account
+            <h3
+              id="registration-signup"
+              className="registration-text"
+              onClick={handleSignUp}
+            >
+              Create an account
             </h3>
             <span>
               <h3
