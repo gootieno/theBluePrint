@@ -2,6 +2,10 @@ import { createContext, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../../redux/user";
+
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import CloseIcon from "@mui/icons-material/Close";
+
 import "./login.css";
 
 const LoginForm = () => {
@@ -24,7 +28,7 @@ const LoginForm = () => {
   };
   return (
     <form className="form-container" onSubmit={handleLogin}>
-      <h2 id="login-title"> LOGIN</h2>
+      <h3 id="login-title"> Welcome Back!</h3>
       <input
         id="email"
         type="text"
@@ -43,9 +47,14 @@ const LoginForm = () => {
         className="login-input-fields"
         onChange={handleInputChange}
       />
-      <button id="login-submit" onClick={handleLogin}>
-        login
-      </button>
+      <div id="login-submit-container" onClick={handleLogin}>
+        <div id="login-close">
+          <CloseIcon />
+        </div>
+        <div id="login-submit">
+          <DoubleArrowIcon />
+        </div>
+      </div>
     </form>
   );
 };

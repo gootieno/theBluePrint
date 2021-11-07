@@ -3,20 +3,32 @@
 }
 
 #email {
-  margin: 20px 10px;
+  margin: 10px 10px 20px;
 }
 
 #password {
-  margin: 0 10px 10px;
+  margin: 0 10px 20px;
 }
 
 #login-title {
   padding: 0;
-  padding-left: 28%;
+  text-align: center;
+  color: #45818e;
 }
 
-#login-submit {
-  margin-left: 30%;
+#login-submit-container {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 10px;
   padding: 0px 20px;
+}
+
+#login-submit:hover {
+  color: #45818e;
+  cursor: pointer;
+}
+
+#login-close:hover {
+  color: orange;
+  cursor: pointer;
 }

@@ -5,31 +5,28 @@
   border-bottom: 1mm solid rgba(52, 52, 52, 0.463);
   margin-right: 50px;
   margin-left: 50px;
+  padding-bottom: 5px;
   position: relative;
 }
-
-/* login */
 
 #landing-page-login-button {
   display: flex;
   margin: 0 auto;
   align-self: center;
   margin-left: 65%;
+  justify-self: center;
+  border: 1px solid #45818e;
+  color: #45818e;
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 3px 10px;
 }
 
 #login-button {
-  border: 1px solid #45818e;
   text-align: center;
   cursor: pointer;
-  color: #45818e;
-  padding: 3px 10px;
+  padding: 3px 8px;
 }
-/* landing page buttons */
-
-/* .landing-page-buttons:hover {
-} */
-
-/* landing page title */
 
 #landing-page-title {
   cursor: pointer;

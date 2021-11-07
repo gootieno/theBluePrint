@@ -1,6 +1,8 @@
 import { useState } from "react";
 import LoginModal from "../LoginModal";
 
+import LoginIcon from "@mui/icons-material/Login";
+
 import "./navbar.css";
 
 function NavBar() {
@@ -21,6 +23,7 @@ function NavBar() {
         >
           LOGIN
         </div>
+        <LoginIcon />
       </div>
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </div>
