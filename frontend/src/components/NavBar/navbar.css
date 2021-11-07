@@ -3,9 +3,9 @@
   display: flex;
   margin-top: 20px;
   border-bottom: 1mm solid rgba(52, 52, 52, 0.463);
-  left: 5%;
-  right: 5%;
-  position: fixed;
+  margin-right: 50px;
+  margin-left: 50px;
+  position: relative;
 }
 
 /* login */
@@ -26,8 +26,8 @@
 }
 /* landing page buttons */
 
-.landing-page-buttons:hover {
-}
+/* .landing-page-buttons:hover {
+} */
 
 /* landing page title */
 
