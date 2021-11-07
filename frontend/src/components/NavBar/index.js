@@ -10,20 +10,8 @@ function NavBar() {
     setShowModal((prevState) => !prevState);
   };
   return (
-    <div id="navbar" className="navbar-container">
-      <div id="landing-page-feed-button">
-        <div
-          id="feed-button"
-          type="button"
-          onClick={() => alert("feed need to be wired")}
-          className="landing-page-buttons"
-        >
-          FEED
-        </div>
-      </div>
-
-      <h2 id="landing-page-title">theBluePrint</h2>
-
+    <div id="navbar-container">
+      <h1 id="landing-page-title">theBluePrint</h1>
       <div id="landing-page-login-button">
         <div
           type="button"
