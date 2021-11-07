@@ -9,11 +9,7 @@ import NavBar from "../NavBar";
 import "./landingpage.css";
 
 const LandingPage = () => {
-  return (
-    <div id="landing-page" className="landing-page-container">
-      
-    </div>
-  );
+  return <div id="landing-page" className="landing-page-container"></div>;
 };
 
 export default LandingPage;

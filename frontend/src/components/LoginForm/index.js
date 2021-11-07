@@ -31,7 +31,6 @@ const LoginForm = () => {
         placeholder="Email"
         name="email"
         value={credentials.email}
-        ß
         className="login-input-fields"
         onChange={handleInputChange}
       />
