@@ -6,6 +6,9 @@ import { loginUser } from "../../redux/user";
 import LoginModal from "../LoginModal";
 import NavBar from "../NavBar";
 
+import GitHubIcon from "@mui/icons-material/GitHub";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+
 import "./landingpage.css";
 
 const LandingPage = () => {
@@ -36,7 +39,10 @@ const LandingPage = () => {
             </h3>
           </div>
         </div>
-        <div id="landing-page-footer">dev icons here</div>
+        <div id="landing-page-footer">
+          <GitHubIcon id="landing-page-github" color="primary" />
+          <LinkedInIcon id="landing-page-linkedin" color="primary" />
+        </div>
       </div>
     </>
   );

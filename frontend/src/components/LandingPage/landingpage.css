@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  background-color: rgba(232, 229, 229, 0.566);
 }
 
 #landing-page-message-container {
@@ -14,6 +15,8 @@
   display: flex;
   font-size: 1.5em;
   justify-content: center;
+  align-items: center;
+  margin-top: 50px;
 }
 
 #landing-page-revolving-text {
@@ -36,12 +39,20 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 8%;
 }
 
 #registration-text {
   text-align: center;
 }
 #landing-page-footer {
-  border-top: 1px solid black;
+  border-top: 1mm solid rgba(52, 52, 52, 0.463);
   color: red;
+  text-align: center;
+  margin: 0% 10%;
+  padding-top: 1.5%;
+}
+
+#landing-page-github {
+  padding-right: 10px;
 }
