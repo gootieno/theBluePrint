@@ -23,7 +23,7 @@ function NavBar() {
         >
           LOGIN
         </div>
-        <LoginIcon />
+        <LoginIcon onClick={handleShowModal} />
       </div>
       <LoginModal showModal={showModal} setShowModal={setShowModal} />
     </div>

@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import LandingPage from "./components/LandingPage";
-import Login from "./components/LoginForm";
+import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
 import Garage from "./components/Garage";
 
@@ -14,12 +14,12 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <LandingPage />
+          <Route path="/register">
+            <SignUpPage />
+          </Route>
         </Route>
         <Route path="/garage">
           <Garage />
-        </Route>
-        <Route path="/login">
-          <Login />
         </Route>
       </Switch>
     </>
