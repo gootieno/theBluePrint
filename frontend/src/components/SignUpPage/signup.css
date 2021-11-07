@@ -1,0 +1,27 @@
+#signup-form-page-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 100vh;
+}
+
+#signup-form-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20vh;
+  margin-right: 50px;
+}
+
+#signup-form-terms-and-conditions {
+  height: 30vh;
+  margin-left: 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 5px;
+}
+
+.signup-page-terms-content {
+  margin-top: 20px;
+}
