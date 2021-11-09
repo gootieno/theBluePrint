@@ -23,8 +23,9 @@ const LoginForm = ({ setShowModal }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const success = await dispatch(loginUser(credentials));
-    if (success) history.push("/garage");
+    const user = await dispatch(loginUser(credentials));
+    setShowModal(false);
+    if (user) history.push("/home");
   };
   return (
     <form className="form-container" onSubmit={handleLogin}>
