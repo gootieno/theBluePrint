@@ -27,8 +27,9 @@ export const signupUser =
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username, email, password }),
     });
-    if (!response.okay) throw response;
-    const user = await response.json();
+    if (!response.ok) throw response;
+    const { user } = await response.json();
+    console.log(user);
     dispatch(addUser(user));
     return user;
   };
@@ -42,7 +43,7 @@ export const loginUser =
       body: JSON.stringify({ email, password }),
     });
     if (!response.ok) throw response;
-    const user = await response.json();
+    const { user } = await response.json();
     dispatch(addUser(user));
     return user;
   };
@@ -51,7 +52,6 @@ const userReducer = (state = null, action) => {
   switch (action.type) {
     case USER_ADDED:
       return {
-        ...state,
         [action.user.id]: action.user,
       };
     case USER_REMOVED:
