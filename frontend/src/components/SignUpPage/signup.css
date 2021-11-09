@@ -34,15 +34,14 @@
 }
 
 #signup-form-submit {
-  margin: 15px 0 10px;
-}
-
-#signup-page-terms-and-conditions {
+  margin-top: 15px;
+  margin-left: 0;
   color: #45818e;
 }
 
 #signup-page-terms-confirm {
   margin-right: 10px;
+  margin-left: 0;
   cursor: pointer;
 }
 
@@ -55,6 +54,8 @@
 .signup-submit {
   cursor: pointer;
   width: fit-content;
+  margin-left: 0;
+  margin-bottom: 5px;
 }
 
 .signup-submit:hover {

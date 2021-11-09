@@ -18,7 +18,7 @@ const LoginForm = ({ setShowModal }) => {
   const history = useHistory();
 
   const handleInputChange = (e) => {
-    setCredentials({ ...credentials, [e.target.id]: e.target.value });
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
 
   const handleLogin = async (e) => {
