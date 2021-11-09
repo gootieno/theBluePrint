@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LoginModal from "../LoginModal";
+import LoginModal from "../Modals/LoginModal";
 
 import LoginIcon from "@mui/icons-material/Login";
-import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import "./navbar.css";
+import ProfileButton from "./ProfileButton";
 
 function NavBar({ isLoaded }) {
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +27,7 @@ function NavBar({ isLoaded }) {
   if (user) {
     loggedIn = (
       <div id="profile-button">
-        <PersonIcon />{" "}
+        <ProfileButton />
       </div>
     );
   } else {

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import LoginForm from "../LoginForm";
+import LoginForm from "../../LoginForm";
 
-import { Modal } from "../../contex/Modal";
+import { Modal } from "../../../contex/Modal";
 
 function LoginModal({ showModal, setShowModal }) {
   return (
