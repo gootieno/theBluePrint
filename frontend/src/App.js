@@ -18,6 +18,9 @@ const App = () => {
         <Route path="/register">
           <SignUpPage />
         </Route>
+        <Route path="/home">
+          <div>this is the home page</div>
+        </Route>
         <Route path="/garage">
           <Garage />
         </Route>

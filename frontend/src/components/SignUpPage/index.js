@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import { signupUser } from "../../redux/user";
+
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import "./signup.css";
@@ -15,9 +17,18 @@ function SignUpPage() {
   });
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
-  const handleSubmit = (event) => {
+  const handleInputChange = (event) => {
+    setSignUpForm({ ...signUpForm, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const user = await dispatch(signupUser(signUpForm));
+    if (user) {
+      history.push("/");
+    }
     // send info to database
   };
 
@@ -25,30 +36,42 @@ function SignUpPage() {
     <>
       <h1 id="signup-form-page-title">It all starts here!</h1>
       <div id="signup-form-page-container">
-        <form id="signup-form-container">
+        <form id="signup-form-container" onSubmit={handleSubmit} type="submit">
           <input
             className="signup-page-terms-content"
             id="signup-username"
             type="text"
             placeholder="username"
+            value={signUpForm.username}
+            name="username"
+            onChange={handleInputChange}
           />
           <input
             className="signup-page-terms-content"
             id="signup-email"
             type="email"
             placeholder="email"
+            value={signUpForm.email}
+            name="email"
+            onChange={handleInputChange}
           />
           <input
             className="signup-page-terms-content"
             id="signup-password"
             type="password"
             placeholder="password"
+            value={signUpForm.password}
+            name="password"
+            onChange={handleInputChange}
           />
           <input
             id="signup-confirm-password"
             type="password"
             placeholder="confirm password"
             className="signup-page-terms-content"
+            value={signUpForm.confirmPassword}
+            name="confirmPassword"
+            onChange={handleInputChange}
           />
         </form>
         <div id="signup-form-terms-and-conditions-container">
@@ -58,11 +81,17 @@ function SignUpPage() {
             <input id="signup-page-terms-confirm" type="checkbox" />
             <span>Agree?</span>
           </span>
-          <div id="signup-form-submit" className="signup-submit">
+          <div
+            id="signup-form-submit"
+            type="submit"
+            className="signup-submit"
+            onClick={handleSubmit}
+          >
             <DoubleArrowIcon
               fontSize="small"
               id="signup-form-submit-icon"
               className="signup-submit"
+              onClick={handleSubmit}
             />
           </div>
         </div>
