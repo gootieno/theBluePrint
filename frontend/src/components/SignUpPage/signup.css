@@ -2,24 +2,30 @@
   display: flex;
   justify-content: center;
   flex-direction: row;
-  height: 100vh;
+  height: 60vh;
+  align-items: center;
+}
+
+#signup-form-page-title {
+  text-align: center;
+  margin-top: 2%;
 }
 
 #signup-form-container {
   display: flex;
   flex-direction: column;
-  margin-top: 20vh;
   margin-right: 50px;
+  width: 15vw;
 }
 
-#signup-form-terms-and-conditions {
+#signup-form-terms-and-conditions-container {
   height: 30vh;
-  margin-left: 50px;
+  margin-left: 5%;
   border: 1px solid black;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  padding: 10px 10px 5px;
+  padding: 10px 20px 0px;
 }
 
 .signup-page-terms-content {
