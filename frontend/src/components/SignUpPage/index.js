@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+
 import "./signup.css";
 
 function SignUpPage() {
@@ -11,23 +13,61 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
+
   const history = useHistory();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // send info to database
+  };
+
   return (
-    <div id="signup-form-container">
-      <div id="signup-form">
-        <input id="signup-username" type="text" placeholder="username" />
-        <input id="signup-email" type="email" placeholder="email" />
-        <input id="signup-password" type="password" placeholder="password" />
-        <input
-          id="signup-confirm-password"
-          type="password"
-          placeholder="confirm password"
-        />
+    <>
+      <h1 id="signup-form-page-title">It all starts here!</h1>
+      <div id="signup-form-page-container">
+        <form id="signup-form-container">
+          <input
+            className="signup-page-terms-content"
+            id="signup-username"
+            type="text"
+            placeholder="username"
+          />
+          <input
+            className="signup-page-terms-content"
+            id="signup-email"
+            type="email"
+            placeholder="email"
+          />
+          <input
+            className="signup-page-terms-content"
+            id="signup-password"
+            type="password"
+            placeholder="password"
+          />
+          <input
+            id="signup-confirm-password"
+            type="password"
+            placeholder="confirm password"
+            className="signup-page-terms-content"
+          />
+        </form>
+        <div id="signup-form-terms-and-conditions-container">
+          <h2 id="signup-page-terms-and-conditions">Terms and conditions</h2>
+          <h3 id="signup-page-terms-body"> Live, Laugh, Love</h3>
+          <span id="signup-page-confirm-container">
+            <input id="signup-page-terms-confirm" type="checkbox" />
+            <span>Agree?</span>
+          </span>
+          <div id="signup-form-submit" className="signup-submit">
+            <DoubleArrowIcon
+              fontSize="small"
+              id="signup-form-submit-icon"
+              className="signup-submit"
+            />
+          </div>
+        </div>
       </div>
-      <div id="signup-form-terms-and-conditions">
-        <p>some text here</p>
-      </div>
-    </div>
+    </>
   );
 }
 

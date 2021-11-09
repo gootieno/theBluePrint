@@ -14,9 +14,9 @@ const App = () => {
       <Switch>
         <Route exact path="/">
           <LandingPage />
-          <Route path="/register">
-            <SignUpPage />
-          </Route>
+        </Route>
+        <Route path="/register">
+          <SignUpPage />
         </Route>
         <Route path="/garage">
           <Garage />

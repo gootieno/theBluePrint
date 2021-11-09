@@ -1,0 +1,62 @@
+#signup-form-page-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  height: 60vh;
+  align-items: center;
+}
+
+#signup-form-page-title {
+  text-align: center;
+  margin-top: 2%;
+}
+
+#signup-form-container {
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  width: 15vw;
+}
+
+#signup-form-terms-and-conditions-container {
+  margin-left: 5%;
+  border: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px 0px;
+}
+
+#signup-page-confirm-container {
+  display: flex;
+  align-content: center;
+  padding-top: 20px;
+}
+
+#signup-form-submit {
+  margin: 15px 0 10px;
+}
+
+#signup-page-terms-and-conditions {
+  color: #45818e;
+}
+
+#signup-page-terms-confirm {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.signup-page-terms-content {
+  margin-top: 20px;
+  line-height: 20px;
+  width: 17vw;
+}
+
+.signup-submit {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.signup-submit:hover {
+  color: #45818e;
+}
