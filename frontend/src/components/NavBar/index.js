@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LoginModal from "../LoginModal";
+import LoginModal from "../Modals/LoginModal";
+import ProfileButtonModal from "../Modals/ProfileButtonModal";
+import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import LoginIcon from "@mui/icons-material/Login";
-import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import "./navbar.css";
 
 function NavBar({ isLoaded }) {
-  const [showModal, setShowModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const user = useSelector((state) => state.user);
 
@@ -20,15 +22,25 @@ function NavBar({ isLoaded }) {
   };
 
   const handleShowModal = () => {
-    setShowModal((prevState) => !prevState);
+    setShowLoginModal((prevState) => !prevState);
+  };
+
+  const handleProfileButton = () => {
+    setShowProfileMenu(true);
   };
 
   let loggedIn;
   if (user) {
     loggedIn = (
-      <div id="profile-button">
-        <PersonIcon />{" "}
-      </div>
+      <>
+        <div id="profile-button" onClick={handleProfileButton}>
+          <PersonIcon onClick={handleProfileButton} />
+        </div>
+        <ProfileButtonModal
+          showProfileMenu={showProfileMenu}
+          setShowProfileMenu={setShowProfileMenu}
+        />
+      </>
     );
   } else {
     loggedIn = (
@@ -42,7 +54,10 @@ function NavBar({ isLoaded }) {
           LOGIN
         </div>
         <LoginIcon onClick={handleShowModal} />
-        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+        <LoginModal
+          showLoginModal={showLoginModal}
+          setShowLoginModal={setShowLoginModal}
+        />
       </>
     );
   }
