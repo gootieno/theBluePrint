@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+
 import "./signup.css";
 
 function SignUpPage() {
@@ -13,6 +15,11 @@ function SignUpPage() {
   });
 
   const history = useHistory();
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // send info to database
+  };
 
   return (
     <>
@@ -51,6 +58,13 @@ function SignUpPage() {
             <input id="signup-page-terms-confirm" type="checkbox" />
             <span>Agree?</span>
           </span>
+          <div id="signup-form-submit" className="signup-submit">
+            <DoubleArrowIcon
+              fontSize="small"
+              id="signup-form-submit-icon"
+              className="signup-submit"
+            />
+          </div>
         </div>
       </div>
     </>

@@ -19,7 +19,6 @@
 }
 
 #signup-form-terms-and-conditions-container {
-  height: 30vh;
   margin-left: 5%;
   border: 1px solid black;
   border-radius: 5px;
@@ -28,6 +27,36 @@
   padding: 10px 20px 0px;
 }
 
+#signup-page-confirm-container {
+  display: flex;
+  align-content: center;
+  padding-top: 20px;
+}
+
+#signup-form-submit {
+  margin: 15px 0 10px;
+}
+
+#signup-page-terms-and-conditions {
+  color: #45818e;
+}
+
+#signup-page-terms-confirm {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
 .signup-page-terms-content {
   margin-top: 20px;
+  line-height: 20px;
+  width: 17vw;
+}
+
+.signup-submit {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.signup-submit:hover {
+  color: #45818e;
 }
