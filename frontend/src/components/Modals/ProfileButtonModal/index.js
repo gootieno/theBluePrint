@@ -1,16 +1,14 @@
-import React from "react";
+import ProfileButtonMenu from "../../ProfileButtonMenu";
 
-import { Modal } from "../../context/Modal";
+import { Modal } from "../../../contex/Modal";
 
-function ProfileButtonModal({ openProfile, setOpenProfile }) {
+function ProfileButtonModal({ showProfileMenu, setShowProfileMenu }) {
   return (
     <>
-      {openProfile && (
-        <>
-          <Modal onClose={() => setOpenProfile(false)}>
-            <ProfileButtonMenu />
-          </Modal>
-        </>
+      {showProfileMenu && (
+        <Modal onClose={() => setShowProfileMenu(false)}>
+          <ProfileButtonMenu setShowProfileMenu={setShowProfileMenu} />
+        </Modal>
       )}
     </>
   );

@@ -1,14 +1,13 @@
-import { useState } from "react";
 import LoginForm from "../../LoginForm";
 
 import { Modal } from "../../../contex/Modal";
 
-function LoginModal({ showModal, setShowModal }) {
+function LoginModal({ showLoginModal, setShowLoginModal }) {
   return (
     <>
-      {showModal && (
-        <Modal onClose={() => setShowModal(false)}>
-          <LoginForm setShowModal={setShowModal} />
+      {showLoginModal && (
+        <Modal onClose={() => setShowLoginModal(false)}>
+          <LoginForm setShowLoginModal={setShowLoginModal} />
         </Modal>
       )}
     </>

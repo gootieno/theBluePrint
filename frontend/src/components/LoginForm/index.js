@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import "./login.css";
 
-const LoginForm = ({ setShowModal }) => {
+const LoginForm = ({ setShowLoginModal }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -24,7 +24,7 @@ const LoginForm = ({ setShowModal }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     const user = await dispatch(loginUser(credentials));
-    setShowModal(false);
+    setShowLoginModal(false);
     if (user) history.push("/home");
   };
   return (
@@ -49,7 +49,7 @@ const LoginForm = ({ setShowModal }) => {
         onChange={handleInputChange}
       />
       <div id="login-submit-container">
-        <div type="button" id="login-close" onClick={() => setShowModal(false)}>
+        <div type="button" id="login-close" onClick={() => setShowLoginModal(false)}>
           <CloseIcon />
         </div>
         <div type="button" id="login-submit" onClick={handleLogin}>
