@@ -12,10 +12,12 @@ const removeUser = () => ({
   type: USER_REMOVED,
 });
 
+/*******************USER SESSION*********************/
 export const restoreUser = () => async (dispatch) => {
   const response = await csrfFetch("/api/session");
-  const data = await response.json();
-  dispatch(addUser(data.user));
+  const { user } = await response.json();
+  if (!response) throw response;
+  dispatch(addUser(user));
   return response;
 };
 
@@ -47,6 +49,15 @@ export const loginUser =
     dispatch(addUser(user));
     return user;
   };
+
+export const logoutUser = () => async (dispatch) => {
+  const response = await csrfFetch("/api/session", {
+    method: "DELETE",
+  });
+  if (!response.ok) throw response;
+  dispatch(removeUser());
+  return response;
+};
 
 const userReducer = (state = null, action) => {
   switch (action.type) {

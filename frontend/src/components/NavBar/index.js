@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import LoginModal from "../LoginModal";
 
 import LoginIcon from "@mui/icons-material/Login";
+import PersonIcon from "@mui/icons-material/PersonOutlineOutlined";
 
 import "./navbar.css";
 
-function NavBar() {
+function NavBar({ isLoaded }) {
   const [showModal, setShowModal] = useState(false);
 
-  const match = useRouteMatch("/");
+  const user = useSelector((state) => state.user);
 
   const history = useHistory();
+
   const handlePageTitle = () => {
     history.push("/");
   };
@@ -20,12 +23,16 @@ function NavBar() {
     setShowModal((prevState) => !prevState);
   };
 
-  return (
-    <div id="navbar-container">
-      <h1 id="landing-page-title" onClick={handlePageTitle}>
-        theBluePrint
-      </h1>
-      <div id="landing-page-login-button">
+  let loggedIn;
+  if (user) {
+    loggedIn = (
+      <div id="profile-button">
+        <PersonIcon />{" "}
+      </div>
+    );
+  } else {
+    loggedIn = (
+      <>
         <div
           type="button"
           id="login-button"
@@ -35,8 +42,17 @@ function NavBar() {
           LOGIN
         </div>
         <LoginIcon onClick={handleShowModal} />
-      </div>
-      <LoginModal showModal={showModal} setShowModal={setShowModal} />
+        <LoginModal showModal={showModal} setShowModal={setShowModal} />
+      </>
+    );
+  }
+
+  return (
+    <div id="navbar-container">
+      <h1 id="landing-page-title" onClick={handlePageTitle}>
+        theBluePrint
+      </h1>
+      <div id="landing-page-login-button">{isLoaded && loggedIn}</div>
     </div>
   );
 }
