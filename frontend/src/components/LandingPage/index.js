@@ -47,20 +47,20 @@ const LandingPage = () => {
             </span>
           </div>
         </div>
-        <div id="landing-page-footer">
-          <GitHubIcon
-            fontSize="large"
-            id="landing-page-github"
-            className="landing-page-footer-icons
+      </div>{" "}
+      <div id="landing-page-footer">
+        <GitHubIcon
+          fontSize="large"
+          id="landing-page-github"
+          className="landing-page-footer-icons
             "
-          />
-          <LinkedInIcon
-            fontSize="large"
-            id="landing-page-linkedin"
-            className="landing-page-footer-icons
+        />
+        <LinkedInIcon
+          fontSize="large"
+          id="landing-page-linkedin"
+          className="landing-page-footer-icons
             "
-          />
-        </div>
+        />
       </div>
     </>
   );
