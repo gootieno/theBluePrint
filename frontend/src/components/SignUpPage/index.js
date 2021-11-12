@@ -16,6 +16,14 @@ function SignUpPage() {
     confirmPassword: "",
   });
 
+  const [title, setTitle] = useState("It all starts here!");
+
+  const [termsAndConditions, setTermsAndConditions] = useState(false);
+
+  const handleTermsAndConditions = () => {
+    setTermsAndConditions((prevState) => !prevState);
+  };
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -29,12 +37,24 @@ function SignUpPage() {
     if (user) {
       history.push("/");
     }
-    // send info to database
   };
 
   return (
     <>
-      <h1 id="signup-form-page-title">It all starts here!</h1>
+      <div id="signup-form-page-title-container">
+        {title.split("").map((letter, i) => (
+          <h1
+            className={
+              letter !== " " ? `title-letters-no-space` : `title-letters-space`
+            }
+            id={letter !== " " ? `title-letter-${i}` : `title-letter-space`}
+            key={`$title-${i}-${letter}`}
+            value={letter}
+          >
+            {letter}
+          </h1>
+        ))}
+      </div>
       <div id="signup-form-page-container">
         <form id="signup-form-container" onSubmit={handleSubmit} type="submit">
           <input
@@ -78,7 +98,13 @@ function SignUpPage() {
           <h2 id="signup-page-terms-and-conditions">Terms and conditions</h2>
           <h3 id="signup-page-terms-body"> Live, Laugh, Love</h3>
           <span id="signup-page-confirm-container">
-            <input id="signup-page-terms-confirm" type="checkbox" />
+            <input
+              id="signup-page-terms-confirm"
+              name="termsAndConditions"
+              type="checkbox"
+              value={termsAndConditions}
+              onChange={handleTermsAndConditions}
+            />
             <span>Agree?</span>
           </span>
           <div
