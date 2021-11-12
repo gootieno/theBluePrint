@@ -23,6 +23,8 @@
 .title-letters-no-space:hover {
   color: #45818e;
   cursor: default;
+  box-shadow: 0px 2px 5px #45818e;
+  border-radius: 5px;
 }
 
 #signup-form-container {
