@@ -59,7 +59,9 @@ export const logoutUser = () => async (dispatch) => {
   return response;
 };
 
-const userReducer = (state = null, action) => {
+let initialState = { user: null };
+
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_ADDED:
       let newState = Object.assign({}, state);

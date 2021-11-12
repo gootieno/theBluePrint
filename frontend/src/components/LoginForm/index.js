@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { loginUser } from "../../redux/user";
 
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -17,6 +17,10 @@ const LoginForm = ({ setShowLoginModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const location = useLocation();
+
+  let { fromUrl } = location.state || { from: { pathname: "/" } };
+
   const handleInputChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -25,7 +29,7 @@ const LoginForm = ({ setShowLoginModal }) => {
     e.preventDefault();
     const user = await dispatch(loginUser(credentials));
     setShowLoginModal(false);
-    if (user) history.push("/home");
+    if (user) history.replace(fromUrl);
   };
   return (
     <form className="form-container" onSubmit={handleLogin}>
@@ -49,7 +53,11 @@ const LoginForm = ({ setShowLoginModal }) => {
         onChange={handleInputChange}
       />
       <div id="login-submit-container">
-        <div type="button" id="login-close" onClick={() => setShowLoginModal(false)}>
+        <div
+          type="button"
+          id="login-close"
+          onClick={() => setShowLoginModal(false)}
+        >
           <CloseIcon />
         </div>
         <div type="button" id="login-submit" onClick={handleLogin}>
