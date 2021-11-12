@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
 
 import { signupUser } from "../../redux/user";
 
@@ -19,6 +19,8 @@ function SignUpPage() {
 
   const [termsAndConditions, setTermsAndConditions] = useState(false);
 
+  const user = useSelector((state) => state.user);
+
   const handleTermsAndConditions = () => {
     setTermsAndConditions((prevState) => !prevState);
   };
@@ -34,9 +36,12 @@ function SignUpPage() {
     event.preventDefault();
     const user = await dispatch(signupUser(signUpForm));
     if (user) {
-      history.push("/");
+      history.push("/home");
     }
   };
+  if (user) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <>

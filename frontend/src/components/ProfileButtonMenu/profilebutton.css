@@ -1,0 +1,9 @@
+#profile-menu-items-container {
+  display: flex;
+  flex-direction: column;
+}
+
+#profile-menu-cancel {
+  margin-top: 10px;
+  cursor: pointer;
+}
