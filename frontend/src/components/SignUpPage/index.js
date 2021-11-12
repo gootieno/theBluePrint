@@ -7,6 +7,7 @@ import { signupUser } from "../../redux/user";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 
 import "./signup.css";
+import Title from "./Title";
 
 function SignUpPage() {
   const [signUpForm, setSignUpForm] = useState({
@@ -15,8 +16,6 @@ function SignUpPage() {
     password: "",
     confirmPassword: "",
   });
-
-  const [title, setTitle] = useState("It all starts here!");
 
   const [termsAndConditions, setTermsAndConditions] = useState(false);
 
@@ -41,20 +40,7 @@ function SignUpPage() {
 
   return (
     <>
-      <div id="signup-form-page-title-container">
-        {title.split("").map((letter, i) => (
-          <h1
-            className={
-              letter !== " " ? `title-letters-no-space` : `title-letters-space`
-            }
-            id={letter !== " " ? `title-letter-${i}` : `title-letter-space`}
-            key={`$title-${i}-${letter}`}
-            value={letter}
-          >
-            {letter}
-          </h1>
-        ))}
-      </div>
+      <Title />
       <div id="signup-form-page-container">
         <form id="signup-form-container" onSubmit={handleSubmit} type="submit">
           <input
