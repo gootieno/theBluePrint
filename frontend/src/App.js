@@ -21,11 +21,11 @@ const App = () => {
   return (
     <>
       <Navbar isLoaded={isLoaded} />
+      <Route exact path="/">
+        <LandingPage />
+      </Route>
       {isLoaded && (
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
           <Route path="/register">
             <SignUpPage />
           </Route>
