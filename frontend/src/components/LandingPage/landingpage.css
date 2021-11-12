@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: rgba(232, 229, 229, 0.566);
+  background-color: rgba(229, 232, 232, 0.566);
 }
 
 #landing-page-message-container {
