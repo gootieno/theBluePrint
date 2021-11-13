@@ -7,9 +7,13 @@ const Home = ({ isAuthenticated }) => {
   if (!isAuthenticated) return <Redirect to="/" />;
   return (
     <div id="home-page-container">
-      <div id="home-page-build-list">build list</div>
+      <h1 id="home-page-build-list" className="home-page-navigation">
+        build list
+      </h1>
       <div id="home-page-divider"></div>
-      <div id="home-page-garage">garage</div>
+      <h1 id="home-page-garage" className="home-page-navigation">
+        garage
+      </h1>
     </div>
   );
 };
