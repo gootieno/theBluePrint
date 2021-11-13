@@ -17,10 +17,6 @@ const LoginForm = ({ setShowLoginModal }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const location = useLocation();
-
-  let { fromUrl } = location.state || { from: { pathname: "/" } };
-
   const handleInputChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
@@ -29,10 +25,10 @@ const LoginForm = ({ setShowLoginModal }) => {
     e.preventDefault();
     const user = await dispatch(loginUser(credentials));
     setShowLoginModal(false);
-    if (user) history.replace(fromUrl);
+    if (user) history.push("/home");
   };
   return (
-    <form className="form-container" onSubmit={handleLogin}>
+    <form type="submit" className="form-container" onSubmit={handleLogin}>
       <h3 id="login-title"> Welcome Back!</h3>
       <input
         id="email"

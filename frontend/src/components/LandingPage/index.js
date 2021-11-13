@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Redirect, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { loginUser } from "../../redux/user";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -8,11 +8,16 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import "./landingpage.css";
 
-const LandingPage = () => {
+const LandingPage = ({ isAuthenticated }) => {
   const history = useHistory();
+
   const handleSignUp = () => {
-    history.push("/register");
+    history.push("/signup");
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/home" />;
+  }
 
   return (
     <>

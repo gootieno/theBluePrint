@@ -15,7 +15,6 @@ const Logout = ({ setShowProfileMenu }) => {
   const handleLogout = async (event) => {
     event.preventDefault();
     let status = await dispatch(logoutUser());
-    console.log(status);
     if (status.ok) {
       setShowProfileMenu(false);
       history.push("/");
