@@ -1,23 +1,20 @@
-import { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { loginUser } from "../../redux/user";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import "./landingpage.css";
 
-const LandingPage = ({ isAuthenticated }) => {
+const LandingPage = () => {
   const history = useHistory();
+  const user = useSelector((state) => state.session.yser);
 
   const handleSignUp = () => {
     history.push("/signup");
   };
 
-  if (isAuthenticated) {
-    return <Redirect to="/home" />;
-  }
+  if (user) return <Redirect to="/home" />;
 
   return (
     <>

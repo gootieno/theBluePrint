@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { logoutUser } from "../../redux/user";
 
 import "./logout.css";
@@ -8,9 +8,6 @@ import "./logout.css";
 const Logout = ({ setShowProfileMenu }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const location = useLocation();
-
-  let { fromUrl } = location.state || { from: { pathname: "/" } };
 
   const handleLogout = async (event) => {
     event.preventDefault();
