@@ -18,7 +18,7 @@ export const restoreUser = () => async (dispatch) => {
   const { user } = await response.json();
   if (!response) throw response;
   dispatch(addUser(user));
-  return response;
+  return user;
 };
 
 export const signupUser =
@@ -31,7 +31,6 @@ export const signupUser =
     });
     if (!response.ok) throw response;
     const { user } = await response.json();
-    console.log(user);
     dispatch(addUser(user));
     return user;
   };
@@ -59,15 +58,18 @@ export const logoutUser = () => async (dispatch) => {
   return response;
 };
 
-const userReducer = (state = null, action) => {
+let initialState = { user: null };
+
+const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case USER_ADDED:
       let newState = Object.assign({}, state);
       newState.user = action.user;
       return newState;
     case USER_REMOVED:
-      delete state.user;
-      return null;
+      let nextState = Object.assign({}, state);
+      delete nextState.user;
+      return nextState;
     default:
       return state;
   }

@@ -19,7 +19,7 @@ function SignUpPage() {
 
   const [termsAndConditions, setTermsAndConditions] = useState(false);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.session.user);
 
   const handleTermsAndConditions = () => {
     setTermsAndConditions((prevState) => !prevState);

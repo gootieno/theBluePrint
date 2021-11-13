@@ -9,11 +9,11 @@ import LoginIcon from "@mui/icons-material/Login";
 
 import "./navbar.css";
 
-function NavBar({ isLoaded }) {
+function NavBar({ isAuthenticated }) {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.session.user);
 
   const history = useHistory();
 
@@ -67,7 +67,7 @@ function NavBar({ isLoaded }) {
       <h1 id="landing-page-title" onClick={handlePageTitle}>
         theBluePrint
       </h1>
-      <div id="landing-page-login-button">{isLoaded && loggedIn}</div>
+      <div id="landing-page-login-button">{isAuthenticated && loggedIn}</div>
     </div>
   );
 }

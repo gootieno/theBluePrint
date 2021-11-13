@@ -1,42 +1,42 @@
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
+import Home from "./components/Home";
 import Garage from "./components/Garage";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
 
 const App = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(restoreUser()).then(() => setIsLoaded(true));
+    dispatch(restoreUser()).then(() => setIsAuthenticated(true));
   }, [dispatch]);
 
   return (
     <>
-      <Navbar isLoaded={isLoaded} />
+      <Navbar isAuthenticated={isAuthenticated} />
       <Route exact path="/">
-        <LandingPage />
+        <LandingPage isAuthenticated={isAuthenticated} />
       </Route>
-      {isLoaded && (
-        <Switch>
-          <Route path="/register">
-            <SignUpPage />
-          </Route>
-          <Route path="/home">
-            <div>this is the home page</div>
-          </Route>
-          <Route path="/garage">
-            <Garage />
-          </Route>
-        </Switch>
-      )}
+      <Switch>
+        <Route path="/signup">
+          <SignUpPage />
+        </Route>
+        <ProtectedRoute isAuthenticated={isAuthenticated} path="/home">
+          <Home />
+        </ProtectedRoute>
+        <Route path="/garage">
+          <Garage />
+        </Route>
+      </Switch>
     </>
   );
 };

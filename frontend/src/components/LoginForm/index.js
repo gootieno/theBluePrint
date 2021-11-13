@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { loginUser } from "../../redux/user";
 
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -28,7 +28,7 @@ const LoginForm = ({ setShowLoginModal }) => {
     if (user) history.push("/home");
   };
   return (
-    <form className="form-container" onSubmit={handleLogin}>
+    <form type="submit" className="form-container" onSubmit={handleLogin}>
       <h3 id="login-title"> Welcome Back!</h3>
       <input
         id="email"
@@ -49,7 +49,11 @@ const LoginForm = ({ setShowLoginModal }) => {
         onChange={handleInputChange}
       />
       <div id="login-submit-container">
-        <div type="button" id="login-close" onClick={() => setShowLoginModal(false)}>
+        <div
+          type="button"
+          id="login-close"
+          onClick={() => setShowLoginModal(false)}
+        >
           <CloseIcon />
         </div>
         <div type="button" id="login-submit" onClick={handleLogin}>
