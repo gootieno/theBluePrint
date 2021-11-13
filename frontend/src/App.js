@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
-import ProtectedRoute from "./components/ProtectedRoute";
+import { useDispatch } from "react-redux";
 
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
@@ -23,20 +21,22 @@ const App = () => {
   return (
     <>
       <Navbar isAuthenticated={isAuthenticated} />
-      <Route exact path="/">
-        <LandingPage isAuthenticated={isAuthenticated} />
-      </Route>
-      <Switch>
-        <Route path="/signup">
-          <SignUpPage />
-        </Route>
-        <ProtectedRoute isAuthenticated={isAuthenticated} path="/home">
-          <Home />
-        </ProtectedRoute>
-        <Route path="/garage">
-          <Garage />
-        </Route>
-      </Switch>
+      {isAuthenticated && (
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
+          <Route path="/signup">
+            <SignUpPage />
+          </Route>
+          <Route path="/home">
+            <Home isAuthenticated={isAuthenticated} />
+          </Route>
+          <Route path="/garage">
+            <Garage />
+          </Route>
+        </Switch>
+      )}
     </>
   );
 };

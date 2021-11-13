@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useState } from "react";
+import { Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginModal from "../Modals/LoginModal";
 import ProfileButtonModal from "../Modals/ProfileButtonModal";
@@ -18,7 +18,7 @@ function NavBar({ isAuthenticated }) {
   const history = useHistory();
 
   const handlePageTitle = () => {
-    history.push("/");
+    user ? history.push("/home") : <Redirect to="/home" />;
   };
 
   const handleShowModal = () => {
