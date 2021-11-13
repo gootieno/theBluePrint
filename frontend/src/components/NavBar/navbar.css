@@ -1,7 +1,7 @@
 /* navbar */
 #navbar-container {
   display: flex;
-  margin-top: 20px;
+  padding-top: 10px;
   border-bottom: 1mm solid rgba(52, 52, 52, 0.463);
   margin-right: 50px;
   margin-left: 50px;
