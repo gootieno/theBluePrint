@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
+import Carousel from "../Carousel";
 import "./garage.css";
 
 const Garage = () => {
@@ -17,7 +19,8 @@ const Garage = () => {
 
   return (
     <div id="garage-container">
-      <div>garage page</div>g
+      <div>garage page</div>
+      <Carousel />
     </div>
   );
 };
