@@ -22,6 +22,11 @@ const Garage = () => {
   return (
     <>
       <h2 id="garage-title">My Garage</h2>
+      <div id="garage-page-links-container">
+        <span className="garage-page-links">Exterior</span>
+        <span className="garage-page-links">Interior</span>
+        <span className="garage-page-links">Performance</span>
+      </div>
       <div id="garage-container">
         <BluePrintSpecs />
         <Carousel />
