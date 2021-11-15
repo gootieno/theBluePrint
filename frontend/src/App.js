@@ -13,6 +13,17 @@ import { restoreUser } from "./redux/user";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [demo, setDemo] = useState({
+    isDemo: false,
+    email: "demo@user.io",
+    password: "password",
+  });
+
+  const handleShowModal = () => {
+    setShowLoginModal((prevState) => !prevState);
+  };
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,11 +32,20 @@ const App = () => {
 
   return (
     <>
-      <Navbar isAuthenticated={isAuthenticated} />
+      <Navbar
+        isAuthenticated={isAuthenticated}
+        handleShowModal={handleShowModal}
+        showLoginModal={showLoginModal}
+        setShowLoginModal={setShowLoginModal}
+        demo={demo}
+      />
       {isAuthenticated && (
         <Switch>
           <Route exact path="/">
-            <LandingPage />
+            <LandingPage
+              setShowLoginModal={setShowLoginModal}
+              setDemo={setDemo}
+            />
           </Route>
           <Route path="/signup">
             <SignUpPage />
