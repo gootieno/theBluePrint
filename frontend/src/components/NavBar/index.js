@@ -9,8 +9,13 @@ import LoginIcon from "@mui/icons-material/Login";
 
 import "./navbar.css";
 
-function NavBar({ isAuthenticated }) {
-  const [showLoginModal, setShowLoginModal] = useState(false);
+function NavBar({
+  isAuthenticated,
+  showLoginModal,
+  setShowLoginModal,
+  handleShowModal,
+  demo,
+}) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   const user = useSelector((state) => state.session.user);
@@ -23,10 +28,6 @@ function NavBar({ isAuthenticated }) {
     } else {
       history.push("/");
     }
-  };
-
-  const handleShowModal = () => {
-    setShowLoginModal((prevState) => !prevState);
   };
 
   const handleProfileButton = () => {
@@ -61,6 +62,7 @@ function NavBar({ isAuthenticated }) {
         <LoginModal
           showLoginModal={showLoginModal}
           setShowLoginModal={setShowLoginModal}
+          demo={demo}
         />
       </>
     );

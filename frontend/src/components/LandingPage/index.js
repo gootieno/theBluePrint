@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -6,12 +7,18 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import "./landingpage.css";
 
-const LandingPage = () => {
+const LandingPage = ({ setDemo, setShowLoginModal }) => {
   const history = useHistory();
-  const user = useSelector((state) => state.session.yser);
+  const user = useSelector((state) => state.session.user);
 
   const handleSignUp = () => {
     history.push("/signup");
+  };
+
+  const handleDemoButton = () => {
+    setShowLoginModal(true);
+    setDemo(true);
+    // setShowLoginModal(false);
   };
 
   if (user) return <Redirect to="/home" />;
@@ -40,6 +47,7 @@ const LandingPage = () => {
             </h3>
             <span>
               <h3
+                onClick={handleDemoButton}
                 type="button"
                 id="registration-demo"
                 className="registration-text"

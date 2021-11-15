@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../../redux/user";
@@ -8,7 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import "./login.css";
 
-const LoginForm = ({ setShowLoginModal }) => {
+const LoginForm = ({ setShowLoginModal, demo }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -27,6 +27,11 @@ const LoginForm = ({ setShowLoginModal }) => {
     setShowLoginModal(false);
     if (user) history.push("/home");
   };
+
+  useEffect(() => {
+    dispatch(loginUser({ email: "demo@user.io", password: "password" }));
+  }, [demo]);
+
   return (
     <form type="submit" className="form-container" onSubmit={handleLogin}>
       <h3 id="login-title"> Welcome Back!</h3>
