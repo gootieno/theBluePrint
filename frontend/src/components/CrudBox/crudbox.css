@@ -1,0 +1,9 @@
+#crudbox-container {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+#crudbox-title {
+  text-align: center;
+}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import BluePrintSpecs from "../BlueprintSpecs";
+
 import "./carousel.css";
 
 const Carousel = () => {
