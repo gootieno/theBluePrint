@@ -1,10 +1,12 @@
 #garage-container {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-around;
+  flex-direction: row;
   align-items: center;
+  margin: 0 5%;
 }
 
 #garage-title {
   margin-top: 5;
+  text-align: center;
 }

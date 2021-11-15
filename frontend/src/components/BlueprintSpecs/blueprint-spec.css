@@ -1,0 +1,9 @@
+#blueprint-title {
+  text-align: center;
+}
+
+#blueprint-specs-container {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+}
