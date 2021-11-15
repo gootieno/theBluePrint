@@ -18,7 +18,10 @@ function NavBar({ isAuthenticated }) {
   const history = useHistory();
 
   const handlePageTitle = () => {
-    user ? history.push("/home") : <Redirect to="/home" />;
+    if (user) {
+      return <Redirect to="/home" />;
+    }
+    history.push("/");
   };
 
   const handleShowModal = () => {

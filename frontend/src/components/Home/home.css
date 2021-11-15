@@ -9,6 +9,7 @@
 #home-page-build-list {
   border: 2px solid rgba(69, 129, 142, 0.95);
   padding: 5px;
+  color: white;
   padding-left: 30px;
   background-color: rgba(52, 52, 52, 0.55);
   border-top-left-radius: 50%;

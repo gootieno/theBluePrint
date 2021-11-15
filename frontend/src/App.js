@@ -14,6 +14,7 @@ import { restoreUser } from "./redux/user";
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(restoreUser()).then(() => setIsAuthenticated(true));
   }, [dispatch]);
