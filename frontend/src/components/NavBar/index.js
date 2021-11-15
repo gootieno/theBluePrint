@@ -19,9 +19,10 @@ function NavBar({ isAuthenticated }) {
 
   const handlePageTitle = () => {
     if (user) {
-      return <Redirect to="/home" />;
+      history.replace("/home");
+    } else {
+      history.push("/");
     }
-    history.push("/");
   };
 
   const handleShowModal = () => {

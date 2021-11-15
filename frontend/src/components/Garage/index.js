@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
+import Carousel from "../Carousel";
 import "./garage.css";
 
 const Garage = () => {
@@ -8,31 +10,17 @@ const Garage = () => {
   const history = useHistory();
 
   const handleBluePrint = () => {
-    history.push("/blueprints");
+    alert("connect blue prints functionality");
   };
 
   const handleBuildLists = () => {
-    history.push("/buildlists");
+    alert("connect routing build list functionality");
   };
 
   return (
-    <div className="garage-container">
-      <div className="blueprint-container">
-        <button
-          onClick={handleBluePrint}
-          className="garage-blueprint garage-buttons"
-        >
-          BluePrints
-        </button>
-      </div>
-      <div className="build-list-container">
-        <button
-          onClick={handleBuildLists}
-          className="garage-build-list garage-buttons"
-        >
-          Build Lists
-        </button>
-      </div>
+    <div id="garage-container">
+      <h2 id="garage-title">My Garage</h2>
+      <Carousel />
     </div>
   );
 };
