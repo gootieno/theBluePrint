@@ -1,25 +1,4 @@
-.garage-container {
+#garage-container {
   display: flex;
-  /* justify-content: center;
-  align-items: center; */
-  height: 100vh;
-  width: 100vw;
-}
-
-.build-list-container {
-  height: 80vh;
-  width: 100vw;
-  border-left: 1px solid black;
-}
-
-.blueprint-container {
-  border-left: 1px solid black;
-  height: 80vh;
-  width: 100vw;
-}
-
-.garage-buttons {
-  text-align: center;
-  margin-left: 50%;
-  margin-top: 40%;
+  justify-content: center;
 }
