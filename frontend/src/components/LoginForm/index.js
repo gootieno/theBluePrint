@@ -28,9 +28,9 @@ const LoginForm = ({ setShowLoginModal, demo }) => {
     if (user) history.push("/home");
   };
 
-  useEffect(() => {
-    dispatch(loginUser({ email: "demo@user.io", password: "password" }));
-  }, [demo]);
+  // useEffect(() => {
+  //   dispatch(loginUser({ email: "demo@user.io", password: "password" }));
+  // }, [demo]);
 
   return (
     <form type="submit" className="form-container" onSubmit={handleLogin}>
