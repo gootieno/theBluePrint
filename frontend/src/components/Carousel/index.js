@@ -3,8 +3,8 @@ import "./carousel.css";
 
 const Carousel = () => {
   const [carousel, setCarousel] = useState([
-    "https://ih1.redbubble.net/image.1101060514.8885/aps,504x498,medium,transparent-pad,600x600,f8f8f8.jpg",
-    "https://i.ytimg.com/vi/0QTvi6BBJII/maxresdefault.jpg",
+    "https://i.pinimg.com/originals/0c/26/c8/0c26c89223132796dfe3e2c1a50dc017.jpg",
+    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5ae44534954809.57c6b45732879.jpg",
     "https://i.pinimg.com/originals/c2/7c/4f/c27c4f51aaa1d0a22015ca091a046696.jpg",
   ]);
   const [current, setCurrent] = useState(0);
@@ -27,7 +27,7 @@ const Carousel = () => {
         className="carousel-buttons"
         onClick={handlePrev}
       >
-        <div id="left">left</div>
+        left
       </div>
       <div id="image-container">
         {carousel.map((element, index) => (
@@ -36,7 +36,14 @@ const Carousel = () => {
             className={index === current ? "content" : "content active"}
             key={index}
           >
-            {index === current && <img id="carousel-image" src={element} />}
+            {index === current && (
+              <img
+                id="carousel-image"
+                src={element}
+                height="400px"
+                width="500px"
+              />
+            )}
           </div>
         ))}
       </div>
@@ -45,7 +52,7 @@ const Carousel = () => {
         className="carousel-buttons"
         onClick={handleNext}
       >
-        <div id="right">right</div>
+        right
       </div>
     </div>
   );

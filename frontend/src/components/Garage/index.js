@@ -19,7 +19,7 @@ const Garage = () => {
 
   return (
     <div id="garage-container">
-      <div>garage page</div>
+      <h2 id="garage-title">My Garage</h2>
       <Carousel />
     </div>
   );

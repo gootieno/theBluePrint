@@ -8,23 +8,25 @@
 #image-container {
   display: flex;
   margin: 0 20px;
-  border-left: 2px solid black;
-  border-right: 2px solid black;
   justify-content: center;
-  width: 40vw;
 }
 
 #carousel-content {
-  height: 50vh;
   padding: 5px;
 }
 
 #carousel-image {
   object-fit: contain;
-  height: inherit;
   max-width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
 }
 
 .carousel-buttons {
   cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.carousel-buttons:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
 }
