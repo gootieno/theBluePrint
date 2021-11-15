@@ -2,9 +2,29 @@
   display: flex;
   justify-content: center;
   margin-top: 50px;
+  align-items: center;
 }
 
 #image-container {
   display: flex;
   margin: 0 20px;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  justify-content: center;
+  width: 40vw;
+}
+
+#carousel-content {
+  height: 50vh;
+  padding: 5px;
+}
+
+#carousel-image {
+  object-fit: contain;
+  height: inherit;
+  max-width: 100%;
+}
+
+.carousel-buttons {
+  cursor: pointer;
 }
