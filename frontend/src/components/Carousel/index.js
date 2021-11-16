@@ -1,15 +1,13 @@
 import { useState } from "react";
-import BluePrintSpecs from "../BlueprintSpecs";
 
 import "./carousel.css";
 
-const Carousel = () => {
+const Carousel = ({ current, setCurrent }) => {
   const [carousel, setCarousel] = useState([
     "https://i.pinimg.com/originals/0c/26/c8/0c26c89223132796dfe3e2c1a50dc017.jpg",
     "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5ae44534954809.57c6b45732879.jpg",
     "https://i.pinimg.com/originals/c2/7c/4f/c27c4f51aaa1d0a22015ca091a046696.jpg",
   ]);
-  const [current, setCurrent] = useState(0);
 
   const handlePrev = () => {
     setCurrent((prevState) =>
