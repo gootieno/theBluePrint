@@ -7,7 +7,13 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  const [garage, setGarage] = useState([]);
+  const [garageTab, setGarageTab] = useState([
+    "Exterior",
+    "Interior",
+    "Performance",
+  ]);
+  const [displayInfo, setDisplayInfo] = useState(0);
+  const [tab, setTab] = useState(null);
 
   const history = useHistory();
 
@@ -19,17 +25,30 @@ const Garage = () => {
     alert("connect routing build list functionality");
   };
 
+  const handleGarageTab = (e) => {
+    let index = Number(e.target.id);
+    setTab(index);
+  };
+
   return (
     <>
       <h2 id="garage-title">My Garage</h2>
       <div id="garage-page-links-container">
-        <span className="garage-page-links">Exterior</span>
-        <span className="garage-page-links">Interior</span>
-        <span className="garage-page-links">Performance</span>
+        {garageTab.map((tab, index) => (
+          <span
+            id={index}
+            key={index}
+            className="garage-page-links"
+            onClick={handleGarageTab}
+            value={tab}
+          >
+            {tab}
+          </span>
+        ))}
       </div>
       <div id="garage-container">
-        <BluePrintSpecs />
-        <Carousel />
+        <BluePrintSpecs garageTab={garageTab} tab={tab} />
+        <Carousel current={displayInfo} setCurrent={setDisplayInfo} />
         <CrudBox />
       </div>
     </>
