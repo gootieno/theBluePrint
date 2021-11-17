@@ -1,24 +1,24 @@
 import { useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 import "./landingpage.css";
+import { loginUser } from "../../redux/user";
 
 const LandingPage = ({ setDemo, setShowLoginModal }) => {
   const history = useHistory();
   const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   const handleSignUp = () => {
     history.push("/signup");
   };
 
   const handleDemoButton = () => {
-    setShowLoginModal(true);
-    setDemo(true);
-    // setShowLoginModal(false);
+    dispatch(loginUser({ email: "demo@user.io", password: "password" }));
   };
 
   if (user) return <Redirect to="/home" />;
