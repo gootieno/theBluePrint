@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Garage.belongsTo(models.User);
+      Garage.belongsTo(models.User, { foreignKey: "userId" });
     }
 
     changeGarageName(newGarageName) {
@@ -20,8 +20,7 @@ module.exports = (sequelize, DataTypes) => {
   Garage.init(
     {
       name: DataTypes.STRING(100),
-      defaultValue: "Garage",
-      userId: DataTypes.INTEGER,
+      userId: { type: DataTypes.INTEGER, references: { model: "Users" } },
     },
     {
       sequelize,
