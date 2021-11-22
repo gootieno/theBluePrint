@@ -21,8 +21,8 @@ router.put(
   "",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const { name, userId } = req.body;
-    let garage = await Garage.findOne({ where: { userId } });
+    const { name, garageId } = req.body;
+    let garage = await Garage.findByPk(garageId);
     try {
       garage = await garage.update({ name });
       res.json(garage);

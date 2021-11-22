@@ -36,9 +36,9 @@ router.put(
   "",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const { blueprintId, name } = req.body;
+    const { categoryId, name } = req.body;
     try {
-      let category = await Category.findOne({ where: { blueprintId } });
+      let category = await Category.findByPk(categoryId);
       category = await category.update({ where: { name } });
       return res.json(category);
     } catch (e) {

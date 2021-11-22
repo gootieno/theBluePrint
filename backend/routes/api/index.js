@@ -6,6 +6,7 @@ const usersRouter = require("./users");
 const garageRouter = require("./garage");
 const blueprintsRouter = require("./blueprints");
 const categoryRouter = require("./category");
+const specsRouter = require("./specs");
 
 router.use("/session", sessionRouter);
 
@@ -13,6 +14,7 @@ router.use("/users", usersRouter);
 router.use("/garage", garageRouter);
 router.use("/blueprints", blueprintsRouter);
 router.use("/category", categoryRouter);
+router.use("/specs", specsRouter);
 
 router.get("/restore-user", restoreUser, (req, res) => {
   return res.json(req.user);
