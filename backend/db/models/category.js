@@ -1,5 +1,5 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Category extends Model {
     /**
@@ -16,8 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
-      name: DataTypes.STRING(20),
-      allowNull: false,
+      name: { type: DataTypes.STRING(50), allowNull: false },
+      blueprintId: {
+        type: DataTypes.INTEGER,
+        references: { model: "BluePrints" },
+      },
     },
     {
       sequelize,
