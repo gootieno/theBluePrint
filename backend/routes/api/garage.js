@@ -24,7 +24,7 @@ router.put(
     const { name, userId } = req.body;
     let garage = await Garage.findOne({ where: { userId } });
     try {
-      await garage.update({ name });
+      garage = await garage.update({ name });
       res.json(garage);
     } catch (e) {
       next();
