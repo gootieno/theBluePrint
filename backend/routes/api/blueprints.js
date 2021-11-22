@@ -6,7 +6,6 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { BluePrint, Category, Spec } = require("../../db/models");
 
-
 router.get(
   "/:id",
   asyncHandler(async (req, res, next) => {
@@ -25,6 +24,17 @@ router.post(
     const { carName, imageUrl, garageId } = req.body;
     const blueprint = await BluePrint.create({ carName, imageUrl, garageId });
 
+    if (blueprint) return res.json(blueprint);
+    next();
+  })
+);
+
+router.put(
+  "",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const { carName } = req.body;
+    const blueprint = await BluePrint.update({ carName });
     if (blueprint) return res.json(blueprint);
     next();
   })

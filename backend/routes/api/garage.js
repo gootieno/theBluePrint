@@ -8,17 +8,31 @@ const { requireAuth } = require("../../utils/auth");
 const { Garage, BluePrint } = require("../../db/models");
 
 router.get(
-  "",
-
+  "/:id",
   asyncHandler(async (req, res, next) => {
-    const garage = await Garage.findAll();
-
-    res.json({ garage });
+    const id = parseInt(req.params.id, 10);
+    const garage = await Garage.findByPk(id);
+    if (garage) return res.json({ garage });
+    next();
   })
 );
 
-// get blueprints for a garage
+router.put(
+  "",
+  requireAuth,
+  asyncHandler(async (req, res, next) => {
+    const { name, userId } = req.body;
+    let garage = await Garage.findOne({ where: { userId } });
+    try {
+      await garage.update({ name });
+      res.json(garage);
+    } catch (e) {
+      next();
+    }
+  })
+);
 
+//--------------------------get blueprints for a garage
 router.get(
   "/:id/blueprints",
   asyncHandler(async (req, res, next) => {
