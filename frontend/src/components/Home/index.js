@@ -1,10 +1,12 @@
 import { Redirect } from "react-router";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./home.css";
+import { getUserBluePrints } from "../../redux/garage";
 
 const Home = ({ isAuthenticated }) => {
   const user = useSelector((state) => state.session.user);
+  const dispatch = useDispatch();
 
   const history = useHistory();
   if (!isAuthenticated) return <Redirect to="/" />;
@@ -14,6 +16,7 @@ const Home = ({ isAuthenticated }) => {
   };
 
   const handleGarage = () => {
+    dispatch(getUserBluePrints(user.id));
     history.push("/garage");
   };
 
