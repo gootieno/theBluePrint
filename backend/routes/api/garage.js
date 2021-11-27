@@ -5,7 +5,7 @@ const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 
-const { Garage, BluePrint } = require("../../db/models");
+const { Garage, BluePrint, Category, Spec } = require("../../db/models");
 
 router.get(
   "/:id",
@@ -40,10 +40,19 @@ router.get(
     const userId = parseInt(req.params.id, 10);
     let garage = await Garage.findAll({
       where: { userId },
-      include: {
-        model: BluePrint,
-        as: "blueprints",
-      },
+      include: [
+        {
+          model: BluePrint,
+          as: "blueprints",
+          include: [
+            {
+              model: Category,
+              as: "categories",
+              include: [{ model: Spec, as: "specs" }],
+            },
+          ],
+        },
+      ],
     });
 
     if (garage) {

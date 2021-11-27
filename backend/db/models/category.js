@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
 
       Category.belongsTo(models.BluePrint, { foreignKey: "blueprintId" });
-      Category.hasMany(models.Spec, { foreignKey: "categoryId" });
+      Category.hasMany(models.Spec, { as: "specs", foreignKey: "categoryId" });
     }
   }
   Category.init(
