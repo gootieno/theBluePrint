@@ -6,8 +6,11 @@ const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
 const { BluePrint, Category, Spec } = require("../../db/models");
 
+const { singleMulterUpload, singlePublicFileUpload } = require("../../aws");
+
 router.get(
   "/:id",
+  requireAuth,
   asyncHandler(async (req, res, next) => {
     const blueprintId = parseInt(req.params.id, 10);
     const blueprint = await BluePrint.findByPk(blueprintId);
@@ -20,8 +23,10 @@ router.get(
 router.post(
   "",
   requireAuth,
+  singleMulterUpload("image"),
   asyncHandler(async (req, res, next) => {
-    const { carName, imageUrl, garageId } = req.body;
+    const { carName, garageId } = req.body;
+    const imageUrl = await singlePublicFileUpload(req.file);
     const blueprint = await BluePrint.create({ carName, imageUrl, garageId });
 
     if (blueprint) return res.json(blueprint);
