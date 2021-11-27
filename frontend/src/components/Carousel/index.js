@@ -20,6 +20,8 @@ const Carousel = ({ current, setCurrent }) => {
     );
   };
 
+  const handleBluePrint = () => {};
+
   return (
     <div id="carousel-container">
       <div
@@ -35,6 +37,7 @@ const Carousel = ({ current, setCurrent }) => {
             id="carousel-content"
             className={index === current ? "content" : "content active"}
             key={index}
+            onClick={handleBluePrint}
           >
             {index === current && (
               <img

@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Garage.belongsTo(models.User, { foreignKey: "userId" });
-      Garage.hasMany(models.BluePrint, { foreignKey: "garageId" });
+      Garage.hasMany(models.BluePrint, {
+        as: "blueprints",
+        foreignKey: "garageId",
+      });
     }
 
     changeGarageName(newGarageName) {

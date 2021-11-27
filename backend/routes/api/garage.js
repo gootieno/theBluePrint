@@ -35,13 +35,20 @@ router.put(
 //--------------------------get blueprints for a garage
 router.get(
   "/:id/blueprints",
+  requireAuth,
   asyncHandler(async (req, res, next) => {
-    const garageId = parseInt(req.params.id, 10);
-    const blueprints = await BluePrint.findAll({
-      where: { garageId },
+    const userId = parseInt(req.params.id, 10);
+    let garage = await Garage.findAll({
+      where: { userId },
+      include: {
+        model: BluePrint,
+        as: "blueprints",
+      },
     });
 
-    if (blueprints) return res.json({ blueprints });
+    if (garage) {
+      return res.json({ garage: garage[0] });
+    }
     next();
   })
 );
