@@ -27,15 +27,43 @@ export const getUserBluePrints = (userId) => async (dispatch) => {
 
 const initialState = {
   blueprints: {},
+  categories: {},
+  specs: {},
 };
 
 const garageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GARAGE_ADDED:
-      let garage = { id: action.garage.id, name: action.garage.name };
+      let garage = {
+        id: action.garage.id,
+        name: action.garage.name,
+        categories: {},
+        specs: {},
+      };
       let blueprints = {};
+      let categories = [];
+      let specs = [];
+
       action.garage.blueprints.forEach((blueprint) => {
         blueprints[blueprint.id] = blueprint;
+        if (blueprint.categories.length > 0) {
+          categories = [...blueprint.categories];
+          delete blueprint.categories;
+        }
+      });
+
+      categories.forEach((category) => {
+        garage.categories[category.id] = category;
+        if (category.specs.length > 0) {
+          specs = [...category.specs];
+          delete category.specs;
+        }
+      });
+
+      specs.forEach((spec) => {
+        if (spec) {
+          garage.specs[spec.id] = spec;
+        }
       });
 
       return {
