@@ -1,20 +1,24 @@
-import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import "./blueprint-spec.css";
 
-const BluePrintSpecs = ({ tab, garageTab, specCategoryArray }) => {
-  if (tab === null) return null;
+const BluePrintSpecs = ({ categoryIndex, garageTab, specs, category }) => {
+  if (categoryIndex === null) return null;
   // let tabName = garageTab[tab];
 
+  const renderSpecs = () =>
+    specs.filter((spec) => spec.categoryId === categoryIndex);
   return (
     <div id="blueprint-specs">
       <div id="exterior-container">
-        {/* <h3 id="blueprint-title">{tabName}</h3> */}
+        <h3 id="blueprint-title">{category.name}</h3>
         <div id="blueprint-specs-container">
-          {specCategoryArray[0].map((exteriorItem, i) => (
-            <div id="blueprint-body">{exteriorItem.name}</div>
+          {specs.map((spec, i) => (
+            <div id="blueprint-body" key={`${spec.id}-${i}`}>
+              {spec.name}
+            </div>
           ))}
           <div id="blueprint-buildlist-redirect">go to buildlist</div>
-        </div>{" "}
+        </div>
       </div>
     </div>
   );
