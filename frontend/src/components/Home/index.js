@@ -9,7 +9,6 @@ const Home = ({ isAuthenticated }) => {
   const dispatch = useDispatch();
 
   const history = useHistory();
-  if (!isAuthenticated) return <Redirect to="/" />;
 
   const handleBuildList = () => {
     alert("implement feature");
@@ -20,6 +19,7 @@ const Home = ({ isAuthenticated }) => {
     history.push("/garage");
   };
 
+  if (!isAuthenticated) return <Redirect to="/" />;
   return (
     <div id="home-page-container">
       <h1

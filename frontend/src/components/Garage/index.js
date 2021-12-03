@@ -18,7 +18,7 @@ const Garage = () => {
   let categories = Object.values(garage.categories);
 
   useEffect(() => {
-    setBluePrint(garage.blueprints[current]);
+    setBluePrint(blueprints[current]);
   }, [current]);
 
   const handleCategoryTab = (e) => {
@@ -28,7 +28,6 @@ const Garage = () => {
   };
 
   if (!garage) return null;
-  console.log(blueprint);
   return (
     <>
       <h2 id="garage-title">{garage.name}</h2>
