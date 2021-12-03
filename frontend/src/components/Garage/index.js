@@ -8,18 +8,10 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
+  const [categoryIndex, setCategoryId] = useState(null);
   const [category, setCategory] = useState(null);
   const [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [categoryIndex, setCategoryIndex] = useState(null);
-
-  const handleBluePrint = () => {
-    alert("connect blue prints functionality");
-  };
-
-  const handleBuildLists = () => {
-    alert("connect routing build list functionality");
-  };
 
   const garage = useSelector((state) => state.garage);
 
@@ -28,13 +20,11 @@ const Garage = () => {
   const specs = Object.values(garage.specs);
 
   const handleCategoryTab = (e) => {
-    let index = e.target.id;
-    setCategoryIndex(index);
-    setCategory(e.target.value);
+    setCategoryId(Number(e.target.id));
+    setCategory(garage.categories[e.target.id]);
   };
 
   if (!garage) return null;
-
   return (
     <>
       <h2 id="garage-title">{garage.name}</h2>
@@ -45,20 +35,28 @@ const Garage = () => {
             key={`index-${category.id}-${index}`}
             onClick={handleCategoryTab}
             className="garage-page-links"
-            value={category.name}
+            value={index}
+            name={category.name}
           >
             {category.name}
           </span>
         ))}
       </div>
       <div id="garage-container">
-        {/* <BluePrintSpecs blueprint={blueprint} /> */}
+        {category && (
+          <BluePrintSpecs
+            blueprint={blueprint}
+            specs={specs}
+            categoryIndex={categoryIndex}
+            category={category}
+          />
+        )}
         <Carousel
           current={current}
           blueprints={blueprints}
           setCurrent={setCurrent}
         />
-        {/* <CrudBox /> */}
+        <CrudBox />
       </div>
     </>
   );
