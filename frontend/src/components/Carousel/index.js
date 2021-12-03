@@ -1,22 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./carousel.css";
 
 const Carousel = ({ current, setCurrent, blueprints }) => {
-  const [carousel, setCarousel] = useState([
-    "https://i.pinimg.com/originals/0c/26/c8/0c26c89223132796dfe3e2c1a50dc017.jpg",
-    "https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/5ae44534954809.57c6b45732879.jpg",
-    "https://i.pinimg.com/originals/c2/7c/4f/c27c4f51aaa1d0a22015ca091a046696.jpg",
-  ]);
+  let blueprintsMaxLength = blueprints.length - 1;
 
   const handlePrev = () => {
     setCurrent((prevState) =>
-      prevState === 0 ? blueprints.length - 1 : current - 1
+      prevState === 0 ? blueprintsMaxLength : prevState - 1
     );
   };
+
   const handleNext = () => {
     setCurrent((prevState) =>
-      prevState === blueprints.length - 1 ? 0 : current + 1
+      prevState === blueprintsMaxLength ? 0 : prevState + 1
     );
   };
 
@@ -34,8 +31,10 @@ const Carousel = ({ current, setCurrent, blueprints }) => {
       <div id="image-container">
         {blueprints.map((blueprint, index) => (
           <div
-            id="carousel-content"
-            className={index === current ? "content" : "content active"}
+            id={blueprint.id}
+            className={`carousel-content ${
+              index === current ? " content" : " content active"
+            }`}
             key={index}
             onClick={handleBluePrint}
           >

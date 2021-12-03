@@ -8,20 +8,23 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  const [categoryIndex, setCategoryId] = useState(null);
   const [category, setCategory] = useState(null);
-  const [blueprint, setBluePrint] = useState(null);
+  let [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
 
-  const garage = useSelector((state) => state.garage);
+  let garage = useSelector((state) => state.garage);
 
-  const blueprints = Object.values(garage.blueprints);
-  const categories = Object.values(garage.categories);
-  const specs = Object.values(garage.specs);
+  let blueprints = Object.values(garage.blueprints);
+  let categories = Object.values(garage.categories);
+
+  useEffect(() => {
+    setBluePrint(blueprints[current]);
+  }, [current]);
 
   const handleCategoryTab = (e) => {
-    setCategoryId(Number(e.target.id));
-    setCategory(garage.categories[e.target.id]);
+    let singleCategory = garage.categories[e.target.id];
+    setBluePrint(blueprints[current]);
+    setCategory(garage.categories[singleCategory.id]);
   };
 
   if (!garage) return null;
@@ -35,7 +38,7 @@ const Garage = () => {
             key={`index-${category.id}-${index}`}
             onClick={handleCategoryTab}
             className="garage-page-links"
-            value={index}
+            value={category.blueprintId}
             name={category.name}
           >
             {category.name}
@@ -44,17 +47,13 @@ const Garage = () => {
       </div>
       <div id="garage-container">
         {category && (
-          <BluePrintSpecs
-            blueprint={blueprint}
-            specs={specs}
-            categoryIndex={categoryIndex}
-            category={category}
-          />
+          <BluePrintSpecs blueprint={blueprint} category={category} />
         )}
         <Carousel
           current={current}
           blueprints={blueprints}
           setCurrent={setCurrent}
+          blueprint={blueprint}
         />
         <CrudBox />
       </div>
