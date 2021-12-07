@@ -7,6 +7,7 @@ import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
 import Home from "./components/Home";
 import Garage from "./components/Garage";
+import Blueprints from "./components/Blueprints";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
@@ -55,6 +56,9 @@ const App = () => {
           </Route>
           <Route path="/garage">
             <Garage />
+          </Route>
+          <Route>
+            <Blueprints />
           </Route>
         </Switch>
       )}

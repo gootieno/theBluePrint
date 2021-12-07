@@ -26,7 +26,7 @@ const Carousel = ({ current, setCurrent, blueprints }) => {
         className="carousel-buttons"
         onClick={handlePrev}
       >
-        left
+        {`<`}
       </div>
       <div id="image-container">
         {blueprints.map((blueprint, index) => (
@@ -54,7 +54,7 @@ const Carousel = ({ current, setCurrent, blueprints }) => {
         className="carousel-buttons"
         onClick={handleNext}
       >
-        right
+        {`>`}
       </div>
     </div>
   );
