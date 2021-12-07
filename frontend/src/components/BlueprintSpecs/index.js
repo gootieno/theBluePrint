@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import "./blueprint-spec.css";
 
-const BluePrintSpecs = ({ blueprint, category }) => {
+const BluePrintSpecs = ({ blueprint, category, handleRoute }) => {
   const specs = useSelector((state) => {
     return Object.values(state.garage.specs).filter((spec) => {
       if (
@@ -13,16 +13,26 @@ const BluePrintSpecs = ({ blueprint, category }) => {
     });
   });
   return (
-    <div id="blueprint-specs">
-      <div id="exterior-container">
-        <h3 id="blueprint-title">{category.name}</h3>
-        <div id="blueprint-specs-container">
+    <div className="specs" id="blueprint-specs">
+      <div className="specs" id="exterior-container">
+        <h3 id="blueprint-title" className="specs">
+          {category.name}
+        </h3>
+        <div className="specs" id="blueprint-specs-container">
           {specs.map((spec, i) => (
-            <div id="blueprint-body" key={`${spec.id}-${i}`}>
+            <div
+              className="blueprint-specs"
+              data-route="specs"
+              id={spec.id}
+              key={`${spec.id}-${i}`}
+              onClick={handleRoute}
+            >
               {spec.name}
             </div>
           ))}
-          <div id="blueprint-buildlist-redirect">go to buildlist</div>
+          <div className="specs" id="blueprint-buildlist-redirect">
+            go to buildlist
+          </div>
         </div>
       </div>
     </div>

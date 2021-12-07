@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import BluePrintSpecs from "../BlueprintSpecs";
 
 import Carousel from "../Carousel";
@@ -12,10 +11,14 @@ const Garage = () => {
   let [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
 
+  const [route, setRoute] = useState(null);
+
   let garage = useSelector((state) => state.garage);
 
   let blueprints = Object.values(garage.blueprints);
   let categories = Object.values(garage.categories);
+
+  let currentRoute;
 
   useEffect(() => {
     setBluePrint(blueprints[current]);
@@ -23,8 +26,15 @@ const Garage = () => {
 
   const handleCategoryTab = (e) => {
     let singleCategory = garage.categories[e.target.id];
+    currentRoute = e.target.dataset.route;
+    setRoute(currentRoute);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
+  };
+
+  let handleRoute = (e) => {
+    currentRoute = e.target.dataset.route;
+    setRoute(currentRoute);
   };
 
   if (!garage) return null;
@@ -35,6 +45,7 @@ const Garage = () => {
         {categories.map((category, index) => (
           <span
             id={category.id}
+            data-route="categories"
             key={`index-${category.id}-${index}`}
             onClick={handleCategoryTab}
             className="garage-page-links"
@@ -47,15 +58,22 @@ const Garage = () => {
       </div>
       <div id="garage-container">
         {category && (
-          <BluePrintSpecs blueprint={blueprint} category={category} />
+          <BluePrintSpecs
+            setRoute={setRoute}
+            blueprint={blueprint}
+            category={category}
+            handleRoute={handleRoute}
+          />
         )}
         <Carousel
           current={current}
           blueprints={blueprints}
           setCurrent={setCurrent}
           blueprint={blueprint}
+          setRoute={setRoute}
+          handleRoute={handleRoute}
         />
-        <CrudBox />
+        <CrudBox route={route} />
       </div>
     </>
   );
