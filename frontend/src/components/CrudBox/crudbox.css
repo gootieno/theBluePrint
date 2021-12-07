@@ -1,11 +1,57 @@
-#crudbox-container {
+#work-bench-container {
   border-radius: 4px;
-  padding: 10px;
+  padding: 15px 0px;
   box-shadow: 0 0px 10px 0.2px rgba(86, 86, 86, 0.8);
+}
+
+#crudbox-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #crudbox-title {
   text-align: center;
   margin-bottom: 5px;
   color: rgba(69, 129, 142, 0.8);
+}
+
+.crud-actions {
+  border: 1px solid #45818ecc;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px;
+  font-weight: bold;
+  color: #474747;
+}
+
+#post:hover {
+  background-color: rgba(39, 175, 112, 0.425);
+}
+#put:hover {
+  background-color: rgba(241, 226, 16, 0.582);
+}
+#delete:hover {
+  background-color: rgba(194, 42, 31, 0.425);
+}
+
+.crud-actions-input {
+  /* width: 100%; */
+}
+
+#text-box-input {
+  margin: 5px;
+  width: 0;
+  border: 0;
+  border-bottom: 1px solid #474747;
+  position: relative;
+}
+
+#text-box-input:focus {
+  padding: 5px;
+  transition: 1s ease;
+  box-sizing: border-box;
+  width: 95%;
 }

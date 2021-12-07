@@ -1,24 +1,35 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./crudbox.css";
 
 const CrudBox = ({ route }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [inputAction, setInputAction] = useState("");
+  let inputRef = useRef(null);
+  const [action, setAction] = useState(null);
+
+  useEffect(() => {
+    if (toggle) handleInputRef();
+  }, [toggle, action]);
 
   const handleRouteAction = (e) => {
+    console.log(toggle);
+    console.log(inputRef);
     if (`${e.target.id}` === "post" || `${e.target.id}` === "put") {
-      if (toggle) {
-        setToggle(false);
-        setRouteAction(e.target.id);
-        setToggle(true);
+      if (e.target.id === e.target.name) {
+        return;
       }
-      setToggle(true);
-      setRouteAction(e.target.id);
+      setAction(e.target.id);
+      setToggle((prev) => !prev);
+      setRouteAction(e.target.name);
     } else {
       setToggle(false);
-      setRouteAction(e.target.id);
+      setRouteAction(e.target.name);
     }
+  };
+
+  const handleInputRef = () => {
+    inputRef.current.focus();
   };
 
   const handleInputAction = (e) => {
@@ -28,26 +39,38 @@ const CrudBox = ({ route }) => {
     <div>
       <h2 id="crudbox-title">Work Bench</h2>
       {route && <span> Working on {route}</span>}
-      <div id="crudbox-container">
-        <button id="put" className="edit-button" onClick={handleRouteAction}>
-          edit
-        </button>
-
-        <button id="post" className="create-button" onClick={handleRouteAction}>
-          create
-        </button>
-
-        <button
-          id="delete"
-          className="delete-button"
-          onClick={handleRouteAction}
-        >
-          delete
-        </button>
-
+      <div id="work-bench-container">
+        <div id="crudbox-container">
+          <div
+            id="post"
+            name="create"
+            className="create-button crud-actions"
+            onClick={handleRouteAction}
+          >
+            CREATE
+          </div>
+          <div
+            id="put"
+            className="edit-button crud-actions"
+            name="edit"
+            onClick={handleRouteAction}
+          >
+            EDIT
+          </div>
+          <div
+            id="delete"
+            className="delete-button crud-actions"
+            onClick={handleRouteAction}
+            name="delete"
+          >
+            DELETE
+          </div>
+        </div>
         {toggle && (
-          <div id="text-box-container">
+          <div className="crud-actions-input">
             <input
+              ref={inputRef}
+              id="text-box-input"
               value={inputAction}
               placeholder="Enter changes here"
               onChange={handleInputAction}
