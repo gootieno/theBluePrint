@@ -3,9 +3,9 @@ import { csrfFetch } from "./csrf";
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
 
-const loadBluePrints = (blueprints) => ({
+const loadBluePrint = (blueprint) => ({
   type: BLUEPRINT_ADDED,
-  blueprints,
+  blueprint,
 });
 
 const loadGarage = (garage) => ({

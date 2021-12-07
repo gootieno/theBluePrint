@@ -3,7 +3,7 @@
   justify-content: space-around;
   flex-direction: row;
   align-items: center;
-  margin: 0 5%;
+  margin: 0 auto;
 }
 
 #garage-title {
@@ -14,6 +14,7 @@
 #garage-page-links-container {
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 .garage-page-links {

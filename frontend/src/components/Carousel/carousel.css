@@ -24,7 +24,8 @@
 .carousel-buttons {
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
-  padding: 10px;
+  padding: 5px 15px;
+  border-radius: 3px;
 }
 
 .carousel-buttons:hover {
