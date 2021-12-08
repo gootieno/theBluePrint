@@ -22,6 +22,10 @@
   color: rgb(69, 129, 142, 0.7);
 }
 
+#work-bench-header.delete {
+  color: rgba(194, 42, 31, 0.8);
+}
+
 .crud-actions {
   border: 1px solid #45818ecc;
   box-shadow: 0 0px 5px 0.2px #45818ecc;
@@ -42,6 +46,19 @@
 }
 #delete:hover {
   background-color: rgba(194, 42, 31, 0.425);
+}
+
+#delete-confirm:hover {
+  background-color: rgba(39, 175, 112, 0.425);
+}
+
+#delete-decline:hover {
+  background-color: rgba(194, 42, 31, 0.425);
+}
+
+.delete-buttons {
+  width: 50px;
+  text-align: center;
 }
 
 #text-box-input {
