@@ -1,7 +1,7 @@
-#blueprint-title {
+#blueprint-spec-title {
   text-align: center;
   margin-bottom: 5px;
-  color: rgba(69, 129, 142, 0.8);
+  color: rgb(69, 129, 142);
 }
 
 #blueprint-specs-container {
@@ -11,5 +11,17 @@
 }
 
 .blueprint-specs {
-  transition: 1s ease-in;
+  color: rgba(69, 129, 142, 0.8);
+  margin-bottom: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.blueprint-specs:hover {
+  color: rgb(18, 77, 90);
+}
+
+#specs-empty {
+  margin: 5px;
+  color: rgba(69, 129, 142, 0.7);
 }

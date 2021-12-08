@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./crudbox.css";
 
-const CrudBox = ({ route, category, name }) => {
+const CrudBox = ({ route, name }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [inputAction, setInputAction] = useState("");
@@ -56,37 +56,62 @@ const CrudBox = ({ route, category, name }) => {
       <h2 id="crudbox-title">Work Bench</h2>
       <div id="work-bench-container">
         {route && (
-          <h3 id="work-bench-header">
+          <h3
+            id="work-bench-header"
+            className={routeAction === "delete" ? "delete" : ""}
+          >
             {routeAction === "delete"
               ? `Delete ${name}?`
-              : `Working on ${route}`}
+              : `Working on ${route[0].toUpperCase() + route.substring(1)}`}
           </h3>
         )}
         <div id="crudbox-container">
-          <div
-            id="post"
-            data-name="create"
-            className="create-button crud-actions"
-            onClick={handleRouteAction}
-          >
-            CREATE
-          </div>
-          <div
-            id="put"
-            className="edit-button crud-actions"
-            data-name="edit"
-            onClick={handleRouteAction}
-          >
-            EDIT
-          </div>
-          <div
-            id="delete"
-            className="delete-button crud-actions"
-            onClick={handleRouteAction}
-            data-name="delete"
-          >
-            DELETE
-          </div>
+          {routeAction === "delete" ? (
+            <>
+              <div
+                id="delete-confirm"
+                className="crud-actions delete-buttons"
+                onClick={handleRouteAction}
+              >
+                YES
+              </div>
+              <div
+                id="delete-decline"
+                className="crud-actions delete-buttons"
+                onClick={handleRouteAction}
+              >
+                NO
+              </div>
+            </>
+          ) : (
+            <>
+              {" "}
+              <div
+                id="post"
+                data-name="create"
+                className="create-button crud-actions"
+                onClick={handleRouteAction}
+              >
+                CREATE
+              </div>
+              <div
+                id="put"
+                className="edit-button crud-actions"
+                data-name="edit"
+                onClick={handleRouteAction}
+              >
+                EDIT
+              </div>
+              <div
+                id="delete"
+                className="delete-button crud-actions"
+                onClick={handleRouteAction}
+                data-name="delete"
+              >
+                DELETE
+              </div>
+            </>
+          )}{" "}
         </div>
         {toggle && (
           <div className="crud-actions-input">
@@ -95,11 +120,7 @@ const CrudBox = ({ route, category, name }) => {
               id="text-box-input"
               type="text"
               value={inputAction}
-              placeholder={
-                action.length && route
-                  ? `${action.toUpperCase()} ${route.toUpperCase()}`
-                  : "Select clickable area to use work bench"
-              }
+              placeholder={`${action.toUpperCase()} ${route.toUpperCase()}`}
               onChange={handleInputAction}
             />
           </div>
