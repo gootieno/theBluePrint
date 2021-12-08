@@ -1,17 +1,7 @@
 import { useSelector } from "react-redux";
 import "./blueprint-spec.css";
 
-const BluePrintSpecs = ({ blueprint, category, handleRoute }) => {
-  const specs = useSelector((state) => {
-    return Object.values(state.garage.specs).filter((spec) => {
-      if (
-        category.blueprintId === blueprint.id &&
-        spec.categoryId === category.id
-      ) {
-        return spec;
-      }
-    });
-  });
+const BluePrintSpecs = ({ specs, category, handleRoute }) => {
   return (
     <div className="specs" id="blueprint-specs">
       <div className="specs" id="exterior-container">
@@ -26,6 +16,7 @@ const BluePrintSpecs = ({ blueprint, category, handleRoute }) => {
               id={spec.id}
               key={`${spec.id}-${i}`}
               onClick={handleRoute}
+              data-name={spec.name}
             >
               {spec.name}
             </div>

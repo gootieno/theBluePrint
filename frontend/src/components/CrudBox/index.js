@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./crudbox.css";
 
-const CrudBox = ({ route }) => {
+const CrudBox = ({ route, category, name }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [inputAction, setInputAction] = useState("");
   let inputRef = useRef(null);
-  const [action, setAction] = useState(null);
+  const [action, setAction] = useState("");
 
   useEffect(() => {
     document
@@ -25,17 +25,22 @@ const CrudBox = ({ route }) => {
   };
 
   const handleRouteAction = (e) => {
+    if (!route) {
+      alert("Nothing selected to work on");
+      return null;
+    }
     if (e.target.id === "post" || e.target.id === "put") {
-      if (e.target.id === action) {
+      setRouteAction(e.target.id);
+      if (e.target.dataset.name === action) {
         setToggle((prev) => !prev);
       } else {
-        setAction(e.target.id);
+        setAction(e.target.dataset.name);
         setToggle(true);
-        setRouteAction(e.target.name);
+        setRouteAction(e.target.id);
       }
     } else {
       setToggle(false);
-      setRouteAction(e.target.name);
+      setRouteAction(e.target.id);
     }
   };
 
@@ -49,12 +54,18 @@ const CrudBox = ({ route }) => {
   return (
     <div>
       <h2 id="crudbox-title">Work Bench</h2>
-      {route && <span> Working on {route}</span>}
       <div id="work-bench-container">
+        {route && (
+          <h3 id="work-bench-header">
+            {routeAction === "delete"
+              ? `Delete ${name}?`
+              : `Working on ${route}`}
+          </h3>
+        )}
         <div id="crudbox-container">
           <div
             id="post"
-            name="post"
+            data-name="create"
             className="create-button crud-actions"
             onClick={handleRouteAction}
           >
@@ -63,7 +74,7 @@ const CrudBox = ({ route }) => {
           <div
             id="put"
             className="edit-button crud-actions"
-            name="put"
+            data-name="edit"
             onClick={handleRouteAction}
           >
             EDIT
@@ -72,7 +83,7 @@ const CrudBox = ({ route }) => {
             id="delete"
             className="delete-button crud-actions"
             onClick={handleRouteAction}
-            name="delete"
+            data-name="delete"
           >
             DELETE
           </div>
@@ -84,7 +95,11 @@ const CrudBox = ({ route }) => {
               id="text-box-input"
               type="text"
               value={inputAction}
-              placeholder="Enter changes here"
+              placeholder={
+                action.length && route
+                  ? `${action.toUpperCase()} ${route.toUpperCase()}`
+                  : "Select clickable area to use work bench"
+              }
               onChange={handleInputAction}
             />
           </div>

@@ -1,6 +1,6 @@
 #work-bench-container {
   border-radius: 4px;
-  padding: 15px 0px;
+  padding: 15px 10px;
   box-shadow: 0 0px 10px 0.2px rgba(86, 86, 86, 0.8);
 }
 
@@ -11,25 +11,27 @@
   box-sizing: border-box;
 }
 
-#work-bench-container {
-  max-height: 200px;
-  transition: all 2s ease;
-}
-
 #crudbox-title {
   text-align: center;
   margin-bottom: 5px;
-  color: rgba(69, 129, 142, 0.8);
+  color: rgb(69, 129, 142);
+}
+
+#work-bench-header {
+  margin: 5px;
+  color: rgb(69, 129, 142, 0.7);
 }
 
 .crud-actions {
   border: 1px solid #45818ecc;
+  box-shadow: 0 0px 5px 0.2px #45818ecc;
   border-radius: 4px;
   margin: 5px;
   cursor: pointer;
   padding: 5px;
   font-weight: bold;
   color: #474747;
+  box-sizing: border-box;
 }
 
 #post:hover {
@@ -47,11 +49,13 @@
   width: 0;
   border: 0;
   padding: 5px;
-  border-bottom: 1px solid #474747;
+  border-bottom: 1px solid #45818ecc;
   position: relative;
 }
 
 #text-box-input:focus {
+  outline: none !important;
+  border-color: #45818ecc;
   transition: 1s ease;
   box-sizing: border-box;
   width: 95%;
