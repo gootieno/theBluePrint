@@ -9,19 +9,30 @@ const CrudBox = ({ route }) => {
   const [action, setAction] = useState(null);
 
   useEffect(() => {
+    document
+      .getElementsByTagName("body")[0]
+      .addEventListener("click", handleClickAway);
     if (toggle) handleInputRef();
+
+    return () =>
+      document
+        .getElementsByTagName("body")[0]
+        .removeEventListener("click", handleClickAway);
   }, [toggle, action]);
 
+  const handleClickAway = (e) => {
+    if (e.target.id !== "post" && e.target.id !== "put") setToggle(false);
+  };
+
   const handleRouteAction = (e) => {
-    console.log(toggle);
-    console.log(inputRef);
-    if (`${e.target.id}` === "post" || `${e.target.id}` === "put") {
-      if (e.target.id === e.target.name) {
-        return;
+    if (e.target.id === "post" || e.target.id === "put") {
+      if (e.target.id === action) {
+        setToggle((prev) => !prev);
+      } else {
+        setAction(e.target.id);
+        setToggle(true);
+        setRouteAction(e.target.name);
       }
-      setAction(e.target.id);
-      setToggle((prev) => !prev);
-      setRouteAction(e.target.name);
     } else {
       setToggle(false);
       setRouteAction(e.target.name);
@@ -43,7 +54,7 @@ const CrudBox = ({ route }) => {
         <div id="crudbox-container">
           <div
             id="post"
-            name="create"
+            name="post"
             className="create-button crud-actions"
             onClick={handleRouteAction}
           >
@@ -52,7 +63,7 @@ const CrudBox = ({ route }) => {
           <div
             id="put"
             className="edit-button crud-actions"
-            name="edit"
+            name="put"
             onClick={handleRouteAction}
           >
             EDIT
@@ -71,6 +82,7 @@ const CrudBox = ({ route }) => {
             <input
               ref={inputRef}
               id="text-box-input"
+              type="text"
               value={inputAction}
               placeholder="Enter changes here"
               onChange={handleInputAction}
