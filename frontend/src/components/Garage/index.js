@@ -7,8 +7,9 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  const [category, setCategory] = useState(null);
+  let [category, setCategory] = useState(null);
   let [blueprint, setBluePrint] = useState(null);
+  let [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
 
   const [route, setRoute] = useState(null);
@@ -26,8 +27,7 @@ const Garage = () => {
 
   const handleCategoryTab = (e) => {
     let singleCategory = garage.categories[e.target.id];
-    currentRoute = e.target.dataset.route;
-    setRoute(currentRoute);
+    handleRoute(e);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
   };
@@ -35,7 +35,23 @@ const Garage = () => {
   let handleRoute = (e) => {
     currentRoute = e.target.dataset.route;
     setRoute(currentRoute);
+    handleName(e);
   };
+
+  let handleName = (e) => {
+    setName(e.target.dataset.name);
+  };
+
+  const specs = useSelector((state) => {
+    return Object.values(state.garage.specs).filter((spec) => {
+      if (
+        category?.blueprintId === blueprint?.id &&
+        spec?.categoryId === category?.id
+      ) {
+        return spec;
+      }
+    });
+  });
 
   if (!garage) return null;
   return (
@@ -50,7 +66,7 @@ const Garage = () => {
             onClick={handleCategoryTab}
             className="garage-page-links"
             value={category.blueprintId}
-            name={category.name}
+            data-name={category.name}
           >
             {category.name}
           </span>
@@ -59,10 +75,9 @@ const Garage = () => {
       <div id="garage-container">
         {category && (
           <BluePrintSpecs
-            setRoute={setRoute}
-            blueprint={blueprint}
             category={category}
             handleRoute={handleRoute}
+            specs={specs}
           />
         )}
         <Carousel
@@ -73,7 +88,7 @@ const Garage = () => {
           setRoute={setRoute}
           handleRoute={handleRoute}
         />
-        <CrudBox route={route} />
+        <CrudBox route={route} category={category} name={name} />
       </div>
     </>
   );
