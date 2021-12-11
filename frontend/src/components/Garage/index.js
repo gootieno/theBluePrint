@@ -28,7 +28,7 @@ const Garage = () => {
   const blueprints = Object.values(garage.blueprints);
   const categories = Object.values(garage.categories);
 
-  let currentRoute;
+  let currentNode;
 
   const handleCategoryTab = (event) => {
     let singleCategory = garage.categories[event.target.id];
@@ -38,39 +38,38 @@ const Garage = () => {
   };
 
   let handleRoute = (event) => {
-    currentRoute = event.target.dataset.route;
-    setRoute(currentRoute);
-    handleName(event);
+    currentNode = event.target.dataset;
+    setRoute(currentNode.route);
+    setName(currentNode.name);
   };
 
   const handleBluePrint = (event) => {
     handleRoute(event);
-    handleBluePrintOptions();
-  };
-
-  const handleBluePrintOptions = () => {
     setBlueprintOptions((prevState) => !prevState);
   };
 
-  let handleName = (event) => {
-    setName(event.target.dataset.name);
-  };
-
-  const specs = useSelector((state) => {
-    return Object.values(state.garage.specs).filter((spec) => {
+  const specs = useSelector((state) =>
+    Object.values(state.garage.specs).filter((spec) => {
       if (
         category?.blueprintId === blueprint?.id &&
         spec?.categoryId === category?.id
       ) {
         return spec;
       }
-    });
-  });
+    })
+  );
 
   if (!garage) return null;
   return (
     <>
-      <h2 id="garage-title">{garage.name}</h2>
+      <h2
+        id="garage-title"
+        data-route="garage"
+        data-name={garage.name}
+        onClick={handleRoute}
+      >
+        {garage.name}
+      </h2>
       <div id="garage-page-links-container">
         {categories.map((category, index) => (
           <span

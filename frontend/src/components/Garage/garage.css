@@ -9,6 +9,7 @@
 #garage-title {
   margin-top: 5;
   text-align: center;
+  cursor: pointer;
 }
 
 #garage-page-links-container {
