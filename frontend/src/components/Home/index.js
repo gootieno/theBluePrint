@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./home.css";
 import { getUserBluePrints } from "../../redux/garage";
 
-const Home = ({ isAuthenticated }) => {
+const Home = () => {
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const Home = ({ isAuthenticated }) => {
     history.push("/garage");
   };
 
-  if (!isAuthenticated) return <Redirect to="/" />;
+  if (!user) return <Redirect to="/" />;
   return (
     <div id="home-page-container">
       <h1

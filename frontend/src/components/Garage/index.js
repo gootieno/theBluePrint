@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserBluePrints } from "../../redux/garage";
 
 import BluePrintSpecs from "../BlueprintSpecs";
-import BluePrints from "../Blueprints";
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
 import "./garage.css";
@@ -22,9 +21,9 @@ const Garage = () => {
   const garage = useSelector((state) => state.garage);
 
   useEffect(() => {
-    dispatch(getUserBluePrints(user.id));
+    if (user) dispatch(getUserBluePrints(user.id));
     setBluePrint(blueprints[current]);
-  }, [dispatch, current, user.id]);
+  }, [dispatch, current, user?.id]);
 
   const blueprints = Object.values(garage.blueprints);
   const categories = Object.values(garage.categories);
@@ -46,6 +45,7 @@ const Garage = () => {
 
   const handleBluePrint = (event) => {
     handleRoute(event);
+    handleBluePrintOptions();
   };
 
   const handleBluePrintOptions = () => {
@@ -99,20 +99,10 @@ const Garage = () => {
           blueprints={blueprints}
           setCurrent={setCurrent}
           blueprint={blueprint}
-          setRoute={setRoute}
-          handleRoute={handleRoute}
           handleBluePrint={handleBluePrint}
         />
         <CrudBox route={route} name={name} />
       </div>
-      {blueprintOptions && (
-        <div
-          id="blueprint-options-container"
-          className="garage-blueprint-options"
-        >
-          <div>Go to projects</div>
-        </div>
-      )}
     </>
   );
 };

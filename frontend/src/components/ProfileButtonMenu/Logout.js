@@ -14,7 +14,7 @@ const Logout = ({ setShowProfileMenu }) => {
     let status = await dispatch(logoutUser());
     if (status.ok) {
       setShowProfileMenu(false);
-      history.push("/");
+      history.replace("/");
     }
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import BluePrint from "../BluePrint";
 import "./carousel.css";
 
 const Carousel = ({ current, setCurrent, blueprints, handleBluePrint }) => {
@@ -36,14 +37,9 @@ const Carousel = ({ current, setCurrent, blueprints, handleBluePrint }) => {
             key={index}
           >
             {index === current && (
-              <img
-                data-route="blueprints"
-                id="carousel-image"
-                src={blueprint.imageUrl}
-                height="400px"
-                width="500px"
-                onClick={handleBluePrint}
-                data-name={blueprint.carName}
+              <BluePrint
+                blueprint={blueprint}
+                handleBluePrint={handleBluePrint}
               />
             )}
           </div>

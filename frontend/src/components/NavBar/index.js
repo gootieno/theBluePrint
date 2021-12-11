@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LoginModal from "../Modals/LoginModal";
 import ProfileButtonModal from "../Modals/ProfileButtonModal";
@@ -14,7 +14,6 @@ function NavBar({
   showLoginModal,
   setShowLoginModal,
   handleShowModal,
-  demo,
 }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
@@ -62,7 +61,6 @@ function NavBar({
         <LoginModal
           showLoginModal={showLoginModal}
           setShowLoginModal={setShowLoginModal}
-          demo={demo}
         />
       </>
     );
