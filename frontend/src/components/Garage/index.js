@@ -4,6 +4,7 @@ import { getUserBluePrints } from "../../redux/garage";
 
 import BluePrintSpecs from "../BlueprintSpecs";
 import Carousel from "../Carousel";
+import Category from "../Category";
 import CrudBox from "../CrudBox";
 import "./garage.css";
 
@@ -71,19 +72,10 @@ const Garage = () => {
         {garage.name}
       </h2>
       <div id="garage-page-links-container">
-        {categories.map((category, index) => (
-          <span
-            id={category.id}
-            data-route="categories"
-            key={`index-${category.id}-${index}`}
-            onClick={handleCategoryTab}
-            className="garage-page-links"
-            value={category.blueprintId}
-            data-name={category.name}
-          >
-            {category.name}
-          </span>
-        ))}
+        <Category
+          handleCategoryTab={handleCategoryTab}
+          categories={categories}
+        />
       </div>
       <div id="garage-container">
         {category && (
