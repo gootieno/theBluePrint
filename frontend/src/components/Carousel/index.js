@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import BluePrint from "../BluePrint";
 import "./carousel.css";
 
