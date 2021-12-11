@@ -10,6 +10,7 @@ import Garage from "./components/Garage";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
+import Projects from "./components/Projects";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -50,6 +51,9 @@ const App = () => {
           </Route>
           <Route path="/garage">
             <Garage />
+          </Route>
+          <Route path="/blueprint/projects">
+            <Projects />
           </Route>
         </Switch>
       )}
