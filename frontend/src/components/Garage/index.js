@@ -1,45 +1,59 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import BluePrintSpecs from "../BlueprintSpecs";
+import { useSelector, useDispatch } from "react-redux";
+import { getUserBluePrints } from "../../redux/garage";
 
+import BluePrintSpecs from "../BlueprintSpecs";
+import BluePrints from "../Blueprints";
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  let [category, setCategory] = useState(null);
-  let [blueprint, setBluePrint] = useState(null);
-  let [name, setName] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [blueprint, setBluePrint] = useState(null);
+  const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
-
+  const [blueprintOptions, setBlueprintOptions] = useState(false);
   const [route, setRoute] = useState(null);
 
-  let garage = useSelector((state) => state.garage);
+  const dispatch = useDispatch();
 
-  let blueprints = Object.values(garage.blueprints);
-  let categories = Object.values(garage.categories);
+  const user = useSelector((state) => state.session.user);
+  const garage = useSelector((state) => state.garage);
+
+  useEffect(() => {
+    dispatch(getUserBluePrints(user.id));
+    setBluePrint(blueprints[current]);
+  }, [dispatch, current, user.id]);
+
+  const blueprints = Object.values(garage.blueprints);
+  const categories = Object.values(garage.categories);
 
   let currentRoute;
 
-  useEffect(() => {
-    setBluePrint(blueprints[current]);
-  }, [current]);
-
-  const handleCategoryTab = (e) => {
-    let singleCategory = garage.categories[e.target.id];
-    handleRoute(e);
+  const handleCategoryTab = (event) => {
+    let singleCategory = garage.categories[event.target.id];
+    handleRoute(event);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
   };
 
-  let handleRoute = (e) => {
-    currentRoute = e.target.dataset.route;
+  let handleRoute = (event) => {
+    currentRoute = event.target.dataset.route;
     setRoute(currentRoute);
-    handleName(e);
+    handleName(event);
   };
 
-  let handleName = (e) => {
-    setName(e.target.dataset.name);
+  const handleBluePrint = (event) => {
+    handleRoute(event);
+  };
+
+  const handleBluePrintOptions = () => {
+    setBlueprintOptions((prevState) => !prevState);
+  };
+
+  let handleName = (event) => {
+    setName(event.target.dataset.name);
   };
 
   const specs = useSelector((state) => {
@@ -87,9 +101,18 @@ const Garage = () => {
           blueprint={blueprint}
           setRoute={setRoute}
           handleRoute={handleRoute}
+          handleBluePrint={handleBluePrint}
         />
-        <CrudBox route={route} category={category} name={name} />
+        <CrudBox route={route} name={name} />
       </div>
+      {blueprintOptions && (
+        <div
+          id="blueprint-options-container"
+          className="garage-blueprint-options"
+        >
+          <div>Go to projects</div>
+        </div>
+      )}
     </>
   );
 };

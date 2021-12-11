@@ -21,7 +21,6 @@
   color: rgb(18, 77, 90);
 }
 
-#specs-empty {
-  margin: 5px;
-  color: rgba(69, 129, 142, 0.7);
+.blueprint-specs:current {
+  color: rgb(5, 61, 73);
 }
