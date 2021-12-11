@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { getUserBluePrints } from "../../redux/garage";
 
 import BluePrintSpecs from "../BlueprintSpecs";
-import BluePrints from "../Blueprints";
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
 import "./garage.css";
@@ -22,14 +21,14 @@ const Garage = () => {
   const garage = useSelector((state) => state.garage);
 
   useEffect(() => {
-    dispatch(getUserBluePrints(user.id));
+    if (user) dispatch(getUserBluePrints(user.id));
     setBluePrint(blueprints[current]);
-  }, [dispatch, current, user.id]);
+  }, [dispatch, current, user?.id]);
 
   const blueprints = Object.values(garage.blueprints);
   const categories = Object.values(garage.categories);
 
-  let currentRoute;
+  let currentNode;
 
   const handleCategoryTab = (event) => {
     let singleCategory = garage.categories[event.target.id];
@@ -39,38 +38,38 @@ const Garage = () => {
   };
 
   let handleRoute = (event) => {
-    currentRoute = event.target.dataset.route;
-    setRoute(currentRoute);
-    handleName(event);
+    currentNode = event.target.dataset;
+    setRoute(currentNode.route);
+    setName(currentNode.name);
   };
 
   const handleBluePrint = (event) => {
     handleRoute(event);
-  };
-
-  const handleBluePrintOptions = () => {
     setBlueprintOptions((prevState) => !prevState);
   };
 
-  let handleName = (event) => {
-    setName(event.target.dataset.name);
-  };
-
-  const specs = useSelector((state) => {
-    return Object.values(state.garage.specs).filter((spec) => {
+  const specs = useSelector((state) =>
+    Object.values(state.garage.specs).filter((spec) => {
       if (
         category?.blueprintId === blueprint?.id &&
         spec?.categoryId === category?.id
       ) {
         return spec;
       }
-    });
-  });
+    })
+  );
 
   if (!garage) return null;
   return (
     <>
-      <h2 id="garage-title">{garage.name}</h2>
+      <h2
+        id="garage-title"
+        data-route="garage"
+        data-name={garage.name}
+        onClick={handleRoute}
+      >
+        {garage.name}
+      </h2>
       <div id="garage-page-links-container">
         {categories.map((category, index) => (
           <span
@@ -99,20 +98,10 @@ const Garage = () => {
           blueprints={blueprints}
           setCurrent={setCurrent}
           blueprint={blueprint}
-          setRoute={setRoute}
-          handleRoute={handleRoute}
           handleBluePrint={handleBluePrint}
         />
         <CrudBox route={route} name={name} />
       </div>
-      {blueprintOptions && (
-        <div
-          id="blueprint-options-container"
-          className="garage-blueprint-options"
-        >
-          <div>Go to projects</div>
-        </div>
-      )}
     </>
   );
 };

@@ -8,9 +8,8 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import "./landingpage.css";
 import { loginUser } from "../../redux/user";
 
-const LandingPage = ({ setDemo, setShowLoginModal }) => {
+const LandingPage = () => {
   const history = useHistory();
-  const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const handleSignUp = () => {
@@ -18,10 +17,14 @@ const LandingPage = ({ setDemo, setShowLoginModal }) => {
   };
 
   const handleDemoButton = () => {
-    dispatch(loginUser({ email: "demo@user.io", password: "password" }));
+    try {
+      dispatch(loginUser({ email: "demo@user.io", password: "password" })).then(
+        () => history.push("/home")
+      );
+    } catch (error) {
+      history.push("/");
+    }
   };
-
-  if (user) return <Redirect to="/home" />;
 
   return (
     <>

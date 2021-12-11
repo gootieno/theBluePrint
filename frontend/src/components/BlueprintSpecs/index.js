@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import "./blueprint-spec.css";
 
 const BluePrintSpecs = ({ specs, category, handleRoute }) => {
