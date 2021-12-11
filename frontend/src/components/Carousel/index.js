@@ -1,18 +1,18 @@
 import BluePrint from "../BluePrint";
 import "./carousel.css";
 
-const Carousel = ({ current, setCurrent, blueprints, handleBluePrint }) => {
-  let blueprintsMaxLength = blueprints.length - 1;
+const Carousel = ({ blueprints, current, setCurrent, handleBluePrint }) => {
+  let carouselMaxLength = blueprints.length - 1;
 
   const handlePrev = () => {
     setCurrent((prevState) =>
-      prevState === 0 ? blueprintsMaxLength : prevState - 1
+      prevState === 0 ? carouselMaxLength : prevState - 1
     );
   };
 
   const handleNext = () => {
     setCurrent((prevState) =>
-      prevState === blueprintsMaxLength ? 0 : prevState + 1
+      prevState === carouselMaxLength ? 0 : prevState + 1
     );
   };
 

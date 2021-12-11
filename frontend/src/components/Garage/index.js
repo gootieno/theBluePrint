@@ -13,7 +13,7 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [blueprintOptions, setBlueprintOptions] = useState(false);
+  const [blueprintProjects, setBluePrintProjects] = useState(false);
   const [route, setRoute] = useState(null);
 
   const dispatch = useDispatch();
@@ -46,7 +46,8 @@ const Garage = () => {
 
   const handleBluePrint = (event) => {
     handleRoute(event);
-    setBlueprintOptions((prevState) => !prevState);
+    setBluePrint(blueprints[current]);
+    setBluePrintProjects((prevState) => !prevState);
   };
 
   const specs = useSelector((state) =>
@@ -86,10 +87,9 @@ const Garage = () => {
           />
         )}
         <Carousel
-          current={current}
           blueprints={blueprints}
+          current={current}
           setCurrent={setCurrent}
-          blueprint={blueprint}
           handleBluePrint={handleBluePrint}
         />
         <CrudBox route={route} name={name} />
