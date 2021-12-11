@@ -5,7 +5,7 @@ const CrudBox = ({ route, name }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [inputAction, setInputAction] = useState("");
-  let inputRef = useRef(null);
+  const inputRef = useRef(null);
   const [action, setAction] = useState("");
 
   useEffect(() => {
@@ -20,27 +20,28 @@ const CrudBox = ({ route, name }) => {
         .removeEventListener("click", handleClickAway);
   }, [toggle, action]);
 
-  const handleClickAway = (e) => {
-    if (e.target.id !== "post" && e.target.id !== "put") setToggle(false);
+  const handleClickAway = (event) => {
+    if (event.target.id !== "post" && event.target.id !== "put")
+      setToggle(false);
   };
 
-  const handleRouteAction = (e) => {
+  const handleRouteAction = (event) => {
     if (!route) {
       alert("Nothing selected to work on");
       return null;
     }
-    if (e.target.id === "post" || e.target.id === "put") {
-      setRouteAction(e.target.id);
-      if (e.target.dataset.name === action) {
+    if (event.target.id === "post" || event.target.id === "put") {
+      setRouteAction(event.target.id);
+      if (event.target.dataset.name === action) {
         setToggle((prev) => !prev);
       } else {
-        setAction(e.target.dataset.name);
+        setAction(event.target.dataset.name);
         setToggle(true);
-        setRouteAction(e.target.id);
+        setRouteAction(event.target.id);
       }
     } else {
       setToggle(false);
-      setRouteAction(e.target.id);
+      setRouteAction(event.target.id);
     }
   };
 
@@ -48,8 +49,8 @@ const CrudBox = ({ route, name }) => {
     inputRef.current.focus();
   };
 
-  const handleInputAction = (e) => {
-    setInputAction(e.target.value);
+  const handleInputAction = (event) => {
+    setInputAction(event.target.value);
   };
   return (
     <div>
@@ -85,7 +86,6 @@ const CrudBox = ({ route, name }) => {
             </>
           ) : (
             <>
-              {" "}
               <div
                 id="post"
                 data-name="create"

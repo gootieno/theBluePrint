@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-
 import "./blueprints.css";
 
 const BluePrint = ({ blueprint, handleBluePrint }) => {
   return (
     <img
       data-route="blueprints"
-      id="carousel-image"
+      id="blueprint-image"
       src={blueprint.imageUrl}
       height="400px"
       width="500px"
