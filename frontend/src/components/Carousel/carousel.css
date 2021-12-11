@@ -13,6 +13,7 @@
 
 .carousel-content {
   padding: 5px;
+  cursor: pointer;
 }
 
 #carousel-image {

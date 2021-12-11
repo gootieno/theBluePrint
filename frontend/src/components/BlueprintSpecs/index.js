@@ -23,7 +23,9 @@ const BluePrintSpecs = ({ specs, category, handleRoute }) => {
               </div>
             ))
           ) : (
-            <h3 id="specs-empty">Nothing to show</h3>
+            <div id="specs-empty" className="blueprint-specs">
+              Nothing to show
+            </div>
           )}
         </div>
       </div>
