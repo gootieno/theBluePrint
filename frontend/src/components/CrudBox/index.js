@@ -21,8 +21,9 @@ const CrudBox = ({ route, name }) => {
   }, [toggle, action]);
 
   const handleClickAway = (event) => {
-    if (event.target.id !== "post" && event.target.id !== "put")
+    if (!event.target.classList.contains("crud-actions")) {
       setToggle(false);
+    }
   };
 
   const handleRouteAction = (event) => {
@@ -49,6 +50,11 @@ const CrudBox = ({ route, name }) => {
     inputRef.current.focus();
   };
 
+  const handleInputCancel = () => {
+    setInputAction("");
+    handleInputRef();
+  };
+
   const handleInputAction = (event) => {
     setInputAction(event.target.value);
   };
@@ -71,14 +77,14 @@ const CrudBox = ({ route, name }) => {
             <>
               <div
                 id="delete-confirm"
-                className="crud-actions delete-buttons"
+                className="crud-actions delete-buttons crud-action-buttons"
                 onClick={handleRouteAction}
               >
                 YES
               </div>
               <div
                 id="delete-decline"
-                className="crud-actions delete-buttons"
+                className="crud-actions delete-buttons crud-action-buttons"
                 onClick={handleRouteAction}
               >
                 NO
@@ -89,14 +95,14 @@ const CrudBox = ({ route, name }) => {
               <div
                 id="post"
                 data-name="create"
-                className="create-button crud-actions"
+                className="create-button crud-actions crud-action-buttons"
                 onClick={handleRouteAction}
               >
                 CREATE
               </div>
               <div
                 id="put"
-                className="edit-button crud-actions"
+                className="edit-button crud-actions crud-action-buttons"
                 data-name="edit"
                 onClick={handleRouteAction}
               >
@@ -104,7 +110,7 @@ const CrudBox = ({ route, name }) => {
               </div>
               <div
                 id="delete"
-                className="delete-button crud-actions"
+                className="delete-button crud-actions crud-action-buttons"
                 onClick={handleRouteAction}
                 data-name="delete"
               >
@@ -114,7 +120,7 @@ const CrudBox = ({ route, name }) => {
           )}{" "}
         </div>
         {toggle && (
-          <div className="crud-actions-input">
+          <div className="crud-actions-input crud-actions">
             <input
               ref={inputRef}
               id="text-box-input"
@@ -122,7 +128,21 @@ const CrudBox = ({ route, name }) => {
               value={inputAction}
               placeholder={`${action.toUpperCase()} ${route.toUpperCase()}`}
               onChange={handleInputAction}
+              className={
+                inputAction.length > 0
+                  ? "crud-input crud-actions active"
+                  : "crud-input crud-actions focus"
+              }
             />
+            {inputAction.length > 0 && (
+              <span
+                id="input-action-cancel"
+                className="text-inputs-cancel crud-actions"
+                onClick={handleInputCancel}
+              >
+                x
+              </span>
+            )}
           </div>
         )}
       </div>
