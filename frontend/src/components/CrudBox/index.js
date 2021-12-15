@@ -4,7 +4,7 @@ import "./crudbox.css";
 const CrudBox = ({ route, name }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
-  const [inputAction, setInputAction] = useState(new String(20));
+  const [inputAction, setInputAction] = useState("");
   const inputRef = useRef(null);
   const [action, setAction] = useState("");
 
@@ -48,6 +48,11 @@ const CrudBox = ({ route, name }) => {
 
   const handleInputRef = () => {
     inputRef.current.focus();
+  };
+
+  const handleInputCancel = () => {
+    setInputAction("");
+    handleInputRef();
   };
 
   const handleInputAction = (event) => {
@@ -133,6 +138,7 @@ const CrudBox = ({ route, name }) => {
               <span
                 id="input-action-cancel"
                 className="text-inputs-cancel crud-actions"
+                onClick={handleInputCancel}
               >
                 x
               </span>
