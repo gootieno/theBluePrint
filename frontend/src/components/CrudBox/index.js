@@ -32,7 +32,6 @@ const CrudBox = ({ route, name }) => {
       return null;
     }
     if (event.target.id === "post" || event.target.id === "put") {
-      setRouteAction(event.target.id);
       if (event.target.dataset.name === action) {
         setToggle((prev) => !prev);
       } else {
@@ -58,6 +57,12 @@ const CrudBox = ({ route, name }) => {
   const handleInputAction = (event) => {
     setInputAction(event.target.value);
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // console.log(`fetch to ${route} with this data : ${inputAction}`);
+  };
+
   return (
     <div>
       <h2 id="crudbox-title">Work Bench</h2>
@@ -126,6 +131,7 @@ const CrudBox = ({ route, name }) => {
               id="text-box-input"
               type="text"
               value={inputAction}
+              autoComplete="off"
               placeholder={`${action.toUpperCase()} ${route.toUpperCase()}`}
               onChange={handleInputAction}
               className={
@@ -135,13 +141,22 @@ const CrudBox = ({ route, name }) => {
               }
             />
             {inputAction.length > 0 && (
-              <span
-                id="input-action-cancel"
-                className="text-inputs-cancel crud-actions"
-                onClick={handleInputCancel}
-              >
-                x
-              </span>
+              <>
+                <span
+                  id="input-action-cancel"
+                  className="text-inputs-cancel crud-actions"
+                  onClick={handleInputCancel}
+                >
+                  x
+                </span>
+                <div
+                  id="input-field-submit"
+                  className="crud-actions crud-action-buttons"
+                  onClick={handleSubmit}
+                >
+                  SUBMIT
+                </div>
+              </>
             )}
           </div>
         )}
