@@ -92,3 +92,16 @@
   position: relative;
   right: 10px;
 }
+
+#input-field-submit {
+  width: 100px;
+  text-align: center;
+  color: white;
+  background-color: #45818eac;
+  margin-left: 110px;
+  flex: 0 0 3;
+}
+
+#input-field-submit:hover {
+  background-color: #45818ed6;
+}
