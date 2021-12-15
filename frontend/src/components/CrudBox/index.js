@@ -58,9 +58,21 @@ const CrudBox = ({ route, name }) => {
     setInputAction(event.target.value);
   };
 
+  const handleDelete = (event) => {
+    if (event.target.id === "delete-confirm") {
+      event.preventDefault();
+      // console.log(`fetch to ${route} route and delete ${name}`);
+    } else {
+      handleRouteAction(event);
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    // console.log(`fetch to ${route} with this data : ${inputAction}`);
+    console
+      .log
+      // `fetch to ${route} route with this data: ${inputAction} with ${routeAction} in the headers`
+      ();
   };
 
   return (
@@ -83,14 +95,14 @@ const CrudBox = ({ route, name }) => {
               <div
                 id="delete-confirm"
                 className="crud-actions delete-buttons crud-action-buttons"
-                onClick={handleRouteAction}
+                onClick={handleDelete}
               >
                 YES
               </div>
               <div
                 id="delete-decline"
                 className="crud-actions delete-buttons crud-action-buttons"
-                onClick={handleRouteAction}
+                onClick={handleDelete}
               >
                 NO
               </div>
