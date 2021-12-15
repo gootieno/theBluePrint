@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getUserBluePrints } from "../../redux/garage";
 
 import BluePrintSpecs from "../BlueprintSpecs";
@@ -17,6 +18,7 @@ const Garage = () => {
   const [route, setRoute] = useState(null);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const garage = useSelector((state) => state.garage);
@@ -48,6 +50,10 @@ const Garage = () => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setBluePrintProjects((prevState) => !prevState);
+  };
+
+  const handleProject = () => {
+    history.push(`blueprints/${blueprint.id}/projects`);
   };
 
   const specs = useSelector((state) =>
@@ -94,6 +100,26 @@ const Garage = () => {
         />
         <CrudBox route={route} name={name} />
       </div>
+      {blueprintProjects && (
+        <div id="garage-blueprint-project-container">
+          <div id="garage-blueprint-project">
+            <div
+              id="blueprint-project"
+              className="crud-action-buttons"
+              onClick={handleProject}
+            >
+              Projects
+            </div>
+            <div
+              id="blueprint-buildlist"
+              className="crud-action-buttons"
+              onClick={() => null}
+            >
+              Build List
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

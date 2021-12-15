@@ -52,7 +52,7 @@ const App = () => {
           <Route path="/garage">
             <Garage />
           </Route>
-          <Route path="/blueprint/projects">
+          <Route path="/blueprints/:id/projects">
             <Projects />
           </Route>
         </Switch>

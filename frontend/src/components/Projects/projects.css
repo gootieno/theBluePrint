@@ -1,0 +1,24 @@
+#blueprint-project-container {
+  display: flex;
+  justify-content: center;
+  height: auto;
+}
+
+#blueprint-project-title {
+  margin-left: 150px;
+  cursor: pointer;
+}
+
+#blueprint-project-create {
+  width: 150px;
+  margin-left: 150px;
+}
+
+#project-list {
+  margin: 25px 150px;
+  box-shadow: 0px 0px 10px black;
+}
+
+.blueprint-projects {
+  /* height: 100px; */
+}
