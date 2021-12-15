@@ -26,7 +26,7 @@
   color: rgba(194, 42, 31, 0.8);
 }
 
-.crud-actions {
+.crud-action-buttons {
   border: 1px solid #45818ecc;
   box-shadow: 0 0px 5px 0.2px #45818ecc;
   border-radius: 4px;
@@ -61,19 +61,34 @@
   text-align: center;
 }
 
-#text-box-input {
+.crud-input {
   margin: 5px;
   width: 0;
   border: 0;
   padding: 5px;
-  border-bottom: 1px solid #45818ecc;
+  border-bottom: 0px solid #45818ecc;
   position: relative;
 }
 
-#text-box-input:focus {
+.crud-input.active {
+  min-width: 200px;
+  outline: none !important;
+  border-bottom: 1px solid #45818ecc;
+  border-color: #45818ecc;
+}
+
+.crud-input.focus:focus {
   outline: none !important;
   border-color: #45818ecc;
   transition: 1s ease;
+  border-bottom: 1px solid #45818ecc;
   box-sizing: border-box;
-  width: 95%;
+  width: 90%;
+}
+
+#input-action-cancel {
+  cursor: pointer;
+  color: #45818ecc;
+  position: relative;
+  right: 10px;
 }
