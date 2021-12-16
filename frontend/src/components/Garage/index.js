@@ -7,6 +7,7 @@ import BluePrintSpecs from "../BlueprintSpecs";
 import Carousel from "../Carousel";
 import Category from "../Category";
 import CrudBox from "../CrudBox";
+import Projects from "../Projects";
 import "./garage.css";
 
 const Garage = () => {
@@ -50,10 +51,11 @@ const Garage = () => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setBluePrintProjects((prevState) => !prevState);
+    history.push(`/blueprints/${blueprints[current].id}/projects`);
   };
 
   const handleProject = () => {
-    history.push(`blueprints/${blueprint.id}/projects`);
+    // history.push(`blueprints/${blueprint.id}/projects`);
   };
 
   const specs = useSelector((state) =>
@@ -100,26 +102,6 @@ const Garage = () => {
         />
         <CrudBox route={route} name={name} />
       </div>
-      {blueprintProjects && (
-        <div id="garage-blueprint-project-container">
-          <div id="garage-blueprint-project">
-            <div
-              id="blueprint-project"
-              className="crud-action-buttons"
-              onClick={handleProject}
-            >
-              Projects
-            </div>
-            <div
-              id="blueprint-buildlist"
-              className="crud-action-buttons"
-              onClick={() => null}
-            >
-              Build List
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
