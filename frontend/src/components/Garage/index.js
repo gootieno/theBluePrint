@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getUserBluePrints } from "../../redux/garage";
 
 import BluePrintSpecs from "../BlueprintSpecs";
 import Carousel from "../Carousel";
 import Category from "../Category";
 import CrudBox from "../CrudBox";
+import Projects from "../Projects";
 import "./garage.css";
 
 const Garage = () => {
@@ -17,6 +19,7 @@ const Garage = () => {
   const [route, setRoute] = useState(null);
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const user = useSelector((state) => state.session.user);
   const garage = useSelector((state) => state.garage);
@@ -48,6 +51,11 @@ const Garage = () => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setBluePrintProjects((prevState) => !prevState);
+    history.push(`/blueprints/${blueprints[current].id}/projects`);
+  };
+
+  const handleProject = () => {
+    // history.push(`blueprints/${blueprint.id}/projects`);
   };
 
   const specs = useSelector((state) =>
