@@ -10,6 +10,7 @@ import "./projects.css";
 const Projects = () => {
   const [sections, setSections] = useState([1]);
   const [current, setCurrent] = useState(0);
+  const [route, setRoute] = useState(null);
 
   const { blueprintId } = useParams();
 
@@ -34,7 +35,9 @@ const Projects = () => {
         </h2>
         <div className="project-carousel-container">project item</div>
       </div>
-      <div id="create-project-container">{/* <CrudBox /> */}</div>
+      <div id="create-project-container">
+        <CrudBox route={route} />
+      </div>
     </div>
   );
 };

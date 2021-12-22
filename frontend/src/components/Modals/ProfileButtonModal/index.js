@@ -1,6 +1,6 @@
 import ProfileButtonMenu from "../../ProfileButtonMenu";
 
-import { Modal } from "../../../contex/Modal";
+import { Modal } from "../../../context/Modal";
 
 function ProfileButtonModal({ showProfileMenu, setShowProfileMenu }) {
   return (

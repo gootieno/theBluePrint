@@ -6,7 +6,8 @@ import "./index.css";
 import App from "./App";
 
 import configureStore from "./redux/store";
-import { ModalProvider } from "./contex/Modal";
+import { ModalProvider } from "./context/Modal";
+import RouteProvider from "./context/Route";
 
 import { restoreCSRF, csrfFetch } from "./redux/csrf";
 
@@ -21,9 +22,11 @@ const Root = () => {
   return (
     <Provider store={store}>
       <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <RouteProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </RouteProvider>
       </ModalProvider>
     </Provider>
   );
