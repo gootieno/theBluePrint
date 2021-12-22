@@ -1,7 +1,28 @@
-#projects-container {
+.projects-container {
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  align-items: center;
-  margin: 0 auto;
+  flex-direction: column;
+  margin: 0 100px;
+  margin-top: 50px;
+}
+
+.project {
+  cursor: pointer;
+}
+
+.project-titles {
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  cursor: default;
+}
+
+.project-carousel-container {
+  margin-left: 50px;
+  height: 200px;
+  width: 300px;
+  border: 1px solid black;
+}
+
+#create-project-container {
+  width: 240px;
 }
