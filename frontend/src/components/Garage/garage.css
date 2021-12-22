@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+#garage-carousel-container {
+  margin-top: 50px;
+}
+
 #garage-page-links-container {
   display: flex;
   justify-content: center;

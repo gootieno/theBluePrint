@@ -1,0 +1,62 @@
+.projects-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 100px;
+  margin-top: 50px;
+}
+
+#projects-title-crud {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 100px;
+}
+
+#blueprint-project-title {
+  cursor: default;
+  width: 100%;
+}
+
+.project {
+  cursor: default;
+}
+
+.project-titles {
+  border-bottom: 1px solid black;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  cursor: default;
+}
+
+.project-carousel-container {
+  display: flex;
+  margin-left: 50px;
+  margin-right: 50px;
+  height: 220px;
+  padding: 20px;
+  align-items: center;
+}
+
+.completed-projects-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.completed-project-item {
+  border: 1px solid red;
+  width: 300px;
+  height: 100%;
+  margin-right: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+#create-project-container {
+  width: 240px;
+  margin-left: 20%;
+}
+
+.in-progress {
+  margin-bottom: 100px;
+}
