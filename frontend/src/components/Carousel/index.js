@@ -47,7 +47,7 @@ const Carousel = ({
                 height="400px"
                 width="500px"
                 onClick={handleCarouselItem}
-                data-name={item.carName}
+                data-name={item.name}
               />
             )}
           </div>
