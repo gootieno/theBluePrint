@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   BluePrint.init(
     {
-      carName: DataTypes.STRING(50),
+      name: DataTypes.STRING(50),
       imageUrl: DataTypes.STRING,
       garageId: { type: DataTypes.INTEGER, references: { model: "Garages" } },
     },
