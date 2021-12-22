@@ -1,13 +1,10 @@
 import { Redirect } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import "./home.css";
-import { getUserBluePrints } from "../../redux/garage";
 
 const Home = () => {
   const user = useSelector((state) => state.session.user);
-  const dispatch = useDispatch();
-
   const history = useHistory();
 
   const handleBuildList = () => {
@@ -15,7 +12,6 @@ const Home = () => {
   };
 
   const handleGarage = () => {
-    dispatch(getUserBluePrints(user.id));
     history.push("/garage");
   };
 

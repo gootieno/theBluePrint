@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
@@ -10,12 +11,19 @@ const Projects = () => {
   const [sections, setSections] = useState([1]);
   const [current, setCurrent] = useState(0);
 
+  const { blueprintId } = useParams();
+
+  const blueprints = useSelector((state) => state.garage.blueprints);
+
+  let blueprint = blueprints[blueprintId];
+
   return (
     <div className="projects-container">
+      <h2 id="blueprint-project-title" className="project-titles">
+        {`Working on your ${blueprint.name}`}
+      </h2>
       <div className="completed project">
-        <h2 id="complete-project-title" className="project-titles">
-          Completed Projects
-        </h2>
+        <h3></h3>
         <div className="project-carousel-container">
           {/* <Carousel current={current} setCurrent={setCurrent} /> */}
         </div>

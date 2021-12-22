@@ -21,16 +21,14 @@ const Garage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const user = useSelector((state) => state.session.user);
   const garage = useSelector((state) => state.garage);
-
-  useEffect(() => {
-    if (user) dispatch(getUserBluePrints(user.id));
-    setBluePrint(blueprints[current]);
-  }, [dispatch, current, user?.id]);
 
   const blueprints = Object.values(garage.blueprints);
   const categories = Object.values(garage.categories);
+
+  useEffect(() => {
+    setBluePrint(garage.blueprints[current]);
+  }, [dispatch, current, garage]);
 
   let currentNode;
 
@@ -50,7 +48,7 @@ const Garage = () => {
   const handleBluePrint = (event) => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
-    setBluePrintProjects((prevState) => !prevState);
+    // setBluePrintProjects((prevState) => !prevState);
     history.push(`/blueprints/${blueprints[current].id}/projects`);
   };
 

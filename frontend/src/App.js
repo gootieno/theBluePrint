@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
@@ -11,6 +11,7 @@ import Garage from "./components/Garage";
 import "./index.css";
 import { restoreUser } from "./redux/user";
 import Projects from "./components/Projects";
+import { getUserBluePrints } from "./redux/garage";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -21,6 +22,7 @@ const App = () => {
   };
 
   const dispatch = useDispatch();
+  let user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(restoreUser())
@@ -28,7 +30,10 @@ const App = () => {
       .catch((error) => {
         if (error) return setIsAuthenticated(false);
       });
-  }, [dispatch]);
+    if (user) {
+      dispatch(getUserBluePrints(user.id));
+    }
+  }, [dispatch, user?.id]);
 
   return (
     <>
@@ -52,7 +57,7 @@ const App = () => {
           <Route path="/garage">
             <Garage />
           </Route>
-          <Route path="/blueprints/:id/projects">
+          <Route path="/blueprints/:blueprintId/projects">
             <Projects />
           </Route>
         </Switch>
