@@ -87,13 +87,15 @@ const Garage = () => {
             specs={specs}
           />
         )}
-        <Carousel
-          current={current}
-          setCurrent={setCurrent}
-          carouselItems={blueprints}
-          handleCarouselItem={handleBluePrint}
-          dataRoute="blueprints"
-        />
+        <div id="garage-carousel-container">
+          <Carousel
+            current={current}
+            setCurrent={setCurrent}
+            carouselItems={blueprints}
+            handleCarouselItem={handleBluePrint}
+            dataRoute="blueprints"
+          />
+        </div>
         <CrudBox route={route} name={name} />
       </div>
     </>

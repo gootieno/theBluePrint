@@ -10,7 +10,7 @@ import Garage from "./components/Garage";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
-import Projects from "./components/Projects";
+import Projects from "./components/ProjectsPage";
 import { getUserBluePrints } from "./redux/garage";
 
 const App = () => {
