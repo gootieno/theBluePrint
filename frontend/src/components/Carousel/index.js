@@ -1,8 +1,13 @@
-import BluePrint from "../BluePrint";
+import BluePrint from "../BluePrints";
 import "./carousel.css";
 
-const Carousel = ({ blueprints, current, setCurrent, handleBluePrint }) => {
-  let carouselMaxLength = blueprints.length - 1;
+const Carousel = ({
+  carouselItems,
+  current,
+  setCurrent,
+  handleCarouselItem,
+}) => {
+  let carouselMaxLength = carouselItems.length - 1;
 
   const handlePrev = () => {
     setCurrent((prevState) =>
@@ -26,18 +31,23 @@ const Carousel = ({ blueprints, current, setCurrent, handleBluePrint }) => {
         {`<`}
       </div>
       <div id="image-container">
-        {blueprints.map((blueprint, index) => (
+        {carouselItems.map((item, index) => (
           <div
-            id={blueprint.id}
+            id={item.id}
             className={`carousel-content ${
               index === current ? " content" : " content active"
             }`}
             key={index}
           >
             {index === current && (
-              <BluePrint
-                blueprint={blueprint}
-                handleBluePrint={handleBluePrint}
+              <img
+                data-route="blueprints"
+                id="blueprint-image"
+                src={item.imageUrl}
+                height="400px"
+                width="500px"
+                onClick={handleCarouselItem}
+                data-name={item.carName}
               />
             )}
           </div>

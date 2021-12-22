@@ -134,7 +134,7 @@ const CrudBox = ({ route, name }) => {
                 DELETE
               </div>
             </>
-          )}{" "}
+          )}
         </div>
         {toggle && (
           <div className="crud-actions-input crud-actions">
