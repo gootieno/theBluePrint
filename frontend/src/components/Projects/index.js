@@ -18,6 +18,7 @@ const Projects = () => {
 
   let blueprint = blueprints[blueprintId];
 
+  if (!blueprint) return null;
   return (
     <div className="projects-container">
       <h2 id="blueprint-project-title" className="project-titles">
