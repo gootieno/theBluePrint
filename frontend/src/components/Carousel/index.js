@@ -6,6 +6,7 @@ const Carousel = ({
   current,
   setCurrent,
   handleCarouselItem,
+  dataRoute,
 }) => {
   let carouselMaxLength = carouselItems.length - 1;
 
@@ -41,8 +42,8 @@ const Carousel = ({
           >
             {index === current && (
               <img
-                data-route="blueprints"
-                id="blueprint-image"
+                data-route={dataRoute}
+                id="carousel-image"
                 src={item.imageUrl}
                 height="400px"
                 width="500px"
