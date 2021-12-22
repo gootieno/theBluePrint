@@ -92,6 +92,7 @@ const Garage = () => {
           setCurrent={setCurrent}
           carouselItems={blueprints}
           handleCarouselItem={handleBluePrint}
+          dataRoute="blueprints"
         />
         <CrudBox route={route} name={name} />
       </div>

@@ -5,8 +5,12 @@
   margin-top: 50px;
 }
 
+#blueprint-project-title {
+  cursor: default;
+}
+
 .project {
-  cursor: pointer;
+  cursor: default;
 }
 
 .project-titles {
@@ -21,6 +25,12 @@
   height: 200px;
   width: 300px;
   border: 1px solid black;
+}
+
+.completed-projects {
+  width: 100%;
+  /* height: 100%; */
+  cursor: pointer;
 }
 
 #create-project-container {
