@@ -1,6 +1,6 @@
 import LoginForm from "../../LoginForm";
 
-import { Modal } from "../../../contex/Modal";
+import { Modal } from "../../../context/Modal";
 
 function LoginModal({ showLoginModal, setShowLoginModal }) {
   return (

@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { getUserBluePrints } from "../../redux/garage";
+
+import { RouteContext } from "../../context/Route";
 
 import BluePrintSpecs from "../BlueprintSpecs";
 import Carousel from "../Carousel";
 import Category from "../Category";
 import CrudBox from "../CrudBox";
-import Projects from "../Projects";
 import "./garage.css";
 
 const Garage = () => {
@@ -15,8 +15,8 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [blueprintProjects, setBluePrintProjects] = useState(false);
-  const [route, setRoute] = useState(null);
+
+  const { route, setRoute } = useContext(RouteContext);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,8 +27,8 @@ const Garage = () => {
   const categories = Object.values(garage.categories);
 
   useEffect(() => {
-    setBluePrint(garage.blueprints[current]);
-  }, [dispatch, current, garage]);
+    setBluePrint(blueprints[current]);
+  }, [dispatch, current]);
 
   let currentNode;
 
@@ -48,12 +48,7 @@ const Garage = () => {
   const handleBluePrint = (event) => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
-    // setBluePrintProjects((prevState) => !prevState);
     history.push(`/blueprints/${blueprints[current].id}/projects`);
-  };
-
-  const handleProject = () => {
-    // history.push(`blueprints/${blueprint.id}/projects`);
   };
 
   const specs = useSelector((state) =>
