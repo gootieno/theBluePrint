@@ -36,6 +36,7 @@
   height: 220px;
   padding: 20px;
   align-items: center;
+  overflow: hidden;
 }
 
 .completed-projects-container {
