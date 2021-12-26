@@ -12,6 +12,7 @@ import "./index.css";
 import { restoreUser } from "./redux/user";
 import Projects from "./components/ProjectsPage";
 import { getUserBluePrints } from "./redux/garage";
+import DynamicCarousel from "./components/DynamicCarousel";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -59,6 +60,9 @@ const App = () => {
           </Route>
           <Route path="/blueprints/:blueprintId/projects">
             <Projects />
+          </Route>
+          <Route path='/dynamic-carousel'>
+            <DynamicCarousel />
           </Route>
         </Switch>
       )}

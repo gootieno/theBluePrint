@@ -5,6 +5,7 @@ import { RouteContext } from "../../context/Route";
 
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
+import DynamicCarousel from "../DynamicCarousel";
 
 import "./projects-page.css";
 
@@ -40,67 +41,19 @@ const Projects = () => {
           <CrudBox route={route} name={name} />
         </div>
       </div>
-
       <div className="completed project">
         {/**------------------------------------------------------------------ */}
         <h3 id="complete-project-title" className="project-titles">
           Completed Projects
         </h3>
-        <div className="project-carousel-container">
-          <div id="carousel-button-left" className="carousel-buttons">
-            {`<`}
-          </div>
-          <div className="completed-projects-container">
-            {carouselContainer.length > 0 &&
-              carouselContainer.map((project) => (
-                <div
-                  className="completed-project-item"
-                  data-route="projects"
-                  onClick={handleProject}
-                  data-name={project}
-                >
-                  {project}
-                </div>
-              ))}
-          </div>
-          <div id="carousel-button-right" className="carousel-buttons">
-            {`>`}
-          </div>
-        </div>
+        <DynamicCarousel handleProject={handleProject} />
       </div>
       {/**------------------------note: create separate components----------- */}
       <div className="in-progress project">
         <h3 id="incomplete-project-title" className="project-titles">
           In Progress Projects
         </h3>
-        {/* <div className="project-carousel-container">
-          {!projects.length ? (
-            <>
-              <div id="carousel-button-left" className="carousel-buttons">
-                {`<`}
-              </div>
-              <div className="completed-projects-container">
-                <div className="completed-project-item">
-                  some project info here
-                </div>
-                <div className="completed-project-item">
-                  some project info here
-                </div>
-                <div className="completed-project-item">
-                  some project info here
-                </div>
-                <div className="completed-project-item">
-                  some project info here
-                </div>
-              </div>
-              <div id="carousel-button-left" className="carousel-buttons">
-                {`<`}
-              </div>
-            </>
-          ) : (
-            <div id="completed-project">Add from in progress</div>
-          )}
-        </div> */}
+        {/* <DynamicCarousel /> */}
       </div>
       {/**------------------------------------------------------------------ */}
     </div>

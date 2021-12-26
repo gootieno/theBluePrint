@@ -1,0 +1,36 @@
+#carousel-container-outer {
+  display: flex;
+  position: relative;
+  margin-top: 100px;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+#carousel-container-inner {
+  display: inline-flex;
+  position: relative;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  padding: 20px;
+  overflow-x: hidden;
+  justify-content: flex-start;
+}
+
+div.carousel-items {
+  margin: 5px 20px 5px 0px;
+  border: 1px solid black;
+}
+
+.carousel-items.current {
+  border: 2px solid red;
+}
+
+.carousel-single-item {
+  width: 300px;
+  height: 200px;
+}
+
+.carousel-buttons {
+  margin: 10px;
+}
