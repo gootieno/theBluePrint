@@ -6,11 +6,12 @@ import { RouteContext } from "../../context/Route";
 import Carousel from "../Carousel";
 import CrudBox from "../CrudBox";
 
-import "./projectsPage.css";
+import "./projects-page.css";
 
 const Projects = () => {
-  const [projects, setProjects] = useState([]);
-  const [current, setCurrent] = useState(0);
+  const [projects, setProjects] = useState([1, 2, 3, 4, 5, 6, 7]);
+  let [carouselContainer, setCarouselContainer] = useState([1, 2, 3, 4]);
+  const [current, setCurrent] = useState(3);
   const [name, setName] = useState(null);
   const { route, setRoute } = useContext(RouteContext);
 
@@ -46,52 +47,25 @@ const Projects = () => {
           Completed Projects
         </h3>
         <div className="project-carousel-container">
-          {!projects.length ? (
-            <>
-              <div id="carousel-button-left" className="carousel-buttons">
-                {`<`}
-              </div>
-              <div className="completed-projects-container">
+          <div id="carousel-button-left" className="carousel-buttons">
+            {`<`}
+          </div>
+          <div className="completed-projects-container">
+            {carouselContainer.length > 0 &&
+              carouselContainer.map((project) => (
                 <div
                   className="completed-project-item"
                   data-route="projects"
                   onClick={handleProject}
-                  data-name="project-1"
+                  data-name={project}
                 >
-                  some project info here
+                  {project}
                 </div>
-                <div
-                  className="completed-project-item"
-                  data-route="projects"
-                  onClick={handleProject}
-                  data-name="project-2"
-                >
-                  some project info here
-                </div>
-                <div
-                  className="completed-project-item"
-                  data-route="projects"
-                  onClick={handleProject}
-                  data-name="project-3"
-                >
-                  some project info here
-                </div>
-                <div
-                  className="completed-project-item"
-                  data-route="projects"
-                  onClick={handleProject}
-                  data-name="project-4"
-                >
-                  some project info here
-                </div>
-              </div>
-              <div id="carousel-button-right" className="carousel-buttons">
-                {`>`}
-              </div>
-            </>
-          ) : (
-            <div id="completed-project">Add from in progress</div>
-          )}
+              ))}
+          </div>
+          <div id="carousel-button-right" className="carousel-buttons">
+            {`>`}
+          </div>
         </div>
       </div>
       {/**------------------------note: create separate components----------- */}
