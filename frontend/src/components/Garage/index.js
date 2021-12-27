@@ -15,6 +15,7 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
+  const [blueprintOptions, setBlueprintOptions] = useState(false);
 
   const { route, setRoute } = useContext(RouteContext);
 
@@ -48,7 +49,13 @@ const Garage = () => {
   const handleBluePrint = (event) => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
-    history.push(`/blueprints/${blueprints[current].id}/projects`);
+    setBlueprintOptions((prevState) => !prevState);
+  };
+
+  const handleProjectRoute = (event) => {
+    event.target.id === "options-yes"
+      ? history.push(`/blueprints/${blueprints[current].id}/projects`)
+      : setBlueprintOptions(false);
   };
 
   const specs = useSelector((state) =>
@@ -98,6 +105,27 @@ const Garage = () => {
         </div>
         <CrudBox route={route} name={name} />
       </div>
+      {blueprintOptions && (
+        <div id="garage-blueprint-project-container">
+          <h2 id="blueprint-project-title">Checkout Projects?</h2>
+          <div id="blueprint-option-buttons-container">
+            <div
+              id="options-yes"
+              className="crud-action-buttons blueprint-options"
+              onClick={handleProjectRoute}
+            >
+              YES
+            </div>
+            <div
+              id="options-no"
+              onClick={handleProjectRoute}
+              className="crud-action-buttons blueprint-options"
+            >
+              NO
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

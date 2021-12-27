@@ -35,7 +35,35 @@
 
 #garage-blueprint-project-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 250px;
+  margin: 50px auto;
+  border-radius: 3px;
+  padding: 10px;
+  box-shadow: 0 0px 10px 0.2px rgba(86, 86, 86, 0.8);
+}
+
+#blueprint-option-buttons-container {
+  padding: 20px;
+  padding-top: 10px;
+}
+
+#blueprint-project-title {
+  text-align: center;
+  margin: 20px auto;
+}
+
+.blueprint-options {
+  margin-top: 0;
+  text-align: center;
+}
+
+.blueprint-options:hover {
+  background-color: rgb(69, 129, 142, 0.5);
+}
+
+.blueprint-options:last-of-type {
+  margin-top: 12px;
 }
 
 #garage-blueprint-project {
