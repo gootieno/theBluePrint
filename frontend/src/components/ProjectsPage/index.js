@@ -5,6 +5,7 @@ import { RouteContext } from "../../context/Route";
 
 import CrudBox from "../CrudBox";
 import CompletedProjects from "./CompletedProjects";
+import InProgressProjects from "./InProgressProjects";
 
 import "./projects-page.css";
 
@@ -38,9 +39,7 @@ const Projects = () => {
         <CompletedProjects handleProject={handleProject} />
       </div>
       <div className="in-progress project">
-        <h3 id="incomplete-project-title" className="project-titles">
-          In Progress Projects
-        </h3>
+        <InProgressProjects handleProject={handleProject} />
       </div>
     </div>
   );
