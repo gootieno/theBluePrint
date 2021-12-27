@@ -25,6 +25,7 @@ const Projects = () => {
   };
 
   if (!blueprint) return null;
+
   return (
     <div className="projects-container">
       <div id="projects-title-crud">

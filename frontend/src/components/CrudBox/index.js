@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./crudbox.css";
+import RouteActions from "./RouteActions";
 
 const CrudBox = ({ route, name }) => {
   const [routeAction, setRouteAction] = useState(null);
@@ -90,51 +91,11 @@ const CrudBox = ({ route, name }) => {
           </h3>
         )}
         <div id="crudbox-container">
-          {routeAction === "delete" ? (
-            <>
-              <div
-                id="delete-confirm"
-                className="crud-actions delete-buttons crud-action-buttons"
-                onClick={handleDelete}
-              >
-                YES
-              </div>
-              <div
-                id="delete-decline"
-                className="crud-actions delete-buttons crud-action-buttons"
-                onClick={handleDelete}
-              >
-                NO
-              </div>
-            </>
-          ) : (
-            <>
-              <div
-                id="post"
-                data-name="create"
-                className="create-button crud-actions crud-action-buttons"
-                onClick={handleRouteAction}
-              >
-                CREATE
-              </div>
-              <div
-                id="put"
-                className="edit-button crud-actions crud-action-buttons"
-                data-name="edit"
-                onClick={handleRouteAction}
-              >
-                EDIT
-              </div>
-              <div
-                id="delete"
-                className="delete-button crud-actions crud-action-buttons"
-                onClick={handleRouteAction}
-                data-name="delete"
-              >
-                DELETE
-              </div>
-            </>
-          )}
+          <RouteActions
+            handleRouteAction={handleRouteAction}
+            routeAction={routeAction}
+            handleDelete={handleDelete}
+          />
         </div>
         {toggle && (
           <div className="crud-actions-input crud-actions">

@@ -16,7 +16,6 @@ function NavBar({
   handleShowModal,
 }) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-
   const user = useSelector((state) => state.session.user);
 
   const history = useHistory();
