@@ -1,12 +1,17 @@
+import { useEffect, useState } from "react";
 import "./dynamic-carousel.css";
 
-const DynamicCarousel = ({ handleProject, current, setCurrent, items }) => {
-  const handleButtonRight = () => {
+const DynamicCarousel = ({ handleProject, items, dataRoute }) => {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {}, [current]);
+
+  const handleButtonRight = (event) => {
     document.getElementById("carousel-container-inner").scrollLeft += 300;
     if (current !== items.length - 1) setCurrent((prevState) => prevState + 1);
   };
 
-  const handleButtonLeft = () => {
+  const handleButtonLeft = (event) => {
     document.getElementById("carousel-container-inner").scrollLeft -= 300;
     if (current !== 0) setCurrent((prevState) => prevState - 1);
   };
@@ -26,9 +31,14 @@ const DynamicCarousel = ({ handleProject, current, setCurrent, items }) => {
             className={
               i === current ? "carousel-items current" : "carousel-items"
             }
-            onClick={handleProject}
           >
-            <div id={`item-${item}`} className="carousel-single-item">
+            <div
+              id={`item-${item}`}
+              data-name={item}
+              data-route={dataRoute}
+              className="carousel-single-item"
+              onClick={handleProject}
+            >
               {`item ${item}`}
             </div>
           </div>

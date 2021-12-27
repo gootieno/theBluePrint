@@ -1,9 +1,9 @@
 #carousel-container-outer {
   display: flex;
   position: relative;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-bottom: 100px;
   align-items: center;
-  width: 100%;
   overflow: hidden;
 }
 
@@ -15,15 +15,18 @@
   padding: 20px;
   overflow-x: hidden;
   justify-content: flex-start;
+  flex: 1;
 }
 
-div.carousel-items {
+.carousel-items {
   margin: 5px 20px 5px 0px;
-  border: 1px solid black;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .carousel-items.current {
-  border: 2px solid red;
+  box-shadow: 0 0px 10px 0.2px rgba(69, 129, 142, 0.8);
 }
 
 .carousel-single-item {
