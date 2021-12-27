@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./crudbox.css";
+import CrudForm from "./CrudForm";
 import RouteActions from "./RouteActions";
 
 const CrudBox = ({ route, name }) => {
@@ -50,15 +51,6 @@ const CrudBox = ({ route, name }) => {
     inputRef.current.focus();
   };
 
-  const handleInputCancel = () => {
-    setInputAction("");
-    handleInputRef();
-  };
-
-  const handleInputAction = (event) => {
-    setInputAction(event.target.value);
-  };
-
   const handleDelete = (event) => {
     if (event.target.id === "delete-confirm") {
       event.preventDefault();
@@ -66,14 +58,6 @@ const CrudBox = ({ route, name }) => {
     } else {
       handleRouteAction(event);
     }
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console
-      .log
-      // `fetch to ${route} route with this data: ${inputAction} with ${routeAction} in the headers`
-      ();
   };
 
   return (
@@ -98,40 +82,13 @@ const CrudBox = ({ route, name }) => {
           />
         </div>
         {toggle && (
-          <div className="crud-actions-input crud-actions">
-            <input
-              ref={inputRef}
-              id="text-box-input"
-              type="text"
-              value={inputAction}
-              autoComplete="off"
-              placeholder={`${action.toUpperCase()} ${route.toUpperCase()}`}
-              onChange={handleInputAction}
-              className={
-                inputAction.length > 0
-                  ? "crud-input crud-actions active"
-                  : "crud-input crud-actions focus"
-              }
-            />
-            {inputAction.length > 0 && (
-              <>
-                <span
-                  id="input-action-cancel"
-                  className="text-inputs-cancel crud-actions"
-                  onClick={handleInputCancel}
-                >
-                  x
-                </span>
-                <div
-                  id="input-field-submit"
-                  className="crud-actions crud-action-buttons"
-                  onClick={handleSubmit}
-                >
-                  SUBMIT
-                </div>
-              </>
-            )}
-          </div>
+          <CrudForm
+            action={action}
+            route={route}
+            toggle={toggle}
+            handleInputRef={handleInputRef}
+            inputRef={inputRef}
+          />
         )}
       </div>
     </div>
