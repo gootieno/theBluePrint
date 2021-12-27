@@ -88,6 +88,7 @@ const CrudBox = ({ route, name }) => {
             toggle={toggle}
             handleInputRef={handleInputRef}
             inputRef={inputRef}
+            name={name}
           />
         )}
       </div>

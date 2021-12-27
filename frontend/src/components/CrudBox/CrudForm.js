@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const CrudForm = ({ action, route, handleInputRef, inputRef }) => {
+const CrudForm = ({ action, route, handleInputRef, inputRef, name }) => {
   const [inputAction, setInputAction] = useState("");
 
   const handleInputAction = (event) => {
@@ -28,7 +28,11 @@ const CrudForm = ({ action, route, handleInputRef, inputRef }) => {
         type="text"
         value={inputAction}
         autoComplete="off"
-        placeholder={`${action.toUpperCase()} ${route.toUpperCase()}`}
+        placeholder={
+          action === "edit"
+            ? `${action.toUpperCase()} ${name.toUpperCase()}`
+            : `${action.toUpperCase()} ${route.toUpperCase()}`
+        }
         onChange={handleInputAction}
         className={
           inputAction.length > 0
