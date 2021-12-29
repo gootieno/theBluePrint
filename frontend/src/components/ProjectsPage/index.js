@@ -17,9 +17,8 @@ const Projects = () => {
   const blueprints = useSelector((state) => state.garage.blueprints);
   let blueprint = blueprints[blueprintId];
 
-  let currentNode;
   const handleProject = (event) => {
-    currentNode = event.target.dataset;
+    const currentNode = event.target.dataset;
     setRoute(currentNode.route);
     setName(currentNode.name);
   };
