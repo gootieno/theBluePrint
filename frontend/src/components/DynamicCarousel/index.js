@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./dynamic-carousel.css";
 
 const DynamicCarousel = ({ handleProject, items, dataRoute }) => {
   const [current, setCurrent] = useState(0);
 
-  useEffect(() => {}, [current]);
-
   const handleButtonRight = (event) => {
-    document.getElementById("carousel-container-inner").scrollLeft += 300;
     if (current !== items.length - 1) setCurrent((prevState) => prevState + 1);
   };
 
   const handleButtonLeft = (event) => {
-    document.getElementById("carousel-container-inner").scrollLeft -= 300;
     if (current !== 0) setCurrent((prevState) => prevState - 1);
   };
 
@@ -28,6 +24,8 @@ const DynamicCarousel = ({ handleProject, items, dataRoute }) => {
       <div id="carousel-container-inner">
         {items.map((item, i) => (
           <div
+            key={`key-${i}`}
+            onClick={() => setCurrent(i)}
             className={
               i === current ? "carousel-items current" : "carousel-items"
             }
