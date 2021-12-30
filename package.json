@@ -10,6 +10,10 @@
     "dev:frontend": "npm install --prefix frontend start",
     "sequelize": "npm run --prefix backend sequelize",
     "sequelize-cli": "npm run --prefix backend sequelize-cli",
+    "seeder:undo": "npm run --prefix backend sequelize-cli db:seed:undo:all",
+    "seeder": "npm run --prefix backend sequelize-cli db:seed:all",
+    "migration:undo": "npm run --prefix backend sequelize-cli db:seed:undo:all",
+    "migration": "npm run --prefix backend sequelize-cli db:seed:all",
     "start": "npm start --prefix backend"
   },
   "repository": {
