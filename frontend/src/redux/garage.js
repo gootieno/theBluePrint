@@ -3,21 +3,21 @@ import { csrfFetch } from "./csrf";
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
 
-const loadBluePrint = (blueprint) => ({
-  type: BLUEPRINT_ADDED,
-  blueprint,
-});
-
 const loadGarage = (garage) => ({
   type: GARAGE_ADDED,
   garage,
+});
+
+const addBluePrint = (blueprint) => ({
+  type: BLUEPRINT_ADDED,
+  blueprint,
 });
 
 //------------------- blueprints thunk --------------
 
 export const getUserBluePrints = (userId) => async (dispatch) => {
   const response = await csrfFetch(`/api/garage/${userId}/blueprints`);
-  if (!response) throw response;
+  if (!response.ok) throw response;
 
   const { garage } = await response.json();
   dispatch(loadGarage(garage));
@@ -74,6 +74,7 @@ const garageReducer = (state = initialState, action) => {
       let newState = { ...state, ...state.blueprints };
       newState.blueprints[action.blueprint.id] = action.blueprint;
       return newState;
+
     default:
       return state;
   }

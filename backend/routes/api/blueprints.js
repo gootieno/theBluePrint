@@ -70,7 +70,7 @@ router.get(
       include: [{ model: Step, as: "steps" }],
     });
 
-    if (projects) return res.json({ projects: projects[0] });
+    if (projects) return res.json({ projects });
     else next();
   })
 );
