@@ -1,7 +1,10 @@
 #work-bench-container {
   border-radius: 4px;
   padding: 15px 10px;
-  box-shadow: 0 0px 10px 0.2px rgba(86, 86, 86, 0.8);
+  box-shadow: 0 0px 10px 0.2px rgba(109, 109, 109, 0.8);
+  width: 260px;
+  height: auto;
+  margin: 0 auto;
 }
 
 #crudbox-container {
@@ -19,7 +22,7 @@
 
 #work-bench-header {
   margin: 5px;
-  color: rgb(69, 129, 142, 0.7);
+  color: rgb(69, 129, 142);
 }
 
 #work-bench-header.delete {
@@ -32,10 +35,14 @@
   border-radius: 4px;
   margin: 5px;
   cursor: pointer;
-  padding: 5px;
+  padding: 5px 10px;
   font-weight: bold;
-  color: #474747;
+  color: rgb(109, 109, 109);
   box-sizing: border-box;
+}
+
+.crud-action-buttons:hover {
+  color: white;
 }
 
 #post:hover {

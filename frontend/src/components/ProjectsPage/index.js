@@ -38,8 +38,16 @@ const Projects = () => {
   return (
     <div className="projects-container">
       <div id="projects-title-crud">
-        <h2 id="blueprint-project-title">
-          {`Working on your ${blueprint.name}`}
+        <h2 id="blueprint-project-title-container">
+          Working on your
+          <span
+            data-route="blueprints"
+            data-name={blueprint.name}
+            onClick={handleProject}
+            className="blueprint-project-title"
+          >
+            {blueprint.name}
+          </span>
         </h2>
         <div id="create-project-container">
           <CrudBox route={route} name={name} />

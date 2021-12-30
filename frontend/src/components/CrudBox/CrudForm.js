@@ -30,8 +30,8 @@ const CrudForm = ({ action, route, handleInputRef, inputRef, name }) => {
         autoComplete="off"
         placeholder={
           action === "edit"
-            ? `${action.toUpperCase()} ${name.toUpperCase()}`
-            : `${action.toUpperCase()} ${route.toUpperCase()}`
+            ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
+            : ` ${action.toUpperCase()} ${route.toUpperCase()}`
         }
         onChange={handleInputAction}
         className={

@@ -6,7 +6,7 @@ const CompletedProjects = ({ handleProject }) => {
     if (!state.projects) return null;
     else
       return Object.values(state.projects).filter(
-        (project) => project.completed
+        (project) => project.completed === true
       );
   });
 
@@ -26,7 +26,10 @@ const CompletedProjects = ({ handleProject }) => {
           id="completed-projects-incomplete-container"
           className="project-message-containers"
         >
-          <h3 id="completed-projects-incomplete-message">
+          <h3
+            id="completed-projects-incomplete-message"
+            className="project-messages"
+          >
             No Completed Projects Yet
           </h3>
         </div>
