@@ -12,6 +12,11 @@ module.exports = {
         type: Sequelize.STRING(20),
         allowNull: false,
       },
+      completed: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       categoryId: {
         type: Sequelize.INTEGER,
         references: { model: "Categories" },
