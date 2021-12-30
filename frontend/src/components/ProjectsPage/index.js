@@ -2,7 +2,7 @@ import { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { RouteContext } from "../../context/Route";
-import { getBluePrintProjects } from "../../redux/garage";
+import { getBluePrintProjects } from "../../redux/projects";
 
 import CrudBox from "../CrudBox";
 import CompletedProjects from "./CompletedProjects";
@@ -21,10 +21,10 @@ const Projects = () => {
   let blueprint = blueprints[blueprintId];
 
   useEffect(() => {
-    dispatch(getBluePrintProjects(blueprintId));
     if (blueprint) {
       setName(blueprint.name);
     }
+    dispatch(getBluePrintProjects(blueprintId));
   }, [dispatch]);
 
   const handleProject = (event) => {

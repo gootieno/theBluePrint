@@ -23,7 +23,7 @@
   cursor: default;
 }
 
-#completed-projects__incomplete-container {
+.project-message-containers {
   margin: 0 auto;
   text-align: center;
   padding: 40px;

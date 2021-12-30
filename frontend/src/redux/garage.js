@@ -2,7 +2,6 @@ import { csrfFetch } from "./csrf";
 
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
-const PROJECTS_LOADED = "garage/PROJECTS_LOADED";
 
 const loadGarage = (garage) => ({
   type: GARAGE_ADDED,
@@ -12,11 +11,6 @@ const loadGarage = (garage) => ({
 const addBluePrint = (blueprint) => ({
   type: BLUEPRINT_ADDED,
   blueprint,
-});
-
-const loadProjects = (projects) => ({
-  type: PROJECTS_LOADED,
-  projects,
 });
 
 //------------------- blueprints thunk --------------
@@ -34,16 +28,6 @@ const initialState = {
   blueprints: {},
   categories: {},
   specs: {},
-  projects: {},
-  steps: {},
-};
-
-export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/blueprints/${blueprintId}/projects`);
-  if (!response.ok) throw response;
-
-  const { projects } = await response.json();
-  dispatch(loadProjects(projects));
 };
 
 const garageReducer = (state = initialState, action) => {
@@ -91,32 +75,6 @@ const garageReducer = (state = initialState, action) => {
       newState.blueprints[action.blueprint.id] = action.blueprint;
       return newState;
 
-    case PROJECTS_LOADED:
-      let projectState = {
-        projects: {},
-        steps: {},
-      };
-      let steps = [];
-
-      action.projects.forEach((project) => {
-        projectState.projects[project.id] = project;
-        if (project.steps.length > 0) {
-          steps = [...steps, ...project.steps];
-          delete project.steps;
-        }
-      });
-
-      steps.forEach((step) => {
-        if (step) {
-          projectState.steps[step.id] = step;
-        }
-      });
-
-      return {
-        ...state,
-        steps: { ...projectState.steps },
-        projects: { ...projectState.projects },
-      };
     default:
       return state;
   }

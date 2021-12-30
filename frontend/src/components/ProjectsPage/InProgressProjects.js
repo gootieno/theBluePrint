@@ -3,10 +3,10 @@ import DynamicCarousel from "../DynamicCarousel";
 
 const InProgressProjects = ({ handleProject }) => {
   let projects = useSelector((state) => {
-    if (!state.garage.projects) return null;
+    if (!state.projects) return null;
     else
-      return Object.values(state.garage.projects).filter(
-        (project) => !project.completed
+      return Object.values(state.projects).filter(
+        (project) => project.completed === false
       );
   });
 
@@ -22,8 +22,13 @@ const InProgressProjects = ({ handleProject }) => {
           dataRoute="projects"
         />
       ) : (
-        <div>
-          <h3>Use Work Bench To Create A Project</h3>
+        <div
+          id="incomplete-projects-message-container"
+          className="project-message-containers"
+        >
+          <h3 id="incomplete-projects-message">
+            Use Work Bench To Create A Project
+          </h3>
         </div>
       )}
     </>
