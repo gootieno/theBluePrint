@@ -23,6 +23,12 @@
   cursor: default;
 }
 
+#completed-projects__incomplete-container {
+  margin: 0 auto;
+  text-align: center;
+  padding: 40px;
+}
+
 .project-titles {
   margin-bottom: 0;
   border-bottom: 1px solid black;

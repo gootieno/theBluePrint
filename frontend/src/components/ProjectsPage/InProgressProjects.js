@@ -1,19 +1,31 @@
-import { useState } from "react";
+import { useSelector } from "react-redux";
 import DynamicCarousel from "../DynamicCarousel";
 
 const InProgressProjects = ({ handleProject }) => {
-  const [inProgressProjects, setInProgressProjects] = useState([1, 2, 3]);
+  let projects = useSelector((state) => {
+    if (!state.garage.projects) return null;
+    else
+      return Object.values(state.garage.projects).filter(
+        (project) => !project.completed
+      );
+  });
 
   return (
     <>
-      <h3 id="incomplete-project-title" className="project-titles">
+      <h2 id="incomplete-project-title" className="project-titles">
         In Progress Projects
-      </h3>
-      <DynamicCarousel
-        items={inProgressProjects}
-        handleProject={handleProject}
-        dataRoute="projects"
-      />
+      </h2>
+      {projects && projects.length ? (
+        <DynamicCarousel
+          items={projects}
+          handleProject={handleProject}
+          dataRoute="projects"
+        />
+      ) : (
+        <div>
+          <h3>Use Work Bench To Create A Project</h3>
+        </div>
+      )}
     </>
   );
 };

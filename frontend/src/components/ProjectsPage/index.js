@@ -1,7 +1,8 @@
-import { useState, useContext } from "react";
-import { useSelector } from "react-redux";
+import { useState, useContext, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { RouteContext } from "../../context/Route";
+import { getBluePrintProjects } from "../../redux/garage";
 
 import CrudBox from "../CrudBox";
 import CompletedProjects from "./CompletedProjects";
@@ -13,9 +14,18 @@ const Projects = () => {
   const [name, setName] = useState(null);
   const { route, setRoute } = useContext(RouteContext);
 
+  const dispatch = useDispatch();
+
   const { blueprintId } = useParams();
   const blueprints = useSelector((state) => state.garage.blueprints);
   let blueprint = blueprints[blueprintId];
+
+  useEffect(() => {
+    dispatch(getBluePrintProjects(blueprintId));
+    if (blueprint) {
+      setName(blueprint.name);
+    }
+  }, [dispatch]);
 
   const handleProject = (event) => {
     const currentNode = event.target.dataset;
