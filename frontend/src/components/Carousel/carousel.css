@@ -24,13 +24,14 @@
 
 .carousel-buttons {
   cursor: pointer;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 10px 0 rgba(109, 109, 109, 0.7);
   padding: 5px 15px;
   border-radius: 3px;
   height: 20px;
-  margin: 0px 20px;
+  margin: 0px 25px;
+  color: rgb(255, 255, 255, 0.7);
 }
 
 .carousel-buttons:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0 10px 0 rgb(69, 129, 142);
 }

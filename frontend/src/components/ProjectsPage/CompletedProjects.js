@@ -23,12 +23,18 @@ const CompletedProjects = ({ handleProject }) => {
         />
       ) : (
         <div
+          data-route="projects"
+          data-name="projects"
           id="completed-projects-incomplete-container"
           className="project-message-containers"
+          onClick={handleProject}
         >
           <h3
+            data-route="projects"
+            data-name="projects"
             id="completed-projects-incomplete-message"
             className="project-messages"
+            onClick={handleProject}
           >
             No Completed Projects Yet
           </h3>
