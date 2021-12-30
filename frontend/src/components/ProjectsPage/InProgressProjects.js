@@ -26,7 +26,7 @@ const InProgressProjects = ({ handleProject }) => {
           id="incomplete-projects-message-container"
           className="project-message-containers"
         >
-          <h3 id="incomplete-projects-message">
+          <h3 id="incomplete-projects-message" className="project-messages">
             Use Work Bench To Create A Project
           </h3>
         </div>

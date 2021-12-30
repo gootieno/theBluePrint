@@ -14,9 +14,17 @@
   align-items: flex-start;
 }
 
-#blueprint-project-title {
+#blueprint-project-title-container {
   cursor: default;
   width: 100%;
+  color: rgb(109, 109, 109);
+}
+
+.blueprint-project-title {
+  color: rgb(69, 129, 142);
+  margin-left: 10px;
+  border-bottom: 2px solid rgb(109, 109, 109);
+  cursor: pointer;
 }
 
 .project {
@@ -29,10 +37,15 @@
   padding: 40px;
 }
 
+.project-messages {
+  color: rgb(109, 109, 109);
+}
+
 .project-titles {
   margin-bottom: 0;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(86, 86, 86, 0.8);
   padding-bottom: 15px;
   padding-left: 15px;
   cursor: default;
+  color: rgb(69, 129, 142);
 }
