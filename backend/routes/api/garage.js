@@ -57,8 +57,9 @@ router.get(
 
     if (garage) {
       return res.json({ garage: garage[0] });
+    } else {
+      next();
     }
-    next();
   })
 );
 

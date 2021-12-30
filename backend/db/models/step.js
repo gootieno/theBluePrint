@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Step.belongsTo(models.Project, { foreignKey: "projectId" });
+      Step.belongsTo(models.Project, {
+        as: "steps",
+        foreignKey: "projectId",
+      });
     }
   }
   Step.init(

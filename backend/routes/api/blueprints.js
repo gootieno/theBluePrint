@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { check } = require("express-validator");
 const { handleValidationErrors } = require("../../utils/validation");
 const { requireAuth } = require("../../utils/auth");
-const { BluePrint, Category, Spec } = require("../../db/models");
+const { BluePrint, Category, Spec, Project, Step } = require("../../db/models");
 
 const { singleMulterUpload, singlePublicFileUpload } = require("../../aws");
 
@@ -14,7 +14,6 @@ router.get(
   asyncHandler(async (req, res, next) => {
     const blueprintId = parseInt(req.params.id, 10);
     const blueprint = await BluePrint.findByPk(blueprintId);
-
     if (blueprint) return res.json({ blueprint });
     next();
   })
@@ -57,6 +56,22 @@ router.get(
 
     if (categories) return res.json({ categories });
     next();
+  })
+);
+
+//----------------------get route for blueprint projects
+router.get(
+  "/:id/projects",
+  asyncHandler(async (req, res, next) => {
+    const blueprintId = parseInt(req.params.id, 10);
+
+    const projects = await Project.findAll({
+      where: blueprintId,
+      include: [{ model: Step, as: "steps" }],
+    });
+
+    if (projects) return res.json({ projects: projects[0] });
+    else next();
   })
 );
 

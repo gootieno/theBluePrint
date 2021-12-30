@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Project.hasMany(models.Step, { foreignKey: "stepId" });
+      Project.hasMany(models.Step, { as: "steps", foreignKey: "projectId" });
     }
   }
   Project.init(
@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       categoryId: {
         type: DataTypes.INTEGER,
         references: { model: "Categories" },
+      },
+      completed: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
       },
       blueprintId: {
         type: DataTypes.INTEGER,
