@@ -113,14 +113,16 @@ const Garage = () => {
             />
           )}{" "}
         </div>
-        <div id="garage-carousel-container">
-          <Carousel
-            current={current}
-            setCurrent={setCurrent}
-            carouselItems={blueprints}
-            handleCarouselItem={handleBluePrint}
-            dataRoute="blueprints"
-          />
+        <div>
+          <div id="garage-carousel-container">
+            <Carousel
+              current={current}
+              setCurrent={setCurrent}
+              carouselItems={blueprints}
+              handleCarouselItem={handleBluePrint}
+              dataRoute="blueprints"
+            />
+          </div>
         </div>
         <div id="garage-crud-box-container">
           {category && <CrudBox route={route} name={name} />}

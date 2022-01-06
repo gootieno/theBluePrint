@@ -1,6 +1,7 @@
 #garage-container {
   box-sizing: border-box;
   width: 100vw;
+  position: relative;
 }
 
 #garage-title {
@@ -21,7 +22,6 @@
   box-sizing: border-box;
   margin: 50px auto;
   align-items: center;
-  border: 3px solid blue;
   transition: width 1s ease;
   width: 20%;
   height: 50%;
@@ -37,36 +37,21 @@
 #garage-blueprint-specs-container {
   box-sizing: border-box;
   position: absolute;
-  border: 5px solid red;
-  left: 20px;
-}
-#garage-blueprint-specs-container.active {
-  transition: width 1s ease;
-  width: 90%;
+  left: 80px;
 }
 
 #garage-carousel-container {
-  border: 1px solid red;
+  position: relative;
   box-sizing: border-box;
-  /* z-index: 1; */
+  z-index: 1;
 }
 
 #garage-crud-box-container {
   box-sizing: border-box;
-  border: 10px solid red;
-  right: 20px;
+
+  right: 10px;
   position: absolute;
-}
-
-.garage-page-links {
-  margin-right: 5px;
-  padding: 3px;
-  cursor: pointer;
-}
-
-.garage-page-links:hover {
-  box-shadow: 0 0px 10px 0.2px rgba(69, 129, 142, 0.8);
-  border-radius: 3px;
+  z-index: -1;
 }
 
 #garage-blueprint-project-container {
@@ -85,7 +70,6 @@
 }
 
 #blueprint-project-title {
-  /* text-align: center; */
   margin-top: 20px;
   margin-left: 10px;
 }
