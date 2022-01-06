@@ -103,7 +103,7 @@ const Garage = () => {
             dataRoute="blueprints"
           />
         </div>
-        <CrudBox route={route} name={name} />
+        {category && <CrudBox route={route} name={name} />}
       </div>
       {blueprintOptions && (
         <div id="garage-blueprint-project-container">
