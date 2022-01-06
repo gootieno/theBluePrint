@@ -11,7 +11,14 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  const [category, setCategory] = useState(null);
+  const garage = useSelector((state) => state.garage);
+
+  const blueprints = Object.values(garage.blueprints);
+  const categories = Object.values(garage.categories);
+
+  const [category, setCategory] = useState(categories[0]);
+  const [transition, setTransition] = useState(false);
+
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
@@ -22,14 +29,25 @@ const Garage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const garage = useSelector((state) => state.garage);
-
-  const blueprints = Object.values(garage.blueprints);
-  const categories = Object.values(garage.categories);
-
   useEffect(() => {
     setBluePrint(blueprints[current]);
   }, [dispatch, current]);
+
+  useEffect(() => {
+    let blueprintSpecsContainer;
+    let crudBoxContainer;
+    if (transition) {
+      blueprintSpecsContainer = document.getElementById(
+        "garage-blueprint-specs-container"
+      );
+
+      crudBoxContainer = document.getElementById("garage-crud-box-container");
+      blueprintSpecsContainer.classList.add("active");
+      crudBoxContainer.classList.add("active");
+    }
+    if (blueprintSpecsContainer)
+      return () => blueprintSpecsContainer.classList.remove("active");
+  }, [transition]);
 
   let currentNode;
 
@@ -38,6 +56,7 @@ const Garage = () => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
+    setTransition(true);
   };
 
   let handleRoute = (event) => {
@@ -47,7 +66,7 @@ const Garage = () => {
   };
 
   const handleGarageTitle = (event) => {
-    setCategory(null);
+    setTransition(false);
     handleRoute(event);
   };
 
@@ -92,15 +111,15 @@ const Garage = () => {
         />
       </div>
       <div id="garage-items">
-        {category && (
-          <div id="garage-blueprint-specs-container">
+        <div id="garage-blueprint-specs-container">
+          {category && (
             <BluePrintSpecs
               category={category}
               handleRoute={handleRoute}
               specs={specs}
             />
-          </div>
-        )}
+          )}{" "}
+        </div>
         <div id="garage-carousel-container">
           <Carousel
             current={current}

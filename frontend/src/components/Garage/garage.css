@@ -1,7 +1,6 @@
 #garage-container {
   box-sizing: border-box;
   width: 100vw;
-  position: relative;
 }
 
 #garage-title {
@@ -22,28 +21,33 @@
   box-sizing: border-box;
   margin: 50px auto;
   align-items: center;
+  border: 10px solid blue;
+  width: 100%;
   justify-content: center;
+  position: relative;
 }
 
 #garage-blueprint-specs-container {
   box-sizing: border-box;
   position: absolute;
-  z-index: 0;
-  left: 0;
-  transition-property: left;
-  transition-duration: 2s;
-  right: 200px;
+  border: 5px solid red;
+  transition: width 1.5s ease-out;
+  width: 20%;
+}
+#garage-blueprint-specs-container.active {
+  transition: width 1s ease;
+  width: 90%;
 }
 
-#garage-blueprint-specs-container
-
 #garage-carousel-container {
+  border: 1px solid red;
   box-sizing: border-box;
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 #garage-crud-box-container {
   box-sizing: border-box;
+  border: 10px solid blue;
   position: absolute;
 }
 
