@@ -48,10 +48,8 @@
 
 #garage-crud-box-container {
   box-sizing: border-box;
-
   right: 10px;
   position: absolute;
-  z-index: -1;
 }
 
 #garage-blueprint-project-container {
