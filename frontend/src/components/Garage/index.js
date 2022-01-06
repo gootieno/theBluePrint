@@ -34,19 +34,12 @@ const Garage = () => {
   }, [dispatch, current]);
 
   useEffect(() => {
-    let blueprintSpecsContainer;
-    let crudBoxContainer;
+    let garageItems;
     if (transition) {
-      blueprintSpecsContainer = document.getElementById(
-        "garage-blueprint-specs-container"
-      );
-
-      crudBoxContainer = document.getElementById("garage-crud-box-container");
-      blueprintSpecsContainer.classList.add("active");
-      crudBoxContainer.classList.add("active");
+      garageItems = document.getElementById("garage-items");
+      garageItems.classList.add("active");
     }
-    if (blueprintSpecsContainer)
-      return () => blueprintSpecsContainer.classList.remove("active");
+    if (garageItems) return () => garageItems.classList.remove("active");
   }, [transition]);
 
   let currentNode;
@@ -129,11 +122,9 @@ const Garage = () => {
             dataRoute="blueprints"
           />
         </div>
-        {category && (
-          <div id="garage-crud-box-container">
-            <CrudBox route={route} name={name} />
-          </div>
-        )}
+        <div id="garage-crud-box-container">
+          {category && <CrudBox route={route} name={name} />}
+        </div>
       </div>
       {blueprintOptions && (
         <div id="garage-blueprint-project-container">

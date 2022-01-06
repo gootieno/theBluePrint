@@ -21,18 +21,24 @@
   box-sizing: border-box;
   margin: 50px auto;
   align-items: center;
-  border: 10px solid blue;
-  width: 100%;
+  border: 3px solid blue;
+  transition: width 1s ease;
+  width: 20%;
+  height: 50%;
   justify-content: center;
   position: relative;
+}
+
+#garage-items.active {
+  transition: width 1s ease;
+  width: 90%;
 }
 
 #garage-blueprint-specs-container {
   box-sizing: border-box;
   position: absolute;
   border: 5px solid red;
-  transition: width 1.5s ease-out;
-  width: 20%;
+  left: 20px;
 }
 #garage-blueprint-specs-container.active {
   transition: width 1s ease;
@@ -47,7 +53,8 @@
 
 #garage-crud-box-container {
   box-sizing: border-box;
-  border: 10px solid blue;
+  border: 10px solid red;
+  right: 20px;
   position: absolute;
 }
 
