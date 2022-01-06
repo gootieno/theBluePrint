@@ -1,5 +1,4 @@
 #garage-container {
-  /* display: flex; */
   margin: 0 auto;
 }
 
@@ -7,16 +6,26 @@
   margin-top: 5;
   text-align: center;
   cursor: pointer;
-}
-
-#garage-carousel-container {
-  margin-top: 50px;
+  color: rgba(69, 129, 142, 0.8);
+  font-weight: bolder;
 }
 
 #garage-page-links-container {
-  display: flex;
-  justify-content: center;
+  text-align: center;
   box-sizing: border-box;
+}
+
+#garage-items {
+  position: relative;
+  display: flex;
+  margin: 100px auto;
+  align-items: center;
+  justify-content: center;
+}
+
+#garage-carousel-container {
+  box-sizing: border-box;
+  padding: 0px 200px;
 }
 
 .garage-page-links {

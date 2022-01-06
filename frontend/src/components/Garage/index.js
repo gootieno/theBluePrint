@@ -71,7 +71,7 @@ const Garage = () => {
 
   if (!garage) return null;
   return (
-    <>
+    <div id="garage-container">
       <h2
         id="garage-title"
         data-route="garage"
@@ -86,47 +86,49 @@ const Garage = () => {
           categories={categories}
         />
       </div>
-      <div id="garage-container">
-        {category && (
-          <BluePrintSpecs
-            category={category}
-            handleRoute={handleRoute}
-            specs={specs}
-          />
-        )}
-        <div id="garage-carousel-container">
-          <Carousel
-            current={current}
-            setCurrent={setCurrent}
-            carouselItems={blueprints}
-            handleCarouselItem={handleBluePrint}
-            dataRoute="blueprints"
-          />
+
+        <div id="garage-items">
+          {category && (
+            <BluePrintSpecs
+              category={category}
+              handleRoute={handleRoute}
+              specs={specs}
+            />
+          )}
+          <div id="garage-carousel-container">
+            <Carousel
+              current={current}
+              setCurrent={setCurrent}
+              carouselItems={blueprints}
+              handleCarouselItem={handleBluePrint}
+              dataRoute="blueprints"
+            />
+          </div>
+          {category && <CrudBox route={route} name={name} />}
         </div>
-        {category && <CrudBox route={route} name={name} />}
-      </div>
-      {blueprintOptions && (
-        <div id="garage-blueprint-project-container">
-          <h2 id="blueprint-project-title">Checkout Projects?</h2>
-          <div id="blueprint-option-buttons-container">
-            <div
-              id="options-yes"
-              className="crud-action-buttons blueprint-options"
-              onClick={handleProjectRoute}
-            >
-              YES
-            </div>
-            <div
-              id="options-no"
-              onClick={handleProjectRoute}
-              className="crud-action-buttons blueprint-options"
-            >
-              NO
+        {blueprintOptions && (
+          <div id="garage-blueprint-project-container">
+            <h2 id="blueprint-project-title">Checkout Projects?</h2>
+            <div id="blueprint-option-buttons-container">
+              <div
+                id="options-yes"
+                className="crud-action-buttons blueprint-options"
+                onClick={handleProjectRoute}
+              >
+                YES
+              </div>
+              <div
+                id="options-no"
+                onClick={handleProjectRoute}
+                className="crud-action-buttons blueprint-options"
+              >
+                NO
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </>
+        )}
+     
+    </div>
   );
 };
 
