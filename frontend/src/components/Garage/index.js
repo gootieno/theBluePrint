@@ -11,7 +11,14 @@ import CrudBox from "../CrudBox";
 import "./garage.css";
 
 const Garage = () => {
-  const [category, setCategory] = useState(null);
+  const garage = useSelector((state) => state.garage);
+
+  const blueprints = Object.values(garage.blueprints);
+  const categories = Object.values(garage.categories);
+
+  const [category, setCategory] = useState(categories[0]);
+  const [transition, setTransition] = useState(false);
+
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
@@ -22,14 +29,18 @@ const Garage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const garage = useSelector((state) => state.garage);
-
-  const blueprints = Object.values(garage.blueprints);
-  const categories = Object.values(garage.categories);
-
   useEffect(() => {
     setBluePrint(blueprints[current]);
   }, [dispatch, current]);
+
+  useEffect(() => {
+    let garageItems;
+    if (transition) {
+      garageItems = document.getElementById("garage-items");
+      garageItems.classList.add("active");
+    }
+    if (garageItems) return () => garageItems.classList.remove("active");
+  }, [transition]);
 
   let currentNode;
 
@@ -38,12 +49,18 @@ const Garage = () => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
+    setTransition(true);
   };
 
   let handleRoute = (event) => {
     currentNode = event.target.dataset;
     setRoute(currentNode.route);
     setName(currentNode.name);
+  };
+
+  const handleGarageTitle = (event) => {
+    setTransition(false);
+    handleRoute(event);
   };
 
   const handleBluePrint = (event) => {
@@ -71,12 +88,12 @@ const Garage = () => {
 
   if (!garage) return null;
   return (
-    <>
+    <div id="garage-container">
       <h2
         id="garage-title"
         data-route="garage"
         data-name={garage.name}
-        onClick={handleRoute}
+        onClick={handleGarageTitle}
       >
         {garage.name}
       </h2>
@@ -86,24 +103,30 @@ const Garage = () => {
           categories={categories}
         />
       </div>
-      <div id="garage-container">
-        {category && (
-          <BluePrintSpecs
-            category={category}
-            handleRoute={handleRoute}
-            specs={specs}
-          />
-        )}
-        <div id="garage-carousel-container">
-          <Carousel
-            current={current}
-            setCurrent={setCurrent}
-            carouselItems={blueprints}
-            handleCarouselItem={handleBluePrint}
-            dataRoute="blueprints"
-          />
+      <div id="garage-items">
+        <div id="garage-blueprint-specs-container">
+          {category && (
+            <BluePrintSpecs
+              category={category}
+              handleRoute={handleRoute}
+              specs={specs}
+            />
+          )}{" "}
         </div>
-        <CrudBox route={route} name={name} />
+        <div>
+          <div id="garage-carousel-container">
+            <Carousel
+              current={current}
+              setCurrent={setCurrent}
+              carouselItems={blueprints}
+              handleCarouselItem={handleBluePrint}
+              dataRoute="blueprints"
+            />
+          </div>
+        </div>
+        <div id="garage-crud-box-container">
+          {category && <CrudBox route={route} name={name} />}
+        </div>
       </div>
       {blueprintOptions && (
         <div id="garage-blueprint-project-container">
@@ -126,7 +149,7 @@ const Garage = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

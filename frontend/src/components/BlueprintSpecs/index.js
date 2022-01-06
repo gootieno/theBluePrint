@@ -2,12 +2,12 @@ import "./blueprint-spec.css";
 
 const BluePrintSpecs = ({ specs, category, handleRoute }) => {
   return (
-    <div className="specs" id="blueprint-specs">
-      <div className="specs" id="exterior-container">
-        <h2 id="blueprint-spec-title" className="specs">
-          {category.name}
-        </h2>
-        <div className="specs" id="blueprint-specs-container">
+    <div className="specs" id="blueprint-specs-container">
+      <h2 id="blueprint-spec-title" className="specs">
+        {category.name}
+      </h2>
+      <div className="specs-list">
+        <div className="spec-item" id="blueprint-spec-item-container">
           {specs.length ? (
             specs.map((spec, i) => (
               <div

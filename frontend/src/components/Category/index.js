@@ -1,4 +1,5 @@
 import React from "react";
+import "./category.css";
 
 const Category = ({ categories, handleCategoryTab }) => {
   return categories.map((category, index) => (
