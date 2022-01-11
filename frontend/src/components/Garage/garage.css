@@ -18,46 +18,54 @@
   box-sizing: border-box;
 }
 
-#garage-items-outer {
-  display: flex;
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0 30%;
-  border: 20px solid red;
-  position: absolute;
-}
-
 #garage-items-inner {
   box-sizing: border-box;
   display: flex;
   width: 100%;
-  border: 20px solid blue;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
-#garage-items-inner.active {
-  transition: width 1s ease;
-  width: 70%;
+#garage-items-inner.active > #garage-blueprint-specs-container {
+  transition: left 1s ease;
+  left: 5%;
+}
+
+#garage-items-inner.active > #garage-crud-box-container {
+  transition: right 1s ease;
+  right: 5%;
+}
+
+.card {
+  width: 38%;
+  height: 100%;
+  top: 10px;
+  background-color: #ffff;
+  position: absolute;
+  z-index: 2;
 }
 
 #garage-blueprint-specs-container {
   box-sizing: border-box;
   position: absolute;
-  border: 2px solid red;
+  transition: left 1s ease;
+  left: 35%;
+  z-index: 1;
 }
 
 #garage-carousel-container {
-  position: relative;
   box-sizing: border-box;
   width: 100%;
+  z-index: 3;
 }
 
 #garage-crud-box-container {
   box-sizing: border-box;
   position: absolute;
-  border: 2px solid green;
-  left: 60%;
+  transition: right 1s ease;
+  right: 35%;
+  z-index: 1;
 }
 
 #garage-blueprint-project-container {

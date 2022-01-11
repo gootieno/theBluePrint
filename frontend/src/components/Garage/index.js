@@ -36,7 +36,7 @@ const Garage = () => {
   useEffect(() => {
     let garageItems;
     if (transition) {
-      garageItems = document.getElementById("garage-items-outer");
+      garageItems = document.getElementById("garage-items-inner");
       garageItems.classList.add("active");
     }
     if (garageItems) return () => garageItems.classList.remove("active");
@@ -105,6 +105,7 @@ const Garage = () => {
       </div>
       <div id="garage-items-outer" className="garage-items">
         <div id="garage-items-inner" className="garage-items">
+          <div className="card" />
           <div id="garage-blueprint-specs-container">
             {category && (
               <BluePrintSpecs
