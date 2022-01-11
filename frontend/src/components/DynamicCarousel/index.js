@@ -3,6 +3,7 @@ import "./dynamic-carousel.css";
 
 const DynamicCarousel = ({ handleProject, items, dataRoute }) => {
   const [current, setCurrent] = useState(0);
+  // const []
 
   const handleButtonRight = (event) => {
     if (current !== items.length - 1) setCurrent((prevState) => prevState + 1);
