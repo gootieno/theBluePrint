@@ -36,7 +36,7 @@ const Garage = () => {
   useEffect(() => {
     let garageItems;
     if (transition) {
-      garageItems = document.getElementById("garage-items");
+      garageItems = document.getElementById("garage-items-outer");
       garageItems.classList.add("active");
     }
     if (garageItems) return () => garageItems.classList.remove("active");
@@ -103,17 +103,17 @@ const Garage = () => {
           categories={categories}
         />
       </div>
-      <div id="garage-items">
-        <div id="garage-blueprint-specs-container">
-          {category && (
-            <BluePrintSpecs
-              category={category}
-              handleRoute={handleRoute}
-              specs={specs}
-            />
-          )}{" "}
-        </div>
-        <div>
+      <div id="garage-items-outer" className="garage-items">
+        <div id="garage-items-inner" className="garage-items">
+          <div id="garage-blueprint-specs-container">
+            {category && (
+              <BluePrintSpecs
+                category={category}
+                handleRoute={handleRoute}
+                specs={specs}
+              />
+            )}{" "}
+          </div>
           <div id="garage-carousel-container">
             <Carousel
               current={current}
@@ -123,9 +123,9 @@ const Garage = () => {
               dataRoute="blueprints"
             />
           </div>
-        </div>
-        <div id="garage-crud-box-container">
-          {category && <CrudBox route={route} name={name} />}
+          <div id="garage-crud-box-container">
+            {category && <CrudBox route={route} name={name} />}
+          </div>
         </div>
       </div>
       {blueprintOptions && (
