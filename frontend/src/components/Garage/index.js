@@ -89,6 +89,9 @@ const Garage = () => {
   if (!garage) return null;
   return (
     <div id="garage-container">
+      <div id="garage-projects-navigation-container">
+        <h2 id="garage-project-navigation">{"Projects >"}</h2>
+      </div>
       <h2
         id="garage-title"
         data-route="garage"
@@ -113,7 +116,7 @@ const Garage = () => {
                 handleRoute={handleRoute}
                 specs={specs}
               />
-            )}{" "}
+            )}
           </div>
           <div id="garage-carousel-container">
             <Carousel
