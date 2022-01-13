@@ -22,7 +22,6 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
-  const [blueprintOptions, setBlueprintOptions] = useState(false);
 
   const { route, setRoute } = useContext(RouteContext);
 
@@ -59,20 +58,22 @@ const Garage = () => {
   };
 
   const handleGarageTitle = (event) => {
-    setTransition(false);
+    setTransition(true);
     handleRoute(event);
   };
 
   const handleBluePrint = (event) => {
     handleRoute(event);
     setBluePrint(blueprints[current]);
-    setBlueprintOptions((prevState) => !prevState);
   };
 
-  const handleProjectRoute = (event) => {
-    event.target.id === "options-yes"
-      ? history.push(`/blueprints/${blueprints[current].id}/projects`)
-      : setBlueprintOptions(false);
+  const handleProjectRoute = () => {
+    history.push(`/blueprints/${blueprints[current].id}/projects`);
+    setTransition(false);
+  };
+
+  const handleBuildListRoute = () => {
+    setTransition(false);
   };
 
   const specs = useSelector((state) =>
@@ -88,22 +89,34 @@ const Garage = () => {
 
   if (!garage) return null;
   return (
-    <div id="garage-container">
-      <h2
-        id="garage-title"
-        data-route="garage"
-        data-name={garage.name}
-        onClick={handleGarageTitle}
-      >
-        {garage.name}
-      </h2>
-      <div id="garage-page-links-container">
-        <Category
-          handleCategoryTab={handleCategoryTab}
-          categories={categories}
-        />
-      </div>
-      <div id="garage-items-outer" className="garage-items">
+    <div id="garage-container-outer">
+      <div id="garage-container">
+        <div id="garage-header-container">
+          <div className="garage-links" onClick={handleBuildListRoute}>
+            <h2 data-route="buildlist" className="garage-project-navigation">
+              {"< BuildList"}
+            </h2>
+          </div>
+          <div id="garage-category-container">
+            <h2
+              id="garage-title"
+              data-route="garage"
+              data-name={garage.name}
+              onClick={handleGarageTitle}
+            >
+              {garage.name}
+            </h2>
+            <div id="garage-page-links-container">
+              <Category
+                handleCategoryTab={handleCategoryTab}
+                categories={categories}
+              />
+            </div>
+          </div>
+          <div className="garage-links" onClick={handleProjectRoute}>
+            <h2 className="garage-project-navigation">{"Projects >"}</h2>
+          </div>
+        </div>
         <div id="garage-items-inner" className="garage-items">
           <div className="card" />
           <div id="garage-blueprint-specs-container">
@@ -113,7 +126,7 @@ const Garage = () => {
                 handleRoute={handleRoute}
                 specs={specs}
               />
-            )}{" "}
+            )}
           </div>
           <div id="garage-carousel-container">
             <Carousel
@@ -129,27 +142,6 @@ const Garage = () => {
           </div>
         </div>
       </div>
-      {blueprintOptions && (
-        <div id="garage-blueprint-project-container">
-          <h2 id="blueprint-project-title">Checkout Projects?</h2>
-          <div id="blueprint-option-buttons-container">
-            <div
-              id="options-yes"
-              className="crud-action-buttons blueprint-options"
-              onClick={handleProjectRoute}
-            >
-              YES
-            </div>
-            <div
-              id="options-no"
-              onClick={handleProjectRoute}
-              className="crud-action-buttons blueprint-options"
-            >
-              NO
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
