@@ -69,10 +69,9 @@ const Garage = () => {
     setBlueprintOptions((prevState) => !prevState);
   };
 
-  const handleProjectRoute = (event) => {
-    event.target.id === "options-yes"
-      ? history.push(`/blueprints/${blueprints[current].id}/projects`)
-      : setBlueprintOptions(false);
+  const handleProjectRoute = () => {
+    history.push(`/blueprints/${blueprints[current].id}/projects`);
+    setBlueprintOptions(false);
   };
 
   const specs = useSelector((state) =>
@@ -89,17 +88,22 @@ const Garage = () => {
   if (!garage) return null;
   return (
     <div id="garage-container">
-      <div id="garage-projects-navigation-container">
+      <div
+        id="garage-projects-navigation-container"
+        onClick={handleProjectRoute}
+      >
         <h2 id="garage-project-navigation">{"Projects >"}</h2>
       </div>
-      <h2
-        id="garage-title"
-        data-route="garage"
-        data-name={garage.name}
-        onClick={handleGarageTitle}
-      >
-        {garage.name}
-      </h2>
+      <div id="garage-title-container">
+        <h2
+          id="garage-title"
+          data-route="garage"
+          data-name={garage.name}
+          onClick={handleGarageTitle}
+        >
+          {garage.name}
+        </h2>
+      </div>
       <div id="garage-page-links-container">
         <Category
           handleCategoryTab={handleCategoryTab}
