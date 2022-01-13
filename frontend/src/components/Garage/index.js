@@ -59,7 +59,7 @@ const Garage = () => {
   };
 
   const handleGarageTitle = (event) => {
-    setTransition(false);
+    setTransition(true);
     handleRoute(event);
   };
 
