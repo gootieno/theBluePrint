@@ -1,41 +1,38 @@
 #garage-container {
   box-sizing: border-box;
   width: 100vw;
-  position: relative;
+  padding-top: 10px;
 }
 
-#garage-projects-navigation-container {
+#garage-header-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.garage-links {
   box-sizing: border-box;
-  position: absolute;
-  right: 10%;
-  z-index: 1;
   cursor: pointer;
 }
 
-#garage-project-navigation {
-  margin-top: 15px;
-  width: 100%;
+.garage-project-navigation {
+  margin-top: 5px;
   color: rgba(86, 86, 86, 1);
-  z-index: 1;
-}
-
-#garage-title-container {
-  display: flex;
-  justify-content: center;
 }
 
 #garage-title {
   box-sizing: border-box;
-  margin: 10px;
+  margin: 10px 0;
   cursor: pointer;
+  text-align: center;
   color: rgba(69, 129, 142, 0.8);
   font-weight: bolder;
+  position: relative;
 }
 
 #garage-page-links-container {
   text-align: center;
   box-sizing: border-box;
-  position: relative;
 }
 
 #garage-items-inner {
