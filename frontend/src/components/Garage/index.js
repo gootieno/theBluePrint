@@ -120,7 +120,7 @@ const Garage = () => {
         <div id="garage-items-inner" className="garage-items">
           <div className="card" />
           <div id="garage-blueprint-specs-container">
-            {transition && (
+            {category && (
               <BluePrintSpecs
                 category={category}
                 handleRoute={handleRoute}
@@ -138,7 +138,7 @@ const Garage = () => {
             />
           </div>
           <div id="garage-crud-box-container">
-            {transition && <CrudBox route={route} name={name} />}
+            {category && <CrudBox route={route} name={name} />}
           </div>
         </div>
       </div>
