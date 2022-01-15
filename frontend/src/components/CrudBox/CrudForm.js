@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { dynamicFetch } from "../../redux/dynamicFetch";
 
 const CrudForm = ({ action, route, handleInputRef, inputRef, name }) => {
   const [inputAction, setInputAction] = useState("");
@@ -14,10 +15,8 @@ const CrudForm = ({ action, route, handleInputRef, inputRef, name }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console
-      .log
-      // `fetch to ${route} route with this data: ${inputAction} with ${routeAction} in the headers`
-      ();
+    const payload = { method: action, url: route, body: inputAction };
+    dynamicFetch(payload);
   };
 
   return (
@@ -31,7 +30,7 @@ const CrudForm = ({ action, route, handleInputRef, inputRef, name }) => {
         placeholder={
           action === "edit"
             ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
-            : ` ${action.toUpperCase()} ${route.toUpperCase()}`
+            : ` ENTER NEW NAME`
         }
         onChange={handleInputAction}
         className={
