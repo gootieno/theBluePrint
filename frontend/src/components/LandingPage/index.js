@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-import "./landingpage.css";
+import { getUserBluePrints } from "../../redux/garage";
+
 import { loginUser } from "../../redux/user";
+import "./landing-page.css";
 
 const LandingPage = () => {
   const history = useHistory();
@@ -16,11 +17,15 @@ const LandingPage = () => {
     history.push("/signup");
   };
 
-  const handleDemoButton = () => {
+  const handleDemoButton = async () => {
     try {
-      dispatch(loginUser({ email: "demo@user.io", password: "password" })).then(
-        () => history.push("/home")
+      let user = await dispatch(
+        loginUser({ email: "demo@user.io", password: "password" })
       );
+      if (user) {
+        dispatch(getUserBluePrints(user.id));
+        history.push("/garage");
+      }
     } catch (error) {
       history.push("/");
     }

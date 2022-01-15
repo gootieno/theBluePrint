@@ -1,18 +1,16 @@
 import { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
-import Home from "./components/Home";
+import Projects from "./components/ProjectsPage";
 import Garage from "./components/Garage";
+import DynamicCarousel from "./components/DynamicCarousel";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
-import Projects from "./components/ProjectsPage";
-import { getUserBluePrints } from "./redux/garage";
-import DynamicCarousel from "./components/DynamicCarousel";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,7 +21,6 @@ const App = () => {
   };
 
   const dispatch = useDispatch();
-  let user = useSelector((state) => state.session.user);
 
   useEffect(() => {
     dispatch(restoreUser())
@@ -31,10 +28,7 @@ const App = () => {
       .catch((error) => {
         if (error) return setIsAuthenticated(false);
       });
-    if (user) {
-      dispatch(getUserBluePrints(user.id));
-    }
-  }, [dispatch, user?.id]);
+  }, [dispatch]);
 
   return (
     <>
@@ -52,16 +46,13 @@ const App = () => {
       </Route>
       {isAuthenticated && (
         <Switch>
-          <Route path="/home">
-            <Home isAuthenticated={isAuthenticated} />
-          </Route>
           <Route path="/garage">
             <Garage />
           </Route>
           <Route path="/blueprints/:blueprintId/projects">
             <Projects />
           </Route>
-          <Route path='/dynamic-carousel'>
+          <Route path="/dynamic-carousel">
             <DynamicCarousel />
           </Route>
         </Switch>

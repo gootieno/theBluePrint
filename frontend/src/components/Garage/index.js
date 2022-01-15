@@ -8,15 +8,13 @@ import BluePrintSpecs from "../BlueprintSpecs";
 import Carousel from "../Carousel";
 import Category from "../Category";
 import CrudBox from "../CrudBox";
+
+import { getUserBluePrints } from "../../redux/garage";
+
 import "./garage.css";
 
 const Garage = () => {
-  const garage = useSelector((state) => state.garage);
-
-  const blueprints = Object.values(garage.blueprints);
-  const categories = Object.values(garage.categories);
-
-  const [category, setCategory] = useState(categories[0]);
+  const [category, setCategory] = useState(null);
   const [transition, setTransition] = useState(false);
 
   const [blueprint, setBluePrint] = useState(null);
@@ -27,6 +25,31 @@ const Garage = () => {
 
   const dispatch = useDispatch();
   const history = useHistory();
+
+  const user = useSelector((state) => state.session.user);
+  const garage = useSelector((state) => state.garage);
+  const categories = useSelector((state) =>
+    Object.values(state.garage.categories)
+  );
+  const blueprints = useSelector((state) =>
+    Object.values(state.garage.blueprints)
+  );
+
+  const specs = useSelector((state) =>
+    Object.values(state.garage.specs).filter((spec) => {
+      if (
+        categories[0].blueprintId === blueprint?.id &&
+        spec?.categoryId === category?.id
+      ) {
+        return spec;
+      }
+    })
+  );
+
+  useEffect(() => {
+    if (user) dispatch(getUserBluePrints(user.id));
+    setCategory(categories[0]);
+  }, [dispatch, user?.id]);
 
   useEffect(() => {
     setBluePrint(blueprints[current]);
@@ -58,16 +81,21 @@ const Garage = () => {
   };
 
   const handleGarageTitle = (event) => {
-    setTransition(true);
+    setBluePrint(blueprints[current]);
+    if (!category) setCategory(categories[0]);
     handleRoute(event);
+    setTransition(true);
   };
 
   const handleBluePrint = (event) => {
     handleRoute(event);
+    if (!category) setCategory(categories[0]);
     setBluePrint(blueprints[current]);
+    setTransition(true);
   };
 
   const handleProjectRoute = () => {
+    setRoute("Projects");
     history.push(`/blueprints/${blueprints[current].id}/projects`);
     setTransition(false);
   };
@@ -76,17 +104,7 @@ const Garage = () => {
     setTransition(false);
   };
 
-  const specs = useSelector((state) =>
-    Object.values(state.garage.specs).filter((spec) => {
-      if (
-        category?.blueprintId === blueprint?.id &&
-        spec?.categoryId === category?.id
-      ) {
-        return spec;
-      }
-    })
-  );
-
+  if (!user) history.push("/");
   if (!garage) return null;
   return (
     <div id="garage-container-outer">
@@ -138,7 +156,7 @@ const Garage = () => {
             />
           </div>
           <div id="garage-crud-box-container">
-            {category && <CrudBox route={route} name={name} />}
+            {categories.length && <CrudBox route={route} name={name} />}
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ function NavBar({
 
   const handlePageTitle = () => {
     if (user) {
-      history.replace("/home");
+      history.replace("/garage");
     } else {
       history.push("/");
     }

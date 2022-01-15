@@ -38,7 +38,7 @@ const Carousel = ({
             className={`carousel-content ${
               index === current ? " content" : " content active"
             }`}
-            key={index}
+            key={`item-${item.id}-${index}`}
           >
             {index === current && (
               <img
