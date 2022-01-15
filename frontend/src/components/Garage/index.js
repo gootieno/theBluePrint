@@ -89,10 +89,13 @@ const Garage = () => {
 
   const handleBluePrint = (event) => {
     handleRoute(event);
+    if (!category) setCategory(categories[0]);
     setBluePrint(blueprints[current]);
+    setTransition(true);
   };
 
   const handleProjectRoute = () => {
+    setRoute("Projects");
     history.push(`/blueprints/${blueprints[current].id}/projects`);
     setTransition(false);
   };

@@ -1,5 +1,6 @@
 #blueprint-specs-container {
   box-sizing: border-box;
+  width: 260px;
 }
 
 #blueprint-spec-title {
@@ -13,7 +14,8 @@
   border-radius: 4px;
   padding: 10px;
   box-shadow: 0 0px 10px 0.2px rgba(86, 86, 86, 0.8);
-  width: 200px;
+  width: 220px;
+  height: auto;
 }
 
 .blueprint-specs {
