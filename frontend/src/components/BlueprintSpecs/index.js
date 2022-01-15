@@ -14,7 +14,7 @@ const BluePrintSpecs = ({ specs, category, handleRoute }) => {
                 className="blueprint-specs"
                 data-route="specs"
                 id={spec.id}
-                key={`${spec.id}-${i}`}
+                key={`spec-${spec.id}-${i}`}
                 onClick={handleRoute}
                 data-name={spec.name}
               >
