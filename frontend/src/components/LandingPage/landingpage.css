@@ -1,5 +1,5 @@
 .landing-page-container {
-  height: 80vh;
+  height: 83vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -65,9 +65,11 @@
 #landing-page-footer {
   border-top: 1mm solid rgba(52, 52, 52, 0.463);
   color: red;
-  text-align: center;
-  margin: 0% 5%;
+  display: flex;
+  justify-content: center;
   padding-top: 20px;
+  margin: 0px 50px;
+  height: 50px;
 }
 
 #landing-page-github {

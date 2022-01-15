@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
-import Home from "./components/Home";
 import Garage from "./components/Garage";
 
 import "./index.css";
@@ -52,16 +51,13 @@ const App = () => {
       </Route>
       {isAuthenticated && (
         <Switch>
-          <Route path="/home">
-            <Home isAuthenticated={isAuthenticated} />
-          </Route>
           <Route path="/garage">
             <Garage />
           </Route>
           <Route path="/blueprints/:blueprintId/projects">
             <Projects />
           </Route>
-          <Route path='/dynamic-carousel'>
+          <Route path="/dynamic-carousel">
             <DynamicCarousel />
           </Route>
         </Switch>

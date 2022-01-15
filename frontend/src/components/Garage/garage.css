@@ -8,7 +8,6 @@
   display: flex;
   justify-content: space-around;
   margin-bottom: 20px;
-  position: relative;
 }
 
 .garage-links {
@@ -23,7 +22,7 @@
 
 #garage-title {
   box-sizing: border-box;
-  margin: 10px 0;
+  margin: 10px 0px;
   cursor: pointer;
   text-align: center;
   color: rgba(69, 129, 142, 0.8);

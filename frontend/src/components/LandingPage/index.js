@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Redirect, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -19,7 +18,7 @@ const LandingPage = () => {
   const handleDemoButton = () => {
     try {
       dispatch(loginUser({ email: "demo@user.io", password: "password" })).then(
-        () => history.push("/home")
+        () => history.push("/garage")
       );
     } catch (error) {
       history.push("/");
