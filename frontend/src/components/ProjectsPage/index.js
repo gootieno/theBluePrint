@@ -54,7 +54,7 @@ const Projects = () => {
           </span>
         </h2>
         <div id="create-project-container">
-          <CrudBox route={route} name={name} />
+          <CrudBox routeObject={{ name, route }} />
         </div>
       </div>
       <div className="completed project">
