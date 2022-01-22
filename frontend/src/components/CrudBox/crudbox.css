@@ -46,6 +46,15 @@
   color: white;
 }
 
+button[disabled],
+button[disabled]#post:hover,
+button[disabled]#put:hover,
+button[disabled]#delete:hover {
+  background-color: rgba(185, 185, 185, 0.5);
+  color: rgba(0, 0, 0, 0.425);
+  cursor: default;
+}
+
 #post:hover {
   background-color: rgba(39, 175, 112, 0.425);
 }
