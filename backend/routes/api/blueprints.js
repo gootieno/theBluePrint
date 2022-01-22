@@ -67,7 +67,7 @@ router.get(
 
     const projects = await Project.findAll({
       where: blueprintId,
-      include: [{ model: Step, as: "steps" }],
+      // include: [{ model: Step, as: "steps" }],
     });
 
     if (projects) return res.json({ projects });

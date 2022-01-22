@@ -15,30 +15,16 @@ export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
   dispatch(loadProjects(projects));
 };
 
-let initialState = {
-  steps: {},
-};
+let initialState = {};
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case PROJECTS_LOADED:
-      let newState = { steps: {} };
-      let steps = [];
+      let newState = {};
       action.projects.forEach((project) => {
         newState[project.id] = project;
-        if (project.steps.length > 0) {
-          steps = [...steps, ...project.steps];
-          delete project.steps;
-        }
       });
-
-      steps.forEach((step) => {
-        if (step) {
-          newState.steps[step.id] = step;
-        }
-      });
-
-      return { ...state, ...newState };
+      return newState;
     default:
       return state;
   }
