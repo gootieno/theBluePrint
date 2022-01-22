@@ -21,8 +21,6 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
     dynamicFetch({ payload, inputAction });
   };
 
-  const blueprintForm = <></>;
-
   const defaultForm = (
     <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
       {route === "blueprints" && (
@@ -47,8 +45,8 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
         onChange={handleInputAction}
         className={
           inputAction.length > 0
-            ? "crud-input crud-actions active"
-            : "crud-input crud-actions focus"
+            ? "crud-input crud-actions"
+            : "crud-input crud-actions active"
         }
       />
       {inputAction.length > 0 && (
