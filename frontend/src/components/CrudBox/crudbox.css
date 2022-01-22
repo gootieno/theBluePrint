@@ -68,6 +68,14 @@
   text-align: center;
 }
 
+#input-field-form {
+  width: 100%;
+}
+
+#blueprint-image {
+  display: none;
+}
+
 .crud-input {
   margin: 5px;
   width: 0;
@@ -78,7 +86,8 @@
 }
 
 .crud-input.active {
-  min-width: 200px;
+  box-sizing: border-box;
+  min-width: 90%;
   outline: none !important;
   border-bottom: 1px solid #45818ecc;
   border-color: #45818ecc;
