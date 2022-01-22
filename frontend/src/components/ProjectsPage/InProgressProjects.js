@@ -1,12 +1,15 @@
 import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import DynamicCarousel from "../DynamicCarousel";
 
 const InProgressProjects = ({ handleProject }) => {
+  const { blueprintId } = useParams();
   let projects = useSelector((state) => {
     if (!state.projects) return null;
     else
       return Object.values(state.projects).filter(
-        (project) => project.completed === false
+        (project) =>
+          project.completed === false && project.blueprintId == blueprintId
       );
   });
 
