@@ -4,7 +4,7 @@ import { dynamicFetch } from "../../redux/dynamicFetch";
 const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
   const [inputAction, setInputAction] = useState("");
 
-  const { name } = routeObject;
+  const { name, route } = routeObject;
 
   const handleInputAction = (event) => {
     setInputAction(event.target.value);
@@ -25,7 +25,14 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
 
   const defaultForm = (
     <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
-      <input id="blueprint-image" type="file" />
+      {route === "blueprints" && (
+        <>
+          <label for="blueprint-image" className="blueprint-image-title">
+            Select Cover Image
+          </label>
+          <input id="blueprint-image" type="file" className="crud-actions" />
+        </>
+      )}
       <input
         ref={inputRef}
         id="text-box-input"
