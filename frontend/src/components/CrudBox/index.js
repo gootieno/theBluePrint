@@ -76,6 +76,7 @@ const CrudBox = ({ routeObject }) => {
             handleRouteAction={handleRouteAction}
             routeAction={routeAction}
             handleDelete={handleDelete}
+            routeObject={routeObject}
           />
         </div>
         {toggle && (

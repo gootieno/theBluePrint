@@ -12,27 +12,25 @@ import InProgressProjects from "./InProgressProjects";
 import "./projects-page.css";
 
 const Projects = () => {
-  const [name, setName] = useState(null);
+  const [name, setName] = useState("");
   const { route, setRoute } = useContext(RouteContext);
-
+  let currentNode;
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const { blueprintId } = useParams();
+  const projects = useSelector((state) => Object.values(state.projects));
   const blueprints = useSelector((state) => state.garage.blueprints);
   let blueprint = blueprints[blueprintId];
 
   useEffect(() => {
-    if (blueprint) {
-      setName(blueprint.name);
-      setRoute("Blueprints");
-    }
+    setRoute("Projects");
+    if (!blueprints.length) dispatch(getUserBluePrints(user.id));
     dispatch(getBluePrintProjects(blueprintId));
-    dispatch(getUserBluePrints(user.id));
   }, [dispatch, blueprint?.id]);
 
   const handleProject = (event) => {
-    const currentNode = event.target.dataset;
+    currentNode = event.target.dataset;
     setRoute(currentNode.route);
     setName(currentNode.name);
   };

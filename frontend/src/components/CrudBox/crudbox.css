@@ -35,10 +35,11 @@
   border-radius: 4px;
   margin: 5px;
   cursor: pointer;
-  padding: 5px 10px;
+  padding: 7px 10px;
   font-weight: bold;
   color: rgb(109, 109, 109);
   box-sizing: border-box;
+  background-color: white;
 }
 
 .crud-action-buttons:hover {

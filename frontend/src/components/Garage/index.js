@@ -20,6 +20,7 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
   const [routeObject, setRouteObject] = useState(null);
+  const [disabled, setDisabled] = useState(false);
 
   const { route, setRoute } = useContext(RouteContext);
 
@@ -87,6 +88,7 @@ const Garage = () => {
 
   const handleGarageTitle = (event) => {
     setBluePrint(blueprints[current]);
+
     if (!category) setCategory(categories[0]);
     handleRoute(event);
     setTransition(true);
@@ -100,7 +102,7 @@ const Garage = () => {
   };
 
   const handleProjectRoute = () => {
-    setRoute("Projects");
+    setRoute("projects");
     history.push(`/blueprints/${blueprints[current].id}/projects`);
     setTransition(false);
   };
