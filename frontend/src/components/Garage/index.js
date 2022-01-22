@@ -18,8 +18,8 @@ const Garage = () => {
   const [transition, setTransition] = useState(false);
 
   const [blueprint, setBluePrint] = useState(null);
-  const [name, setName] = useState(null);
   const [current, setCurrent] = useState(0);
+  const [routeObject, setRouteObject] = useState(null);
 
   const { route, setRoute } = useContext(RouteContext);
 
@@ -67,7 +67,7 @@ const Garage = () => {
   let currentNode;
 
   const handleCategoryTab = (event) => {
-    let singleCategory = garage.categories[event.target.id];
+    const singleCategory = garage.categories[event.target.dataset.id];
     handleRoute(event);
     setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
@@ -76,8 +76,13 @@ const Garage = () => {
 
   let handleRoute = (event) => {
     currentNode = event.target.dataset;
+    setRouteObject({
+      ...routeObject,
+      id: currentNode.id,
+      route: currentNode.route,
+      name: currentNode.name,
+    });
     setRoute(currentNode.route);
-    setName(currentNode.name);
   };
 
   const handleGarageTitle = (event) => {
@@ -119,6 +124,7 @@ const Garage = () => {
             <h2
               id="garage-title"
               data-route="garage"
+              data-id={garage.id}
               data-name={garage.name}
               onClick={handleGarageTitle}
             >
@@ -156,7 +162,7 @@ const Garage = () => {
             />
           </div>
           <div id="garage-crud-box-container">
-            {categories.length && <CrudBox route={route} name={name} />}
+            {categories.length && <CrudBox routeObject={routeObject} />}
           </div>
         </div>
       </div>

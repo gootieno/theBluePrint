@@ -4,7 +4,8 @@ import "./category.css";
 const Category = ({ categories, handleCategoryTab }) => {
   return categories.map((category, index) => (
     <span
-      id={category.id}
+      id='single-category'
+      data-id={category.id}
       data-route="categories"
       key={`index-${category.id}-${index}`}
       onClick={handleCategoryTab}

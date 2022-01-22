@@ -13,6 +13,7 @@ const BluePrintSpecs = ({ specs, category, handleRoute }) => {
               <div
                 className="blueprint-specs"
                 data-route="specs"
+                data-id={spec.id}
                 id={spec.id}
                 key={`spec-${spec.id}-${i}`}
                 onClick={handleRoute}

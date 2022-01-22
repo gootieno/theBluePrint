@@ -68,29 +68,57 @@
   text-align: center;
 }
 
+#input-field-form {
+  margin-top: 5px;
+  box-sizing: border-box;
+}
+
+#blueprint-image {
+  box-sizing: border-box;
+  padding-top: 5px;
+}
+
+.blueprint-image-title {
+  box-sizing: border-box;
+  margin-left: 5px;
+  margin-top: 5px;
+  color: rgb(69, 129, 142);
+  font-weight: bolder;
+}
+
+input[type="file"]::file-selector-button {
+  border: 1px solid #45818ecc;
+  background-color: white;
+  box-shadow: 0 0px 5px 0.2px #45818ecc;
+  border-radius: 4px;
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: rgb(109, 109, 109);
+  box-sizing: border-box;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: rgba(212, 211, 211, 0.4);
+}
+
 .crud-input {
   margin: 5px;
-  width: 0;
+  width: 0%;
   border: 0;
   padding: 5px;
   border-bottom: 0px solid #45818ecc;
+  border-color: #45818ecc;
   position: relative;
-}
-
-.crud-input.active {
-  min-width: 200px;
-  outline: none !important;
-  border-bottom: 1px solid #45818ecc;
-  border-color: #45818ecc;
-}
-
-.crud-input.focus:focus {
-  outline: none !important;
-  border-color: #45818ecc;
-  transition: 1s ease;
-  border-bottom: 1px solid #45818ecc;
   box-sizing: border-box;
+  outline: none !important;
+}
+
+.crud-input.active:focus {
+  transition: width 1s ease;
   width: 90%;
+  border-bottom: 1px solid #45818ecc;
 }
 
 #input-action-cancel {

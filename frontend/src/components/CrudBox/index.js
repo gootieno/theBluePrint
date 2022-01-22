@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { dynamicFetch } from "../../redux/dynamicFetch";
 import "./crudbox.css";
 import CrudForm from "./CrudForm";
 import RouteActions from "./RouteActions";
 
-const CrudBox = ({ route, name }) => {
+const CrudBox = ({ routeObject }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
-  const [inputAction, setInputAction] = useState("");
   const inputRef = useRef(null);
   const [action, setAction] = useState("");
 
@@ -29,10 +29,6 @@ const CrudBox = ({ route, name }) => {
   };
 
   const handleRouteAction = (event) => {
-    if (!route) {
-      alert("Nothing selected to work on");
-      return null;
-    }
     if (event.target.id === "post" || event.target.id === "put") {
       if (event.target.dataset.name === action) {
         setToggle((prev) => !prev);
@@ -54,12 +50,13 @@ const CrudBox = ({ route, name }) => {
   const handleDelete = (event) => {
     if (event.target.id === "delete-confirm") {
       event.preventDefault();
-      // console.log(`fetch to ${route} route and delete ${name}`);
     } else {
       handleRouteAction(event);
     }
   };
 
+  if (!routeObject) return null;
+  const { route, name } = routeObject;
   return (
     <div>
       <h2 id="crudbox-title">Work Bench</h2>
@@ -84,11 +81,9 @@ const CrudBox = ({ route, name }) => {
         {toggle && (
           <CrudForm
             action={action}
-            route={route}
-            toggle={toggle}
             handleInputRef={handleInputRef}
             inputRef={inputRef}
-            name={name}
+            routeObject={routeObject}
           />
         )}
       </div>
