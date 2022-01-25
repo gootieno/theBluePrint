@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router";
+import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
 
 const CrudForm = ({
@@ -9,18 +10,18 @@ const CrudForm = ({
   routeObject,
   dynamicForm,
 }) => {
-  const [inputAction, setInputAction] = useState("");
+  const { formValue, handleFormChange, setFormValue } = useContext(FormContext);
 
   const { blueprintId } = useParams();
 
-  const { name, route } = routeObject;
-
-  const handleInputAction = (event) => {
-    setInputAction(event.target.value);
-  };
+  const { name } = routeObject;
 
   const handleInputCancel = () => {
-    setInputAction("");
+    setFormValue({
+      image: "",
+      name: "",
+      description: "",
+    });
     handleInputRef();
   };
 
@@ -28,7 +29,8 @@ const CrudForm = ({
     event.preventDefault();
     const payload = {
       method: action,
-      data: { name: inputAction, blueprintId },
+      data: { ...formValue },
+      blueprintId,
       routeObject,
     };
     dynamicFetch(payload);
@@ -41,21 +43,22 @@ const CrudForm = ({
         ref={inputRef}
         id="text-box-input"
         type="text"
-        value={inputAction}
+        name="name"
+        value={formValue.name}
         autoComplete="off"
         placeholder={
           action === "edit"
             ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
             : ` ENTER NEW NAME`
         }
-        onChange={handleInputAction}
+        onChange={handleFormChange}
         className={
-          inputAction.length > 0
+          formValue.name
             ? "crud-input crud-actions active"
             : "crud-input crud-actions focus"
         }
       />
-      {inputAction.length > 0 && (
+      {formValue.name && (
         <span
           id="input-action-cancel"
           className="text-inputs-cancel crud-actions"
