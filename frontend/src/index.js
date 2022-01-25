@@ -8,6 +8,7 @@ import App from "./App";
 import configureStore from "./redux/store";
 import { ModalProvider } from "./context/Modal";
 import RouteProvider from "./context/Route";
+import FormProvider from "./context/Form";
 
 import { restoreCSRF, csrfFetch } from "./redux/csrf";
 
@@ -21,13 +22,15 @@ if (process.env.NODE_ENV !== "production") {
 const Root = () => {
   return (
     <Provider store={store}>
-      <ModalProvider>
-        <RouteProvider>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </RouteProvider>
-      </ModalProvider>
+      <FormProvider>
+        <ModalProvider>
+          <RouteProvider>
+            <BrowserRouter>
+              <App />
+            </BrowserRouter>
+          </RouteProvider>
+        </ModalProvider>
+      </FormProvider>
     </Provider>
   );
 };

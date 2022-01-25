@@ -1,9 +1,14 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router";
 import { dynamicFetch } from "../../redux/dynamicFetch";
 
-const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
+const CrudForm = ({
+  action,
+  handleInputRef,
+  inputRef,
+  routeObject,
+  dynamicForm,
+}) => {
   const [inputAction, setInputAction] = useState("");
 
   const { blueprintId } = useParams();
@@ -31,15 +36,7 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
 
   const defaultForm = (
     <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
-      {route === "blueprints" && (
-        <>
-          <label htmlFor="blueprint-image" className="blueprint-image-title">
-            Select Cover Image
-          </label>
-          <input id="blueprint-image" type="file" className="crud-actions" />
-        </>
-      )}
-      
+      {dynamicForm}
       <input
         ref={inputRef}
         id="text-box-input"
