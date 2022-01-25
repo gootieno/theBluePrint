@@ -23,7 +23,7 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
     event.preventDefault();
     const payload = {
       method: action,
-      data: { inputAction, blueprintId },
+      data: { name: inputAction, blueprintId },
       routeObject,
     };
     dynamicFetch(payload);
@@ -39,6 +39,7 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
           <input id="blueprint-image" type="file" className="crud-actions" />
         </>
       )}
+      
       <input
         ref={inputRef}
         id="text-box-input"

@@ -66,7 +66,7 @@ router.get(
     const blueprintId = parseInt(req.params.id, 10);
 
     const projects = await Project.findAll({
-      where: blueprintId,
+      where: { blueprintId },
       // include: [{ model: Step, as: "steps" }],
     });
 

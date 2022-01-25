@@ -29,7 +29,7 @@ let initialState = {};
 export default (state = initialState, action) => {
   switch (action.type) {
     case PROJECTS_LOADED:
-      let newState = {};
+      let newState = { ...state };
       action.projects.forEach((project) => {
         newState[project.id] = project;
       });
