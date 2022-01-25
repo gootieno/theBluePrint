@@ -39,34 +39,36 @@ const CrudForm = ({
   const defaultForm = (
     <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
       {dynamicForm}
-      <input
-        ref={inputRef}
-        id="text-box-input"
-        type="text"
-        name="name"
-        value={formValue.name}
-        autoComplete="off"
-        placeholder={
-          action === "edit"
-            ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
-            : ` ENTER NEW NAME`
-        }
-        onChange={handleFormChange}
-        className={
-          formValue.name
-            ? "crud-input crud-actions active"
-            : "crud-input crud-actions focus"
-        }
-      />
-      {formValue.name && (
-        <span
-          id="input-action-cancel"
-          className="text-inputs-cancel crud-actions"
-          onClick={handleInputCancel}
-        >
-          x
-        </span>
-      )}
+      <div>
+        <input
+          ref={inputRef}
+          id="text-box-input"
+          type="text"
+          name="name"
+          value={formValue.name}
+          autoComplete="off"
+          placeholder={
+            action === "edit"
+              ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
+              : ` ENTER NEW NAME`
+          }
+          onChange={handleFormChange}
+          className={
+            formValue.name
+              ? "crud-input crud-actions active"
+              : "crud-input crud-actions focus"
+          }
+        />
+        {formValue.name && (
+          <span
+            id="input-action-cancel"
+            className="text-inputs-cancel crud-actions"
+            onClick={handleInputCancel}
+          >
+            x
+          </span>
+        )}
+      </div>
     </form>
   );
 

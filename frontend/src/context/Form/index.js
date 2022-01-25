@@ -9,10 +9,10 @@ export default ({ children }) => {
     title: "",
     description: "",
     media: "",
+    foreignKey: 0,
   });
 
   const handleFormChange = (event) => {
-    console.log("form value ", formValue);
     setFormValue({ ...formValue, [event.target.name]: event.target.value });
   };
 
