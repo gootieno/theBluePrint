@@ -11,9 +11,7 @@ router.post(
   "",
   requireAuth,
   asyncHandler(async (req, res, next) => {
-    const blueprintId = parseInt(req.params.id, 10);
-    const { name, categoryId } = req.body;
-
+    const { name, categoryId, blueprintId } = req.body;
     try {
       const project = await Project.create({ name, blueprintId, categoryId });
       return res.json({ project });
