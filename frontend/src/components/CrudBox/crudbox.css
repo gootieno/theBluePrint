@@ -125,7 +125,13 @@ input[type="file"]::file-selector-button:hover {
   outline: none !important;
 }
 
-.crud-input.active:focus {
+.crud-input.active {
+  box-sizing: border-box;
+  min-width: 90%;
+  border-bottom: 1px solid #45818ecc;
+}
+
+.crud-input.focus:focus {
   transition: width 1s ease;
   width: 90%;
   border-bottom: 1px solid #45818ecc;

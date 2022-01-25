@@ -1,6 +1,6 @@
 import { csrfFetch } from "./csrf";
 
-export const dynamicFetch = async ({ payload }) => {
+export const dynamicFetch = async (payload) => {
   const {
     routeObject: { route, id },
     data,

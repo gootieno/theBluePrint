@@ -16,14 +16,13 @@ export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
   dispatch(loadProjects(projects));
 };
 
-export const postBlueprintProject =
-  (blueprintId, payload) => async (dispatch) => {
-    const { response } = await dynamicFetch(payload);
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-    }
-  };
+export const postBlueprintProject = (payload) => async (dispatch) => {
+  const { response } = await dynamicFetch(payload);
+  if (response.ok) {
+    const data = await response.json();
+    console.log(data);
+  }
+};
 
 let initialState = {};
 
