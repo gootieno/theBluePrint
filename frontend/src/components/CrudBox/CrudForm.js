@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 import { dynamicFetch } from "../../redux/dynamicFetch";
 
 const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
   const [inputAction, setInputAction] = useState("");
+
+  const { blueprintId } = useParams();
 
   const { name, route } = routeObject;
 
@@ -17,9 +21,12 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const payload = { method: action, data: { inputAction }, routeObject };
-    dynamicFetch({ payload, inputAction });
-    
+    const payload = {
+      method: action,
+      data: { inputAction, blueprintId },
+      routeObject,
+    };
+    dynamicFetch(payload);
   };
 
   const defaultForm = (
@@ -46,14 +53,14 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
         onChange={handleInputAction}
         className={
           inputAction.length > 0
-            ? "crud-input crud-actions"
-            : "crud-input crud-actions active"
+            ? "crud-input crud-actions active"
+            : "crud-input crud-actions focus"
         }
       />
       {inputAction.length > 0 && (
         <span
           id="input-action-cancel"
-          className="text-inputs-cancel crud-actions active"
+          className="text-inputs-cancel crud-actions"
           onClick={handleInputCancel}
         >
           x

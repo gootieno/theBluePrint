@@ -26,7 +26,7 @@ const Projects = () => {
   let blueprint = blueprints[blueprintId];
 
   useEffect(() => {
-    setRoute("Projects");
+    setRoute("projects");
     if (!blueprints.length) dispatch(getUserBluePrints(user.id));
     dispatch(getBluePrintProjects(blueprintId));
   }, [dispatch, blueprint?.id]);
