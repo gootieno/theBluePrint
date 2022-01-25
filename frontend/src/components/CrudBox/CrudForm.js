@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
@@ -37,7 +37,12 @@ const CrudForm = ({
   };
 
   const defaultForm = (
-    <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
+    <form
+      id="input-field-form"
+      type="submit"
+      onSubmit={handleSubmit}
+      className="crud-actions"
+    >
       {dynamicForm}
       <div>
         <input
@@ -56,7 +61,7 @@ const CrudForm = ({
           className={
             formValue.name
               ? "crud-input crud-actions active"
-              : "crud-input crud-actions focus"
+              : "crud-input crud-actions"
           }
         />
         {formValue.name && (

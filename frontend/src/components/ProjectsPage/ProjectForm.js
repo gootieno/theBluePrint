@@ -20,6 +20,7 @@ const ProjectForm = () => {
               onChange={handleFormChange}
               value={category.id}
               name="foreignKey"
+              className="crud-actions"
             >
               {category.name}
             </option>

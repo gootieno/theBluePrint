@@ -25,6 +25,8 @@ const CrudBox = ({ routeObject, children }) => {
   const handleClickAway = (event) => {
     if (!event.target.classList.contains("crud-actions")) {
       setToggle(false);
+    } else {
+      setToggle(true);
     }
   };
 
@@ -81,6 +83,7 @@ const CrudBox = ({ routeObject, children }) => {
         </div>
         {toggle && (
           <CrudForm
+            toggle={toggle}
             action={action}
             handleInputRef={handleInputRef}
             inputRef={inputRef}

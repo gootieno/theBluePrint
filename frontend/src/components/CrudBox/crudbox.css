@@ -148,16 +148,16 @@ input[type="file"]::file-selector-button:hover {
 
 .crud-input.active {
   box-sizing: border-box;
+  transition: width 1s ease;
   min-width: 90%;
   margin-right: 0;
   border-bottom: 1px solid #45818ecc;
 }
 
-.crud-input.focus:focus {
+.crud-input:focus {
   transition: width 1s ease;
   width: 90%;
   border-bottom: 1px solid #45818ecc;
-  outline: none !important;
 }
 
 #input-action-cancel {
