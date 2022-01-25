@@ -5,9 +5,9 @@ import { useDispatch } from "react-redux";
 import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUpPage";
 import Navbar from "./components/NavBar";
+import Steps from "./components/Steps";
 import Projects from "./components/ProjectsPage";
 import Garage from "./components/Garage";
-import DynamicCarousel from "./components/DynamicCarousel";
 
 import "./index.css";
 import { restoreUser } from "./redux/user";
@@ -52,8 +52,8 @@ const App = () => {
           <Route path="/blueprints/:blueprintId/projects">
             <Projects />
           </Route>
-          <Route path="/dynamic-carousel">
-            <DynamicCarousel />
+          <Route path="/projects/:projectId/steps">
+            <Steps />
           </Route>
         </Switch>
       )}

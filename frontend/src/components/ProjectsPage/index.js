@@ -6,6 +6,7 @@ import { getUserBluePrints } from "../../redux/garage";
 import { getBluePrintProjects } from "../../redux/projects";
 
 import CrudBox from "../CrudBox";
+import StepModal from "../Modals/StepModal";
 import CompletedProjects from "./CompletedProjects";
 import InProgressProjects from "./InProgressProjects";
 
@@ -13,13 +14,14 @@ import "./projects-page.css";
 
 const Projects = () => {
   const [name, setName] = useState("");
+  const [showStepForm, setShowStepForm] = useState(false);
+
   const { route, setRoute } = useContext(RouteContext);
   let currentNode;
   const user = useSelector((state) => state.session.user);
   const dispatch = useDispatch();
 
   const { blueprintId } = useParams();
-  const projects = useSelector((state) => Object.values(state.projects));
   const blueprints = useSelector((state) => state.garage.blueprints);
   let blueprint = blueprints[blueprintId];
 
@@ -61,6 +63,10 @@ const Projects = () => {
       <div className="in-progress project">
         <InProgressProjects handleProject={handleProject} />
       </div>
+      <StepModal
+        showStepForm={showStepForm}
+        setShowStepForm={setShowStepForm}
+      />
     </div>
   );
 };

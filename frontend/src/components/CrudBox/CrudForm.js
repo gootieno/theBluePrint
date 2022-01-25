@@ -19,13 +19,14 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
     event.preventDefault();
     const payload = { method: action, data: { inputAction }, routeObject };
     dynamicFetch({ payload, inputAction });
+    
   };
 
   const defaultForm = (
     <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
       {route === "blueprints" && (
         <>
-          <label for="blueprint-image" className="blueprint-image-title">
+          <label htmlFor="blueprint-image" className="blueprint-image-title">
             Select Cover Image
           </label>
           <input id="blueprint-image" type="file" className="crud-actions" />
@@ -52,7 +53,7 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
       {inputAction.length > 0 && (
         <span
           id="input-action-cancel"
-          className="text-inputs-cancel crud-actions"
+          className="text-inputs-cancel crud-actions active"
           onClick={handleInputCancel}
         >
           x
