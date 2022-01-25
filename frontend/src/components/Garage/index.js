@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { RouteContext } from "../../context/Route";
 
 import BluePrintSpecs from "../BlueprintSpecs";
+import BlueprintForm from "../BluePrints/BlueprintForm";
 import Carousel from "../Carousel";
 import Category from "../Category";
 import CrudBox from "../CrudBox";
@@ -20,7 +21,6 @@ const Garage = () => {
   const [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
   const [routeObject, setRouteObject] = useState(null);
-  const [disabled, setDisabled] = useState(false);
 
   const { route, setRoute } = useContext(RouteContext);
 
@@ -164,7 +164,11 @@ const Garage = () => {
             />
           </div>
           <div id="garage-crud-box-container">
-            {categories.length && <CrudBox routeObject={routeObject} />}
+            {categories.length && (
+              <CrudBox routeObject={routeObject}>
+                {route === "blueprints" && <BlueprintForm />}
+              </CrudBox>
+            )}
           </div>
         </div>
       </div>

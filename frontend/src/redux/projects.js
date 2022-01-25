@@ -20,7 +20,6 @@ export const postBlueprintProject = (payload) => async (dispatch) => {
   const { response } = await dynamicFetch(payload);
   if (response.ok) {
     const data = await response.json();
-    console.log(data);
   }
 };
 

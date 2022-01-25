@@ -79,6 +79,8 @@ button[disabled]#delete:hover {
 }
 
 #input-field-form {
+  display: flex;
+  flex-direction: column;
   margin-top: 5px;
   box-sizing: border-box;
 }
@@ -113,6 +115,25 @@ input[type="file"]::file-selector-button:hover {
   background-color: rgba(212, 211, 211, 0.4);
 }
 
+#project-category {
+  box-sizing: border-box;
+  margin: 10px;
+  border-color: rgb(69, 129, 142);
+  width: 50%;
+  height: 30px;
+  border-radius: 5px;
+}
+
+#project-category-title {
+  margin: 10px;
+  color: rgb(69, 129, 142);
+  font-weight: bolder;
+}
+
+#project-category:focus {
+  background-color: white;
+}
+
 .crud-input {
   margin: 5px;
   width: 0%;
@@ -127,15 +148,16 @@ input[type="file"]::file-selector-button:hover {
 
 .crud-input.active {
   box-sizing: border-box;
+  transition: width 1s ease;
   min-width: 90%;
+  margin-right: 0;
   border-bottom: 1px solid #45818ecc;
 }
 
-.crud-input.focus:focus {
+.crud-input:focus {
   transition: width 1s ease;
   width: 90%;
   border-bottom: 1px solid #45818ecc;
-  outline: none !important;
 }
 
 #input-action-cancel {

@@ -4,7 +4,7 @@ import "./crudbox.css";
 import CrudForm from "./CrudForm";
 import RouteActions from "./RouteActions";
 
-const CrudBox = ({ routeObject }) => {
+const CrudBox = ({ routeObject, children }) => {
   const [routeAction, setRouteAction] = useState(null);
   const [toggle, setToggle] = useState(false);
   const inputRef = useRef(null);
@@ -25,6 +25,8 @@ const CrudBox = ({ routeObject }) => {
   const handleClickAway = (event) => {
     if (!event.target.classList.contains("crud-actions")) {
       setToggle(false);
+    } else {
+      setToggle(true);
     }
   };
 
@@ -81,10 +83,12 @@ const CrudBox = ({ routeObject }) => {
         </div>
         {toggle && (
           <CrudForm
+            toggle={toggle}
             action={action}
             handleInputRef={handleInputRef}
             inputRef={inputRef}
             routeObject={routeObject}
+            dynamicForm={children}
           />
         )}
       </div>

@@ -9,6 +9,7 @@ import CrudBox from "../CrudBox";
 import StepModal from "../Modals/StepModal";
 import CompletedProjects from "./CompletedProjects";
 import InProgressProjects from "./InProgressProjects";
+import ProjectForm from "./ProjectForm";
 
 import "./projects-page.css";
 
@@ -54,7 +55,9 @@ const Projects = () => {
           </span>
         </h2>
         <div id="create-project-container">
-          <CrudBox routeObject={{ name, route }} />
+          <CrudBox routeObject={{ name, route }}>
+            {route === "projects" && <ProjectForm />}
+          </CrudBox>
         </div>
       </div>
       <div className="completed project">

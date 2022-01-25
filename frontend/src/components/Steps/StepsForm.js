@@ -1,30 +1,33 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { FormContext } from "../../context/Form";
 
-const StepsForm = ({ setShowStepForm }) => {
-  const [stepForm, setStepForm] = useState({
-    title: "",
-    description: "",
-    media: null,
-  });
-
-  const handleStepForm = (event) => {
-    setStepForm({ ...stepForm, [event.target.name]: event.target.value });
-  };
+const StepsForm = () => {
+  const { formValue, handleFormChange } = useContext(FormContext);
 
   return (
-    <form id="step-form">
+    <>
       <input
         type="text"
+        name="title"
         placeholder="Enter Step Title"
-        value={stepForm.title}
+        value={formValue.title}
+        onChange={handleFormChange}
       />
-      <input type="textarea" value={stepForm.description} />
-      <input type="file" value={stepForm.media} />
+      <input
+        type="textarea"
+        name="description"
+        value={formValue.description}
+        onChange={handleFormChange}
+      />
+      <input
+        type="file"
+        value={formValue.media}
+        onChange={handleFormChange}
+        name="media"
+      />
       <button>Add Step</button>
-      <button onClick={setShowStepForm} type="submit">
-        Finished
-      </button>
-    </form>
+      <button type="submit">Finished</button>
+    </>
   );
 };
 

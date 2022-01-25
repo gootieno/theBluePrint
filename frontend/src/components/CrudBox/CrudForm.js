@@ -1,21 +1,27 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
 
-const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
-  const [inputAction, setInputAction] = useState("");
+const CrudForm = ({
+  action,
+  handleInputRef,
+  inputRef,
+  routeObject,
+  dynamicForm,
+}) => {
+  const { formValue, handleFormChange, setFormValue } = useContext(FormContext);
 
   const { blueprintId } = useParams();
 
-  const { name, route } = routeObject;
-
-  const handleInputAction = (event) => {
-    setInputAction(event.target.value);
-  };
+  const { name } = routeObject;
 
   const handleInputCancel = () => {
-    setInputAction("");
+    setFormValue({
+      image: "",
+      name: "",
+      description: "",
+    });
     handleInputRef();
   };
 
@@ -23,50 +29,51 @@ const CrudForm = ({ action, handleInputRef, inputRef, routeObject }) => {
     event.preventDefault();
     const payload = {
       method: action,
-      data: { name: inputAction, blueprintId },
+      data: { ...formValue },
+      blueprintId,
       routeObject,
     };
     dynamicFetch(payload);
   };
 
   const defaultForm = (
-    <form id="input-field-form" type="submit" onSubmit={handleSubmit}>
-      {route === "blueprints" && (
-        <>
-          <label htmlFor="blueprint-image" className="blueprint-image-title">
-            Select Cover Image
-          </label>
-          <input id="blueprint-image" type="file" className="crud-actions" />
-        </>
-      )}
-      
-      <input
-        ref={inputRef}
-        id="text-box-input"
-        type="text"
-        value={inputAction}
-        autoComplete="off"
-        placeholder={
-          action === "edit"
-            ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
-            : ` ENTER NEW NAME`
-        }
-        onChange={handleInputAction}
-        className={
-          inputAction.length > 0
-            ? "crud-input crud-actions active"
-            : "crud-input crud-actions focus"
-        }
-      />
-      {inputAction.length > 0 && (
-        <span
-          id="input-action-cancel"
-          className="text-inputs-cancel crud-actions"
-          onClick={handleInputCancel}
-        >
-          x
-        </span>
-      )}
+    <form
+      id="input-field-form"
+      type="submit"
+      onSubmit={handleSubmit}
+      className="crud-actions"
+    >
+      {dynamicForm}
+      <div>
+        <input
+          ref={inputRef}
+          id="text-box-input"
+          type="text"
+          name="name"
+          value={formValue.name}
+          autoComplete="off"
+          placeholder={
+            action === "edit"
+              ? ` ${action.toUpperCase()} ${name.toUpperCase()}`
+              : ` ENTER NEW NAME`
+          }
+          onChange={handleFormChange}
+          className={
+            formValue.name
+              ? "crud-input crud-actions active"
+              : "crud-input crud-actions"
+          }
+        />
+        {formValue.name && (
+          <span
+            id="input-action-cancel"
+            className="text-inputs-cancel crud-actions"
+            onClick={handleInputCancel}
+          >
+            x
+          </span>
+        )}
+      </div>
     </form>
   );
 
