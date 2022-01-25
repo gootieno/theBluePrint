@@ -22,7 +22,6 @@ const Projects = () => {
   const dispatch = useDispatch();
 
   const { blueprintId } = useParams();
-  const projects = useSelector((state) => Object.values(state.projects));
   const blueprints = useSelector((state) => state.garage.blueprints);
   let blueprint = blueprints[blueprintId];
 

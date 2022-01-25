@@ -1,4 +1,5 @@
 import { csrfFetch } from "./csrf";
+import { dynamicFetch } from "./dynamicFetch";
 
 const PROJECTS_LOADED = "garage/PROJECTS_LOADED";
 
@@ -14,6 +15,15 @@ export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
   const { projects } = await response.json();
   dispatch(loadProjects(projects));
 };
+
+export const postBlueprintProject =
+  (blueprintId, payload) => async (dispatch) => {
+    const { response } = await dynamicFetch(payload);
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+    }
+  };
 
 let initialState = {};
 
