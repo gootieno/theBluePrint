@@ -9,7 +9,7 @@ const BlueprintForm = () => {
       <label
         htmlFor="blueprint-image"
         className="blueprint-image-title"
-        name="image"
+        name="media"
       >
         Select Cover Image
       </label>
@@ -17,7 +17,7 @@ const BlueprintForm = () => {
         id="blueprint-image"
         type="file"
         value={formValue.image}
-        name="image"
+        name="media"
         className="crud-actions"
         onChange={handleFormChange}
       />

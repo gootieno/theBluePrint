@@ -32,6 +32,15 @@ export default (state = initialState, action) => {
       action.projects.forEach((project) => {
         newState[project.id] = project;
       });
+
+      let nextState = {
+        ...state,
+        [action.project]: {
+          ...state[action.project],
+          id: action.project,
+          count: 1,
+        },
+      };
       return newState;
     default:
       return state;

@@ -8,12 +8,26 @@ export const dynamicFetch = async (payload) => {
   } = payload;
 
   if (method === "create") {
-    const response = await csrfFetch(`/api/${route}`, {
-      method: "POST",
-      contentType: "application/json",
-      body: JSON.stringify(data),
-    });
-    if (response.ok) return { route, response };
+    let { media } = data;
+    if (media) {
+      const formData = new FormData();
+      for (let item in data) {
+        formData.append(item, data[item]);
+      }
+      const response = await csrfFetch(`/api/${route}`, {
+        method: "POST",
+        contentType: "multipart/form-data",
+        body: formData,
+      });
+      if (response.ok) return { route, response };
+    } else {
+      const response = await csrfFetch(`/api/${route}`, {
+        method: "POST",
+        contentType: "application/json",
+        body: JSON.stringify(data),
+      });
+      if (response.ok) return { route, response };
+    }
   } else if (method === "edit" && id) {
     const response = await csrfFetch(`/api/${route}/${id}`, {
       method: "PUT",
