@@ -13,6 +13,11 @@ export default ({ children }) => {
   });
 
   const handleFormChange = (event) => {
+    if (event.target.type === "file" || event.target.name === "media") {
+      let mediaFromInput = event.target.files[0];
+      setFormValue({ ...formValue, [event.target.name]: mediaFromInput });
+      return;
+    }
     setFormValue({ ...formValue, [event.target.name]: event.target.value });
   };
 
