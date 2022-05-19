@@ -36,7 +36,7 @@ function SignUpPage() {
     event.preventDefault();
     const user = await dispatch(signupUser(signUpForm));
     if (user) {
-      history.push("/home");
+      history.push("/garage");
     }
   };
   if (user) {
