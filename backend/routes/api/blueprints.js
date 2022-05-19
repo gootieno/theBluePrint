@@ -55,7 +55,7 @@ router.get(
     const blueprintId = parseInt(req.params.id, 10);
     const categories = await Category.findAll({
       where: { blueprintId },
-      include: { model: Spec },
+      include: [{ model: Spec, as: "specs" }],
     });
 
     if (categories) return res.json({ categories });
@@ -71,7 +71,6 @@ router.get(
 
     const projects = await Project.findAll({
       where: { blueprintId },
-      // include: [{ model: Step, as: "steps" }],
     });
 
     if (projects) return res.json({ projects });

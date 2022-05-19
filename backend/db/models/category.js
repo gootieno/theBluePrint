@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Category.init(
     {
-      name: { type: DataTypes.STRING(50), allowNull: false },
+      name: { type: DataTypes.STRING(50), allowNull: false, unique: true },
       blueprintId: {
         type: DataTypes.INTEGER,
         references: { model: "BluePrints" },
