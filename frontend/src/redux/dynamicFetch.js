@@ -10,13 +10,13 @@ export const dynamicFetch = async (payload) => {
   if (method === "create") {
     let { media } = data;
     if (media) {
-      const formData = new FormData();
+      let formData = new FormData();
       for (let item in data) {
         formData.append(item, data[item]);
       }
       const response = await csrfFetch(`/api/${route}`, {
         method: "POST",
-        contentType: "multipart/form-data",
+        "Content-Type": "multipart/form-data",
         body: formData,
       });
       if (response.ok) return { route, response };
