@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
@@ -17,6 +17,8 @@ const LandingPage = () => {
     history.push("/signup");
   };
 
+  const user = useSelector((state) => state.session.user);
+
   const handleDemoButton = async () => {
     try {
       let user = await dispatch(
@@ -30,6 +32,8 @@ const LandingPage = () => {
       history.push("/");
     }
   };
+
+  if (user && user.id) history.replace("/garage");
 
   return (
     <>

@@ -22,11 +22,15 @@ router.get(
 router.post(
   "",
   requireAuth,
-  singleMulterUpload("image"),
+  singleMulterUpload("media"),
   asyncHandler(async (req, res, next) => {
-    const { carName, garageId } = req.body;
+    const { name, garageId } = req.body;
     const imageUrl = await singlePublicFileUpload(req.file);
-    const blueprint = await BluePrint.create({ carName, imageUrl, garageId });
+    const blueprint = await BluePrint.create({
+      carName: name,
+      imageUrl,
+      garageId,
+    });
 
     if (blueprint) return res.json(blueprint);
     next();
