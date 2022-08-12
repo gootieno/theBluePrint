@@ -1,0 +1,21 @@
+#welcome-message-container {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+}
+
+#welcome-message-letters-container {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  width: inherit;
+}
+
+#message-letter {
+  padding: 5px;
+  cursor: default;
+}
+
+#message-letter:hover {
+  color: cadetblue;
+}
