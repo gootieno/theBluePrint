@@ -44,7 +44,7 @@ const CrudForm = ({
       className="crud-actions"
     >
       {dynamicForm}
-      <>
+      <div className="crud-actions">
         <input
           ref={inputRef}
           id="text-box-input"
@@ -73,7 +73,7 @@ const CrudForm = ({
             x
           </span>
         )}
-      </>
+      </div>
     </form>
   );
 
