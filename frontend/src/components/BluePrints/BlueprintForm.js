@@ -16,7 +16,7 @@ const BlueprintForm = () => {
       <input
         id="blueprint-image"
         type="file"
-        value={formValue.image}
+        accept="image/*"
         name="media"
         className="crud-actions"
         onChange={handleFormChange}

@@ -146,19 +146,17 @@ input[type="file"]::file-selector-button:hover {
   outline: none !important;
 }
 
-.crud-input.active {
-  box-sizing: border-box;
-  transition: width 1s ease;
-  min-width: 90%;
-  margin-right: 0;
+.crud-input { 
   border-bottom: 1px solid #45818ecc;
+  width: 90%;
 }
 
+
 .crud-input:focus {
-  transition: width 1s ease;
-  width: 90%;
-  border-bottom: 1px solid #45818ecc;
+  animation: in-out 1s ease forwards 1;
 }
+
+
 
 #input-action-cancel {
   cursor: pointer;
@@ -178,4 +176,16 @@ input[type="file"]::file-selector-button:hover {
 
 #input-field-submit:hover {
   background-color: #45818ed6;
+}
+
+
+@keyframes in-out {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 90%;
+    border-bottom: 1px solid #45818ecc;
+  }
 }
