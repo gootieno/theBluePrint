@@ -33,7 +33,7 @@ function NavBar({
   };
 
   let loggedIn;
-  if (user) {
+  if (user !== null) {
     loggedIn = (
       <>
         <div id="profile-button" onClick={handleProfileButton}>

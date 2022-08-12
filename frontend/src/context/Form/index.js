@@ -16,9 +16,9 @@ export default ({ children }) => {
     if (event.target.type === "file" || event.target.name === "media") {
       let mediaFromInput = event.target.files[0];
       setFormValue({ ...formValue, [event.target.name]: mediaFromInput });
-      return;
+    } else {
+      setFormValue({ ...formValue, [event.target.name]: event.target.value });
     }
-    setFormValue({ ...formValue, [event.target.name]: event.target.value });
   };
 
   return (
