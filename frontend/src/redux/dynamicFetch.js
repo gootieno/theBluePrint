@@ -9,16 +9,21 @@ export const dynamicFetch = async (payload) => {
 
   if (method === "create") {
     let { media } = data;
-    if (media) {
-      let formData = new FormData();
-      for (let item in data) {
-        formData.append(item, data[item]);
+    if (media !== null) {
+      const formData = new FormData();
+      formData.append("media", media);
+      // for (const item in data) {
+      //   if (data[item]) formData.append(item, data[item]);
+      // }
+      for (const key of formData.entries()) {
+        console.log("form data", key);
       }
       const response = await csrfFetch(`/api/${route}`, {
-        method: "POST",
         "Content-Type": "multipart/form-data",
+        method: "POST",
         body: formData,
       });
+
       if (response.ok) return { route, response };
     } else {
       const response = await csrfFetch(`/api/${route}`, {

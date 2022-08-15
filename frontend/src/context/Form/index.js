@@ -8,7 +8,7 @@ export default ({ children }) => {
     name: "",
     title: "",
     description: "",
-    media: "",
+    media: null,
     foreignKey: 0,
   });
 
