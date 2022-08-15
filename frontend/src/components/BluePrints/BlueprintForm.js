@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { FormContext } from "../../context/Form";
 
 const BlueprintForm = () => {
-  const { formValue, handleFormChange } = useContext(FormContext);
+  const { handleFormChange } = useContext(FormContext);
 
   return (
     <>
@@ -16,7 +16,6 @@ const BlueprintForm = () => {
       <input
         id="blueprint-image"
         type="file"
-        accept="image/*"
         name="media"
         className="crud-actions"
         onChange={handleFormChange}
