@@ -22,7 +22,7 @@ const LandingPage = () => {
   const handleDemoButton = async () => {
     try {
       let user = await dispatch(
-        loginUser({ email: "demo@user.io", password: "password" })
+        loginUser({ email: "demo@aa.io", password: "password" })
       );
       if (user) {
         dispatch(getUserBluePrints(user.id));
