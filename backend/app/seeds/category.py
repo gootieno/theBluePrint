@@ -1,7 +1,7 @@
 from app.models import db, Category
 
 
-def seed_category():
+def seed_categories():
     interior = Category(
         name='Interior',
         blueprint_id=1)
