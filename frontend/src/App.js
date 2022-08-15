@@ -10,7 +10,7 @@ import Projects from "./components/ProjectsPage";
 import Garage from "./components/Garage";
 
 import "./index.css";
-import { restoreUser } from "./redux/user";
+import { authenticate } from "./redux/user";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,7 +23,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(restoreUser())
+    dispatch(authenticate())
       .then(() => setIsAuthenticated(true))
       .catch((error) => {
         if (error) return setIsAuthenticated(false);
