@@ -1,7 +1,7 @@
 from .config import Config
 from .seeds import seed_commands
 import os
-from flask import Flask, render_template, request, session, redirect
+from flask import Flask, request, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
