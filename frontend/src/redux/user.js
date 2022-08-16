@@ -19,10 +19,11 @@ export const authenticate = () => async (dispatch) => {
       "Content-Type": "application/json",
     },
   });
+  console.log("response ", response);
   if (response.ok) {
     const data = await response.json();
     if (data.errors) {
-      return;
+      return data.errors;
     }
 
     dispatch(setUser(data));
@@ -42,10 +43,11 @@ export const loginUser =
         password,
       }),
     });
-
+    console.log("response", response);
     if (response.ok) {
       const data = await response.json();
       dispatch(setUser(data));
+      console.log("data ", data);
       return data;
     } else if (response.status < 500) {
       const data = await response.json();
@@ -67,6 +69,7 @@ export const logoutUser = () => async (dispatch) => {
   if (response.ok) {
     dispatch(removeUser());
   }
+  return response;
 };
 
 export const signupUser =

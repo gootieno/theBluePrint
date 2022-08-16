@@ -10,14 +10,7 @@ import { ModalProvider } from "./context/Modal";
 import RouteProvider from "./context/Route";
 import FormProvider from "./context/Form";
 
-import { restoreCSRF, csrfFetch } from "./redux/csrf";
-
 const store = configureStore();
-if (process.env.NODE_ENV !== "production") {
-  restoreCSRF();
-  window.csrfFetch = csrfFetch;
-  window.store = store;
-}
 
 const Root = () => {
   return (

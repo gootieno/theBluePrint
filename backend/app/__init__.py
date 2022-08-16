@@ -1,11 +1,11 @@
-from .config import Config
-from .seeds import seed_commands
 import os
-from flask import Flask, request, redirect
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import generate_csrf
+from flask import Flask, request, redirect
 from flask_login import LoginManager
+from .config import Config
+from .seeds import seed_commands
 
 from .models import db, User
 from .api.user_routes import user_routes
@@ -16,6 +16,8 @@ print('app successfully running')
 
 
 app = Flask(__name__)
+app.config.from_object(Config)
+
 
 # Setup login manager
 login = LoginManager(app)
@@ -29,10 +31,8 @@ def load_user(id):
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
-
-app.config.from_object(Config)
-app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(garage_routes, url_prefix='/api/garage')
 db.init_app(app)
 Migrate(app, db)

@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
 
@@ -16,7 +14,8 @@ const addBluePrint = (blueprint) => ({
 //------------------- blueprints thunk --------------
 
 export const getUserBluePrints = (userId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/garage/${userId}/blueprints`);
+  console.log("in the blueprints route ", userId);
+  const response = await fetch(`/api/garage/${userId}/blueprints`);
   if (!response.ok) throw response;
 
   const { garage } = await response.json();

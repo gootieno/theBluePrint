@@ -19,6 +19,8 @@ const LandingPage = () => {
 
   const user = useSelector((state) => state.session.user);
 
+  console.log("user landing page", user);
+
   const handleDemoButton = async () => {
     try {
       let user = await dispatch(
