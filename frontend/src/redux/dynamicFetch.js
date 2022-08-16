@@ -1,5 +1,3 @@
-import { csrfFetch } from "./csrf";
-
 export const dynamicFetch = async (payload) => {
   const {
     routeObject: { route, id },
@@ -18,7 +16,7 @@ export const dynamicFetch = async (payload) => {
       for (const key of formData.entries()) {
         console.log("form data", key);
       }
-      const response = await csrfFetch(`/api/${route}`, {
+      const response = await fetch(`/api/${route}`, {
         "Content-Type": "multipart/form-data",
         method: "POST",
         body: formData,
@@ -26,7 +24,7 @@ export const dynamicFetch = async (payload) => {
 
       if (response.ok) return { route, response };
     } else {
-      const response = await csrfFetch(`/api/${route}`, {
+      const response = await fetch(`/api/${route}`, {
         method: "POST",
         contentType: "application/json",
         body: JSON.stringify(data),
@@ -34,14 +32,14 @@ export const dynamicFetch = async (payload) => {
       if (response.ok) return { route, response };
     }
   } else if (method === "edit" && id) {
-    const response = await csrfFetch(`/api/${route}/${id}`, {
+    const response = await fetch(`/api/${route}/${id}`, {
       method: "PUT",
       contentType: "application/json",
       body: JSON.stringify(data),
     });
     if (response.ok) return { route, response };
   } else if (method === "delete" && id) {
-    const response = await csrfFetch(`/api/${route}/${id}`, {
+    const response = await fetch(`/api/${route}/${id}`, {
       method: "DELETE",
       contentType: "application/json",
       body: JSON.stringify(data),

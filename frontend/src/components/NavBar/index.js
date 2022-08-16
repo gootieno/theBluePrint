@@ -33,8 +33,7 @@ function NavBar({
   };
 
   let loggedIn;
-  if (user !== undefined) {
-    console.log("user ", user);
+  if (user) {
     loggedIn = (
       <>
         <div id="profile-button" onClick={handleProfileButton}>

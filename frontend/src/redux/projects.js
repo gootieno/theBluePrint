@@ -1,4 +1,3 @@
-import { csrfFetch } from "./csrf";
 import { dynamicFetch } from "./dynamicFetch";
 
 const PROJECTS_LOADED = "garage/PROJECTS_LOADED";
@@ -9,7 +8,7 @@ const loadProjects = (projects) => ({
 });
 
 export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
-  const response = await csrfFetch(`/api/blueprints/${blueprintId}/projects`);
+  const response = await fetch(`/api/blueprints/${blueprintId}/projects`);
   if (!response.ok) throw response;
 
   const { projects } = await response.json();
