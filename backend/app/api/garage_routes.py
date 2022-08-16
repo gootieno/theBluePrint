@@ -1,11 +1,21 @@
-from flask import Blueprint
+# pylint: disable=redefined-builtin
+from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import Garage
+
+from sqlalchemy.orm import joinedload
+
 
 garage_routes = Blueprint('blueprints', __name__)
 
 
-@garage_routes.route('/<int:id>/blueprints')
-def load_garage(id):
-    garage = Garage.query.all()
-    return {'garage': [garageItem.to_dict() for garageItem in garage]}
+@garage_routes.route('/<int:id>/blueprints', methods=['GET'])
+def get_garage_blueprints(id):
+    garage = Garage.query.options(
+        joinedload(Garage.blueprints)
+    ).filter(Garage.user_id == id).all()
+
+    garage_blueprints = [garage_blueprint.to_dict()
+                         for garage_blueprint in garage]
+
+    return jsonify({"garage": garage_blueprints})
