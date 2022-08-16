@@ -18,7 +18,6 @@ const Garage = () => {
   const [category, setCategory] = useState(null);
   const [transition, setTransition] = useState(false);
 
-  const [blueprint, setBluePrint] = useState(null);
   const [current, setCurrent] = useState(0);
   const [routeObject, setRouteObject] = useState(null);
 
@@ -38,23 +37,18 @@ const Garage = () => {
 
   const specs = useSelector((state) =>
     Object.values(state.garage.specs).filter((spec) => {
-      if (
-        categories[0].blueprintId === blueprint?.id &&
-        spec?.categoryId === category?.id
-      ) {
+      if (spec?.categoryId === category?.id) {
         return spec;
+      } else {
+        return null;
       }
     })
   );
 
   useEffect(() => {
-    if (user) dispatch(getUserBluePrints(user.id));
+    if (user.id) dispatch(getUserBluePrints(user.id));
     setCategory(categories[0]);
   }, [dispatch, user?.id]);
-
-  useEffect(() => {
-    setBluePrint(blueprints[current]);
-  }, [dispatch, current]);
 
   useEffect(() => {
     let garageItems;
@@ -70,7 +64,6 @@ const Garage = () => {
   const handleCategoryTab = (event) => {
     const singleCategory = garage.categories[event.target.dataset.id];
     handleRoute(event);
-    setBluePrint(blueprints[current]);
     setCategory(garage.categories[singleCategory.id]);
     setTransition(true);
   };
@@ -87,8 +80,6 @@ const Garage = () => {
   };
 
   const handleGarageTitle = (event) => {
-    setBluePrint(blueprints[current]);
-
     if (!category) setCategory(categories[0]);
     handleRoute(event);
     setTransition(true);
@@ -97,7 +88,6 @@ const Garage = () => {
   const handleBluePrint = (event) => {
     handleRoute(event);
     if (!category) setCategory(categories[0]);
-    setBluePrint(blueprints[current]);
     setTransition(true);
   };
 

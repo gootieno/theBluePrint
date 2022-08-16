@@ -12,4 +12,5 @@ class Spec(db.Model):
         return {
             'id':  self.id,
             'name': self.name,
+            'categoryId': self.category_id
         }

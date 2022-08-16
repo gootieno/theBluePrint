@@ -11,11 +11,9 @@ garage_routes = Blueprint('blueprints', __name__)
 
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
 def get_garage_blueprints(id):
-    garage = Garage.query.options(
-        joinedload(Garage.blueprints)
-    ).filter(Garage.user_id == id).all()
+    garage = Garage.query.filter(Garage.user_id == id).all()
 
     garage_blueprints = [garage_blueprint.to_dict()
                          for garage_blueprint in garage]
 
-    return jsonify({"garage": garage_blueprints})
+    return jsonify({"garage": garage_blueprints[0]})

@@ -22,12 +22,12 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    await dispatch(authenticate())
-    .then(() => setIsAuthenticated(true))
-    .catch((error) => {
-      if (error) return setIsAuthenticated(false);
-    });
+  useEffect(() => {
+    dispatch(authenticate())
+      .then(() => setIsAuthenticated(true))
+      .catch((error) => {
+        if (error) return setIsAuthenticated(false);
+      });
   }, [dispatch]);
 
   return (

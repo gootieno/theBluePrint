@@ -5,6 +5,7 @@ from .users import seed_users, undo_users
 from .garage import seed_garage, undo_garage
 from .blueprint import seed_blueprints, undo_blueprints
 from .category import seed_categories, undo_categories
+from .specs import seed_specs, undo_specs
 
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
@@ -18,6 +19,7 @@ def seed():
     seed_garage()
     seed_blueprints()
     seed_categories()
+    seed_specs()
     # Add other seed functions here
 
 
@@ -28,4 +30,5 @@ def undo():
     undo_garage()
     undo_blueprints()
     undo_categories()
+    undo_specs()
     # Add other undo functions here
