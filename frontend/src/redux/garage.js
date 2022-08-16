@@ -14,11 +14,11 @@ const addBluePrint = (blueprint) => ({
 //------------------- blueprints thunk --------------
 
 export const getUserBluePrints = (userId) => async (dispatch) => {
-  console.log("in the blueprints route ", userId);
   const response = await fetch(`/api/garage/${userId}/blueprints`);
   if (!response.ok) throw response;
 
   const { garage } = await response.json();
+  console.log("in the blueprints route ", garage);
   dispatch(loadGarage(garage));
   return response;
 };
