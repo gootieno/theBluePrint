@@ -15,4 +15,5 @@ class Category(db.Model):
         return {
             "id": self.id,
             "name": self.name,
+            'blueprintId': self.blueprint_id,
             'specs': [spec.to_dict() for spec in self.specs]}
