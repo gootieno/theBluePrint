@@ -45,6 +45,7 @@ const garageReducer = (state = initialState, action) => {
       action.garage.blueprints.forEach((blueprint) => {
         blueprints[blueprint.id] = blueprint;
         if (blueprint.categories.length > 0) {
+          console.log("blueprint categories ", blueprint.categories);
           categories = [...categories, ...blueprint.categories];
           delete blueprint.categories;
         }
