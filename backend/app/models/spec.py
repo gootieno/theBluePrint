@@ -8,8 +8,6 @@ class Spec(db.Model):
     name = db.Column(db.String(25), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
-    categories = db.relationship('Category', backref='specs')
-
     def to_dict(self):
         return {
             'id':  self.id,

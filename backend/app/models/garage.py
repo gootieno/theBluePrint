@@ -13,5 +13,7 @@ class Garage(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'name': self.name
+            'name': self.name,
+            'blueprints': [blueprint.to_dict()
+                           for blueprint in self.blueprints]
         }
