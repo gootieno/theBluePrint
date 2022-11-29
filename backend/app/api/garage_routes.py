@@ -1,9 +1,6 @@
-# pylint: disable=redefined-builtin
-from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import Garage
-
-from sqlalchemy.orm import joinedload
+# pylint: disable=missing-module-docstring
+from flask import Blueprint
+from app.models import Garage, Blueprint as CarBlueprints, Category
 
 
 garage_routes = Blueprint('blueprints', __name__)
@@ -11,9 +8,9 @@ garage_routes = Blueprint('blueprints', __name__)
 
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
 def get_garage_blueprints(id):
-    garage = Garage.query.filter(Garage.user_id == id).all()
+    garage = Garage.query.join(Garage.blueprints).join(
+        CarBlueprints.categories).join(Category.specs).filter(Garage.user_id == id).first()
 
-    garage_blueprints = [garage_blueprint.to_dict()
-                         for garage_blueprint in garage]
+    print('garage  ', garage.to_dict())
 
-    return jsonify({"garage": garage_blueprints[0]})
+    return garage.to_dict()
