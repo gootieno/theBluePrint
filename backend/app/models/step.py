@@ -1,3 +1,4 @@
+# pylint: disable=too-few-public-methods
 from .db import db
 
 
@@ -11,7 +12,7 @@ class Step(db.Model):
     project_id = db.Column(db.Integer, db.ForeignKey(
         'projects.id'), nullable=False)
 
-    projects = db.relationship("Project", backref='steps')
+    projects = db.relationship("Project", backref="steps")
 
     def to_dict(self):
         return {

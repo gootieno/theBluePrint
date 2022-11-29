@@ -18,7 +18,6 @@ export const getUserBluePrints = (userId) => async (dispatch) => {
   if (!response.ok) throw response;
 
   const { garage } = await response.json();
-  console.log("in the blueprints route ", garage);
   dispatch(loadGarage(garage));
   return response;
 };
@@ -41,10 +40,11 @@ const garageReducer = (state = initialState, action) => {
       let blueprints = {};
       let categories = [];
       let specs = [];
-
+      console.log("all fetched items", action.garage);
       action.garage.blueprints.forEach((blueprint) => {
         blueprints[blueprint.id] = blueprint;
         if (blueprint.categories.length > 0) {
+          console.log("blueprint categories", blueprint.categories);
           categories = [...categories, ...blueprint.categories];
           delete blueprint.categories;
         }
