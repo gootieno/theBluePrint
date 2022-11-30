@@ -25,5 +25,5 @@ class Blueprint(db.Model):
             'id': self.id,
             'name': self.name,
             'imageUrl': self.image_url,
-            'categories': [category.to_dict() for category in self.categories]
+            'categories': [category.eager_load() for category in self.categories]
         }
