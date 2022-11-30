@@ -18,6 +18,7 @@ export const getUserBluePrints = (userId) => async (dispatch) => {
   if (!response.ok) throw response;
 
   const { garage } = await response.json();
+
   dispatch(loadGarage(garage));
   return response;
 };
