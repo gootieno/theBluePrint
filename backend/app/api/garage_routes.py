@@ -8,9 +8,8 @@ garage_routes = Blueprint('blueprints', __name__)
 
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
 def get_garage_blueprints(id):
-    garage = Garage.query.join(Garage.blueprints).join(
-        CarBlueprints.categories).join(Category.specs).filter(Garage.user_id == id).first()
+    garage = Garage.query.get(id)
 
-    print('garage  ', garage.to_dict())
+    print('garage  ', garage.eager_load())
 
-    return garage.to_dict()
+    return garage.eager_load()

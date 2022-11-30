@@ -18,6 +18,5 @@ class Garage(db.Model):
         return {
             "id": self.id,
             "name": self.name,
-            "imageUrl": self.image_url,
-            "blueprints": [blueprint.to_dict() for blueprint in self.blueprints],
+            "blueprints": [blueprint.eager_load() for blueprint in self.blueprints],
         }
