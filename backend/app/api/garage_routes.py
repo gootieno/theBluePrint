@@ -12,4 +12,4 @@ def get_garage_blueprints(id):
 
     print('garage  ', garage.eager_load())
 
-    return garage.eager_load()
+    return {'garage':garage.eager_load()}
