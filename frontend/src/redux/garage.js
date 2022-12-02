@@ -33,31 +33,30 @@ const garageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GARAGE_ADDED:
       let garage = {
-        id: action.garage.id,
-        name: action.garage.name,
-        categories: {},
-        specs: {},
+        ...state,
       };
-      let blueprints = {};
+
       let categories = [];
       let specs = [];
-      console.log("all fetched items", action.garage);
+
       action.garage.blueprints.forEach((blueprint) => {
-        blueprints[blueprint.id] = blueprint;
         if (blueprint.categories.length > 0) {
-          console.log("blueprint categories", blueprint.categories);
           categories = [...categories, ...blueprint.categories];
         }
         delete blueprint.categories;
+<<<<<<< HEAD
+=======
+        garage.blueprints[blueprint.id] = blueprint;
+>>>>>>> main
       });
 
       console.log("categories ", categories);
       categories.forEach((category) => {
-        garage.categories[category.id] = category;
         if (category.specs.length > 0) {
           specs = [...specs, ...category.specs];
-          delete category.specs;
         }
+        delete category.specs;
+        garage.categories[category.id] = category;
       });
 
       specs.forEach((spec) => {
@@ -66,10 +65,7 @@ const garageReducer = (state = initialState, action) => {
         }
       });
 
-      return {
-        ...garage,
-        blueprints: { ...blueprints },
-      };
+      return garage;
 
     case BLUEPRINT_ADDED:
       let newState = { ...state, ...state.blueprints };
