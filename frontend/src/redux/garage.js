@@ -27,7 +27,6 @@ const initialState = {
   blueprints: {},
   categories: {},
   specs: {},
-  blueprints: {},
 };
 
 const garageReducer = (state = initialState, action) => {
