@@ -3,7 +3,7 @@ from flask import Blueprint
 from app.models import Garage, Blueprint as CarBlueprints, Category
 
 
-garage_routes = Blueprint('blueprints', __name__)
+garage_routes = Blueprint('garage', __name__)
 
 
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])

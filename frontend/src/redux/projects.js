@@ -8,11 +8,11 @@ const loadProjects = (projects) => ({
 });
 
 export const getBluePrintProjects = (blueprintId) => async (dispatch) => {
-  const response = await fetch(`/api/blueprints/${blueprintId}/projects`);
+  const response = await fetch(`/api/categories/${blueprintId}/projects`);
   if (!response.ok) throw response;
 
-  const { projects } = await response.json();
-  dispatch(loadProjects(projects));
+  const { category_projects } = await response.json();
+  dispatch(loadProjects(category_projects));
 };
 
 export const postBlueprintProject = (payload) => async (dispatch) => {
