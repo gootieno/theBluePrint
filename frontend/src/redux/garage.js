@@ -34,6 +34,7 @@ const garageReducer = (state = initialState, action) => {
     case GARAGE_ADDED:
       let garage = {
         ...state,
+        ...state.blueprints,
       };
 
       let categories = [];
@@ -44,10 +45,7 @@ const garageReducer = (state = initialState, action) => {
           categories = [...categories, ...blueprint.categories];
         }
         delete blueprint.categories;
-<<<<<<< HEAD
-=======
         garage.blueprints[blueprint.id] = blueprint;
->>>>>>> main
       });
 
       console.log("categories ", categories);

@@ -1,9 +1,12 @@
 import { useContext } from "react";
 import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { FormContext } from "../../context/Form";
 
 const ProjectForm = () => {
   const { handleFormChange } = useContext(FormContext);
+
+  const { blueprintId } = useParams();
 
   const categories = useSelector((state) =>
     Object.values(state.garage.categories)
@@ -15,16 +18,20 @@ const ProjectForm = () => {
       </label>
       <select id="project-category" className="crud-actions ">
         {categories &&
-          categories.map((category) => (
-            <option
-              onChange={handleFormChange}
-              value={category.id}
-              name="foreignKey"
-              className="crud-actions"
-            >
-              {category.name}
-            </option>
-          ))}
+          categories.map((category) => {
+            console.log(category, blueprintId);
+            if (category.blueprintId == blueprintId)
+              return (
+                <option
+                  onChange={handleFormChange}
+                  value={category.id}
+                  name="foreignKey"
+                  className="crud-actions"
+                >
+                  {category.name}
+                </option>
+              );
+          })}
       </select>
     </>
   );
