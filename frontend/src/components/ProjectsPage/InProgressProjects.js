@@ -5,14 +5,11 @@ import DynamicCarousel from "../DynamicCarousel";
 const InProgressProjects = ({ handleProject }) => {
   const { blueprintId } = useParams();
   let projects = useSelector((state) => {
-    if (!state.projects) return null;
-    else
-      return Object.values(state.projects).filter(
-        (project) =>
-          project.completed === false && project.blueprintId == blueprintId
-      );
+    return Object.values(state.projects).filter(
+      (project) => project.completed === false
+    );
   });
-
+  console.log(projects);
   return (
     <>
       <h2 id="incomplete-project-title" className="project-titles">
