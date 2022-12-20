@@ -126,6 +126,7 @@ const Garage = () => {
               <Category
                 handleCategoryTab={handleCategoryTab}
                 categories={categories}
+                blueprintId={blueprints[current].id}
               />
             </div>
           </div>
