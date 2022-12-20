@@ -11,6 +11,8 @@ from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .api.garage_routes import garage_routes
+from .api.category_routes import category_routes
+
 
 print("app successfully running")
 
@@ -34,6 +36,7 @@ app.cli.add_command(seed_commands)
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(garage_routes, url_prefix="/api/garage")
+app.register_blueprint(category_routes, url_prefix="/api/categories")
 db.init_app(app)
 Migrate(app, db)
 

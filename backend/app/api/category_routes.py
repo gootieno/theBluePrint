@@ -3,13 +3,17 @@ from flask import Blueprint
 from app.models import Project
 
 
-category_blueprints = Blueprint("blueprints", __name__)
+category_routes = Blueprint("categories", __name__)
 
 
-@category_blueprints.route("/<int:id>/projects", methods=["GET"])
+@category_routes.route("/<int:id>/projects", methods=["GET"])
 def blueprint_projects(id):
     category_projects = Project.query.filter_by(category_id=id).all()
 
-    print("garage  ", category_projects.to_dict())
+    category_projects = [
+        category_project.to_dict() for category_project in category_projects
+    ]
 
-    return {"category_projects": category_projects.to_dict()}
+    print("garage  ", category_projects)
+
+    return {"category_projects": category_projects}
