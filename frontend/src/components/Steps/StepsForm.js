@@ -2,32 +2,41 @@ import { useContext, useState } from "react";
 import { FormContext } from "../../context/Form";
 
 const StepsForm = () => {
+  const [form, setForm] = useState({
+    title: "",
+    description: "",
+    media: "",
+  });
   const { formValue, handleFormChange } = useContext(FormContext);
 
+  const handleChange = (e) => {
+    e.target.style.height = "100px";
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   return (
-    <>
+    <form type="submit" id="steps-form">
       <input
         type="text"
         name="title"
         placeholder="Enter Step Title"
-        value={formValue.title}
-        onChange={handleFormChange}
+        value={form.title}
+        onChange={handleChange}
       />
-      <input
-        type="textarea"
+      <textarea
+        type="text"
         name="description"
-        value={formValue.description}
-        onChange={handleFormChange}
-      />
+        placeholder="Enter Description"
+        value={form.description}
+        onChange={handleChange}
+      ></textarea>
       <input
         type="file"
-        value={formValue.media}
-        onChange={handleFormChange}
+        value={form.media}
+        onChange={handleChange}
         name="media"
       />
-      <button>Add Step</button>
-      <button type="submit">Finished</button>
-    </>
+    </form>
   );
 };
 

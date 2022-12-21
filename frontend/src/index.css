@@ -1,10 +1,14 @@
 /* TODO Add site wide styles */
 html {
   font-family: "Roboto";
+  height: 100vh;
+
 }
 #root {
   padding: 0;
   margin: 0;
+  height: 100%;
+  padding-bottom: 50px;
 }
 
 body {
@@ -12,5 +16,4 @@ body {
   margin: 0;
   overflow-x: hidden;
   background-color: #ffff;
-  height: 100vh;
 }

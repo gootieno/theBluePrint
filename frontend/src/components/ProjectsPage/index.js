@@ -1,6 +1,6 @@
 import { useState, useContext, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { RouteContext } from "../../context/Route";
 import { getUserBluePrints } from "../../redux/garage";
 import { getBluePrintProjects } from "../../redux/projects";
@@ -16,26 +16,33 @@ import "./projects-page.css";
 const Projects = () => {
   const [name, setName] = useState("");
   const [showStepForm, setShowStepForm] = useState(false);
+  let [currentNode, setCurrentNode] = useState(null);
 
   const { route, setRoute } = useContext(RouteContext);
-  let currentNode;
   const user = useSelector((state) => state.session.user);
+
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { blueprintId } = useParams();
-  const blueprints = useSelector((state) => state.garage.blueprints);
-  let blueprint = blueprints[blueprintId];
+  const blueprint = useSelector(
+    (state) => state.garage.blueprints[blueprintId]
+  );
 
   useEffect(() => {
     setRoute("projects");
-    if (!blueprints.length) dispatch(getUserBluePrints(user.id));
+    dispatch(getUserBluePrints(user.id));
     dispatch(getBluePrintProjects(blueprintId));
-  }, [dispatch, blueprint?.id]);
+  }, [dispatch, blueprintId, user?.id]);
 
   const handleProject = (event) => {
-    currentNode = event.target.dataset;
-    setRoute(currentNode.route);
-    setName(currentNode.name);
+    event.stopPropagation();
+    let { dataRoute, dataName, id } = event.target.dataset;
+    currentNode = setCurrentNode(event.target.dataset);
+    console.log("event data set ", event.target.dataset);
+    setRoute(dataRoute);
+    setName(dataName);
+    history.push(`/projects/${id}/steps`);
   };
 
   if (!blueprint) return null;

@@ -102,7 +102,7 @@ const Garage = () => {
   };
 
   if (!user) history.push("/");
-  if (!garage) return null;
+  if (!garage || !blueprints.length) return null;
   return (
     <div id="garage-container-outer">
       <div id="garage-container">
