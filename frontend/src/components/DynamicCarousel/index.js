@@ -35,10 +35,12 @@ const DynamicCarousel = ({ handleProject, items, dataRoute }) => {
               id={`item-${item.id}`}
               data-name={item.name}
               data-route={dataRoute}
+              data-id={item.id}
               className="carousel-single-item"
               onClick={handleProject}
             >
               <h3
+                data-id={item.id}
                 data-name={item.name}
                 data-route={dataRoute}
                 onClick={handleProject}
