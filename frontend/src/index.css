@@ -22,6 +22,7 @@ body {
   --app-color-teal: #45818ecc;
   --app-border: 1px solid  var(--app-color-teal);
   --app-card-shadow: 0 4px 8px 0 rgb(0 0 0 / 60%);
+  --app-card-shadow-teal: 0 4px 8px 0 var(--app-color-teal);
   --app-title-color: var(--app-color-teal);
   --app-text-color: rgba(86, 86, 86, 1);
   --app-border-radius: 5px;
@@ -29,5 +30,8 @@ body {
   --app-button-padding: 7px 10px;
   --app-button-hover-color: rgba(212, 211, 211, 0.4);
   --app-hover-color-teal: rgb(18, 77, 90);
-  --app-button-box-shadow: 0 0px 5px 0.2px #45818ecc
+  --app-button-box-shadow: 0 0px 5px 0.2px #45818ecc;
+  --app-button-create-color: rgba(39, 175, 112, 0.425);
+  --app-button-delete-color: rgba(194, 42, 31, 0.425);
+  --app-button-update-color: rgba(241, 226, 16, 0.582);
 }

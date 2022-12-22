@@ -8,9 +8,20 @@ export default ({ children }) => {
     name: "",
     title: "",
     description: "",
-    media: null,
+    media: "",
     foreignKey: 0,
   });
+
+  const resetForm = () => {
+    setFormValue({
+      image: "",
+      name: "",
+      title: "",
+      description: "",
+      media: "",
+      foreignKey: 0,
+    });
+  };
 
   const handleFormChange = (event) => {
     if (event.target.type === "file" || event.target.name === "media") {
@@ -22,7 +33,9 @@ export default ({ children }) => {
   };
 
   return (
-    <FormContext.Provider value={{ formValue, setFormValue, handleFormChange }}>
+    <FormContext.Provider
+      value={{ formValue, resetForm, setFormValue, handleFormChange }}
+    >
       {children}
     </FormContext.Provider>
   );

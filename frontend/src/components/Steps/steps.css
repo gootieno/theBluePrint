@@ -112,3 +112,82 @@
     color: var(--app-color-teal);
     font-weight: bolder;
 }
+
+#step-card{
+    margin: 40px 20px;
+    padding: 10px;
+    box-shadow: var(--app-card-shadow);
+}
+
+#steps-card-heading {
+    color: var(--app-title-color);
+    margin-top: 80px;
+}
+
+#steps-card-container {
+    width: 50%;
+    box-shadow: var(--app-card-shadow-teal);
+    border-radius: var(--app-border-radius);
+    padding: 10px;
+    margin-bottom: 100px;
+    height: 80vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#steps-card-container::-webkit-scrollbar {
+    display: none;
+}
+
+#step-card-title {
+    border-bottom: var(--app-border);
+    padding-bottom: 10px;
+    border-width: 2px;
+    cursor: default;
+}
+
+#step-instruction-container {
+    border: var(--app-border);
+    border-radius: var(--app-border-radius);
+    padding: 10px 5px;
+    min-height: 20px;
+    overflow: hidden;
+}
+
+#step-instruction {
+    list-style: none;
+    padding-left: 10px;
+    cursor: default;
+}
+
+#step-card-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+#step-add-button:hover {
+    background-color: var(--app-button-create-color);
+    color: var(--app-button-active)
+}
+
+#step-delete-button:hover {
+    background-color: var(--app-button-delete-color);
+    color: var(--app-button-active)
+}
+
+.step-buttons {
+    border: var(--app-border);
+    padding: var(--app-button-padding);
+    border-radius: var(--app-border-radius);
+    background-color: var(--app-button-active);
+    box-shadow: var(--app-button-box-shadow);
+    color: var(--app-text-color);
+    cursor: pointer;
+    font-weight: bolder;
+}
+
+.step-buttons:hover {
+    color: var(--app-color-teal);
+    background-color: var(--app-button-hover-color);
+}
