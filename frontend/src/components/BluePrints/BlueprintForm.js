@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FormContext } from "../../context/Form";
+import "./blueprints.css";
 
 const BlueprintForm = () => {
   const { handleFormChange } = useContext(FormContext);
@@ -17,7 +18,7 @@ const BlueprintForm = () => {
         id="blueprint-image"
         type="file"
         name="media"
-        className="crud-actions"
+        role="button"
         onChange={handleFormChange}
       />
     </>
