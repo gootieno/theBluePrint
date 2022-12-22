@@ -23,11 +23,17 @@ const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(authenticate())
-      .then(() => setIsAuthenticated(true))
-      .catch((error) => {
-        if (error) return setIsAuthenticated(false);
-      });
+    let isMounted = true;
+    if (isMounted)
+      dispatch(authenticate())
+        .then(() => setIsAuthenticated(true))
+        .catch((error) => {
+          if (error) return setIsAuthenticated(false);
+        });
+
+    return () => {
+      isMounted = false;
+    };
   }, [dispatch]);
 
   return (

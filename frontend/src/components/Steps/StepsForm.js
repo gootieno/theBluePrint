@@ -1,25 +1,19 @@
-import { useContext, useState } from "react";
-import { FormContext } from "../../context/Form";
-
-const StepsForm = ({ steps, handleAddStep }) => {
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    media: "",
-  });
-  const { formValue, handleFormChange } = useContext(FormContext);
-
-  console.log("form value ", formValue);
-
+const StepsForm = ({ steps, form, setForm, setSteps, resetForm }) => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleAddStep = (e) => {
+    e.preventDefault();
+    setSteps([...steps, form]);
+    resetForm();
   };
 
   return (
     <form type="submit" id="steps-form" onSubmit={handleAddStep}>
       <h4 id="step-number">STEP #{steps.length + 1}</h4>
       <div id="form-title-container">
-        <label for="title">Title</label>
+        <label htmlFor="title">Title</label>
         <input
           id="step-title"
           type="text"
@@ -31,23 +25,22 @@ const StepsForm = ({ steps, handleAddStep }) => {
       </div>
 
       <div id="form-description-container">
-        <label id="description-label" for="description">
+        <label htmlFor="description" id="description-label">
           What To Do
         </label>
-        <span
+        <textarea
           id="step-description"
-          contentEditable
-          role="textbox"
+          role="input"
           type="text"
           name="description"
           placeholder="How to complete this step"
           value={form.description}
           onChange={handleChange}
-        ></span>
+        ></textarea>
       </div>
 
       <div id="steps-media-container">
-        <label id="media-label" for="media">
+        <label id="media-label" htmlFor="media">
           Got Pix?
         </label>
         <input
