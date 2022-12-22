@@ -33,6 +33,7 @@ const garageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GARAGE_ADDED:
       let garage = {
+        name: action.garage.name,
         ...state,
         ...state.blueprints,
       };

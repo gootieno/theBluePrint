@@ -1,1 +1,28 @@
 
+#blueprint-image {
+    border: 1px solid #45818ecc;
+  background-color: var(--app-button-active);
+  box-shadow: 0 0px 5px 0.2px #45818ecc;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 5px 10px;
+  font-weight: bold;
+  color: var(--app-color-teal);
+  box-sizing: border-box;
+
+}
+
+
+#blueprint-image::file-selector-button {
+    background-color: var(--app-button-active);
+    border: none;
+    color: var(--app-button-color);
+    font-weight: bolder;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+#blueprint-image::file-selector-button:hover {
+    color: var(--app-hover-color-teal);
+    background-color: var(--app-button-hover-color);
+}
