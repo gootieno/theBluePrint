@@ -45,3 +45,17 @@ def update_project(id):
     db.session.commit()
     
     return jsonify({'updated_project': project.to_dict()})
+
+
+@project_routes.route('<int:id>', methods=['DELETE'])
+def delete_project(id):
+    project = Project.query.get(id)
+    
+    if (project):
+        db.session.delete(project)
+        db.session.commit()
+        
+        return jsonify({'deleted': True})
+    
+    else:
+        return jsonify({'deleted': False, 'message': 'No project found'})
