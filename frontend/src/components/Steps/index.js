@@ -1,4 +1,6 @@
 import { useState, useContext } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import StepsForm from "./StepsForm";
 import { FormContext } from "../../context/Form";
 import "./steps.css";
@@ -6,11 +8,15 @@ import "./steps.css";
 const Steps = () => {
   const [steps, setSteps] = useState([]);
 
+  const { projectId } = useParams();
+
+  const project = useSelector((state) => state.projects[projectId]);
+
   const { formValue, setFormValue, resetForm } = useContext(FormContext);
 
   return (
     <div id="step-main-container">
-      <h2 id="steps-heading">Create Project Steps</h2>
+      <h2 id="steps-heading">Create {project.name} Steps</h2>
       <StepsForm
         steps={steps}
         setSteps={setSteps}
