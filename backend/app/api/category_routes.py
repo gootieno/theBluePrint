@@ -1,19 +1,18 @@
 # pylint: disable=missing-module-docstring
-from flask import Blueprint
-from app.models import Project
+from flask import Blueprint, request, jsonify
+from app.models import Project, Category, db
 
 
 category_routes = Blueprint("categories", __name__)
 
 
-@category_routes.route("/<int:id>/projects", methods=["GET"])
-def category_projects(id):
-    category_projects = Project.query.filter_by(category_id=id).all()
+# create blueprint categories
+@category_routes.route("/", methods=["POST"])
+def create_category():
+    data = request.json
 
-    category_projects = [
-        category_project.to_dict() for category_project in category_projects
-    ]
+    category = Category(name=data["name"], blueprint_id=data["blueprintId"])
+    db.session.add(category)
+    db.session.commit()
 
-    print("garage  ", category_projects)
-
-    return {"category_projects": category_projects}
+    return jsonify({"category": category})
