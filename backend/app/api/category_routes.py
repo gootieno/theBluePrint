@@ -38,3 +38,18 @@ def update_category(id):
         db.session.commit()
 
     return jsonify(category.to_dict())
+
+
+# delete category
+@category_routes.route("/<int:id>", methods=["DELETE"])
+def delete_category(id):
+
+    category = Category.query.get(id)
+
+    if category:
+        db.session.delete(category)
+        db.session.commit()
+
+        return jsonify({"deleted": True})
+    else:
+        return jsonify({"deleted": False, "message": "No category found"})
