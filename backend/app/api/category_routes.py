@@ -53,3 +53,17 @@ def delete_category(id):
         return jsonify({"deleted": True})
     else:
         return jsonify({"deleted": False, "message": "No category found"})
+
+
+# get category projects
+@category_routes.route("/<int:id>/projects", methods=["GET"])
+def category_projects(id):
+    category_projects = Project.query.filter_by(category_id=id).all()
+
+    category_projects = [
+        category_project.to_dict() for category_project in category_projects
+    ]
+
+    print("garage  ", category_projects)
+
+    return {"category_projects": category_projects}
