@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring
 from flask import Blueprint, request, jsonify
-from app.models import Project, Category, db
+from app.models import Project, Category, Spec, db
 
 
 category_routes = Blueprint("categories", __name__)
@@ -60,10 +60,18 @@ def delete_category(id):
 def category_projects(id):
     category_projects = Project.query.filter_by(category_id=id).all()
 
-    category_projects = [
+    projects = [
         category_project.to_dict() for category_project in category_projects
     ]
 
-    print("garage  ", category_projects)
+    return jsonify(projects.to_dict())
 
-    return {"category_projects": category_projects}
+
+# get category specs
+@category_routes.route("/<int:id>/specs", methods=["GET"])
+def category_specs(id):
+    category_specs = Spec.query.filter_by(category_id=id).all()
+
+    specs = [category_spec.to_dict() for category_spec in category_specs]
+
+    return jsonify(specs.to_dict())
