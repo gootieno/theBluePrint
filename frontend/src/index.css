@@ -30,7 +30,7 @@ body {
   --app-button-padding: 7px 10px;
   --app-button-hover-color: rgba(212, 211, 211, 0.4);
   --app-hover-color-teal: rgb(18, 77, 90);
-  --app-button-box-shadow: 0 0px 5px 0.2px #45818ecc;
+  --app-button-box-shadow: 0 0px 5px 0.2px var(--app-color-teal);
   --app-button-create-color: rgba(39, 175, 112, 0.425);
   --app-button-delete-color: rgba(194, 42, 31, 0.425);
   --app-button-update-color: rgba(241, 226, 16, 0.582);
