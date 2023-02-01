@@ -64,7 +64,7 @@ def category_projects(id):
         category_project.to_dict() for category_project in category_projects
     ]
 
-    return jsonify(projects.to_dict())
+    return jsonify({"category_projects": projects})
 
 
 # get category specs
