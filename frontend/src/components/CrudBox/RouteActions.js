@@ -6,8 +6,6 @@ const RouteActions = ({
   handleDelete,
   routeObject,
 }) => {
-  const [showStepForm, setShowStepForm] = useState(false);
-
   const { name, route } = routeObject;
   return (
     <>
