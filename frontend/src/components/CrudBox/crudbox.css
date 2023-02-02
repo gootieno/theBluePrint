@@ -133,7 +133,7 @@ button[disabled]#delete:hover {
 
 
 .crud-input:focus {
-  animation: in-out 1s ease forwards 1;
+  animation: in-out 1s ease forwards;
 }
 
 
