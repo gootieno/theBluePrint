@@ -1,14 +1,22 @@
+import { dynamicFetch } from "./dynamicFetch.js";
+
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
+const CATEGORY_ADDED = "garage/CATEGORY_ADDED";
 
 const loadGarage = (garage) => ({
   type: GARAGE_ADDED,
   garage,
 });
 
-const addBluePrint = (blueprint) => ({
+export const addBluePrint = (blueprint) => ({
   type: BLUEPRINT_ADDED,
   blueprint,
+});
+
+export const addCategory = (category) => ({
+  type: CATEGORY_ADDED,
+  category,
 });
 
 //------------------- blueprints thunk --------------
@@ -70,6 +78,12 @@ const garageReducer = (state = initialState, action) => {
       let newState = { ...state, ...state.blueprints };
       newState.blueprints[action.blueprint.id] = action.blueprint;
       return newState;
+
+    case CATEGORY_ADDED:
+      return {
+        ...state,
+        [state.categories]: { ...state.categories, ...action.category },
+      };
 
     default:
       return state;

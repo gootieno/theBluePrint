@@ -11,6 +11,48 @@ const createFormData = (data, id) => {
   return formData;
 };
 
+const sendRequest = async ({ method, formData, route, id }) => {
+  const methodMapper = {};
+
+  methodMapper["create"] = "POST";
+  methodMapper["edit"] = "PUT";
+  methodMapper["delete"] = "DELETE";
+
+  console.log("route ", route);
+
+  let response;
+  switch (method) {
+    case "create":
+      console.log("method ", method);
+      response = await fetch(`/api/${route}`, {
+        method: methodMapper[method],
+        contentType: "multipart/form-data",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    case "edit" || "delete":
+      console.log("method ", method);
+
+      response = await fetch(`/api/${route}/${id}`, {
+        method: methodMapper[method],
+        contentType: "multipart/form-data",
+        body: formData,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data;
+      }
+    default:
+      // handle get requests
+      return null;
+  }
+};
+
 export const dynamicFetch = async (payload) => {
   const {
     routeObject: { route, id },
@@ -20,28 +62,8 @@ export const dynamicFetch = async (payload) => {
 
   let formData = createFormData(data, id);
 
-  if (method === "create") {
-    const response = await fetch(`/api/${route}`, {
-      method: "POST",
-      contentType: "multipart/form-data",
-      body: formData,
-    });
-    if (response.ok) return { route, response };
-  } else if (method === "edit" && id) {
-    const response = await fetch(`/api/${route}/${id}`, {
-      method: "PUT",
-      contentType: "multipart/form-data",
-      body: formData,
-    });
-    if (response.ok) return { route, response };
-  } else if (method === "delete" && id) {
-    const response = await fetch(`/api/${route}/${id}`, {
-      method: "DELETE",
-      contentType: "multipart/form-data",
-      body: formData,
-    });
-    if (response.ok) return { route, response };
-  } else {
-    console.log("does this look right? ", `fetching to /api/${route}/${id}`);
-  }
+  const responseData = await sendRequest({ method, formData, route, id });
+
+  console.log("responnse data ", responseData);
+  if (responseData) return responseData;
 };

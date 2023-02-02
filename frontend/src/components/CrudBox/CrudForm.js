@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useDispatch } from "react-redux";
 import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
+import { addCategory, addBluePrint } from "../../redux/garage";
 
 const CrudForm = ({
   action,
@@ -11,6 +13,8 @@ const CrudForm = ({
   dynamicForm,
 }) => {
   const { formValue, handleFormChange, setFormValue } = useContext(FormContext);
+
+  const dispatch = useDispatch();
 
   const { blueprintId } = useParams();
 
@@ -25,7 +29,7 @@ const CrudForm = ({
     handleInputRef();
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = {
       method: action,
@@ -33,7 +37,30 @@ const CrudForm = ({
       blueprintId,
       routeObject,
     };
-    dynamicFetch(payload);
+
+    const responseBody = await dynamicFetch(payload);
+
+    switch (routeObject.route) {
+      case "categories":
+        if (action === "create") {
+          const { category } = responseBody;
+          return dispatch(addCategory(category));
+        } else if (action === "edit") {
+          break;
+        } else if (action === "delete") {
+          break;
+        }
+
+      case "blueprints":
+        if (action === "create") {
+          const { blueprint } = responseBody;
+          dispatch(addBluePrint(blueprint));
+        } else if (action === "edit") {
+          break;
+        } else if (action === "delete") {
+          break;
+        }
+    }
   };
 
   const defaultForm = (
