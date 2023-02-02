@@ -7,11 +7,12 @@ category_routes = Blueprint("categories", __name__)
 
 
 # create blueprint categories
-@category_routes.route("/", methods=["POST"])
+@category_routes.route("", methods=["POST"])
 def create_category():
-    data = request.json
+    data = request.form
 
-    category = Category(name=data["name"], blueprint_id=data["blueprintId"])
+    print('data =++++++++++++++++++++++++===========> ', data)
+    category = Category(name=data["name"], blueprint_id=data["id"])
     db.session.add(category)
     db.session.commit()
 
@@ -21,9 +22,9 @@ def create_category():
 # update blueprint category
 @category_routes.route("/<int:id>", methods=["PUT", "PATCH"])
 def update_category(id):
-    data = request.json
+    data = request.form
 
-    blueprint_id = data["blueprintId"]
+    blueprint_id = data["id"]
     updated_name = data["name"]
 
     category = Category.query.get(id)
