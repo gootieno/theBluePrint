@@ -18,3 +18,9 @@ def blueprint_categories(id):
     print("garage  ", blueprint_categories)
 
     return jsonify({"blueprint_categories": blueprint_categories})
+
+@blueprint_routes.route('/<int:id>/categories', methods=["POST"])
+def create_blueprint_category(id):
+    form = request.files
+    print('request files', form)
+    return jsonify({'blueprint_category'})
