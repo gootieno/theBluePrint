@@ -15,6 +15,7 @@ const BlueprintForm = () => {
         Select Cover Image
       </label>
       <input
+        className="crud-actions"
         id="blueprint-image"
         type="file"
         name="media"

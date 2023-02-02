@@ -6,13 +6,12 @@ export const dynamicFetch = async (payload) => {
   } = payload;
 
   if (method === "create") {
-    let { media } = data;
-    if (media !== null) {
+    let { media, name } = data;
+    if (media) {
       const formData = new FormData();
       formData.append("media", media);
-      // for (const item in data) {
-      //   if (data[item]) formData.append(item, data[item]);
-      // }
+      formData.append("name", name ? name : "");
+
       for (const key of formData.entries()) {
         console.log("form data", key);
       }
