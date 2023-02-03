@@ -16,7 +16,7 @@ def create_category():
     db.session.add(category)
     db.session.commit()
 
-    return jsonify(category.to_dict())
+    return jsonify({"category": category.to_dict()})
 
 
 # update blueprint category
