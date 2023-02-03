@@ -43,7 +43,6 @@ const garageReducer = (state = initialState, action) => {
       let garage = {
         name: action.garage.name,
         ...state,
-        ...state.blueprints,
       };
 
       let categories = [];
@@ -80,10 +79,16 @@ const garageReducer = (state = initialState, action) => {
       return newState;
 
     case CATEGORY_ADDED:
-      return {
+      const categoryState = {
         ...state,
-        [state.categories]: { ...state.categories, ...action.category },
+        [state.categories]: {
+          ...state,
+          ...state.categories,
+          [action.category.id]: action.category,
+        },
       };
+
+      return categoryState;
 
     default:
       return state;

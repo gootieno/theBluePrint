@@ -1,9 +1,10 @@
-from app.models import db, Project
+from app.models import Project, db
 
 
 # Adds a demo user, you can add other users here if you want
 def seed_projects():
-    project = Project(name="AEM Install", completed=False, category_id=1)
+    project = Project(name="AEM Install", completed=False,
+                      category_id=1, blueprint_id=1)
 
     db.session.add(project)
     db.session.commit()
