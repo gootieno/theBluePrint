@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring
-from flask import Blueprint, request, jsonify
-from app.models import Category, db
+from flask import Blueprint, jsonify
+from app.models import Category
 
 
 blueprint_routes = Blueprint("blueprints", __name__)
@@ -18,9 +18,3 @@ def blueprint_categories(id):
     print("garage  ", blueprint_categories)
 
     return jsonify({"blueprint_categories": blueprint_categories})
-
-@blueprint_routes.route('/<int:id>/categories', methods=["POST"])
-def create_blueprint_category(id):
-    form = request.files
-    print('request files', form)
-    return jsonify({'blueprint_category'})
