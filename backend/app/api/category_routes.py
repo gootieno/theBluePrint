@@ -12,7 +12,7 @@ def create_category():
     data = request.form
 
     print('data =++++++++++++++++++++++++===========> ', data)
-    category = Category(name=data["name"], blueprint_id=data["id"])
+    category = Category(name=data["name"], blueprint_id=data["blueprintId"])
     db.session.add(category)
     db.session.commit()
 
@@ -24,7 +24,7 @@ def create_category():
 def update_category(id):
     data = request.form
 
-    blueprint_id = data["id"]
+    blueprint_id = data["blueprintId"]
     updated_name = data["name"]
 
     category = Category.query.get(id)
@@ -76,3 +76,9 @@ def category_specs(id):
     specs = [category_spec.to_dict() for category_spec in category_specs]
 
     return jsonify(specs.to_dict())
+
+
+
+
+
+
