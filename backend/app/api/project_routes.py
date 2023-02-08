@@ -7,39 +7,42 @@ project_routes = Blueprint("projects", __name__)
 
 
 # create category projects
-@project_routes.route("/", methods=["POST"])
+@project_routes.route("", methods=["POST"])
 def create_project():
-    data = request.json
+    data = request.form
 
+    completed = False
+    if (data['completed'] == 'true'):
+        completed = True
+    
     project = Project(
-        name=data["name"], completed=data["completed"], category_id=data["categoryId"]
+        name=data["name"], completed=completed,
+        category_id=data["categoryId"],
+        blueprint_id=data['blueprintId']
     )
 
     db.session.add(project)
     db.session.commit()
 
-    return jsonify(project.to_dict())
+    return jsonify({"project" : project.to_dict()})
+
 
 
 # update project
 @project_routes.route("/<int:id>", methods=["PUT", "PATCH"])
 def update_project(id):
-    data = request.json
+    data = request.form
 
     updated_name = data["name"]
-    completed = data["completed"]
+    completed = True if data['completed'] == 'true' else False
     category_id = data["categoryId"]
-
+ 
     project = Project.query.filter_by(id=id, category_id=category_id).first()
 
     if updated_name:
         project.name = updated_name
 
-    if completed == True or completed == False:
-        project.completed = completed
-
-    if category_id:
-        project.category_id = category_id
+    project.completed = completed
 
     db.session.add(project)
     db.session.commit()
