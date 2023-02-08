@@ -85,7 +85,7 @@ def category_specs(id):
 
     specs = [category_spec.to_dict() for category_spec in category_specs]
 
-    return jsonify(specs.to_dict())
+    return jsonify({"specs": specs})
 
 
 

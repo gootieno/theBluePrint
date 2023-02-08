@@ -15,6 +15,7 @@ from .api.blueprint_routes import blueprint_routes
 from .api.category_routes import category_routes
 from .api.project_routes import project_routes
 from .api.step_routes import step_routes
+from .api.spec_routes import spec_routes
 
 
 print("app successfully running")
@@ -43,6 +44,7 @@ app.register_blueprint(blueprint_routes, url_prefix="/api/blueprints")
 app.register_blueprint(category_routes, url_prefix="/api/categories")
 app.register_blueprint(project_routes, url_prefix="/api/projects")
 app.register_blueprint(step_routes, url_prefix='/api/steps')
+app.register_blueprint(spec_routes, url_prefix='/api/specs')
 
 db.init_app(app)
 Migrate(app, db)
