@@ -47,7 +47,7 @@ app.register_blueprint(step_routes, url_prefix='/api/steps')
 app.register_blueprint(spec_routes, url_prefix='/api/specs')
 
 db.init_app(app)
-Migrate(app, db)
+Migrate(app, db, compare_type=True)
 
 # Application Security
 CORS(app)
