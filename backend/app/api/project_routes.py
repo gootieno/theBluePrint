@@ -72,4 +72,4 @@ def get_project_steps(id):
 
     steps = [project_step.to_dict() for project_step in project_steps]
 
-    return jsonify(steps)
+    return jsonify({"steps": steps})
