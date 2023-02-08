@@ -6,6 +6,16 @@ from app.models import Project, Category, Spec, db
 category_routes = Blueprint("categories", __name__)
 
 
+# get a category 
+@category_routes.route('/<int:id>', methods=['GET'])
+def get_single_category(id):
+    category = Category.query.get(id)
+    
+    if(category):
+        return jsonify({'category': category.to_dict()})
+
+    else:    
+        return jsonify({'message': f"No category with ID {id} found"})
 # create blueprint categories
 @category_routes.route("", methods=["POST"])
 def create_category():
