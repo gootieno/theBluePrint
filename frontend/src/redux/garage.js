@@ -92,6 +92,14 @@ const garageReducer = (state = initialState, action) => {
         ...state,
         categories: { ...state.categories, ...categoryState },
       };
+    case CATEGORY_UPDATED:
+      return {
+        ...state,
+        categories: {
+          ...state.categories,
+          [action.category.id]: action.category,
+        },
+      };
 
     default:
       return state;

@@ -1,4 +1,4 @@
-import { addCategory } from "./garage";
+import { addCategory, updatedCategory } from "./garage";
 import { addBluePrint } from "./garage";
 
 const createFormData = (data, id) => {
@@ -17,11 +17,11 @@ const createFormData = (data, id) => {
 const dispatchToStore = (responseData, dispatch, routeAction, route) => {
   switch (route) {
     case "categories":
+      const { category } = responseData;
       if (routeAction === "create") {
-        const { category } = responseData;
         return dispatch(addCategory(category));
       } else if (routeAction === "edit") {
-        break;
+        return dispatch(updatedCategory(category));
       } else if (routeAction === "delete") {
         break;
       }
