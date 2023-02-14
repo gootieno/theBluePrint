@@ -22,7 +22,7 @@ def create_category():
     data = request.form
 
     print('data =++++++++++++++++++++++++===========> ', data)
-    category = Category(name=data["name"], blueprint_id=data["blueprintId"])
+    category = Category(name=data["name"], blueprint_id=data["associationId"])
     db.session.add(category)
     db.session.commit()
 
@@ -34,7 +34,7 @@ def create_category():
 def update_category(id):
     data = request.form
 
-    blueprint_id = data["blueprintId"]
+    blueprint_id = data["associationId"]
     updated_name = data["name"]
 
     category = Category.query.get(id)
