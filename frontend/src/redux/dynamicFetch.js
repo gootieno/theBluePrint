@@ -1,3 +1,6 @@
+import { addCategory } from "./garage";
+import { addBluePrint } from "./garage";
+
 const createFormData = (data, id) => {
   let formData = new FormData();
   formData.append("id", id);
@@ -11,58 +14,86 @@ const createFormData = (data, id) => {
   return formData;
 };
 
-const sendRequest = async ({ method, formData, route, id }) => {
-  const methodMapper = {};
-
-  methodMapper["create"] = "POST";
-  methodMapper["edit"] = "PUT";
-  methodMapper["delete"] = "DELETE";
-
-  console.log("route ", route);
-
-  let response;
-  switch (method) {
-    case "create":
-      console.log("method ", method);
-      response = await fetch(`/api/${route}`, {
-        method: methodMapper[method],
-        contentType: "multipart/form-data",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return data;
+const dispatchToStore = (responseData, dispatch, routeAction, route) => {
+  switch (route) {
+    case "categories":
+      if (routeAction === "create") {
+        const { category } = responseData;
+        return dispatch(addCategory(category));
+      } else if (routeAction === "edit") {
+        break;
+      } else if (routeAction === "delete") {
+        break;
       }
-    case "edit" || "delete":
-      console.log("method ", method);
-
-      response = await fetch(`/api/${route}/${id}`, {
-        method: methodMapper[method],
-        contentType: "multipart/form-data",
-        body: formData,
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return data;
+      break;
+    case "blueprints":
+      if (routeAction === "create") {
+        const { blueprint } = responseData;
+        dispatch(addBluePrint(blueprint));
+      } else if (routeAction === "edit") {
+        break;
+      } else if (routeAction === "delete") {
+        break;
       }
+
     default:
-      // handle get requests
       return null;
   }
 };
 
-export const dynamicFetch = async (payload) => {
+const sendRequest =
+  ({ method, formData, route, id }) =>
+  async (dispatch) => {
+    let response;
+    switch (method) {
+      case "create":
+        response = await fetch(`/api/${route}`, {
+          method: "POST",
+          contentType: "multipart/form-data",
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          dispatchToStore(data, dispatch, method, route);
+          return data;
+        }
+        break;
+      case "edit" || "delete":
+        response = await fetch(`/api/${route}/${id}`, {
+          method: method === "edit" ? "PUT" : "DELETE",
+          contentType: "multipart/form-data",
+          body: formData,
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          dispatchToStore(data, dispatch, method, route);
+          return data;
+        }
+        break;
+      default:
+        // handle get requests
+        return null;
+    }
+  };
+
+export const dynamicFetch = (payload) => {
   const {
-    routeObject: { route, id },
+    routeObject: { route, id, associationId },
     data,
     method,
   } = payload;
 
   let formData = createFormData(data, id);
 
-  const responseData = await sendRequest({ method, formData, route, id });
+  const responseData = sendRequest({
+    method,
+    formData,
+    route,
+    id,
+    associationId,
+  });
 
   console.log("responnse data ", responseData);
   if (responseData) return responseData;

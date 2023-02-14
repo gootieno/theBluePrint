@@ -1,5 +1,4 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
@@ -27,7 +26,7 @@ const CrudForm = ({
     handleInputRef();
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     const payload = {
       method: action,
@@ -36,29 +35,7 @@ const CrudForm = ({
     };
 
     console.log("payload ", payload);
-    const responseBody = await dynamicFetch(payload);
-
-    switch (routeObject.route) {
-      case "categories":
-        if (action === "create") {
-          const { category } = responseBody;
-          return dispatch(addCategory(category));
-        } else if (action === "edit") {
-          break;
-        } else if (action === "delete") {
-          break;
-        }
-
-      case "blueprints":
-        if (action === "create") {
-          const { blueprint } = responseBody;
-          dispatch(addBluePrint(blueprint));
-        } else if (action === "edit") {
-          break;
-        } else if (action === "delete") {
-          break;
-        }
-    }
+    const responseBody = dispatch(dynamicFetch(payload));
   };
 
   const defaultForm = (

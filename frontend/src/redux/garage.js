@@ -3,6 +3,7 @@ import { dynamicFetch } from "./dynamicFetch.js";
 const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
 const CATEGORY_ADDED = "garage/CATEGORY_ADDED";
+const CATEGORY_UPDATED = "garage/CATEGORY_UPDATED";
 
 const loadGarage = (garage) => ({
   type: GARAGE_ADDED,
@@ -19,8 +20,12 @@ export const addCategory = (category) => ({
   category,
 });
 
-//------------------- blueprints thunk --------------
+export const updatedCategory = (category) => ({
+  type: CATEGORY_UPDATED,
+  category,
+});
 
+//------------------- blueprints thunk --------------
 export const getUserBluePrints = (userId) => async (dispatch) => {
   const response = await fetch(`/api/garage/${userId}/blueprints`);
   if (!response.ok) throw response;
@@ -56,7 +61,6 @@ const garageReducer = (state = initialState, action) => {
         garage.blueprints[blueprint.id] = blueprint;
       });
 
-      console.log("categories ", categories);
       categories.forEach((category) => {
         if (category.specs.length > 0) {
           specs = [...specs, ...category.specs];
@@ -80,15 +84,14 @@ const garageReducer = (state = initialState, action) => {
 
     case CATEGORY_ADDED:
       const categoryState = {
-        ...state,
-        [state.categories]: {
-          ...state,
-          ...state.categories,
-          [action.category.id]: action.category,
-        },
+        ...state.categories,
       };
+      categoryState[action.category.id] = action.category;
 
-      return categoryState;
+      return {
+        ...state,
+        categories: { ...state.categories, ...categoryState },
+      };
 
     default:
       return state;
