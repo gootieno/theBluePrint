@@ -10,6 +10,7 @@ const Category = ({ categories, handleCategoryTab, blueprintId }) => {
           id="single-category"
           data-id={category.id}
           data-route="categories"
+          data-association-id={blueprintId}
           key={`index-${category.id}-${index}`}
           onClick={handleCategoryTab}
           className="garage-page-links"

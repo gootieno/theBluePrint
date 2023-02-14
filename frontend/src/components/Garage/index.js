@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { RouteContext } from "../../context/Route";
+import Form, { FormContext } from "../../context/Form";
 
 import BluePrintSpecs from "../BlueprintSpecs";
 import BlueprintForm from "../BluePrints/BlueprintForm";
@@ -22,6 +23,7 @@ const Garage = () => {
   const [routeObject, setRouteObject] = useState(null);
 
   const { route, setRoute } = useContext(RouteContext);
+  const { formValue, setFormValue } = useContext(FormContext);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -70,6 +72,15 @@ const Garage = () => {
 
   let handleRoute = (event) => {
     currentNode = event.target.dataset;
+    const { associationId } = event.target.dataset;
+    console.log("event dataset ", associationId);
+    if (associationId) {
+      setFormValue({
+        ...formValue,
+        associationId,
+      });
+    }
+
     setRouteObject({
       ...routeObject,
       id: currentNode.id,

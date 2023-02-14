@@ -1,4 +1,3 @@
-import BluePrint from "../BluePrints";
 import "./carousel.css";
 
 const Carousel = ({

@@ -18,6 +18,7 @@ const BluePrintSpecs = ({ specs, category, handleRoute }) => {
                 key={`spec-${spec.id}-${i}`}
                 onClick={handleRoute}
                 data-name={spec.name}
+                data-association-id={category.id}
               >
                 {spec.name}
               </div>
