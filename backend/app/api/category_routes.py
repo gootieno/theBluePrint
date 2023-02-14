@@ -48,7 +48,7 @@ def update_category(id):
 
         db.session.commit()
 
-    return jsonify(category.to_dict())
+    return jsonify({'category': category.to_dict()})
 
 
 # delete category
