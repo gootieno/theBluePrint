@@ -61,7 +61,7 @@ def delete_category(id):
         db.session.delete(category)
         db.session.commit()
 
-        return jsonify({"deleted": True})
+        return jsonify({"deleted": True, 'categoryId': id})
     else:
         return jsonify({"deleted": False, "message": "No category found"})
 
