@@ -9,7 +9,7 @@ spec_routes = Blueprint("specs", __name__)
 @spec_routes.route('', methods=['POST'])
 def create_spec():
     data = request.form
-    spec = Spec(name=data['name'], category_id=data['categoryId'])
+    spec = Spec(name=data['name'], category_id=data['associationId'])
     
     db.session.add(spec)
     db.session.commit()
@@ -20,7 +20,7 @@ def create_spec():
 def update_spec(id):
     data = request.form
     spec = Spec.query.filter(Spec.id == id,
-                             Spec.category_id == data['categoryId']).first()
+                             Spec.category_id == data['associationId']).first()
     
     if (spec):
         spec.name = data['name']

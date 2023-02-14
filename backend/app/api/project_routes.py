@@ -24,7 +24,7 @@ def create_project():
     db.session.add(project)
     db.session.commit()
 
-    return jsonify({"project" : project.to_dict()})
+    return jsonify({"project": project.to_dict()})
 
 
 
