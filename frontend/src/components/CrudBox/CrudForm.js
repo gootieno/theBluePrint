@@ -36,6 +36,7 @@ const CrudForm = ({
 
     console.log("payload ", payload);
     const responseBody = dispatch(dynamicFetch(payload));
+    
   };
 
   const defaultForm = (
