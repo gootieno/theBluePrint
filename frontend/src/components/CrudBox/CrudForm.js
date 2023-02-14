@@ -16,8 +16,6 @@ const CrudForm = ({
 
   const dispatch = useDispatch();
 
-  const { blueprintId } = useParams();
-
   const { name } = routeObject;
 
   const handleInputCancel = () => {
@@ -34,10 +32,10 @@ const CrudForm = ({
     const payload = {
       method: action,
       data: { ...formValue },
-      blueprintId,
       routeObject,
     };
 
+    console.log("payload ", payload);
     const responseBody = await dynamicFetch(payload);
 
     switch (routeObject.route) {

@@ -9,7 +9,7 @@ export default ({ children }) => {
     title: "",
     description: "",
     media: "",
-    foreignKey: 0,
+    associationId: 0,
   });
 
   const resetForm = () => {
@@ -19,7 +19,7 @@ export default ({ children }) => {
       title: "",
       description: "",
       media: "",
-      foreignKey: 0,
+      associationId: 0,
     });
   };
 
