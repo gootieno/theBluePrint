@@ -11,6 +11,4 @@ garage_routes = Blueprint('garage', __name__)
 def get_garage_blueprints(id):
     garage = Garage.query.get(id)
 
-    print('garage  ', garage.eager_load())
-
-    return {'garage':garage.eager_load()}
+    return {'garage': garage.eager_load()}
