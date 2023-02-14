@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { FormContext, formValue } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
 import "./crudbox.css";
 import CrudForm from "./CrudForm";
@@ -9,6 +11,9 @@ const CrudBox = ({ routeObject, children }) => {
   const [toggle, setToggle] = useState(false);
   const inputRef = useRef(null);
   const [action, setAction] = useState("");
+
+  const dispatch = useDispatch();
+  const { formValue, setFormValue } = useContext(FormContext);
 
   useEffect(() => {
     document
@@ -52,6 +57,14 @@ const CrudBox = ({ routeObject, children }) => {
   const handleDelete = (event) => {
     if (event.target.id === "delete-confirm") {
       event.preventDefault();
+
+      const payload = {
+        method: action,
+        data: { ...formValue },
+        routeObject,
+      };
+
+      const response = dispatch(dynamicFetch(payload));
     } else {
       handleRouteAction(event);
     }
