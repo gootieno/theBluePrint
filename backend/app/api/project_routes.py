@@ -47,7 +47,7 @@ def update_project(id):
     db.session.add(project)
     db.session.commit()
 
-    return jsonify({"updated_project": project.to_dict()})
+    return jsonify({"project": project.to_dict()})
 
 
 # delete project
@@ -59,7 +59,7 @@ def delete_project(id):
         db.session.delete(project)
         db.session.commit()
 
-        return jsonify({"deleted": True})
+        return jsonify({"deleted": True, "projectId": id})
 
     else:
         return jsonify({"deleted": False, "message": "No project found"})

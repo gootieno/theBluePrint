@@ -33,4 +33,4 @@ def delete_spec(id):
     spec = Spec.query.get(id)
     db.session.delete(spec)
     db.session.commit()
-    return jsonify({"deleted": True})
+    return jsonify({"deleted": True, 'specId': id})
