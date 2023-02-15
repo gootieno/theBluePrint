@@ -1,4 +1,4 @@
-import { addCategory, updatedCategory } from "./garage";
+import { addCategory, updatedCategory, deleteCategory } from "./garage";
 import { addBluePrint } from "./garage";
 
 const createFormData = (data, id) => {
@@ -17,13 +17,13 @@ const createFormData = (data, id) => {
 const dispatchToStore = (responseData, dispatch, routeAction, route) => {
   switch (route) {
     case "categories":
-      const { category } = responseData;
+      const { category, categoryId } = responseData;
       if (routeAction === "create") {
         return dispatch(addCategory(category));
       } else if (routeAction === "edit") {
         return dispatch(updatedCategory(category));
       } else if (routeAction === "delete") {
-        break;
+        return dispatch(deleteCategory(categoryId));
       }
       break;
     case "blueprints":
@@ -59,7 +59,8 @@ const sendRequest =
           return data;
         }
         break;
-      case "edit" || "delete":
+      case "edit":
+      case "delete":
         response = await fetch(`/api/${route}/${id}`, {
           method: method === "edit" ? "PUT" : "DELETE",
           contentType: "multipart/form-data",

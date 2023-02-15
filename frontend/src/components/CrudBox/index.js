@@ -36,6 +36,7 @@ const CrudBox = ({ routeObject, children }) => {
   };
 
   const handleRouteAction = (event) => {
+    console.log(event.target.dataset);
     if (event.target.id === "post" || event.target.id === "put") {
       if (event.target.dataset.name === action) {
         setToggle((prev) => !prev);
@@ -59,7 +60,7 @@ const CrudBox = ({ routeObject, children }) => {
       event.preventDefault();
 
       const payload = {
-        method: action,
+        method: routeAction,
         data: { ...formValue },
         routeObject,
       };
