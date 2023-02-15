@@ -1,4 +1,11 @@
-import { addCategory, updatedCategory, deleteCategory } from "./garage";
+import {
+  addCategory,
+  updatedCategory,
+  deleteCategory,
+  addSpec,
+  updateSpec,
+  deleteSpec,
+} from "./garage";
 import { addBluePrint } from "./garage";
 
 const createFormData = (data, id) => {
@@ -24,6 +31,16 @@ const dispatchToStore = (responseData, dispatch, routeAction, route) => {
         return dispatch(updatedCategory(category));
       } else if (routeAction === "delete") {
         return dispatch(deleteCategory(categoryId));
+      }
+      break;
+    case "specs":
+      const { spec, specId } = responseData;
+      if (routeAction === "create") {
+        return dispatch(addSpec(spec));
+      } else if (routeAction === "edit") {
+        return dispatch(updateSpec(spec));
+      } else if (routeAction === "delete") {
+        return dispatch(deleteSpec(specId));
       }
       break;
     case "blueprints":

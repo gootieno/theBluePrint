@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { useDispatch } from "react-redux";
 import { FormContext } from "../../context/Form";
 import { dynamicFetch } from "../../redux/dynamicFetch";
-import { addCategory, addBluePrint } from "../../redux/garage";
 
 const CrudForm = ({
   action,
@@ -11,7 +10,8 @@ const CrudForm = ({
   routeObject,
   dynamicForm,
 }) => {
-  const { formValue, handleFormChange, setFormValue } = useContext(FormContext);
+  const { formValue, handleFormChange, setFormValue, resetForm } =
+    useContext(FormContext);
 
   const dispatch = useDispatch();
 
@@ -35,8 +35,8 @@ const CrudForm = ({
     };
 
     console.log("payload ", payload);
-    const responseBody = dispatch(dynamicFetch(payload));
-    
+    dispatch(dynamicFetch(payload));
+    resetForm();
   };
 
   const defaultForm = (
