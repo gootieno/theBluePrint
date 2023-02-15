@@ -13,7 +13,7 @@ const CrudBox = ({ routeObject, children }) => {
   const [action, setAction] = useState("");
 
   const dispatch = useDispatch();
-  const { formValue, setFormValue } = useContext(FormContext);
+  const { formValue } = useContext(FormContext);
 
   useEffect(() => {
     document
@@ -28,7 +28,10 @@ const CrudBox = ({ routeObject, children }) => {
   }, [toggle, action]);
 
   const handleClickAway = (event) => {
-    if (!event.target.classList.contains("crud-actions")) {
+    if (
+      !event.target.classList.contains("crud-actions") ||
+      event.target.id.includes("delete")
+    ) {
       setToggle(false);
     } else {
       setToggle(true);
@@ -36,7 +39,6 @@ const CrudBox = ({ routeObject, children }) => {
   };
 
   const handleRouteAction = (event) => {
-    console.log(event.target.dataset);
     if (event.target.id === "post" || event.target.id === "put") {
       if (event.target.dataset.name === action) {
         setToggle((prev) => !prev);
@@ -46,6 +48,7 @@ const CrudBox = ({ routeObject, children }) => {
         setRouteAction(event.target.id);
       }
     } else {
+      console.log(event.target.id);
       setToggle(false);
       setRouteAction(event.target.id);
     }
@@ -56,6 +59,7 @@ const CrudBox = ({ routeObject, children }) => {
   };
 
   const handleDelete = (event) => {
+    console.log("toggle ", toggle);
     if (event.target.id === "delete-confirm") {
       event.preventDefault();
 
@@ -65,11 +69,12 @@ const CrudBox = ({ routeObject, children }) => {
         routeObject,
       };
 
-      const response = dispatch(dynamicFetch(payload));
+      dispatch(dynamicFetch(payload));
     } else {
       handleRouteAction(event);
     }
   };
+  console.log("toggle value ", toggle);
 
   if (!routeObject) return null;
   const { route, name } = routeObject;
