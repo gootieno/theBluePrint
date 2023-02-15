@@ -12,8 +12,8 @@ def create_blueprint():
     data = request.form
     
     blueprint = CarBlueprint(name=data['name'],
-                             image_url=data['imageUrl'],
-                             garage_id=data['garageId'])
+                             image_url=data['media'],
+                             garage_id=data['associationId'])
     
     db.session.add(blueprint)
     db.session.commit()
@@ -27,13 +27,13 @@ def update_blueprint(id):
     data = request.form
     blueprint = CarBlueprint.query.filter(CarBlueprint.id == id,
                                           CarBlueprint.garage_id
-                                          == data['garageId']).first()
+                                          == data['associationId']).first()
     
     if (blueprint):
         if (data['name']):
             blueprint.name = data['name']
-        if (data['imageUrl']):
-            blueprint.image_url = data['imageUrl']
+        if (data['media']):
+            blueprint.image_url = data['media']
         
         db.session.commit()
         return jsonify({"blueprint": blueprint.to_dict()})
@@ -50,8 +50,7 @@ def delete_blueprint(id):
         db.session.delete(blueprint)
         db.session.commit()
         
-        return jsonify({"blueprintId": id,
-                "message": f"Blueprint with ID {id} successfully deleted."})
+        return jsonify({"blueprintId": id, "deleted": True})
         
     else:
         return jsonify({"message": f"No blueprint found with id {id}."})
