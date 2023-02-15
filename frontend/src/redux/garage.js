@@ -4,6 +4,7 @@ const GARAGE_ADDED = "garage/GARAGE_ADDED";
 const BLUEPRINT_ADDED = "garage/BLUEPRINT_ADDED";
 const CATEGORY_ADDED = "garage/CATEGORY_ADDED";
 const CATEGORY_UPDATED = "garage/CATEGORY_UPDATED";
+const CATEGORY_DELETED = "garage/CATEGORY_DELETED";
 
 const loadGarage = (garage) => ({
   type: GARAGE_ADDED,
@@ -25,6 +26,11 @@ export const updatedCategory = (category) => ({
   category,
 });
 
+export const deleteCategory = (categoryId) => ({
+  type: CATEGORY_DELETED,
+  categoryId,
+});
+
 //------------------- blueprints thunk --------------
 export const getUserBluePrints = (userId) => async (dispatch) => {
   const response = await fetch(`/api/garage/${userId}/blueprints`);
@@ -43,6 +49,7 @@ const initialState = {
 };
 
 const garageReducer = (state = initialState, action) => {
+  let categoryState = { ...state.categories };
   switch (action.type) {
     case GARAGE_ADDED:
       let garage = {
@@ -83,9 +90,6 @@ const garageReducer = (state = initialState, action) => {
       return newState;
 
     case CATEGORY_ADDED:
-      const categoryState = {
-        ...state.categories,
-      };
       categoryState[action.category.id] = action.category;
 
       return {
@@ -101,6 +105,14 @@ const garageReducer = (state = initialState, action) => {
         },
       };
 
+    case CATEGORY_DELETED:
+      delete categoryState[action.categoryId];
+      return {
+        ...state,
+        categories: {
+          ...categoryState,
+        },
+      };
     default:
       return state;
   }
