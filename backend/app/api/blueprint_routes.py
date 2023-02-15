@@ -39,8 +39,7 @@ def update_blueprint(id):
         return jsonify({"blueprint": blueprint.to_dict()})
     
     else:
-        return jsonify({"blueprint":
-            {"message": f"No blueprint found with ID {id}"}})
+        return jsonify({"message": f"No blueprint found with ID {id}"})
     
 # delete blueprint
 @blueprint_routes.route('/<int:id>', methods=['DELETE'])
@@ -51,14 +50,11 @@ def delete_blueprint(id):
         db.session.delete(blueprint)
         db.session.commit()
         
-        return jsonify({"blueprint": {
-            "message": f"Blueprint with ID {id} successfully deleted."
-        }})
+        return jsonify({"blueprintId": id,
+                "message": f"Blueprint with ID {id} successfully deleted."})
         
     else:
-        return jsonify({"blueprint": {
-            "message": f"No blueprint found with id {id}."
-        }})
+        return jsonify({"message": f"No blueprint found with id {id}."})
 
 # get blueprint categories
 @blueprint_routes.route("/<int:id>/categories", methods=["GET"])
@@ -69,7 +65,5 @@ def blueprint_categories(id):
         blueprint_category.to_dict() for
         blueprint_category in blueprint_categories
     ]
-
-    print("garage  ", blueprint_categories)
 
     return jsonify({"blueprint_categories": blueprint_categories})
