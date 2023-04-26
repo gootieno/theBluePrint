@@ -15,7 +15,7 @@ def login():
     
     user = User.query.filter(User.email == email).first()
    
-    if user and user.check_password(password):
+    if user and user.check_password(password): 
         access_token = create_access_token(identity=email)
         return {'user':user.to_dict(), 'access_token':access_token}
     elif user is None:
