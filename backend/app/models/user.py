@@ -1,7 +1,6 @@
 from .db import db
-from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-
+from flask_bcrypt import check_password_hash, generate_password_hash
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -19,7 +18,7 @@ class User(db.Model, UserMixin):
 
     @password.setter
     def password(self, password):
-        self.hashed_password = generate_password_hash(password)
+        self.hashed_password = generate_password_hash(password, 10).decode('utf-8')
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
