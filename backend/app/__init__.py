@@ -1,22 +1,24 @@
+import json
 import os
-from flask_cors import CORS
-from flask_migrate import Migrate
-from flask_wtf.csrf import generate_csrf
-from flask import Flask, request, redirect
-from flask_login import LoginManager
-from .config import Config
-from .seeds import seed_commands
+from datetime import datetime, timedelta, timezone
 
-from .models import db, User
-from .api.user_routes import user_routes
+from flask import Flask, redirect, request
+from flask_cors import CORS
+from flask_jwt_extended import JWTManager, get_jwt, get_jwt_identity, create_access_token
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+
 from .api.auth_routes import auth_routes
-from .api.garage_routes import garage_routes
 from .api.blueprint_routes import blueprint_routes
 from .api.category_routes import category_routes
+from .api.garage_routes import garage_routes
 from .api.project_routes import project_routes
-from .api.step_routes import step_routes
 from .api.spec_routes import spec_routes
-
+from .api.step_routes import step_routes
+from .api.user_routes import user_routes
+from .config import Config
+from .models import db
+from .seeds import seed_commands
 
 print("app successfully running")
 
@@ -25,15 +27,9 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 
-# Setup login manager
-login = LoginManager(app)
-login.login_view = "auth.unauthorized"
-
-
-@login.user_loader
-def load_user(id):
-    return User.query.get(int(id))
-
+# Setup JWT
+jwt = JWTManager(app)
+Bcrypt(app)
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
@@ -53,11 +49,6 @@ Migrate(app, db, compare_type=True)
 CORS(app)
 
 
-# Since we are deploying with Docker and Flask,
-# we won't be using a buildpack when we deploy to Heroku.
-# Therefore, we need to make sure that in production any
-# request made over http is redirected to https.
-# Well.........
 @app.before_request
 def https_redirect():
     if os.environ.get("FLASK_ENV") == "production":
@@ -69,14 +60,20 @@ def https_redirect():
 
 @app.after_request
 def inject_csrf_token(response):
-    response.set_cookie(
-        "csrf_token",
-        generate_csrf(),
-        secure=True if os.environ.get("FLASK_ENV") == "production" else False,
-        samesite="Strict" if os.environ.get("FLASK_ENV") == "production" else None,
-        httponly=True,
-    )
-    return response
+    try:
+        exp_timestamp = get_jwt()["exp"]
+        now = datetime.now(timezone.utc)
+        target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
+        if target_timestamp > exp_timestamp:
+            access_token = create_access_token(identity=get_jwt_identity())
+            data = response.get_json()
+            if type(data) is dict:
+                data["access_token"] = access_token 
+                response.data = json.dumps(data)
+        return response
+    except (RuntimeError, KeyError):
+        # Case where there is not a valid JWT. Just return the original respone
+        return response
 
 
 @app.route("/", defaults={"path": ""})
@@ -85,3 +82,6 @@ def react_root(path):
     if path == "favicon.ico":
         return app.send_static_file("favicon.ico")
     return app.send_static_file("index.html")
+
+
+

@@ -27,6 +27,9 @@ greenlet = "==1.1.0"
 Mako = "==1.1.4"
 psycopg2 = "*"
 psycopg2-binary = "*"
+flask-jwt-extended = "*"
+flask-bcrypt = "*"
+bcrypt = "*"
 
 [dev-packages]
 psycopg2-binary = "==2.8.6"
