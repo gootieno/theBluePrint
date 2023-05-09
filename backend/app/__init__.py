@@ -15,7 +15,6 @@ from .api.garage_routes import garage_routes
 from .api.project_routes import project_routes
 from .api.spec_routes import spec_routes
 from .api.step_routes import step_routes
-from .api.user_routes import user_routes
 from .config import Config
 from .models import db
 from .seeds import seed_commands
@@ -34,7 +33,6 @@ Bcrypt(app)
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
-app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(garage_routes, url_prefix="/api/garage")
 app.register_blueprint(blueprint_routes, url_prefix="/api/blueprints")
 app.register_blueprint(category_routes, url_prefix="/api/categories")
