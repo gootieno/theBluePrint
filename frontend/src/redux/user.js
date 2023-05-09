@@ -2,9 +2,9 @@
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
-const setUser = (user) => ({
+const setUser = (data) => ({
   type: SET_USER,
-  payload: user,
+  payload: data,
 });
 
 const removeUser = () => ({
@@ -14,6 +14,9 @@ const removeUser = () => ({
 const initialState = { user: null };
 
 export const authenticate = () => async (dispatch) => {
+  const accessToken = sessionStorage.getItem('bp_token')
+  if(!accessToken) removeUser()
+
   const response = await fetch("/api/auth/", {
     headers: {
       "Content-Type": "application/json",
@@ -27,6 +30,7 @@ export const authenticate = () => async (dispatch) => {
     }
 
     dispatch(setUser(data));
+
   }
 };
 
@@ -104,7 +108,10 @@ export const signupUser =
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
-      return { user: action.payload };
+      return {
+        user: action.payload.user,
+        accessToken: action.payload.access_token,
+      };
     case REMOVE_USER:
       return { user: null };
     default:

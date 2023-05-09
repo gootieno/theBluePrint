@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import { RouteContext } from "../../context/Route";
-import Form, { FormContext } from "../../context/Form";
+import { FormContext } from "../../context/Form";
 
 import BluePrintSpecs from "../BlueprintSpecs";
 import BlueprintForm from "../BluePrints/BlueprintForm";
@@ -66,6 +66,7 @@ const Garage = () => {
   const handleCategoryTab = (event) => {
     const singleCategory = garage.categories[event.target.dataset.id];
     handleRoute(event);
+    singleCategory.id
     setCategory(garage.categories[singleCategory.id]);
     setTransition(true);
   };
