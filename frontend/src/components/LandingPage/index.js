@@ -19,11 +19,9 @@ const LandingPage = () => {
 
   const user = useSelector((state) => state.session.user);
 
-  console.log("user landing page", user);
-
   const handleDemoButton = async () => {
     try {
-      let user = await dispatch(
+      let { user, access_token: accessToken } = await dispatch(
         loginUser({ email: "demo@aa.io", password: "password" })
       );
       if (user) {
