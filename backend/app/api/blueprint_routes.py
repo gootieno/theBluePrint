@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring
 from flask import Blueprint, jsonify, request
-from app.models import Blueprint as CarBlueprint, Category, db
+from app.models import BluePrint as CarBlueprint, Category, db
 
 
 blueprint_routes = Blueprint("blueprints", __name__)

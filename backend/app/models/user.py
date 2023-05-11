@@ -1,16 +1,17 @@
 from .db import db
-from flask_login import UserMixin
 from flask_bcrypt import check_password_hash, generate_password_hash
 
-class User(db.Model, UserMixin):
+class User(db.Model):
     __tablename__ = 'users'
-
+    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(40), nullable=False, unique=True)
-    email = db.Column(db.String(255), nullable=False, unique=True)
-    hashed_password = db.Column(db.String(255), nullable=False)
+    email = db.Column(db.String(100))
+    username = db.Column(db.String(50))
+    password = db.Column(db.LargeBinary)
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    garage = db.relationship('Garage', backref='garages')
+    garages = db.relationship('Garage', backref='users', lazy=True)
 
     @property
     def password(self):

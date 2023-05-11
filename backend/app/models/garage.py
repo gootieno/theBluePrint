@@ -1,22 +1,21 @@
 # pylint: disable=missing-module-docstring
+from .blueprint import BluePrint
 from .db import db
 
 
 class Garage(db.Model):
-    __tablename__ = "garages"
-
+    __tablename__ = 'garages'
+    
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100))
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    created_at = db.Column(db.DateTime, default=db.func.now())
+    updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
-    blueprints = db.relationship("Blueprint", backref="garages", lazy="joined")
+    blueprints = db.relationship('BluePrint', backref='garages', lazy=True)
 
     def to_dict(self):
         return {"id": self.id, "name": self.name}
 
-    def eager_load(self):
-        return {
-            "id": self.id,
-            "name": self.name,
-            "blueprints": [blueprint.eager_load() for blueprint in self.blueprints],
-        }
+
+    
