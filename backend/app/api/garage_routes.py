@@ -1,6 +1,6 @@
 # pylint: disable=missing-module-docstring
-from app.models import Blueprint as CarBlueprint
-from app.models import Garage
+from app.models import BluePrint as CarBlueprint
+from app.models import Category, Garage, Spec
 from flask import Blueprint
 
 garage_routes = Blueprint('garage', __name__)
@@ -10,5 +10,10 @@ garage_routes = Blueprint('garage', __name__)
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
 def get_garage_blueprints(id):
     garage = Garage.query.get(id)
+   
+    blueprint = Blueprint.query.options(
+    joinedload(Blueprint.categories).joinedload(Category.specs)
+    ).filter_by(id=1).first()
 
-    return {'garage': garage.eager_load()}
+    print('garage ', blueprint)
+    return {'garage':garage.load_blueprints()}

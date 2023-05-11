@@ -5,11 +5,11 @@ from flask_bcrypt import generate_password_hash
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Han', email='demo@aa.io', hashed_password=hash_password('password'))
+        username='Han', email='demo@aa.io', password=hash_password('password'))
     john = User(
-        username='JohnDoe', email='john@aa.io', hashed_password=hash_password('password'))
+        username='JohnDoe', email='john@aa.io', password=hash_password('password'))
     jane = User(
-        username='JaneDoe', email='jane@aa.io', hashed_password=hash_password('password'))
+        username='JaneDoe', email='jane@aa.io', password=hash_password('password'))
 
     db.session.add(demo)
     db.session.add(john)
