@@ -1,6 +1,6 @@
-from app.models import Garage, User
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from flask_jwt_extended import create_access_token
+from app.models import User
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -15,12 +15,12 @@ def login():
     
     
     user = User.query.filter(User.email == email).first()
-    garage = User.query.filter(Garage.user_id == user.id).first()
    
+    if user is None:
+        return {'message': "No user with the provided email address"}
+        
+    if user and not user.check_password(password):
+        return {"message": "The provided password is incorrect"}    
     if user and user.check_password(password): 
         access_token = create_access_token(identity=email)
-        return {'user':user.to_dict(), 'access_token':access_token, 'garage': garage.to_dict()}
-    elif user is None:
-        raise ValueError("Wrong email provided")
-    else:
-        raise ValueError("Wrong password provided") 
+        return {'user':user.to_dict(), 'access_token':access_token}

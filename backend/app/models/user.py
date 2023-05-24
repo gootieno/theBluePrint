@@ -1,6 +1,7 @@
 from .db import db
 from flask_bcrypt import check_password_hash, generate_password_hash
 
+
 class User(db.Model):
     __tablename__ = 'users'
     

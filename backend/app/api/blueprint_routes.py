@@ -9,7 +9,7 @@ blueprint_routes = Blueprint("blueprints", __name__)
 # create blueprint 
 @blueprint_routes.route("", methods=['POST'])
 def create_blueprint():
-    data = request.form
+    data = request.json
     
     blueprint = CarBlueprint(name=data['name'],
                              image_url=data['media'],
@@ -22,12 +22,10 @@ def create_blueprint():
 
 
 # update blueprint
-@blueprint_routes.route('/<int:id>', methods=['PUT', 'PATCH'])
+@blueprint_routes.route('/<int:id>', methods=['PUT','PATCH'])
 def update_blueprint(id):
-    data = request.form
-    blueprint = CarBlueprint.query.filter(CarBlueprint.id == id,
-                                          CarBlueprint.garage_id
-                                          == data['associationId']).first()
+    data = request.json
+    blueprint = CarBlueprint.query.filter(CarBlueprint.id == id).first()
     
     if (blueprint):
         if (data['name']):

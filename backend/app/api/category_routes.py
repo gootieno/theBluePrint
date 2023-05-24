@@ -16,13 +16,14 @@ def get_single_category(id):
 
     else:    
         return jsonify({'message': f"No category with ID {id} found"})
+    
 # create blueprint categories
 @category_routes.route("", methods=["POST"])
 def create_category():
-    data = request.form
+    data = request.json
 
-    print('data =++++++++++++++++++++++++===========> ', data)
-    category = Category(name=data["name"], blueprint_id=data["associationId"])
+
+    category = Category(name=data["name"], blueprint_id=data["blueprintId"])
     db.session.add(category)
     db.session.commit()
 
@@ -32,9 +33,9 @@ def create_category():
 # update blueprint category
 @category_routes.route("/<int:id>", methods=["PUT", "PATCH"])
 def update_category(id):
-    data = request.form
+    data = request.json
 
-    blueprint_id = data["associationId"]
+    blueprint_id = data["blueprintId"]
     updated_name = data["name"]
 
     category = Category.query.get(id)
