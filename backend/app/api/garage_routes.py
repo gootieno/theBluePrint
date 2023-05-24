@@ -1,6 +1,5 @@
 # pylint: disable=missing-module-docstring
 from app.models import BluePrint as CarBlueprint
-from app.models import Category, Garage, Spec
 from sqlalchemy.orm import subqueryload
 from flask import Blueprint
 from collections import defaultdict
@@ -26,9 +25,11 @@ def get_garage_blueprints(id):
         'categories': defaultdict(lambda: {
             'id': None,
             'name': None,
-            'specs': []
-        })
+            'blueprintId': None
+        }),
+        'specs': []
     })
+    
 
     for bp in garage_query:
         bp_dict[bp.id]['id'] = bp.id
@@ -39,12 +40,14 @@ def get_garage_blueprints(id):
         for category in bp.categories:
             bp_dict[bp.id]['categories'][category.id]['id'] = category.id
             bp_dict[bp.id]['categories'][category.id]['name'] = category.name
-
+            bp_dict[bp.id]['categories'][category.id]['blueprintId'] = category.blueprint_id
+                    
             for spec in category.specs:
-                bp_dict[bp.id]['categories'][category.id]['specs'].append({
+                bp_dict[bp.id]['specs'].append({
                     'id': spec.id,
                     'name': spec.name,
+                    "category_id": spec.category_id
                 })
 
-    garage_blueprints = list(bp_dict.values())
-    return {'garage': garage_blueprints}
+    blueprints = list(bp_dict.values())
+    return {'blueprints': blueprints}
