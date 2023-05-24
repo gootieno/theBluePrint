@@ -7,6 +7,13 @@ import {
   removeUser,
 } from "./actions/userActions";
 
+import {
+  SET_USER,
+  SET_ACCESS_TOKEN,
+  REMOVE_ACCESS_TOKEN,
+  REMOVE_USER,
+} from "./actions/userActions";
+
 const initialState = { user: null };
 
 export const loginUser =
