@@ -52,7 +52,7 @@ const App = () => {
       </Route>
       {isAuthenticated && (
         <Switch>
-          <Route path="/garage">
+          <Route path="/garage/:garageId">
             <Garage />
           </Route>
           <Route path="/blueprints/:blueprintId/projects">

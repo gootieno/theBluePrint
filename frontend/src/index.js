@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import dotenv from "react-dotenv";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
@@ -10,6 +11,7 @@ import { ModalProvider } from "./context/Modal";
 import RouteProvider from "./context/Route";
 import FormProvider from "./context/Form";
 
+dotenv.config();
 const store = configureStore();
 
 const Root = () => {
