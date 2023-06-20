@@ -45,7 +45,6 @@ Hi! And welcome to theBluePrint! This application is inspired by the love of car
   - PUT/PATCH /api/projects/:id
 
   - DELETE /api/projects/:id
-    deletes a project and dependent tables
     
  ### Step
  
