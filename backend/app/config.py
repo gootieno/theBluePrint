@@ -1,4 +1,5 @@
 # pylint: disable=missing-module-docstring
+from datetime import timedelta
 import os
 
 
@@ -13,3 +14,8 @@ class Config:
         'DATABASE_URL').replace('postgres://', 'postgresql://')
     SQLALCHEMY_ECHO = True
     JWT_SECRET_KEY = os.environ.get('JWT_SECRET_KEY')
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(hours=2)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
+    JWT_COOKIE_SECURE = False
+    JWT_TOKEN_LOCATION = ['cookies']
+    

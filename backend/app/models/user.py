@@ -8,7 +8,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(100))
     username = db.Column(db.String(50))
-    password = db.Column(db.LargeBinary)
+    hashed_password = db.Column(db.LargeBinary)
     created_at = db.Column(db.DateTime, default=db.func.now())
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
@@ -23,7 +23,7 @@ class User(db.Model):
         self.hashed_password = generate_password_hash(password, 10).decode('utf-8')
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.hashed_password, password)
 
     def to_dict(self):
         return {

@@ -1,8 +1,8 @@
 """initial migration
 
-Revision ID: 6cd798fb5b31
+Revision ID: 2148bcf8bff1
 Revises: 
-Create Date: 2023-05-10 22:31:40.920215
+Create Date: 2023-06-24 16:49:40.768308
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6cd798fb5b31'
+revision = '2148bcf8bff1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,6 +21,7 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=100), nullable=True),
+    sa.Column('username', sa.String(length=50), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
@@ -42,6 +43,15 @@ def upgrade():
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['garage_id'], ['garages.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_table('build_list',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('name', sa.String(length=100), nullable=True),
+    sa.Column('blueprint_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
+    sa.ForeignKeyConstraint(['blueprint_id'], ['blueprints.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('categories',
@@ -94,6 +104,7 @@ def downgrade():
     op.drop_table('specs')
     op.drop_table('projects')
     op.drop_table('categories')
+    op.drop_table('build_list')
     op.drop_table('blueprints')
     op.drop_table('garages')
     op.drop_table('users')
