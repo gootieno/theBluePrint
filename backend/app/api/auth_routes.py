@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from app.models import User
 
@@ -13,14 +13,14 @@ def login():
     email = request.json.get("email", None)
     password = request.json.get("password", None)
     
-    
     user = User.query.filter(User.email == email).first()
    
+    print('user password ====================> ', user.check_password(password))
     if user is None:
-        return {'message': "No user with the provided email address"}
+        return jsonify({'message': "No user with the provided email address"}), 401
         
-    if user and not user.check_password(password):
-        return {"message": "The provided password is incorrect"}    
-    if user and user.check_password(password): 
+    # if user is not None and not user.check_password(password):
+    #     return {"message": "The provided password is incorrect"}
+    if user and user.check_password(password):
         access_token = create_access_token(identity=email)
-        return {'user':user.to_dict(), 'access_token':access_token}
+        return jsonify(access_token=access_token)
