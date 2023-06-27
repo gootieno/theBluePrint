@@ -14,6 +14,8 @@ import {
   REMOVE_USER,
 } from "./actions/userActions";
 
+import { loadGarage } from "./garage";
+
 const initialState = { user: null };
 
 export const loginUser =
@@ -36,8 +38,8 @@ export const loginUser =
         if (data.access_token) {
           setTokenToStorage(data.access_token);
           dispatch(setAccessToken(data.access_token));
-          dispatch(setUser(data.user));
-          return data.user;
+
+          return await dispatch(loadGarage({ garageId: data.garage_id }));
         }
       } else {
         // Handle non-200 response status
@@ -98,8 +100,7 @@ export const signupUser =
         if (data.access_token) {
           setTokenToStorage(data.access_token);
           dispatch(setAccessToken(data.access_token));
-          dispatch(setUser(data.user));
-          return data.user;
+          return data;
         }
       } else {
         // Handle non-200 response status
