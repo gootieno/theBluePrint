@@ -33,6 +33,7 @@ Bcrypt(app)
 
 # Tell flask about our seed commands
 app.cli.add_command(seed_commands)
+
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(garage_routes, url_prefix="/api/garage")
 app.register_blueprint(blueprint_routes, url_prefix="/api/blueprints")

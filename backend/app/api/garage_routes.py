@@ -1,8 +1,7 @@
 # pylint: disable=missing-module-docstring
-from app.models import BluePrint as CarBlueprint
-from sqlalchemy.orm import subqueryload
-from flask import Blueprint
-from collections import defaultdict
+from app.models import BluePrint as CarBlueprint, Garage
+from sqlalchemy.orm import joinedload
+from flask import Blueprint, jsonify
 
 garage_routes = Blueprint('garage', __name__)
 
@@ -10,44 +9,41 @@ garage_routes = Blueprint('garage', __name__)
 # get garage blueprints, specs and categories
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
 def get_garage_blueprints(id):
-   
-    garage_query = CarBlueprint.query \
-    .options(subqueryload('categories').subqueryload('specs')) \
-    .filter(CarBlueprint.garage_id == id) \
-    .all()
+    garage_query = (
+        CarBlueprint.query
+        .join(Garage)
+        .options(joinedload('categories').joinedload('specs'))
+        .filter(CarBlueprint.garage_id == id, Garage.user_id == 1)
+        .all()
+    )
     
+    garage = Garage.query.filter_by(id=id).first()
 
-    bp_dict = defaultdict(lambda: {
-        'id': None,
-        'name': None,
-        'imageUrl': None,
-        'garage_id': None,
-        'categories': defaultdict(lambda: {
-            'id': None,
-            'name': None,
-            'blueprintId': None
-        }),
-        'specs': []
-    })
+    blueprints = []
     
+    for blueprint in garage_query:
+        bp_dict = {
+            'id': blueprint.id,
+            'name': blueprint.name,
+            'imageUrl': blueprint.image_url,
+            'garage_id': id,
+            'categories': {},
+            'specs': []
+        }
 
-    for bp in garage_query:
-        bp_dict[bp.id]['id'] = bp.id
-        bp_dict[bp.id]['name'] = bp.name
-        bp_dict[bp.id]['imageUrl'] = bp.image_url
-        bp_dict[bp.id]['garage_id'] = bp.garage_id
+        for category in blueprint.categories:
+            category_dict = {
+                'id': category.id,
+                'name': category.name,
+                'blueprintId': category.blueprint_id
+            }
+            bp_dict['categories'][category.id] = category_dict
+            bp_dict['specs'].extend(
+                {'id': spec.id, 'name': spec.name, 'category_id': spec.category_id}
+                for spec in category.specs
+            )
 
-        for category in bp.categories:
-            bp_dict[bp.id]['categories'][category.id]['id'] = category.id
-            bp_dict[bp.id]['categories'][category.id]['name'] = category.name
-            bp_dict[bp.id]['categories'][category.id]['blueprintId'] = category.blueprint_id
-                    
-            for spec in category.specs:
-                bp_dict[bp.id]['specs'].append({
-                    'id': spec.id,
-                    'name': spec.name,
-                    "category_id": spec.category_id
-                })
+        blueprints.append(bp_dict)
+        
 
-    blueprints = list(bp_dict.values())
-    return {'blueprints': blueprints}
+    return jsonify({'garage': {'name': garage.name}, 'blueprints': blueprints})
