@@ -15,7 +15,6 @@ def login():
     
     user = User.query.filter(User.email == email).first()
    
-    print('user password ====================> ', user.check_password(password))
     if user is None:
         return jsonify({'message': "No user with the provided email address"}), 401
         
