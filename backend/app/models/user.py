@@ -1,4 +1,5 @@
 from .db import db
+from sqlalchemy.schema import UniqueConstraint
 from flask_bcrypt import check_password_hash, generate_password_hash
 
 
@@ -13,6 +14,8 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
 
     garages = db.relationship('Garage', backref='users', lazy=True)
+    
+    __table_args__ = (UniqueConstraint('email', name='uq_email'),)
 
     @property
     def password(self):

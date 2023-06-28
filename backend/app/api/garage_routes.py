@@ -1,6 +1,7 @@
 # pylint: disable=missing-module-docstring
 from app.models import BluePrint as CarBlueprint, Garage
 from sqlalchemy.orm import joinedload
+from flask_jwt_extended import jwt_required, get_jwt
 from flask import Blueprint, jsonify
 
 garage_routes = Blueprint('garage', __name__)
@@ -8,7 +9,16 @@ garage_routes = Blueprint('garage', __name__)
 
 # get garage blueprints, specs and categories
 @garage_routes.route('/<int:id>/blueprints', methods=['GET'])
+@jwt_required()
 def get_garage_blueprints(id):
+    
+    claims = get_jwt()
+    
+    user_id = claims["user_id"]
+    garage_id = claims['garage_id']
+    
+    print('user id and garage id ', user_id, garage_id)
+    
     garage_query = (
         CarBlueprint.query
         .join(Garage)
@@ -46,4 +56,4 @@ def get_garage_blueprints(id):
         blueprints.append(bp_dict)
         
 
-    return jsonify({'garage': {'name': garage.name}, 'blueprints': blueprints})
+    return jsonify({'garage': {'name': garage.name}, 'blueprints': blueprints, "user" :[user_id, garage_id]})
