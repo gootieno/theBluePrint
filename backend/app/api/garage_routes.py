@@ -15,45 +15,38 @@ def get_garage_blueprints(id):
     claims = get_jwt()
     
     user_id = claims["user_id"]
-    garage_id = claims['garage_id']
     
-    print('user id and garage id ', user_id, garage_id)
+    garage = Garage.query.filter_by(id=id).first()
     
     garage_query = (
         CarBlueprint.query
         .join(Garage)
         .options(joinedload('categories').joinedload('specs'))
-        .filter(CarBlueprint.garage_id == id, Garage.user_id == 1)
+        .filter(CarBlueprint.garage_id == id, Garage.user_id == user_id)
         .all()
     )
     
-    garage = Garage.query.filter_by(id=id).first()
 
-    blueprints = []
-    
-    for blueprint in garage_query:
-        bp_dict = {
-            'id': blueprint.id,
-            'name': blueprint.name,
-            'imageUrl': blueprint.image_url,
-            'garage_id': id,
-            'categories': {},
-            'specs': []
-        }
+    blueprints = {}
+    categories = {}
+    specs = {}
 
-        for category in blueprint.categories:
-            category_dict = {
-                'id': category.id,
-                'name': category.name,
-                'blueprintId': category.blueprint_id
-            }
-            bp_dict['categories'][category.id] = category_dict
-            bp_dict['specs'].extend(
-                {'id': spec.id, 'name': spec.name, 'category_id': spec.category_id}
-                for spec in category.specs
-            )
+    for bp in garage_query:
+        blueprint_id = bp.id
+        blueprints[blueprint_id] = bp.to_dict()
 
-        blueprints.append(bp_dict)
+        for category in bp.categories:
+            category_id = category.id
+            categories[category_id] = category.to_dict()
+
+            for spec in category.specs:
+                spec_id = spec.id
+                specs[spec_id] = spec.to_dict()
         
 
-    return jsonify({'garage': {'name': garage.name}, 'blueprints': blueprints, "user" :[user_id, garage_id]})
+    return jsonify({
+        'blueprints': blueprints,
+        'categories': categories,
+        'specs': specs,
+        'garage': {'name': garage.name, 'id': garage.id}
+    })
