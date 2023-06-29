@@ -1,23 +1,22 @@
 import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
-import { getTokenFromStorage } from "./utils/authUtils";
+import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
+
+const token = getCookieFromStorage(BP_COOKIE);
+
+export const loadGarage = (garageId) => async (dispatch) => {
+  const response = await fetch(`/api/garage/${garageId}/blueprints`, {
+    headers: { 'X-CSRF-TOKEN': `${token}` },
+  });
+  
+  if (response.ok) {
+    const data = await response.json();
+    console.log("garage after login ", data);
+    dispatch(addGarage(data.garage));
+    return response;
+  }
+};
 
 const initialState = {};
-
-export const loadGarage =
-  ({ garageId }) =>
-  async (dispatch) => {
-    const token = getTokenFromStorage();
-    const response = await fetch(`/api/garage/${garageId}/blueprints`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("garage after login ", data);
-      dispatch(addGarage(data));
-      return response
-    }
-  };
 
 const garageReducer = (state = initialState, action) => {
   switch (action.type) {

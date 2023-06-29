@@ -1,7 +1,7 @@
-export const bp_cookie = getCookieFromStorage("access_cookie");
+export const BP_COOKIE = "csrf_access_cookie";
 
 const cookieParser = () => {
-  const allCookies = document.cookies.split("; ");
+  const allCookies = document.cookie.split("; ");
 
   const cookieObj = {};
 
@@ -21,11 +21,13 @@ export const getCookieFromStorage = (cookieName) => {
   const cookie = cookieObj[cookieName];
 
   if (cookie) return cookie;
+  else return null;
 };
 export const removeCookieFromStorage = (cookieName) => {
   document.cookie = `${cookieName}=;max-age=0`;
 
   const cookieObj = cookieParser();
+
   if (cookieObj[cookieName])
     return { message: "remove cookie failed", isRemoved: false };
   else return { message: "remove cookie successful", isRemoved: true };
