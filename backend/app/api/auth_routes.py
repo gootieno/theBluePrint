@@ -25,6 +25,6 @@ def login():
         garage = Garage.query.filter(Garage.user_id == user.id).first()
         additional_claims  = {"garage_id":garage.id,  "user_id":user.id}
         access_token = create_access_token(identity=email, additional_claims=additional_claims)
-        response = jsonify({"message": "login successful"})
+        response = jsonify({"message": "login successful", "garage_id": garage.id})
         set_access_cookies(response, access_token)
         return response
