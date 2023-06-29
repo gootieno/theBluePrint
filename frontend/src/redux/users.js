@@ -1,8 +1,12 @@
 // constants
-import { removeCookieFromStorage,  bp_cookie } from "./utils/authUtils";
-import { setLoginStatus } from "./actions/userActions";
+import {
+  getCookieFromStorage,
+  removeCookieFromStorage,
+  BP_COOKIE,
+} from "./utils/authUtils";
+import { setLoginMessage, removeLoginMessage } from "./actions/userActions";
 
-import { SET_USER, SET_LOGIN_STATUS, REMOVE_USER } from "./actions/userActions";
+import { SET_LOGIN_MESSAGE, REMOVE_LOGIN_MESSAGE } from "./actions/userActions";
 
 import { loadGarage } from "./garage";
 
@@ -22,9 +26,9 @@ export const loginUser =
       });
 
       if (response.ok) {
-        const data = await response.json();
-        dispatch(setLoginStatus(data));
-        return dispatch(loadGarage());
+        const { message, garage_id } = await response.json();
+        dispatch(setLoginMessage(message));
+        return dispatch(loadGarage(garage_id));
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -46,9 +50,11 @@ export const logoutUser = () => async (dispatch) => {
     });
 
     if (response.ok) {
+      const cookie = getCookieFromStorage(BP_COOKIE);
+      if (cookie) removeCookieFromStorage(cookie);
 
-      removeCookieFromStorage(bp_cookie);
-      
+      const data = await response.json();
+      dispatch(removeLoginMessage(data.message));
     } else {
       // Handle non-200 response status
       const errorData = await response.json();
@@ -81,10 +87,8 @@ export const signupUser =
 
       if (response.ok) {
         const data = await response.json();
-        if (data.access_token) {
-
-          return data;
-        }
+        dispatch(setLoginMessage(data.message));
+        return dispatch(loadGarage());
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -97,22 +101,23 @@ export const signupUser =
     }
   };
 
-
 const initialState = { user: null };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_LOGIN_STATUS:
+    case SET_LOGIN_MESSAGE:
       return {
         ...state,
-        [action.data]: action.data,
+        message: action.message,
       };
-    case SET_USER:
+
+    case REMOVE_LOGIN_MESSAGE: {
       return {
-        user: action.payload.user,
+        ...state,
+        message: action.message,
       };
-    case REMOVE_USER:
-      return { user: null };
+    }
+
     default:
       return state;
   }
