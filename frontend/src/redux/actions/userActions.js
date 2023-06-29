@@ -1,15 +1,16 @@
 export const SET_USER = "session/SET_USER";
 export const REMOVE_USER = "session/REMOVE_USER";
-export const SET_ACCESS_TOKEN = "session/SET_ACCESS_TOKEN";
-export const REMOVE_ACCESS_TOKEN = "session/REMOVE_ACCESS_TOKEN";
+export const SET_LOGIN_STATUS = "session/SET_LOGIN_STATUS";
+export const REMOVE_LOGIN_STATUS = "session/REMOVE_LOGIN_STATUS";
 
-export const setAccessToken = (token) => ({
-  type: SET_ACCESS_TOKEN,
-  token,
+export const setLoginStatus = (data) => ({
+  type: SET_LOGIN_STATUS,
+  payload: data.message,
 });
 
-export const removeAccessToken = () => ({
-  type: REMOVE_ACCESS_TOKEN,
+export const removeLoginStatus = (data) => ({
+  type: REMOVE_LOGIN_STATUS,
+  payload: data.message,
 });
 
 export const setUser = (data) => ({

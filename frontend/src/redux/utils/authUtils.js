@@ -1,18 +1,32 @@
-export const getTokenFromStorage = () =>
-  sessionStorage.getItem("bp_access_token");
+export const bp_cookie = getCookieFromStorage("access_cookie");
 
-export const setTokenToStorage = (token) =>
-  sessionStorage.setItem("bp_access_token", token);
+const cookieParser = () => {
+  const allCookies = document.cookies.split("; ");
 
-export const removeTokenFromStorage = () =>
-  sessionStorage.removeItem("bp_access_token");
+  const cookieObj = {};
 
-export const checkForToken = () => (dispatch) => {
-  const accessToken = getTokenFromStorage();
-  if (!accessToken) {
-    removeTokenFromStorage();
-    return false;
-  } else {
-    return accessToken;
+  for (const cookie of allCookies) {
+    const cookieKey = cookie.split("=")[0];
+    const cookieValue = cookie.split("=")[1];
+
+    cookieObj[cookieKey] = cookieValue;
   }
+
+  return cookieObj;
+};
+
+export const getCookieFromStorage = (cookieName) => {
+  const cookieObj = cookieParser();
+
+  const cookie = cookieObj[cookieName];
+
+  if (cookie) return cookie;
+};
+export const removeCookieFromStorage = (cookieName) => {
+  document.cookie = `${cookieName}=;max-age=0`;
+
+  const cookieObj = cookieParser();
+  if (cookieObj[cookieName])
+    return { message: "remove cookie failed", isRemoved: false };
+  else return { message: "remove cookie successful", isRemoved: true };
 };
