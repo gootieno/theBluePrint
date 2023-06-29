@@ -1,22 +1,10 @@
 // constants
-import { setTokenToStorage, removeTokenFromStorage } from "./utils/authUtils";
-import {
-  setAccessToken,
-  removeAccessToken,
-  setUser,
-  removeUser,
-} from "./actions/userActions";
+import { removeCookieFromStorage,  bp_cookie } from "./utils/authUtils";
+import { setLoginStatus } from "./actions/userActions";
 
-import {
-  SET_USER,
-  SET_ACCESS_TOKEN,
-  REMOVE_ACCESS_TOKEN,
-  REMOVE_USER,
-} from "./actions/userActions";
+import { SET_USER, SET_LOGIN_STATUS, REMOVE_USER } from "./actions/userActions";
 
 import { loadGarage } from "./garage";
-
-const initialState = { user: null };
 
 export const loginUser =
   ({ email, password }) =>
@@ -35,12 +23,8 @@ export const loginUser =
 
       if (response.ok) {
         const data = await response.json();
-        if (data.access_token) {
-          setTokenToStorage(data.access_token);
-          dispatch(setAccessToken(data.access_token));
-
-          return await dispatch(loadGarage({ garageId: data.garage_id }));
-        }
+        dispatch(setLoginStatus(data));
+        return dispatch(loadGarage());
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -62,9 +46,9 @@ export const logoutUser = () => async (dispatch) => {
     });
 
     if (response.ok) {
-      removeTokenFromStorage();
-      dispatch(removeAccessToken());
-      dispatch(removeUser());
+
+      removeCookieFromStorage(bp_cookie);
+      
     } else {
       // Handle non-200 response status
       const errorData = await response.json();
@@ -98,8 +82,7 @@ export const signupUser =
       if (response.ok) {
         const data = await response.json();
         if (data.access_token) {
-          setTokenToStorage(data.access_token);
-          dispatch(setAccessToken(data.access_token));
+
           return data;
         }
       } else {
@@ -114,16 +97,15 @@ export const signupUser =
     }
   };
 
+
+const initialState = { user: null };
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_ACCESS_TOKEN:
+    case SET_LOGIN_STATUS:
       return {
-        accessToken: action.token,
-      };
-
-    case REMOVE_ACCESS_TOKEN:
-      return {
-        accessToken: null,
+        ...state,
+        [action.data]: action.data,
       };
     case SET_USER:
       return {
