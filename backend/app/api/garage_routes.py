@@ -18,6 +18,7 @@ def get_garage_blueprints(id):
     
     garage = Garage.query.filter_by(id=id).first()
     
+    #eager loading categories and specs. All models needed to display garage on login and refresh. 
     garage_query = (
         CarBlueprint.query
         .join(Garage)
