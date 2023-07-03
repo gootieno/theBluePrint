@@ -1,10 +1,10 @@
-import Login from "./Login";
+import LandingPage from "./LandingPage";
 
 const App = () => {
   return (
     <>
-      <h1>App Component Rendering</h1>
-      <Login />
+      {/* <h1>App Component Rendering</h1> */}
+      <LandingPage />
     </>
   );
 };

@@ -1,5 +1,61 @@
 /* TODO Add site wide styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 html {
   font-family: "Roboto";
   height: 100vh;
+}
+
+:root {
+  /*shadow colors*/
+  --shadow-color-50: #F3F3F3;
+  --shadow-color-100: #DDDDDD;
+  --shadow-color-200: #C6C6C6;
+  --shadow-color-300: #B0B0B0;
+  --shadow-color-400: #9B9B9B;
+  --shadow-color-500: #868686;
+  --shadow-color-600: #727272;
+  --shadow-color-700: #5E5E5E;
+  --shadow-color-800: #4B4B4B;
+  --shadow-color-900: #393939;
+
+  /*brand colors*/
+  --brand-color-50: #E9F6F9;
+  --brand-color-100: #BDE3EC;
+  --brand-color-200: #91D1DE;
+  --brand-color-300: #63BDCF;
+  --brand-color-400: #2CA9BF;
+  --brand-color-500: #0095AC;
+  --brand-color-600: #008097;
+  --brand-color-700: #006B81;
+  --brand-color-800: #005669;
+  --brand-color-900: #004250;
+  
+  /*danger colors*/
+  --danger-color-50: #FFEEE9;
+  --danger-color-100: #FFCBBD;
+  --danger-color-200: #FFA895;
+  --danger-color-300: #FF8672;
+  --danger-color-400: #FF6553;
+  --danger-color-500: #F4453A;
+  --danger-color-600: #DC2727;
+  --danger-color-700: #BE0B18;
+  --danger-color-800: #9C000F;
+  --danger-color-900: #78030A;
+
+  /*secondary colors*/
+  --secondary-color-50: #FBEFFF;
+  --secondary-color-100: #EFD0FF;
+  --secondary-color-200: #E1B2FF;
+  --secondary-color-300: #CF94FF;
+  --secondary-color-400: #BA79FF;
+  --secondary-color-500: #A35FFF;
+  --secondary-color-600: #8B49F3;
+  --secondary-color-700: #7337D6;
+  --secondary-color-800: #5D29B1;
+  --secondary-color-900: #471F88;
 }
