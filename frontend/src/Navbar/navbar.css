@@ -1,0 +1,9 @@
+#navbar-container {
+    border-bottom: 2px solid var(--brand-color-800);
+    display: flex;
+    padding: 15px 20px;
+}
+
+#navbar-heading {
+    color: var(--brand-color-700)
+}
