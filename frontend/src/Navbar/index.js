@@ -2,6 +2,14 @@ import { useSelector } from "react-redux";
 import "./navbar.css";
 
 const Navbar = () => {
+  const isLoggedIn = false;
+
+  const navIcon = isLoggedIn ? (
+    <img id="nav-icon-image" src="/assets/license.png" />
+  ) : (
+    <img id="nav-icon-image" src="/assets/login-icon.png" />
+  );
+
   return (
     <>
       <header id="navbar-container">
@@ -9,8 +17,7 @@ const Navbar = () => {
           theBlueprint
         </h2>
         <div id="icon-container" className="navbar-items">
-          <div className="icon-login"></div>
-          <div className="icon-login-arrow"></div>
+          <div className="icon navbar-items">{navIcon}</div>
         </div>
       </header>
     </>

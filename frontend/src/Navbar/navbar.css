@@ -1,9 +1,29 @@
 #navbar-container {
     border-bottom: 2px solid var(--brand-color-800);
     display: flex;
-    padding: 15px 20px;
+    padding: 1rem 3rem;
+    align-items: center;
+    justify-content: space-between;
 }
 
 #navbar-heading {
     color: var(--brand-color-700)
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+}
+
+#nav-icon-image {
+    height: 100%;
+    position: absolute;
+}
+
+@media screen and (max-width: 414px) {
+     #navbar-container {
+        padding: 1rem 2rem;
+     }   
 }
