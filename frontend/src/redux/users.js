@@ -28,7 +28,9 @@ export const loginUser =
       if (response.ok) {
         const { message, garage_id } = await response.json();
         dispatch(setLoginMessage(message));
-        return dispatch(loadGarage(garage_id));
+        dispatch(loadGarage(garage_id));
+
+        return garage_id;
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
