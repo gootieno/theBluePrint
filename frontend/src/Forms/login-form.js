@@ -24,6 +24,7 @@ const LoginForm = ({ onClose }) => {
   return (
     <div id="login-form-container">
       <form id="login-form" onSubmit={handleSubmit}>
+        <h3 id="login-form-heading">Login</h3>
         <label
           htmlFor="email"
           id="form-email-label"
@@ -52,11 +53,12 @@ const LoginForm = ({ onClose }) => {
           onChange={handleChange}
           value={password}
         />
-        <div id="form-button-container" className="login-form-items">
-          <button id="submit-button" className="form-buttons">
+        <div id="form-buttons-container" className="login-form-items">
+          <button id="submit-button" className="form-buttons" name="submit">
             Submit
           </button>
           <button
+            name="close"
             id="close-login-modal"
             className="form-buttons"
             onClick={onClose}
