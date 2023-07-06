@@ -1,4 +1,3 @@
-import { useState } from "react";
 import ReactDom from "react-dom";
 import "./modal.css";
 
@@ -7,9 +6,7 @@ const Modal = ({ children, open }) => {
   return ReactDom.createPortal(
     <>
       <div id="modal-overlay"></div>
-      <div id="modal-container">
-        {children}
-      </div>
+      <div id="modal-container">{children}</div>
     </>,
     document.getElementById("portal")
   );

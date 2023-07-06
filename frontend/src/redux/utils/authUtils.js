@@ -1,4 +1,4 @@
-export const BP_COOKIE = "csrf_access_cookie";
+export const BP_COOKIE = "csrf_access_token";
 
 const cookieParser = () => {
   const allCookies = document.cookie.split("; ");

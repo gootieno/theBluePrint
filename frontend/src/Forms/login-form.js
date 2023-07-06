@@ -1,9 +1,15 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginUser } from "../redux/users";
 import "./login-form.css";
 
-const LoginForm = ({ onClose }) => {
+const LoginForm = ({ onClose, setIsLoggedIn }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -12,13 +18,23 @@ const LoginForm = ({ onClose }) => {
         break;
       case "email":
         setEmail(e.target.value);
+        break;
       default:
         return null;
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("check validations");
+    const garageId = await dispatch(loginUser({ email, password }));
+    setEmail("");
+    setPassword("");
+
+    setIsLoggedIn(true)
+    navigate(`/garage/${garageId}`);
+    onClose();
   };
 
   return (
