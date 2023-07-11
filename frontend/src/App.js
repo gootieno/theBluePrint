@@ -3,28 +3,24 @@ import Navbar from "./Navbar";
 import Garage from "./Garage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoute";
-import { BP_COOKIE, getCookieFromStorage } from "./redux/utils/authUtils";
+import {
+  BP_COOKIE,
+  getCookieFromStorage,
+  restoreUser,
+} from "./redux/utils/authUtils";
 
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const token = getCookieFromStorage(BP_COOKIE);
-
-    if (token !== null) setIsLoggedIn(true);
-    else setIsLoggedIn(false);
-  }, [isLoggedIn]);
-
-  if (!isLoggedIn) return null;
   return (
     <Router>
-      <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <Navbar />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
-          <Route element={<Garage />} exact path="/garage/:garageId" />
+        <Route element={<ProtectedRoutes />}>
+          <Route exact path="/garage/:garageId" element={<Garage />} />
         </Route>
       </Routes>
     </Router>

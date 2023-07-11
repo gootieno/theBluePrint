@@ -56,6 +56,7 @@ export const logoutUser = () => async (dispatch) => {
       if (cookie) removeCookieFromStorage(cookie);
 
       const data = await response.json();
+      console.log("data  ", data);
       dispatch(removeLoginMessage(data.message));
     } else {
       // Handle non-200 response status
@@ -103,19 +104,19 @@ export const signupUser =
     }
   };
 
-const initialState = { user: null };
+const initialState = { isLoggedIn: false };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_LOGIN_MESSAGE:
-      return {
-        ...state,
-        message: action.message,
-      };
-
+      const newState = { ...state };
+      newState.isLoggedIn = true;
+      newState.message = action.message;
+      return newState;
     case REMOVE_LOGIN_MESSAGE: {
       return {
         ...state,
+        [state.user]: null,
         message: action.message,
       };
     }

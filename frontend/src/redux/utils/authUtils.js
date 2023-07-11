@@ -1,3 +1,6 @@
+import { setLoginMessage } from "../actions/userActions";
+import { logoutUser } from "../users";
+
 export const BP_COOKIE = "csrf_access_token";
 
 const cookieParser = () => {
@@ -31,4 +34,10 @@ export const removeCookieFromStorage = (cookieName) => {
   if (cookieObj[cookieName])
     return { message: "remove cookie failed", isRemoved: false };
   else return { message: "remove cookie successful", isRemoved: true };
+};
+
+export const restoreUser = (bp_cookie, dispatch) => {
+  const cookie = getCookieFromStorage(bp_cookie);
+  if (cookie !== null)
+    dispatch(setLoginMessage({ message: "login successful" }));
 };

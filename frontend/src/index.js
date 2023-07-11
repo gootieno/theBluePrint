@@ -9,7 +9,7 @@ import store from "./redux/store";
 const Root = () => {
   return (
     <Provider store={store}>
-      <App />
+        <App />
     </Provider>
   );
 };
