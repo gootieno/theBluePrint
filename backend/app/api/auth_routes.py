@@ -1,5 +1,5 @@
-from flask import Blueprint, request, jsonify
-from flask_jwt_extended import create_access_token, set_access_cookies
+from flask import Blueprint, request, jsonify, make_response
+from flask_jwt_extended import create_access_token, set_access_cookies, jwt_required, get_jwt_identity
 from app.models import User, Garage
 
 auth_routes = Blueprint('auth', __name__)
@@ -25,6 +25,18 @@ def login():
         garage = Garage.query.filter(Garage.user_id == user.id).first()
         additional_claims  = {"garage_id":garage.id,  "user_id":user.id}
         access_token = create_access_token(identity=email, additional_claims=additional_claims)
-        response = jsonify({"message": "login successful", "garage_id": garage.id})
+        response = jsonify({"message": "login successful", "garage_id": garage.id, "authenticated": True})
         set_access_cookies(response, access_token)
         return response
+
+@auth_routes.route('/refresh_token', methods=['POST'])
+@jwt_required()  # Requires a valid access token
+def refresh_token():
+    current_user = get_jwt_identity()
+    new_token = create_access_token(identity=current_user)
+
+    # Set new access token as a cookie
+    response = make_response(jsonify(access_token=new_token, authenticated=True, message="login successful"))
+    set_access_cookies(response, new_token)
+
+    return response, 200
