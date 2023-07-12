@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify, make_response
-from flask_jwt_extended import create_access_token, set_access_cookies, jwt_required, get_jwt_identity
+from flask_jwt_extended import create_access_token, set_access_cookies
+from flask_jwt_extended import jwt_required, get_jwt_identity,unset_jwt_cookies
 from app.models import User, Garage
 
 auth_routes = Blueprint('auth', __name__)
@@ -28,6 +29,14 @@ def login():
         response = jsonify({"message": "login successful", "garage_id": garage.id, "authenticated": True})
         set_access_cookies(response, access_token)
         return response
+    
+    
+@auth_routes.route("/logout", methods=["DELETE"])
+def logout():
+    response = jsonify({"message": "logout successful"})
+    unset_jwt_cookies(response)
+    return response
+
 
 @auth_routes.route('/refresh_token', methods=['POST'])
 @jwt_required()  # Requires a valid access token
