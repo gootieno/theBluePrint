@@ -5,7 +5,7 @@ import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
 const token = getCookieFromStorage(BP_COOKIE);
 
 export const loadGarage = (garageId) => async (dispatch) => {
-  const response = await fetch(`/api/garage/${garageId}/blueprints`, {
+  const response = await fetch(`/api/garage/${garageId}`, {
     headers: { "X-CSRF-TOKEN": `${token}` },
   });
 

@@ -8,7 +8,7 @@ garage_routes = Blueprint('garage', __name__)
 
 
 # get garage blueprints, specs and categories
-@garage_routes.route('/<int:id>/blueprints', methods=['GET'])
+@garage_routes.route('/<int:id>', methods=['GET'])
 @jwt_required()
 def get_garage_blueprints(id):
     

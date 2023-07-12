@@ -31,7 +31,10 @@ Happy building and happy driving!
 
 ## API Endpoints
 
-    
+
+### Garage
+  - GET /api/garage/:garage_id
+
 ### Blueprint
 
   - GET /api/garage/:garage_id/blueprints
@@ -44,7 +47,7 @@ Happy building and happy driving!
 
 ### Category
 
-  - GET /api/blueprint/:blueprint_id/categories
+  - GET /api/blueprints/:blueprint_id/categories
 
   - POST /api/categories
 
@@ -74,7 +77,7 @@ Happy building and happy driving!
     
  ### Step
  
-  - GET /api/:project_id/steps
+  - GET /api/projects/:project_id/steps
 
   - POST /api/steps
 
