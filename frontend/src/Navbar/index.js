@@ -12,9 +12,9 @@ import {
 } from "../redux/utils/authUtils";
 import { logoutUser } from "../redux/users";
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = getCookieFromStorage(BP_COOKIE);
+  // const isLoggedIn = getCookieFromStorage(BP_COOKIE);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    removeCookieFromStorage(BP_COOKIE);
+    // removeCookieFromStorage(BP_COOKIE);
     dispatch(logoutUser());
     navigate("/");
   };
