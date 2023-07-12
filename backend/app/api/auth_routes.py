@@ -15,12 +15,14 @@ def login():
     password = request.json.get("password", None)
     
     user = User.query.filter(User.email == email).first()
-   
+    
+    
     if user is None:
         return jsonify({'message': "No user with the provided email address"}), 401
         
+        
     if user is not None and not user.check_password(password):
-        return {"message": "The provided password is incorrect"}
+        return jsonify({"message": "The provided password is incorrect"}), 401
     
     if user and user.check_password(password):
         garage = Garage.query.filter(Garage.user_id == user.id).first()
@@ -41,9 +43,10 @@ def logout():
 @auth_routes.route('/refresh_token', methods=['POST'])
 @jwt_required()  # Requires a valid access token
 def refresh_token():
-    current_user = get_jwt_identity()
-    new_token = create_access_token(identity=current_user)
-
+    identity_email = get_jwt_identity()
+    user = User.query.filter(User.email == identity_email).first()
+    additional_claims  = {"user_id":user.id}    
+    new_token = create_access_token(identity=identity_email, additional_claims=additional_claims)
     # Set new access token as a cookie
     response = make_response(jsonify(access_token=new_token, authenticated=True, message="login successful"))
     set_access_cookies(response, new_token)

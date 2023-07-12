@@ -26,7 +26,7 @@ class User(db.Model):
         self.hashed_password = generate_password_hash(password, 10).decode('utf-8')
 
     def check_password(self, password):
-        return check_password_hash(self.hashed_password, password)
+        return check_password_hash(self.hashed_password.decode('utf-8'), password)
 
     def to_dict(self):
         return {

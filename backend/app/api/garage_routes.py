@@ -50,4 +50,4 @@ def get_garage_blueprints(id):
         'categories': categories,
         'specs': specs,
         'garage': {'name': garage.name, 'id': garage.id}
-    })
+    }), 200
