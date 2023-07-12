@@ -11,7 +11,7 @@ export const loadGarage = (garageId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     console.log("garage after login ", data);
-    dispatch(addGarage(data.garage));
+    dispatch(addGarage(data));
     return response;
   }
 };

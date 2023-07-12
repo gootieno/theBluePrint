@@ -1,9 +1,11 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { BP_COOKIE, getCookieFromStorage } from "../redux/utils/authUtils";
 
 const ProtectedRoutes = () => {
-  const user = useSelector((state) => state.user);
-  return user?.isLoggedIn ? <Outlet /> : <Navigate to="/" />;
+  const isLoggedIn = getCookieFromStorage(BP_COOKIE);
+
+  console.log("is logged in from protected ", isLoggedIn);
+  return isLoggedIn ? <Outlet /> : <Navigate to="/" replace />;
 };
 
 export default ProtectedRoutes;

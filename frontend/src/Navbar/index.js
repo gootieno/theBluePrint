@@ -7,10 +7,9 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const user = useSelector((state) => state.user);
-  console.log("is logged in ", user);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-  const navIcon = user.isLoggedIn ? (
+  const navIcon = isLoggedIn ? (
     <img id="nav-icon-image" src="/assets/license.png" alt="logged in icon" />
   ) : (
     <img id="nav-icon-image" src="/assets/login-icon.png" alt="login icon" />

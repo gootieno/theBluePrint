@@ -1,6 +1,3 @@
-import { setLoginMessage } from "../actions/userActions";
-import { logoutUser } from "../users";
-
 export const BP_COOKIE = "csrf_access_token";
 
 const cookieParser = () => {
@@ -36,8 +33,22 @@ export const removeCookieFromStorage = (cookieName) => {
   else return { message: "remove cookie successful", isRemoved: true };
 };
 
-export const restoreUser = (bp_cookie, dispatch) => {
-  const cookie = getCookieFromStorage(bp_cookie);
-  if (cookie !== null)
-    dispatch(setLoginMessage({ message: "login successful" }));
+export const restoreUser = async (abortController, token) => {
+  try {
+    const response = await fetch("/api/auth/refresh_token", {
+      method: "POST",
+      headers: { "X-CSRF-TOKEN": token },
+      signal: abortController.signal,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      return data;
+    } else {
+      throw new Error("Failed to refresh token");
+    }
+  } catch (error) {
+    console.error(error);
+  }
 };

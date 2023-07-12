@@ -37,14 +37,14 @@ const LoginForm = ({ onClose }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("check validations");
-    const garageId = dispatch(loginUser({ email, password }));
+    const garageId = await dispatch(loginUser({ email, password }));
     setEmail("");
     setPassword("");
 
+    console.log("garage id ", garageId);
     navigate(`/garage/${garageId}`);
     onClose();
   };
