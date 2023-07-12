@@ -17,15 +17,16 @@ const App = () => {
   const [token, setToken] = useState(() => getCookieFromStorage(BP_COOKIE));
 
   const dispatch = useDispatch();
+  const abortController = new AbortController();
 
   useEffect(() => {
     let isMounted = true;
 
-    const verifyUserToken = () => {
+    const verifyUserToken = async () => {
       try {
         if (token && isMounted) {
-          // const data = await restoreUser(abortController, token);
-          const data = getCookieFromStorage(BP_COOKIE);
+          const data = await restoreUser(abortController, token);
+
           console.log("data from refresh token ", data);
           if (data)
             dispatch(

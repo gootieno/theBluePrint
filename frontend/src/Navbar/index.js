@@ -1,19 +1,23 @@
 import Modal from "../Modal";
 import LoginForm from "../Forms/login-form";
 
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import "./navbar.css";
+import {
+  BP_COOKIE,
+  getCookieFromStorage,
+  removeCookieFromStorage,
+} from "../redux/utils/authUtils";
+import { logoutUser } from "../redux/users";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isLoggedIn = getCookieFromStorage(BP_COOKIE);
 
-  const navIcon = isLoggedIn ? (
-    <img id="nav-icon-image" src="/assets/license.png" alt="logged in icon" />
-  ) : (
-    <img id="nav-icon-image" src="/assets/login-icon.png" alt="login icon" />
-  );
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const openModal = () => {
     setIsOpen(true);
@@ -23,6 +27,22 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const handleLogout = () => {
+    removeCookieFromStorage(BP_COOKIE);
+    dispatch(logoutUser());
+    navigate("/");
+  };
+
+  const navIcon = isLoggedIn ? (
+    <div className="icon navbar-items" onClick={handleLogout}>
+      <img id="nav-icon-image" src="/assets/license.png" alt="logged in icon" />
+    </div>
+  ) : (
+    <div className="icon navbar-items" onClick={openModal}>
+      <img id="nav-icon-image" src="/assets/login-icon.png" alt="login icon" />
+    </div>
+  );
+
   return (
     <>
       <header id="navbar-container">
@@ -30,9 +50,7 @@ const Navbar = () => {
           theBlueprint
         </h2>
         <div id="icon-container" className="navbar-items">
-          <div className="icon navbar-items" onClick={openModal}>
-            {navIcon}
-          </div>
+          {navIcon}
         </div>
       </header>
       <Modal open={isOpen} onClose={closeModal}>
