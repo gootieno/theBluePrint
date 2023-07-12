@@ -8,7 +8,7 @@ import "./login-form.css";
 const LoginForm = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [error, setError] = useState("");
 
   const emailRef = useRef();
   const errorRef = useRef();
@@ -21,7 +21,7 @@ const LoginForm = ({ onClose }) => {
   }, []);
 
   useEffect(() => {
-    setErrors([]);
+    setError("");
   }, [email, password]);
 
   const handleChange = (e) => {
@@ -39,26 +39,27 @@ const LoginForm = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const garageId = await dispatch(loginUser({ email, password }));
+      setEmail("");
+      setPassword("");
 
-    const garageId = await dispatch(loginUser({ email, password }));
-    setEmail("");
-    setPassword("");
-
-    console.log("garage id ", garageId);
-    navigate(`/garage/${garageId}`);
-    onClose();
+      console.log("garage id ", garageId);
+      navigate(`/garage/${garageId}`);
+      onClose();
+    } catch (error) {
+      setError(error.message);
+    }
   };
 
   return (
     <div id="login-form-container">
       <form id="login-form" onSubmit={handleSubmit}>
-        {errors.length
-          ? errors.map((error) => (
-              <p ref={errorRef} className="login-errors">
-                {error}
-              </p>
-            ))
-          : ""}
+        {error && (
+          <p ref={errorRef} className="login-errors">
+            {error}
+          </p>
+        )}
         <h3 id="login-form-heading">Login</h3>
         <label
           htmlFor="login-email"

@@ -1,8 +1,17 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadGarage } from "../redux/garage";
 
 const Garage = () => {
-  console.log("in the garage page is logged in ")
   const { garageId } = useParams();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadGarage(garageId));
+  }, [garageId]);
+
   return <div>Viewing Garage {garageId}</div>;
 };
 

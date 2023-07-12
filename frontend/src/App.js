@@ -28,8 +28,6 @@ const App = () => {
       try {
         if (token && isMounted) {
           const data = await restoreUser(abortController, token);
-
-          console.log("data from refresh token ", data);
           if (data)
             dispatch(
               setUser({ authenticated: true, message: "Token refreshed" })
@@ -42,7 +40,7 @@ const App = () => {
 
     verifyUserToken();
   }, [dispatch, token]);
-  console.log("is logged in", isLoggedIn);
+
   return (
     <Router>
       <Navbar isLoggedIn={isLoggedIn} />

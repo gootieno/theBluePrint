@@ -4,10 +4,9 @@ import {
   removeCookieFromStorage,
   BP_COOKIE,
 } from "./utils/authUtils";
+
 import { setUser, removeUser } from "./actions/userActions";
-
 import { SET_USER, REMOVE_USER } from "./actions/userActions";
-
 import { loadGarage } from "./garage";
 
 export const loginUser =
@@ -27,7 +26,7 @@ export const loginUser =
 
       if (response.ok) {
         const data = await response.json();
-        console.log("data after login ", data);
+
         dispatch(setUser(data));
         dispatch(loadGarage(data.garage_id));
 
@@ -58,7 +57,6 @@ export const logoutUser = () => async (dispatch) => {
       if (cookie) removeCookieFromStorage(cookie);
 
       const data = await response.json();
-      console.log("data from logout ", data);
       dispatch(removeUser(data));
     } else {
       // Handle non-200 response status
@@ -69,7 +67,6 @@ export const logoutUser = () => async (dispatch) => {
     return response;
   } catch (error) {
     // Handle network errors or other exceptions
-    console.error("Logout error:", error);
     throw error;
   }
 };
@@ -101,7 +98,6 @@ export const signupUser =
       }
     } catch (error) {
       // Handle network errors or other exceptions
-      console.error("Signup error:", error);
       throw error;
     }
   };
