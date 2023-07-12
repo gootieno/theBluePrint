@@ -22,7 +22,7 @@ At theBluePrint, we believe that every car project is unique and deserves a spec
 
 Get ready to dive into the world of car building, documentation, and community. Join theBluePrint and turn your dream car into a reality!
 
-Feel free to explore our features and start documenting your projects. If you have any questions or need assistance along the way, our team is here to help.
+Feel free to explore our features and start documenting your projects. If you have any questions or need assistance along the way, I am here to help.
 
 Happy building and happy driving!
 
