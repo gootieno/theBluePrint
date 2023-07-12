@@ -47,6 +47,7 @@ export const loginUser =
 export const logoutUser = () => async (dispatch) => {
   try {
     const response = await fetch("/api/auth/logout", {
+      method: 'DELETE',
       headers: {
         "Content-Type": "application/json",
       },
@@ -57,7 +58,7 @@ export const logoutUser = () => async (dispatch) => {
       if (cookie) removeCookieFromStorage(cookie);
 
       const data = await response.json();
-      dispatch(removeUser(data.message));
+      dispatch(removeUser(data));
     } else {
       // Handle non-200 response status
       const errorData = await response.json();
