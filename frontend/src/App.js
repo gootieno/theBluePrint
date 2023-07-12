@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import Garage from "./Garage";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import ProtectedRoutes from "./ProtectedRoute";
+import { useSelector } from "react-redux";
 import {
   BP_COOKIE,
   getCookieFromStorage,
@@ -15,6 +16,7 @@ import { setUser } from "./redux/actions/userActions";
 
 const App = () => {
   const [token, setToken] = useState(() => getCookieFromStorage(BP_COOKIE));
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const dispatch = useDispatch();
   const abortController = new AbortController();
@@ -40,16 +42,20 @@ const App = () => {
 
     verifyUserToken();
   }, [dispatch, token]);
-
+  console.log("is logged in", isLoggedIn);
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route exact path="/" element={<LandingPage />} />
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/garage/:garageId" element={<Garage />} />
-        </Route>
-      </Routes>
+      <Navbar isLoggedIn={isLoggedIn} />
+      {isLoggedIn && (
+        <>
+          <Routes>
+            <Route exact path="/" element={<LandingPage />} />
+            <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
+              <Route path="/garage/:garageId" element={<Garage />} />
+            </Route>
+          </Routes>
+        </>
+      )}
     </Router>
   );
 };

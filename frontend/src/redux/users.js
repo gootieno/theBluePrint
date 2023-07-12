@@ -47,7 +47,7 @@ export const loginUser =
 export const logoutUser = () => async (dispatch) => {
   try {
     const response = await fetch("/api/auth/logout", {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
@@ -58,6 +58,7 @@ export const logoutUser = () => async (dispatch) => {
       if (cookie) removeCookieFromStorage(cookie);
 
       const data = await response.json();
+      console.log("data from logout ", data);
       dispatch(removeUser(data));
     } else {
       // Handle non-200 response status
@@ -91,8 +92,8 @@ export const signupUser =
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(setUser(data.message));
-        return dispatch(loadGarage());
+        dispatch(setUser(data));
+        return dispatch(loadGarage(data.garage_id));
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -118,7 +119,7 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER: {
       return {
         ...state,
-        [state.user]: null,
+        isLoggedIn: false,
         message: action.message,
       };
     }

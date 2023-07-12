@@ -29,8 +29,8 @@ export const removeCookieFromStorage = (cookieName) => {
   const cookieObj = cookieParser();
 
   if (cookieObj[cookieName])
-    return { message: "remove cookie failed", isRemoved: false };
-  else return { message: "remove cookie successful", isRemoved: true };
+    return { message: "remove cookie failed", isLoggedIn: true };
+  else return { message: "remove cookie successful", isLoggedIn: false };
 };
 
 export const restoreUser = async (abortController, token) => {
