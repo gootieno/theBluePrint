@@ -1,4 +1,5 @@
 import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
+import { addBlueprint } from "./actions/blueprintActions";
 import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
 
 const token = getCookieFromStorage(BP_COOKIE);
@@ -11,7 +12,8 @@ export const loadGarage = (garageId) => async (dispatch) => {
   if (response.ok) {
     const data = await response.json();
     console.log("garage after login ", data);
-    dispatch(addGarage(data));
+    dispatch(addGarage(data.garage));
+    dispatch(addBlueprint(data.blueprints));
     return response;
   }
 };

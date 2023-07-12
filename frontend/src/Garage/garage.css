@@ -1,0 +1,35 @@
+#garage-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#garage-heading {
+    text-align: center;
+    color: var(--brand-color-700);
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+#garage-categories-container {
+    width: 100%;
+    border: 1px solid green;
+    padding: 10px;
+}
+
+#garage-blueprints-container {
+    width: 100%;
+    border: 1px solid blue;
+    padding: 10px;
+}
+
+#garage-specs-container {
+    width: 100%;
+    border: 1px solid purple;
+    padding: 10px;
+}
+
+#garage-crud-box-container {
+    width: 100%;
+    border: 1px solid orange;
+    padding: 10px;
+}
