@@ -4,9 +4,9 @@ import {
   removeCookieFromStorage,
   BP_COOKIE,
 } from "./utils/authUtils";
-import { setLoginMessage, removeLoginMessage } from "./actions/userActions";
+import { setUser, removeUser } from "./actions/userActions";
 
-import { SET_LOGIN_MESSAGE, REMOVE_LOGIN_MESSAGE } from "./actions/userActions";
+import { SET_USER, REMOVE_USER } from "./actions/userActions";
 
 import { loadGarage } from "./garage";
 
@@ -26,11 +26,12 @@ export const loginUser =
       });
 
       if (response.ok) {
-        const { message, garage_id } = await response.json();
-        dispatch(setLoginMessage(message));
-        dispatch(loadGarage(garage_id));
+        const data = await response.json();
+        console.log("data after login ", data);
+        dispatch(setUser(data));
+        dispatch(loadGarage(data.garage_id));
 
-        return garage_id;
+        return data.garage_id;
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -56,7 +57,7 @@ export const logoutUser = () => async (dispatch) => {
       if (cookie) removeCookieFromStorage(cookie);
 
       const data = await response.json();
-      dispatch(removeLoginMessage(data.message));
+      dispatch(removeUser(data.message));
     } else {
       // Handle non-200 response status
       const errorData = await response.json();
@@ -89,7 +90,7 @@ export const signupUser =
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(setLoginMessage(data.message));
+        dispatch(setUser(data.message));
         return dispatch(loadGarage());
       } else {
         // Handle non-200 response status
@@ -103,19 +104,20 @@ export const signupUser =
     }
   };
 
-const initialState = { user: null };
+const initialState = { isLoggedIn: false };
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case SET_LOGIN_MESSAGE:
-      return {
-        ...state,
-        message: action.message,
-      };
+    case SET_USER:
+      const newState = { ...state };
 
-    case REMOVE_LOGIN_MESSAGE: {
+      newState.isLoggedIn = true;
+      newState.message = action.message;
+      return newState;
+    case REMOVE_USER: {
       return {
         ...state,
+        [state.user]: null,
         message: action.message,
       };
     }

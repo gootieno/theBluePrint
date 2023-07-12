@@ -1,15 +1,28 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/users";
+
 import "./login-form.css";
 
-const LoginForm = ({ onClose, setIsLoggedIn }) => {
+const LoginForm = ({ onClose }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState([]);
+
+  const emailRef = useRef();
+  const errorRef = useRef();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    emailRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrors([]);
+  }, [email, password]);
 
   const handleChange = (e) => {
     switch (e.target.name) {
@@ -27,12 +40,11 @@ const LoginForm = ({ onClose, setIsLoggedIn }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("check validations");
     const garageId = await dispatch(loginUser({ email, password }));
     setEmail("");
     setPassword("");
 
-    setIsLoggedIn(true)
+    console.log("garage id ", garageId);
     navigate(`/garage/${garageId}`);
     onClose();
   };
@@ -40,9 +52,16 @@ const LoginForm = ({ onClose, setIsLoggedIn }) => {
   return (
     <div id="login-form-container">
       <form id="login-form" onSubmit={handleSubmit}>
+        {errors.length
+          ? errors.map((error) => (
+              <p ref={errorRef} className="login-errors">
+                {error}
+              </p>
+            ))
+          : ""}
         <h3 id="login-form-heading">Login</h3>
         <label
-          htmlFor="email"
+          htmlFor="login-email"
           id="form-email-label"
           className="login-form-items"
         >
@@ -52,11 +71,15 @@ const LoginForm = ({ onClose, setIsLoggedIn }) => {
           name="email"
           id="login-email"
           className="login-form-items"
+          autoComplete="off"
+          ref={emailRef}
           onChange={handleChange}
           value={email}
+          required
+          type="email"
         />
         <label
-          htmlFor="password"
+          htmlFor="login-password"
           id="form-password-label"
           className="login-form-items"
         >
@@ -68,6 +91,8 @@ const LoginForm = ({ onClose, setIsLoggedIn }) => {
           className="login-form-items"
           onChange={handleChange}
           value={password}
+          type="password"
+          required
         />
         <div id="form-buttons-container" className="login-form-items">
           <button id="submit-button" className="form-buttons" name="submit">

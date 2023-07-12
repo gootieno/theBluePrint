@@ -1,10 +1,13 @@
-import { useState } from "react";
-import "./navbar.css";
 import Modal from "../Modal";
 import LoginForm from "../Forms/login-form";
 
-const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import "./navbar.css";
+
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const navIcon = isLoggedIn ? (
     <img id="nav-icon-image" src="/assets/license.png" alt="logged in icon" />
@@ -32,8 +35,8 @@ const Navbar = ({ setIsLoggedIn, isLoggedIn }) => {
           </div>
         </div>
       </header>
-      <Modal open={!isLoggedIn && isOpen} onClose={closeModal}>
-        <LoginForm onClose={closeModal} setIsLoggedIn={setIsLoggedIn} />
+      <Modal open={isOpen} onClose={closeModal}>
+        <LoginForm onClose={closeModal} />
       </Modal>
     </>
   );

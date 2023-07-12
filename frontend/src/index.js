@@ -7,16 +7,14 @@ import App from "./App";
 import store from "./redux/store";
 
 const Root = () => {
-  return (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+  return <App />;
 };
 
 ReactDOM.render(
   <React.StrictMode>
-    <Root />
+    <Provider store={store}>
+      <Root />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -32,3 +32,23 @@ export const removeCookieFromStorage = (cookieName) => {
     return { message: "remove cookie failed", isRemoved: false };
   else return { message: "remove cookie successful", isRemoved: true };
 };
+
+export const restoreUser = async (abortController, token) => {
+  try {
+    const response = await fetch("/api/auth/refresh_token", {
+      method: "POST",
+      headers: { "X-CSRF-TOKEN": token },
+      signal: abortController.signal,
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+
+      return data;
+    } else {
+      throw new Error("Failed to refresh token");
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
