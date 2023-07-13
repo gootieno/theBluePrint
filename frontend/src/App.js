@@ -5,14 +5,15 @@ import {
 } from "./redux/utils/authUtils";
 import LandingPage from "./LandingPage";
 import Navbar from "./Navbar";
-import Garage from "./Garage";
-import ProtectedRoutes from "./ProtectedRoute";
+import ProtectedRoutes from "./ProtectedRoutes";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { ModalProvider } from "./Context/FormModal";
 import { useSelector } from "react-redux";
 
 import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/actions/userActions";
+import Garage from "./Garage";
 
 const App = () => {
   const [token, setToken] = useState(() => getCookieFromStorage(BP_COOKIE));
@@ -28,9 +29,10 @@ const App = () => {
       try {
         if (token && isMounted) {
           const data = await restoreUser(abortController, token);
-          if (data)
+          console.log("data ", data);
+          if (data?.access_token)
             dispatch(
-              setUser({ authenticated: true, message: "Token refreshed" })
+              setUser({ authenticated: data, message: "Token refreshed" })
             );
         }
       } catch (error) {
@@ -47,20 +49,22 @@ const App = () => {
     };
   }, [abortController, dispatch, token]);
 
+  console.log("is logged in ", isLoggedIn);
   return (
-    <Router>
-      <Navbar isLoggedIn={isLoggedIn} />
-      {isLoggedIn && (
-        <>
-          <Routes>
-            <Route exact path="/" element={<LandingPage />} />
-            <Route element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}>
-              <Route path="/garage/:garageId" element={<Garage />} />
-            </Route>
-          </Routes>
-        </>
-      )}
-    </Router>
+    <ModalProvider>
+      <Router>
+        <Navbar isLoggedIn={isLoggedIn} />
+        <Routes>
+          <Route exact path="/" element={<LandingPage />} />
+          <Route
+            path="/garage/*"
+            element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}
+          >
+            <Route path=":garageId" element={<Garage />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ModalProvider>
   );
 };
 

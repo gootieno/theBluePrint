@@ -14,8 +14,9 @@ const Garage = () => {
 
   useEffect(() => {
     dispatch(loadGarage(garageId));
-  }, [garageId]);
+  }, [dispatch, garageId]);
 
+  console.log("garage id ", garageId);
   return (
     <div id="garage-container">
       <h1 id="garage-heading" className="garage-items">

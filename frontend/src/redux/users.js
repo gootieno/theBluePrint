@@ -26,9 +26,8 @@ export const loginUser =
 
       if (response.ok) {
         const data = await response.json();
-
+        console.log("login data ", data);
         dispatch(setUser(data));
-        dispatch(loadGarage(data.garage_id));
 
         return data.garage_id;
       } else {
