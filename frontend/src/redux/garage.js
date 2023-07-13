@@ -2,6 +2,7 @@ import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
 import { addBlueprints } from "./actions/blueprintActions";
 import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
 import { addCategories } from "./actions/categoryActions";
+import { addSpecs } from "./actions/specActions";
 
 export const loadGarage = (garageId) => async (dispatch) => {
   const token = getCookieFromStorage(BP_COOKIE);
@@ -15,6 +16,7 @@ export const loadGarage = (garageId) => async (dispatch) => {
     dispatch(addGarage(data.garage));
     dispatch(addBlueprints(data.blueprints));
     dispatch(addCategories(data.categories));
+    dispatch(addSpecs(data.specs));
     return response;
   }
 };
