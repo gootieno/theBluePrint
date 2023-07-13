@@ -1,5 +1,5 @@
 import {
-  BLUEPRINT_ADDED,
+  BLUEPRINTS_ADDED,
   BLUEPRINT_EDITED,
   BLUEPRINT_DELETED,
 } from "./actions/blueprintActions";
@@ -8,9 +8,8 @@ const initialState = {};
 const blueprintReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
-    case BLUEPRINT_ADDED:
-      newState = { ...state };
-      newState = action.blueprint;
+    case BLUEPRINTS_ADDED:
+      newState = action.blueprints;
       return newState;
     case BLUEPRINT_EDITED:
       newState = { ...state };

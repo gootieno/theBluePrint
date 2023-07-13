@@ -1,16 +1,16 @@
-import LandingPage from "./LandingPage";
-import Navbar from "./Navbar";
-import Garage from "./Garage";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ProtectedRoutes from "./ProtectedRoute";
-import { useSelector } from "react-redux";
 import {
   BP_COOKIE,
   getCookieFromStorage,
   restoreUser,
 } from "./redux/utils/authUtils";
+import LandingPage from "./LandingPage";
+import Navbar from "./Navbar";
+import Garage from "./Garage";
+import ProtectedRoutes from "./ProtectedRoute";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { setUser } from "./redux/actions/userActions";
 
@@ -19,7 +19,7 @@ const App = () => {
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const dispatch = useDispatch();
-  const abortController = new AbortController();
+  let abortController = useMemo(() => new AbortController(), []);
 
   useEffect(() => {
     let isMounted = true;
@@ -39,7 +39,13 @@ const App = () => {
     };
 
     verifyUserToken();
-  }, [dispatch, token]);
+
+    return () => {
+      isMounted = false;
+      abortController.abort();
+      setToken(null);
+    };
+  }, [abortController, dispatch, token]);
 
   return (
     <Router>

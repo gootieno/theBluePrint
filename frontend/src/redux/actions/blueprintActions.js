@@ -1,10 +1,10 @@
-export const BLUEPRINT_ADDED = "blueprints/BLUEPRINT_ADDED";
+export const BLUEPRINTS_ADDED = "blueprints/BLUEPRINTS_ADDED";
 export const BLUEPRINT_EDITED = "blueprints/BLUEPRINT_EDITED";
 export const BLUEPRINT_DELETED = "blueprints/BLUEPRINT_DELETED";
 
-export const addBlueprint = (blueprint) => ({
-  type: BLUEPRINT_ADDED,
-  blueprint,
+export const addBlueprints = (blueprints) => ({
+  type: BLUEPRINTS_ADDED,
+  blueprints,
 });
 
 export const editBlueprint = (blueprint) => ({
