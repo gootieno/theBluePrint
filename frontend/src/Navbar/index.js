@@ -1,33 +1,38 @@
-import Modal from "../Modal";
-import LoginForm from "../Forms/login-form";
+import FormModal from "../Context/FormModal";
+import LoginForm from "../Forms/loginForm";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../redux/users";
+import { useState, useContext } from "react";
 import "./navbar.css";
+import { ModalContext } from "../Context/FormModal";
+import { BP_COOKIE, getCookieFromStorage } from "../redux/utils/authUtils";
 
-const Navbar = ({ isLoggedIn }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = () => {
+  const { setIsOpen, isOpen } = useContext(ModalContext);
+  const [dropDown, setDropDown] = useState(false);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const isLoggedIn = getCookieFromStorage(BP_COOKIE);
 
   const openModal = () => {
     setIsOpen(true);
   };
 
   const closeModal = () => {
+    console.log("closing modal");
     setIsOpen(false);
   };
 
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    navigate("/", { replace: true });
+  const handleDropDown = (event) => {
+    setDropDown((prev) => !prev);
   };
 
+  console.log("navBar is logged in", isLoggedIn);
+
   const navIcon = isLoggedIn ? (
-    <div className="icon navbar-items" onClick={handleLogout}>
+    <div
+      id={dropDown ? "showDropDown" : "hideDropDown"}
+      className="icon navbar-items"
+      onClick={handleDropDown}
+    >
       <img id="nav-icon-image" src="/assets/license.png" alt="logged in icon" />
     </div>
   ) : (
@@ -46,9 +51,9 @@ const Navbar = ({ isLoggedIn }) => {
           {navIcon}
         </div>
       </header>
-      <Modal open={isOpen}>
+      <FormModal isOpen={isOpen}>
         <LoginForm onClose={closeModal} />
-      </Modal>
+      </FormModal>
     </>
   );
 };

@@ -6,13 +6,13 @@ import { addSpecs } from "./actions/specActions";
 
 export const loadGarage = (garageId) => async (dispatch) => {
   const token = getCookieFromStorage(BP_COOKIE);
+
   const response = await fetch(`/api/garage/${garageId}`, {
     headers: { "X-CSRF-TOKEN": `${token}` },
   });
 
   if (response.ok) {
     const data = await response.json();
-    console.log("garage after login ", data);
     dispatch(addGarage(data.garage));
     dispatch(addBlueprints(data.blueprints));
     dispatch(addCategories(data.categories));
