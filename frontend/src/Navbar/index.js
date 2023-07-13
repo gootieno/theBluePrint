@@ -4,17 +4,11 @@ import LoginForm from "../Forms/login-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import "./navbar.css";
-import {
-  BP_COOKIE,
-  getCookieFromStorage,
-  removeCookieFromStorage,
-} from "../redux/utils/authUtils";
 import { logoutUser } from "../redux/users";
+import "./navbar.css";
 
-const Navbar = ({ isLoggedIn}) => {
+const Navbar = ({ isLoggedIn }) => {
   const [isOpen, setIsOpen] = useState(false);
-  // const isLoggedIn = getCookieFromStorage(BP_COOKIE);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -28,9 +22,8 @@ const Navbar = ({ isLoggedIn}) => {
   };
 
   const handleLogout = () => {
-    // removeCookieFromStorage(BP_COOKIE);
     dispatch(logoutUser());
-    navigate("/");
+    navigate("/", { replace: true });
   };
 
   const navIcon = isLoggedIn ? (
@@ -53,7 +46,7 @@ const Navbar = ({ isLoggedIn}) => {
           {navIcon}
         </div>
       </header>
-      <Modal open={isOpen} onClose={closeModal}>
+      <Modal open={isOpen}>
         <LoginForm onClose={closeModal} />
       </Modal>
     </>

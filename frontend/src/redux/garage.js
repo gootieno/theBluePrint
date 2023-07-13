@@ -1,10 +1,10 @@
 import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
-import { addBlueprint } from "./actions/blueprintActions";
+import { addBlueprints } from "./actions/blueprintActions";
 import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
-
-const token = getCookieFromStorage(BP_COOKIE);
+import { addCategories } from "./actions/categoryActions";
 
 export const loadGarage = (garageId) => async (dispatch) => {
+  const token = getCookieFromStorage(BP_COOKIE);
   const response = await fetch(`/api/garage/${garageId}`, {
     headers: { "X-CSRF-TOKEN": `${token}` },
   });
@@ -13,7 +13,8 @@ export const loadGarage = (garageId) => async (dispatch) => {
     const data = await response.json();
     console.log("garage after login ", data);
     dispatch(addGarage(data.garage));
-    dispatch(addBlueprint(data.blueprints));
+    dispatch(addBlueprints(data.blueprints));
+    dispatch(addCategories(data.categories));
     return response;
   }
 };
