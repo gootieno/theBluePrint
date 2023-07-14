@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/users";
 
 import "./login-form.css";
@@ -46,8 +46,7 @@ const LoginForm = ({ onClose }) => {
       setEmail("");
       setPassword("");
 
-      console.log("garage id ", garageId);
-      redirect(`/garage/${garageId}`);
+      navigate(`/garage/${garageId}`);
       onClose();
     } catch (error) {
       setError(error.message);

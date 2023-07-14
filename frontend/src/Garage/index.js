@@ -9,14 +9,12 @@ const Garage = () => {
   const { garageId } = useParams();
 
   const garage = useSelector((state) => state.garage);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadGarage(garageId));
   }, [dispatch, garageId]);
 
-  console.log("garage id ", garageId);
   return (
     <div id="garage-container">
       <h1 id="garage-heading" className="garage-items">

@@ -6,7 +6,7 @@ import {
 } from "./utils/authUtils";
 
 import { setUser, removeUser } from "./actions/userActions";
-import { SET_USER, REMOVE_USER } from "./actions/userActions";
+import { SET_USER, REMOVE_USER, RESTORE_USER } from "./actions/userActions";
 import { loadGarage } from "./garage";
 
 export const loginUser =
@@ -101,20 +101,19 @@ export const signupUser =
     }
   };
 
-const initialState = { isLoggedIn: false };
+const initialState = {};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       const newState = { ...state };
-
-      newState.isLoggedIn = true;
       newState.message = action.message;
+      newState.isLoggedIn = action.isLoggedIn;
       return newState;
     case REMOVE_USER: {
       return {
         ...state,
-        isLoggedIn: false,
+        isLoggedIn: action.isLoggedIn,
         message: action.message,
       };
     }
