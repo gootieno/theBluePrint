@@ -1,4 +1,8 @@
+import { setUser } from "../actions/userActions";
+
 export const BP_COOKIE = "csrf_access_token";
+export const RESET_STORE = 'authUtils/RESET_STORE'
+
 
 const cookieParser = () => {
   const allCookies = document.cookie.split("; ");
@@ -14,6 +18,10 @@ const cookieParser = () => {
 
   return cookieObj;
 };
+
+export const resetStore = () => ({
+  type: RESET_STORE
+})
 
 export const getCookieFromStorage = (cookieName) => {
   const cookieObj = cookieParser();
@@ -33,7 +41,8 @@ export const removeCookieFromStorage = (cookieName) => {
   else return { message: "remove cookie successful", isLoggedIn: false };
 };
 
-export const restoreUser = async (abortController, token) => {
+export const restoreUser = (abortController) => async (dispatch) => {
+  const token = getCookieFromStorage(BP_COOKIE);
   try {
     const response = await fetch("/api/auth/refresh_token", {
       method: "POST",
@@ -43,7 +52,7 @@ export const restoreUser = async (abortController, token) => {
 
     if (response.ok) {
       const data = await response.json();
-
+      dispatch(setUser(data));
       return data;
     } else {
       throw new Error("Failed to refresh token");

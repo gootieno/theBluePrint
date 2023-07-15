@@ -3,6 +3,7 @@ import {
   BLUEPRINT_EDITED,
   BLUEPRINT_DELETED,
 } from "./actions/blueprintActions";
+import { RESET_STORE } from "./utils/authUtils";
 
 const initialState = {};
 const blueprintReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ const blueprintReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.id];
       return newState;
+    case RESET_STORE:
+      return initialState;
     default:
       return state;
   }

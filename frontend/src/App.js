@@ -6,65 +6,51 @@ import {
 import LandingPage from "./LandingPage";
 import Navbar from "./Navbar";
 import ProtectedRoutes from "./ProtectedRoutes";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ModalProvider } from "./Context/FormModal";
-import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+
+import { useSelector, useDispatch } from "react-redux";
 
 import { useState, useEffect, useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { setUser } from "./redux/actions/userActions";
 import Garage from "./Garage";
+import { logoutUser } from "./redux/users";
 
 const App = () => {
-  const [token, setToken] = useState(() => getCookieFromStorage(BP_COOKIE));
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
-
-  const dispatch = useDispatch();
   let abortController = useMemo(() => new AbortController(), []);
+  const [token, setToken] = useState(() => getCookieFromStorage(BP_COOKIE));
+  const dispatch = useDispatch();
 
   useEffect(() => {
     let isMounted = true;
 
-    const verifyUserToken = async () => {
-      try {
-        if (token && isMounted) {
-          const data = await restoreUser(abortController, token);
-          console.log("data ", data);
-          if (data?.access_token)
-            dispatch(
-              setUser({ authenticated: data, message: "Token refreshed" })
-            );
+    const restoreUserToken = async () => {
+      if (isMounted && token) {
+        console.log("in the restore user");
+        const data = await dispatch(restoreUser(abortController));
+        if (!data.access_token) {
+          setToken(null);
+          dispatch(logoutUser());
         }
-      } catch (error) {
-        console.error(error);
       }
     };
-
-    verifyUserToken();
+    restoreUserToken();
 
     return () => {
       isMounted = false;
       abortController.abort();
-      setToken(null);
     };
-  }, [abortController, dispatch, token]);
+  }, [abortController, token]);
 
-  console.log("is logged in ", isLoggedIn);
   return (
-    <ModalProvider>
-      <Router>
-        <Navbar isLoggedIn={isLoggedIn} />
-        <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route
-            path="/garage/*"
-            element={<ProtectedRoutes isLoggedIn={isLoggedIn} />}
-          >
-            <Route path=":garageId" element={<Garage />} />
-          </Route>
-        </Routes>
-      </Router>
-    </ModalProvider>
+    <>
+      <Navbar />
+      <Routes>
+        <Route index element={<LandingPage />} />
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/garage/:garageId" element={<Garage />} />
+        </Route>
+      </Routes>
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ import {
   getCookieFromStorage,
   removeCookieFromStorage,
   BP_COOKIE,
+  resetStore,
 } from "./utils/authUtils";
 
 import { setUser, removeUser } from "./actions/userActions";
@@ -57,6 +58,7 @@ export const logoutUser = () => async (dispatch) => {
 
       const data = await response.json();
       dispatch(removeUser(data));
+      dispatch(resetStore());
     } else {
       // Handle non-200 response status
       const errorData = await response.json();
@@ -89,7 +91,8 @@ export const signupUser =
       if (response.ok) {
         const data = await response.json();
         dispatch(setUser(data));
-        return dispatch(loadGarage(data.garage_id));
+        dispatch(loadGarage(data.garage_id));
+        return data;
       } else {
         // Handle non-200 response status
         const errorData = await response.json();
@@ -101,23 +104,26 @@ export const signupUser =
     }
   };
 
-const initialState = { isLoggedIn: false };
+const initialState = {};
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       const newState = { ...state };
-
-      newState.isLoggedIn = true;
       newState.message = action.message;
+      newState.isLoggedIn = action.isLoggedIn;
       return newState;
-    case REMOVE_USER: {
+    case REMOVE_USER:
       return {
         ...state,
-        isLoggedIn: false,
+        isLoggedIn: action.isLoggedIn,
         message: action.message,
       };
-    }
+    // case SET_COOKIE:
+    //   return {
+    //     ...state,
+    //     token: action.token,
+    //   };
 
     default:
       return state;

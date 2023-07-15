@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate, redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../redux/users";
 
 import "./login-form.css";
@@ -42,12 +42,11 @@ const LoginForm = ({ onClose }) => {
     e.preventDefault();
     try {
       const garageId = await dispatch(loginUser({ email, password }));
-      await dispatch(loadGarage(garageId));
+      // await dispatch(loadGarage(garageId));
       setEmail("");
       setPassword("");
 
-      console.log("garage id ", garageId);
-      redirect(`/garage/${garageId}`);
+      navigate(`/garage/${garageId}`);
       onClose();
     } catch (error) {
       setError(error.message);
