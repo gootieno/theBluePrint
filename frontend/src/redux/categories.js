@@ -4,6 +4,7 @@ import {
   CATEGORY_DELETED,
   CATEGORY_EDITED,
 } from "./actions/categoryActions";
+import { RESET_STORE } from "./utils/authUtils";
 
 const initialState = {};
 const categoriesReducer = (state = initialState, action) => {
@@ -20,6 +21,8 @@ const categoriesReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.id];
       return newState;
+    case RESET_STORE:
+      return initialState;
     default:
       return state;
   }

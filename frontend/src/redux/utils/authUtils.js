@@ -1,6 +1,8 @@
 import { setUser } from "../actions/userActions";
 
 export const BP_COOKIE = "csrf_access_token";
+export const RESET_STORE = 'authUtils/RESET_STORE'
+
 
 const cookieParser = () => {
   const allCookies = document.cookie.split("; ");
@@ -16,6 +18,10 @@ const cookieParser = () => {
 
   return cookieObj;
 };
+
+export const resetStore = () => ({
+  type: RESET_STORE
+})
 
 export const getCookieFromStorage = (cookieName) => {
   const cookieObj = cookieParser();

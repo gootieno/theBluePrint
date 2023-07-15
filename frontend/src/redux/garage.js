@@ -1,6 +1,10 @@
 import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
 import { addBlueprints } from "./actions/blueprintActions";
-import { getCookieFromStorage, BP_COOKIE } from "./utils/authUtils";
+import {
+  getCookieFromStorage,
+  BP_COOKIE,
+  RESET_STORE,
+} from "./utils/authUtils";
 import { addCategories } from "./actions/categoryActions";
 import { addSpecs } from "./actions/specActions";
 
@@ -29,6 +33,9 @@ const garageReducer = (state = initialState, action) => {
       let newState = { ...state };
       newState = action.garage;
       return newState;
+
+    case RESET_STORE:
+      return initialState;
     default:
       return state;
   }

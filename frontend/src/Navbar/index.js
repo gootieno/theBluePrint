@@ -1,7 +1,7 @@
 import FormModal from "../Context/FormModal";
 import LoginForm from "../Forms/loginForm";
 import { useState, useContext } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../Context/FormModal";
 import { BP_COOKIE, getCookieFromStorage } from "../redux/utils/authUtils";
@@ -12,7 +12,7 @@ const Navbar = () => {
   const { setIsOpen, isOpen } = useContext(ModalContext);
   const [dropDown, setDropDown] = useState(false);
 
-  const isLoggedIn = getCookieFromStorage(BP_COOKIE);
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

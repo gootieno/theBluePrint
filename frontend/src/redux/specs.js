@@ -4,6 +4,7 @@ import {
   SPECS_EDITED,
   SPEC_ADDED,
 } from "./actions/specActions";
+import { RESET_STORE } from "./utils/authUtils";
 
 const initialState = {};
 
@@ -25,6 +26,8 @@ export const specsReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.id];
       return newState;
+    case RESET_STORE:
+      return initialState
     default:
       return state;
   }

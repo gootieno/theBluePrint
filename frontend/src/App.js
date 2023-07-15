@@ -47,7 +47,7 @@ const App = () => {
       <Routes>
         <Route index element={<LandingPage />} />
         <Route element={<ProtectedRoutes />}>
-          <Route path="garage/:garageId" element={<Garage />} />
+          <Route path="/garage/:garageId" element={<Garage />} />
         </Route>
       </Routes>
     </>

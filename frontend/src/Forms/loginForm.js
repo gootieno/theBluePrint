@@ -42,7 +42,7 @@ const LoginForm = ({ onClose }) => {
     e.preventDefault();
     try {
       const garageId = await dispatch(loginUser({ email, password }));
-      await dispatch(loadGarage(garageId));
+      // await dispatch(loadGarage(garageId));
       setEmail("");
       setPassword("");
 
