@@ -1,6 +1,7 @@
 #garage-container {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 #garage-heading {
@@ -19,6 +20,8 @@
 #garage-blueprints-container {
     width: 100%;
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 #garage-specs-container {
