@@ -1,5 +1,5 @@
 import { Outlet, useLocation, Navigate } from "react-router-dom";
-import { BP_COOKIE, getCookieFromStorage } from "../redux/utils/authUtils";
+import { BP_COOKIE, getCookieFromStorage } from "../../redux/utils/authUtils";
 
 const ProtectedRoutes = () => {
   const isLoggedIn = getCookieFromStorage(BP_COOKIE);

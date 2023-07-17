@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "../redux/users";
+import { loginUser } from "../../redux/users";
 
 import "./login-form.css";
-import { loadGarage } from "../redux/garage";
 
 const LoginForm = ({ onClose }) => {
   const [email, setEmail] = useState("");

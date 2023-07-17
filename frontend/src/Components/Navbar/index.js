@@ -1,12 +1,11 @@
-import FormModal from "../Context/FormModal";
+import FormModal from "../../Context/FormModal";
 import LoginForm from "../Forms/loginForm";
 import { useState, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ModalContext } from "../Context/FormModal";
-import { BP_COOKIE, getCookieFromStorage } from "../redux/utils/authUtils";
+import { ModalContext } from "../../Context/FormModal";
+import { logoutUser } from "../../redux/users";
 import "./navbar.css";
-import { logoutUser } from "../redux/users";
 
 const Navbar = () => {
   const { setIsOpen, isOpen } = useContext(ModalContext);

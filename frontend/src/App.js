@@ -3,16 +3,13 @@ import {
   getCookieFromStorage,
   restoreUser,
 } from "./redux/utils/authUtils";
-import LandingPage from "./LandingPage";
-import Navbar from "./Navbar";
-import ProtectedRoutes from "./ProtectedRoutes";
+import LandingPage from "./Components/LandingPage";
+import Navbar from "./Components/Navbar";
+import ProtectedRoutes from "./Components/ProtectedRoutes";
+import Garage from "./Components/Garage";
 import { Route, Routes } from "react-router-dom";
-
-import { useSelector, useDispatch } from "react-redux";
-
+import { useDispatch } from "react-redux";
 import { useState, useEffect, useMemo } from "react";
-import { setUser } from "./redux/actions/userActions";
-import Garage from "./Garage";
 import { logoutUser } from "./redux/users";
 
 const App = () => {
@@ -39,7 +36,7 @@ const App = () => {
       isMounted = false;
       abortController.abort();
     };
-  }, [abortController, token]);
+  }, [dispatch, abortController, token]);
 
   return (
     <>
