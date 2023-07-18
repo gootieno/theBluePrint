@@ -1,39 +1,39 @@
-#garage-container {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-}
+
 
 #garage-heading {
     text-align: center;
     color: var(--brand-color-700);
     font-weight: bold;
     margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 #garage-categories-container {
     width: 100%;
-    padding: 10px;
     margin-top: 20px;
-    font-size: 1.2rem;
+    font-size: 1rem;
+}
+
+#main-garage-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border:  2px solid black;
+    box-sizing:content-box;
+    margin: 30px;
 }
 
 #garage-blueprints-container {
-    width: 100%;
     padding: 10px;
     display: flex;
     justify-content: center;
 }
 
 #garage-specs-container {
-    width: 300px;
-    height: 200px;
+    width: 180px;
+    height: 140px;
     box-shadow: 0px 0px 10px var(--shadow-color-400);
     padding: 20px 30px;
-    font-size: 1.3rem;
-    position: absolute;
-    top: 45%;
-    left: 20px;
     overflow-y:scroll;
 }
 
@@ -51,17 +51,51 @@
     background: var(--brand-color-800)
   }
 
-#garage-work-bench-container {
-    display: flex;
-    border: 2px solid black;
 
+
+#garage-work-bench-container {
+    background-color: var(--shadow-color-50);
+    box-shadow: 0px 0px 10px var(--shadow-color-200);
+    padding: 10px  20px;
 }
 
 .work-bench-buttons {
-    font-size: var(--button-medium);
-    width: 140px;
+    font-size: var(--button-small);
+    width: 90px;
+    text-align: center;
     padding: 3px 10px;
-    margin: 5px 10px;
     background-color: transparent;
+    border:2px solid var(--brand-color-700);
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+#create {
+    background-color: var(--brand-color-200);
+    color: var(--brand-color-50);
+}
+
+#create:hover {
+    background-color: var(--brand-color-300);
+    color: var(--shadow-color-50)
+}
+
+#edit {
+    color: var(--shadow-color-500);
+    background-color: rgb(255, 255, 154);
+}
+
+#edit:hover {
+    background-color: rgb(246, 255, 0);
+}
+
+#delete {
+    color: white;
+    background-color: var(--danger-color-200);
+}
+
+#delete:hover {
+    background-color: var(--danger-color-300);
 }
 

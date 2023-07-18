@@ -52,24 +52,30 @@ const Garage = () => {
           />
         )}
       </section>
-      <main id="garage-blueprints-container">
-        <Carousel current={current} setCurrent={setCurrent} items={blueprints}>
-          {blueprint && <Blueprint blueprint={blueprint} />}
-        </Carousel>
+      <main id="main-garage-container">
+        <section
+          id="garage-specs-container"
+          className="scroll-hidden"
+          onMouseEnter={handleScroll}
+          onMouseLeave={handleScroll}
+        >
+          {categoryId && (
+            <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
+          )}
+        </section>
+        <div id="garage-blueprints-container">
+          <Carousel
+            current={current}
+            setCurrent={setCurrent}
+            items={blueprints}
+          >
+            {blueprint && <Blueprint blueprint={blueprint} />}
+          </Carousel>
+        </div>
+        <section id="garage-work-bench-container">
+          <WorkBench />
+        </section>
       </main>
-      <section
-        id="garage-specs-container"
-        className="scroll-hidden"
-        onMouseEnter={handleScroll}
-        onMouseLeave={handleScroll}
-      >
-        {categoryId && (
-          <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
-        )}
-      </section>
-      <section id="garage-work-bench-container">
-        <WorkBench />
-      </section>
     </div>
   );
 };

@@ -2,7 +2,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -64,6 +63,18 @@ h1,h2,h3,h4,h5,h6 {
   --secondary-color-700: #7337D6;
   --secondary-color-800: #5D29B1;
   --secondary-color-900: #471F88;
+
+  /*warning colors*/
+  --brand-warning-50: rgb(255, 255, 0);
+  --brand-warning-100: rgb(235, 235, 0);
+  --brand-warning-200: rgb(224, 224, 0);
+  --brand-warning-300: rgb(208, 208, 0);
+  --brand-warning-400: rgb(186, 186, 2);
+  --brand-warning-500: rgb(150, 150, 0);
+  --brand-warning-600: rgb(122, 122, 0);
+  --brand-warning-700: rgb(97, 97, 1);
+  --brand-warning-800: rgb(94, 94, 1);
+  --brand-warning-900: rgb(70, 70, 1);
 
   /*button sizes*/
   --button-small: 1.3rem;
