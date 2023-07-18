@@ -7,6 +7,7 @@ import Category from "../Category";
 import "./garage.css";
 import Spec from "../Spec";
 import Blueprint from "../Blueprint";
+import Carousel from "../Carousel";
 
 const Garage = () => {
   const { garageId } = useParams();
@@ -45,7 +46,9 @@ const Garage = () => {
         )}
       </section>
       <main id="garage-blueprints-container">
-        {blueprint && <Blueprint blueprint={blueprint} />}
+        <Carousel current={current} setCurrent={setCurrent} items={blueprints}>
+          {blueprint && <Blueprint blueprint={blueprint} />}
+        </Carousel>
       </main>
       <section id="garage-specs-container">
         {categoryId && <Spec categoryId={categoryId} />}
