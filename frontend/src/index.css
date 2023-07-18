@@ -64,4 +64,9 @@ h1,h2,h3,h4,h5,h6 {
   --secondary-color-700: #7337D6;
   --secondary-color-800: #5D29B1;
   --secondary-color-900: #471F88;
+
+  /*button sizes*/
+  --button-small: 1.3rem;
+  --button-medium: 1.8rem;
+  --button-large: 2.2rem;
 }

@@ -8,6 +8,7 @@ import "./garage.css";
 import Spec from "../Spec";
 import Blueprint from "../Blueprint";
 import Carousel from "../Carousel";
+import WorkBench from "../Workbench";
 
 const Garage = () => {
   const { garageId } = useParams();
@@ -32,6 +33,12 @@ const Garage = () => {
     setCategoryId(+event.target.id);
   };
 
+  const handleScroll = (event) => {
+    event.currentTarget.className === "scroll-hidden"
+      ? (event.currentTarget.className = "scroll-visible")
+      : (event.currentTarget.className = "scroll-hidden");
+  };
+
   return (
     <div id="garage-container">
       <h1 id="garage-heading" className="garage-items">
@@ -50,10 +57,19 @@ const Garage = () => {
           {blueprint && <Blueprint blueprint={blueprint} />}
         </Carousel>
       </main>
-      <section id="garage-specs-container">
-        {categoryId && <Spec categoryId={categoryId} />}
+      <section
+        id="garage-specs-container"
+        className="scroll-hidden"
+        onMouseEnter={handleScroll}
+        onMouseLeave={handleScroll}
+      >
+        {categoryId && (
+          <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
+        )}
       </section>
-      <section id="garage-crud-box-container">crudbox</section>
+      <section id="garage-work-bench-container">
+        <WorkBench />
+      </section>
     </div>
   );
 };
