@@ -1,5 +1,8 @@
+import "./carousel.css";
+
 const Carousel = ({ children, current, setCurrent, items }) => {
   const handleCarousel = (event) => {
+    event.target.classList.add("mouse-down");
     if (event.target.name === "left" && current === 0) {
       setCurrent(items.length - 1);
       return;
@@ -15,16 +18,29 @@ const Carousel = ({ children, current, setCurrent, items }) => {
     } else {
       setCurrent((prev) => prev + 1);
     }
-    console.log("current ", current);
+  };
+
+  const handleMouseUp = (event) => {
+    event.target.classList.remove("mouse-down");
   };
 
   return (
-    <div>
-      <button name="left" onClick={handleCarousel}>
+    <div id="carousel-container">
+      <button
+        name="left"
+        onMouseDown={handleCarousel}
+        onMouseUp={handleMouseUp}
+        className="carousel-buttons"
+      >
         {"<"}
       </button>
       {children}
-      <button name="right" onClick={handleCarousel}>
+      <button
+        name="right"
+        onMouseDown={handleCarousel}
+        onMouseUp={handleMouseUp}
+        className="carousel-buttons"
+      >
         {">"}
       </button>
     </div>
