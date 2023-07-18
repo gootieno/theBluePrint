@@ -8,10 +8,9 @@ const Category = ({ blueprintId, handleCategories }) => {
     )
   );
 
-  console.log("categories ", categories);
   return (
     <div id="categories-container">
-      {categories &&
+      {categories.length ? (
         categories.map((category) => (
           <span
             id={category.id}
@@ -20,7 +19,10 @@ const Category = ({ blueprintId, handleCategories }) => {
           >
             {category.name}
           </span>
-        ))}
+        ))
+      ) : (
+        <span className="categories">No categories created</span>
+      )}
     </div>
   );
 };
