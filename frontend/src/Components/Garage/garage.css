@@ -1,6 +1,7 @@
 #garage-container {
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 #garage-heading {
@@ -12,20 +13,26 @@
 
 #garage-categories-container {
     width: 100%;
-    border: 1px solid green;
     padding: 10px;
+    margin-top: 20px;
+    font-size: 1.2rem;
 }
 
 #garage-blueprints-container {
     width: 100%;
-    border: 1px solid blue;
     padding: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 #garage-specs-container {
-    width: 100%;
-    border: 1px solid purple;
-    padding: 10px;
+    width: fit-content;
+    box-shadow: 0px 0px 10px var(--shadow-color-400);
+    padding: 20px 30px;
+    font-size: 1.3rem;
+    position: absolute;
+    top: 50%;
+    left: 20px;
 }
 
 #garage-crud-box-container {
