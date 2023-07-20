@@ -3,10 +3,7 @@ import "./spec.css";
 
 const Spec = ({ categoryId, blueprintId }) => {
   const specs = useSelector((state) =>
-    Object.values(state.specs).filter(
-      (spec) =>
-        spec.categoryId === categoryId && spec.blueprintId === blueprintId
-    )
+    Object.values(state.specs).filter((spec) => spec.categoryId === categoryId)
   );
 
   return (

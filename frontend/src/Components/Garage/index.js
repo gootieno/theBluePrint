@@ -15,6 +15,7 @@ const Garage = () => {
   const [current, setCurrent] = useState(0);
   const [blueprint, setBlueprint] = useState(null);
   const [categoryId, setCategoryId] = useState(1);
+  const [category, setCategory] = useState(null);
 
   const garage = useSelector((state) => state.garage);
   const blueprints = useSelector((state) => Object.values(state.blueprints));
@@ -52,24 +53,30 @@ const Garage = () => {
           />
         )}
       </section>
-      <main id="garage-blueprints-container">
-        <Carousel current={current} setCurrent={setCurrent} items={blueprints}>
-          {blueprint && <Blueprint blueprint={blueprint} />}
-        </Carousel>
+      <main id="main-garage-container">
+        <section
+          id="garage-specs-container"
+          className="scroll-hidden"
+          onMouseEnter={handleScroll}
+          onMouseLeave={handleScroll}
+        >
+          {categoryId && (
+            <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
+          )}
+        </section>
+        <div id="garage-blueprints-container">
+          <Carousel
+            current={current}
+            setCurrent={setCurrent}
+            items={blueprints}
+          >
+            {blueprint && <Blueprint blueprint={blueprint} />}
+          </Carousel>
+        </div>
+        <section id="garage-work-bench-container">
+          <WorkBench />
+        </section>
       </main>
-      <section
-        id="garage-specs-container"
-        className="scroll-hidden"
-        onMouseEnter={handleScroll}
-        onMouseLeave={handleScroll}
-      >
-        {categoryId && (
-          <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
-        )}
-      </section>
-      <section id="garage-work-bench-container">
-        <WorkBench />
-      </section>
     </div>
   );
 };

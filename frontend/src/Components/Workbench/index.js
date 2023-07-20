@@ -1,6 +1,8 @@
+import "./workbench.css";
+
 const WorkBench = () => {
   return (
-    <div id="workbench-container">
+    <div id="work-bench-container">
       <button id="create" className="work-bench-buttons">
         Create
       </button>
