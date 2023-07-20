@@ -15,6 +15,7 @@ const Garage = () => {
   const [current, setCurrent] = useState(0);
   const [blueprint, setBlueprint] = useState(null);
   const [categoryId, setCategoryId] = useState(1);
+  const [category, setCategory] = useState(null);
 
   const garage = useSelector((state) => state.garage);
   const blueprints = useSelector((state) => Object.values(state.blueprints));
