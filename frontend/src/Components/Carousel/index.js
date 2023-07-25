@@ -17,6 +17,7 @@ const Carousel = ({ children, current, setCurrent, items }) => {
     } else {
       setCurrent((prev) => prev + 1);
     }
+
   };
 
   return (
