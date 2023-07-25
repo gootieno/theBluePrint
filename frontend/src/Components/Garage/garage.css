@@ -1,4 +1,32 @@
+#garage-heading-navigation-container {
+    width: fit-content;
+    margin: 0 auto;
+}
 
+#projects-navigation-container {
+    position: absolute;
+    right: 8%;
+    top:0;
+    margin-top: 3%;
+    border-radius: 3px;
+    padding: 5px 25px 15px 10px;
+    background-image: url("../../../public/assets/sign.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    z-index: 2;
+    transition: margin-top ease 1s;
+}
+
+#projects-navigation-container:hover {
+    margin-top: 4.5%;
+}
+
+#projects-navigation {
+    margin: 0;
+    color: var(--brand-color-800);
+    cursor: pointer;
+}
 
 #garage-heading {
     text-align: center;
@@ -8,12 +36,6 @@
     margin-bottom: 0px;
 }
 
-#garage-categories-container {
-    width: 100%;
-    margin-top: 20px;
-    font-size: 1rem;
-}
-
 #main-garage-container {
     display: flex;
     justify-content: space-between;
@@ -21,6 +43,12 @@
     border:  2px solid black;
     box-sizing:content-box;
     margin: 30px;
+}
+
+#garage-categories-container {
+    width: 100%;
+    margin-top: 20px;
+    font-size: 1rem;
 }
 
 #garage-blueprints-container {
@@ -35,7 +63,9 @@
     box-shadow: 0px 0px 10px var(--shadow-color-400);
     padding: 20px 30px;
     overflow-y:scroll;
+    position: relative;
 }
+
 
 .scroll-hidden::-webkit-scrollbar {
     display: none;
@@ -44,12 +74,12 @@
 .scroll-visible::-webkit-scrollbar {
     width: 5px;
     height: 8px;
-    background: var(--brand-color-300);
-  }
+    background: white;
+}
 
 .scroll-visible::-webkit-scrollbar-thumb {
     background: var(--brand-color-800)
-  }
+}
 
 
 
@@ -99,3 +129,18 @@
     background-color: var(--danger-color-300);
 }
 
+@media screen and (max-width: 1419px) {
+    #main-garage-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 0px;
+    }
+
+    #garage-specs-container {
+        width: 400px;
+    }
+
+    #garage-work-bench-container {
+        width: 400px;
+    }
+}

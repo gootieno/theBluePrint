@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 import "./category.css";
 
-const Category = ({ blueprintId, handleCategories }) => {
+const Category = ({ blueprint, handleCategories }) => {
   const categories = useSelector((state) =>
     Object.values(state.categories).filter(
-      (category) => category.blueprintId === blueprintId
+      (category) => category.blueprintId === blueprint.id
     )
   );
 

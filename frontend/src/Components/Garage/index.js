@@ -16,6 +16,7 @@ const Garage = () => {
   const [blueprint, setBlueprint] = useState(null);
   const [categoryId, setCategoryId] = useState(1);
   const [category, setCategory] = useState(null);
+  const [specs, setSpecs] = useState(null);
 
   const garage = useSelector((state) => state.garage);
   const blueprints = useSelector((state) => Object.values(state.blueprints));
@@ -28,7 +29,8 @@ const Garage = () => {
 
   useEffect(() => {
     setBlueprint(blueprints[current]);
-  }, [blueprints, current]);
+    console.log("category id", categoryId);
+  }, [blueprints, current, categoryId]);
 
   const handleCategories = (event) => {
     setCategoryId(+event.target.id);
@@ -42,15 +44,17 @@ const Garage = () => {
 
   return (
     <div id="garage-container">
-      <h1 id="garage-heading" className="garage-items">
-        {garage.name}
-      </h1>
+      <div id="garage-heading-navigation-container">
+        <h1 id="garage-heading" className="garage-items">
+          {garage.name}
+        </h1>
+        <div id="projects-navigation-container">
+          <h2 id="projects-navigation">Projects</h2>
+        </div>
+      </div>
       <section id="garage-categories-container">
         {blueprint && (
-          <Category
-            blueprintId={blueprint.id}
-            handleCategories={handleCategories}
-          />
+          <Category blueprint={blueprint} handleCategories={handleCategories} />
         )}
       </section>
       <main id="main-garage-container">
@@ -60,9 +64,7 @@ const Garage = () => {
           onMouseEnter={handleScroll}
           onMouseLeave={handleScroll}
         >
-          {categoryId && (
-            <Spec categoryId={categoryId} blueprintId={blueprint?.id} />
-          )}
+          {categoryId && <Spec categoryId={categoryId} />}
         </section>
         <div id="garage-blueprints-container">
           <Carousel
