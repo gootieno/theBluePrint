@@ -1,9 +1,14 @@
 import { useSelector } from "react-redux";
 import "./spec.css";
 
-const Spec = ({ categoryId }) => {
+const Spec = () => {
+  const selectedCategory = useSelector(
+    (state) => state.categories.currentCategory
+  );
   const specs = useSelector((state) =>
-    Object.values(state.specs).filter((spec) => spec.categoryId === categoryId)
+    Object.values(state.specs).filter(
+      (spec) => spec.categoryId === selectedCategory?.id
+    )
   );
 
   return (

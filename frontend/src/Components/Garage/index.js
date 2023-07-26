@@ -9,28 +9,22 @@ import Spec from "../Spec";
 import Blueprint from "../Blueprint";
 import Carousel from "../Carousel";
 import WorkBench from "../Workbench";
+import { setCurrentBlueprint } from "../../redux/actions/blueprintActions";
 
 const Garage = () => {
   const { garageId } = useParams();
-  const [current, setCurrent] = useState(0);
-  const [blueprint, setBlueprint] = useState(null);
   const [categoryId, setCategoryId] = useState(1);
   const [category, setCategory] = useState(null);
   const [specs, setSpecs] = useState(null);
 
   const garage = useSelector((state) => state.garage);
   const blueprints = useSelector((state) => Object.values(state.blueprints));
-
+  const blueprint = useSelector((state) => state.blueprints.currentBlueprint);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(loadGarage(garageId));
   }, [dispatch, garageId]);
-
-  useEffect(() => {
-    setBlueprint(blueprints[current]);
-    console.log("category id", categoryId);
-  }, [blueprints, current, categoryId]);
 
   const handleCategories = (event) => {
     setCategoryId(+event.target.id);
@@ -42,6 +36,10 @@ const Garage = () => {
       : (event.currentTarget.className = "scroll-hidden");
   };
 
+  const handleCarouselItems = (currentBlueprint) => {
+    console.log("blueprint ", blueprint);
+    dispatch(setCurrentBlueprint(currentBlueprint));
+  };
   return (
     <div id="garage-container">
       <div id="garage-heading-navigation-container">
@@ -67,11 +65,7 @@ const Garage = () => {
           {categoryId && <Spec categoryId={categoryId} />}
         </section>
         <div id="garage-blueprints-container">
-          <Carousel
-            current={current}
-            setCurrent={setCurrent}
-            items={blueprints}
-          >
+          <Carousel items={blueprints} handleItems={handleCarouselItems}>
             {blueprint && <Blueprint blueprint={blueprint} />}
           </Carousel>
         </div>

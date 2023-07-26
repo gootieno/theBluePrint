@@ -2,6 +2,7 @@ export const CATEGORIES_ADDED = "categories/CATEGORIES_ADDED";
 export const CATEGORY_ADDED = "categories/CATEGORY_ADDED";
 export const CATEGORY_EDITED = "categories/CATEGORY_EDITED";
 export const CATEGORY_DELETED = "categories/CATEGORY_DELETED";
+export const CURRENT_CATEGORY_SET = "categories/CURRENT_CATEGORY_SET";
 
 export const addCategories = (categories) => ({
   type: CATEGORIES_ADDED,
@@ -21,4 +22,9 @@ export const editCategory = (category) => ({
 export const deleteCategory = (id) => ({
   type: CATEGORY_DELETED,
   id,
+});
+
+export const setCurrentCategory = (category) => ({
+  type: CURRENT_CATEGORY_SET,
+  category,
 });
