@@ -1,5 +1,6 @@
 import { addGarage, GARAGE_ADDED } from "./actions/garageActions";
 import { addBlueprints } from "./actions/blueprintActions";
+import { setCurrentBlueprint } from "./actions/blueprintActions";
 import {
   getCookieFromStorage,
   BP_COOKIE,
@@ -19,6 +20,7 @@ export const loadGarage = (garageId) => async (dispatch) => {
     const data = await response.json();
     dispatch(addGarage(data.garage));
     dispatch(addBlueprints(data.blueprints));
+    dispatch(setCurrentBlueprint(0));
     dispatch(addCategories(data.categories));
     dispatch(addSpecs(data.specs));
     return response;

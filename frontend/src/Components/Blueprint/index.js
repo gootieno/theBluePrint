@@ -1,6 +1,11 @@
+import { useSelector } from "react-redux";
 import "./blueprint.css";
 
-const Blueprint = ({ blueprint }) => {
+const Blueprint = () => {
+  const blueprint = useSelector((state) => state.blueprints.currentBlueprint);
+
+
+  if (!blueprint) return null;
   return (
     <div id="blueprint-container">
       <img
