@@ -11,12 +11,12 @@ const initialState = { currentCategory: null };
 const categoriesReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case CURRENT_CATEGORY_SET:
+      const nextCategory = state[action.id];
+      newState = { ...state, currentCategory: nextCategory };
+      return newState;
     case CATEGORIES_ADDED:
-      newState = {
-        ...state,
-        ...action.categories,
-        ["currentCategory"]: Object.values(action.categories)[0],
-      };
+      newState = { ...state, ...action.categories };
       return newState;
     case CATEGORY_ADDED:
       return { ...state, [action.category.id]: action.category };

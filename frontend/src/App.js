@@ -24,7 +24,7 @@ const App = () => {
       if (isMounted && token) {
         console.log("in the restore user");
         const data = await dispatch(restoreUser(abortController));
-        if (!data.access_token) {
+        if (!data || !data.access_token) {
           setToken(null);
           dispatch(logoutUser());
         }

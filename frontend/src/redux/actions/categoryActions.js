@@ -24,7 +24,5 @@ export const deleteCategory = (id) => ({
   id,
 });
 
-export const setCurrentCategory = (category) => ({
-  type: CURRENT_CATEGORY_SET,
-  category,
-});
+
+export const setCurrentCategory = (id) => ({ type: CURRENT_CATEGORY_SET, id });

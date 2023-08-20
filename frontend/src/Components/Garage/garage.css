@@ -49,6 +49,11 @@
     width: 100%;
     margin-top: 20px;
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: var(--brand-color-700);
+    font-weight: 600;
 }
 
 #garage-blueprints-container {
@@ -65,7 +70,6 @@
     overflow-y:scroll;
     position: relative;
 }
-
 
 .scroll-hidden::-webkit-scrollbar {
     display: none;

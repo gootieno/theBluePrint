@@ -10,6 +10,10 @@ const initialState = { currentBlueprint: null };
 const blueprintReducer = (state = initialState, action) => {
   let newState;
   switch (action.type) {
+    case CURRENT_BLUEPRINT_SET:
+      const stateArray = Object.values(state);
+      newState = { ...state, currentBlueprint: stateArray[action.index] };
+      return newState;
     case BLUEPRINTS_ADDED:
       newState = {
         ...state,

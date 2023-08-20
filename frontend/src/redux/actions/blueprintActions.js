@@ -18,7 +18,9 @@ export const deleteBlueprint = (id) => ({
   id,
 });
 
-export const setCurrentBlueprint = (blueprint) => ({
+
+export const setCurrentBlueprint = (index) => ({
   type: CURRENT_BLUEPRINT_SET,
-  blueprint,
+  index,
+
 });

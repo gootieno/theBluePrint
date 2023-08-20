@@ -1,7 +1,9 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loadGarage } from "../../redux/garage";
+import { setCurrentBlueprint } from "../../redux/actions/blueprintActions";
+
 import Category from "../Category";
 
 import "./garage.css";
@@ -13,22 +15,28 @@ import { setCurrentBlueprint } from "../../redux/actions/blueprintActions";
 
 const Garage = () => {
   const { garageId } = useParams();
-  const [categoryId, setCategoryId] = useState(1);
-  const [category, setCategory] = useState(null);
-  const [specs, setSpecs] = useState(null);
+
+  const [current, setCurrent] = useState(0);
 
   const garage = useSelector((state) => state.garage);
-  const blueprints = useSelector((state) => Object.values(state.blueprints));
-  const blueprint = useSelector((state) => state.blueprints.currentBlueprint);
+
+  const blueprints = useSelector((state) =>
+    Object.entries(state.blueprints).filter(
+      ([key, value]) => key !== "currentBlueprint"
+    )
+  );
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(loadGarage(garageId));
   }, [dispatch, garageId]);
 
-  const handleCategories = (event) => {
-    setCategoryId(+event.target.id);
-  };
+
+  useEffect(() => {
+    dispatch(setCurrentBlueprint(current));
+  }, [dispatch, current]);
 
   const handleScroll = (event) => {
     event.currentTarget.className === "scroll-hidden"
@@ -47,13 +55,13 @@ const Garage = () => {
           {garage.name}
         </h1>
         <div id="projects-navigation-container">
-          <h2 id="projects-navigation">Projects</h2>
+          <h2 id="projects-navigation" onClick={() => navigate("/projects")}>
+            Projects
+          </h2>
         </div>
       </div>
       <section id="garage-categories-container">
-        {blueprint && (
-          <Category blueprint={blueprint} handleCategories={handleCategories} />
-        )}
+        <Category />
       </section>
       <main id="main-garage-container">
         <section
@@ -61,12 +69,15 @@ const Garage = () => {
           className="scroll-hidden"
           onMouseEnter={handleScroll}
           onMouseLeave={handleScroll}
-        >
-          {categoryId && <Spec categoryId={categoryId} />}
-        </section>
+        ></section>
         <div id="garage-blueprints-container">
-          <Carousel items={blueprints} handleItems={handleCarouselItems}>
-            {blueprint && <Blueprint blueprint={blueprint} />}
+
+          <Carousel
+            current={current}
+            setCurrent={setCurrent}
+            items={blueprints}
+          >
+            <Blueprint />
           </Carousel>
         </div>
         <section id="garage-work-bench-container">
