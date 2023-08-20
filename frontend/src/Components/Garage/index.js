@@ -17,6 +17,7 @@ const Garage = () => {
   const [current, setCurrent] = useState(0);
 
   const garage = useSelector((state) => state.garage);
+
   const blueprints = useSelector((state) =>
     Object.entries(state.blueprints).filter(
       ([key, value]) => key !== "currentBlueprint"
@@ -31,7 +32,6 @@ const Garage = () => {
   }, [dispatch, garageId]);
 
   useEffect(() => {
-    console.log("current ", current);
     dispatch(setCurrentBlueprint(current));
   }, [dispatch, current]);
 
@@ -53,7 +53,9 @@ const Garage = () => {
           </h2>
         </div>
       </div>
-      <section id="garage-categories-container"></section>
+      <section id="garage-categories-container">
+        <Category />
+      </section>
       <main id="main-garage-container">
         <section
           id="garage-specs-container"

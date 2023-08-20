@@ -1,28 +1,27 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+
 import "./category.css";
 
-const Category = ({ category, setCategoryId, blueprint }) => {
-  // const categories = useSelector((state) =>
-  //   Object.values(state.categories).filter(
-  //     (category) => category.blueprintId === blueprint.id
-  //   )
-  // );
+const Category = () => {
+  const currentBlueprint = useSelector(
+    (state) => state.blueprints.currentBlueprint
+  );
 
-  const handleCategories = (event) => {
-    setCategoryId(+event.target.id);
-  };
+  const categories = useSelector((state) =>
+    Object.values(state.categories).filter(
+      (category) => category && category.blueprintId === currentBlueprint.id
+    )
+  );
 
   return (
     <>
-      {category ? (
-        <span
-          id={category.id}
-          className="categories"
-          onClick={handleCategories}
-        >
-          {category.name}
-        </span>
+      {categories.length ? (
+        categories.map((category) => (
+          <span id={category.id} key={category.id}>
+            {category.name}
+          </span>
+        ))
       ) : (
         <span className="categories">No categories created</span>
       )}
