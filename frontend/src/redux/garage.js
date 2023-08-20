@@ -9,7 +9,7 @@ import {
 import { addCategories } from "./actions/categoryActions";
 import { addSpecs } from "./actions/specActions";
 
-export const loadGarage = (garageId) => async (dispatch) => {
+export const loadGarage = (garageId) => async (dispatch, getState) => {
   const token = getCookieFromStorage(BP_COOKIE);
 
   const response = await fetch(`/api/garage/${garageId}`, {
@@ -21,6 +21,8 @@ export const loadGarage = (garageId) => async (dispatch) => {
     dispatch(addGarage(data.garage));
     dispatch(addBlueprints(data.blueprints));
     dispatch(setCurrentBlueprint(0));
+    const state = getState();
+    const currentBlueprint = state.blueprints.currentBlueprint;
     dispatch(addCategories(data.categories));
     dispatch(addSpecs(data.specs));
     return response;
