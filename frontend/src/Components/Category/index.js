@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -13,6 +14,7 @@ const Category = () => {
       (category) => category && category.blueprintId === currentBlueprint.id
     )
   );
+
 
   return (
     <>

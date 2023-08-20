@@ -26,6 +26,9 @@ const categoriesReducer = (state = initialState, action) => {
       newState = { ...state };
       delete newState[action.id];
       return newState;
+    case CURRENT_CATEGORY_SET:
+      newState = { ...state, ["currentCategory"]: action.category };
+      return newState;
     case RESET_STORE:
       return initialState;
     default:

@@ -6,6 +6,7 @@ const Spec = ({ categoryId, specs }) => {
   //   Object.values(state.specs).filter((spec) => spec.categoryId === categoryId)
   // );
   console.log("category ", categoryId);
+
   return (
     <>
       <h2 id="specs-heading">Specs</h2>

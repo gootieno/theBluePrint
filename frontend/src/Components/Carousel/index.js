@@ -1,24 +1,25 @@
+import { useState, useEffect } from "react";
 import "./carousel.css";
 
-const Carousel = ({ children, current, setCurrent, items }) => {
+const Carousel = ({ children, items, handleItems }) => {
+  const [current, setCurrent] = useState(0);
+
   const handleCarousel = (event) => {
-    if (event.target.name === "left" && current === 0) {
-      setCurrent(items.length - 1);
-      return;
-    }
-
-    if (event.target.name === "right" && current === items.length - 1) {
-      setCurrent(0);
-      return;
-    }
-
     if (event.target.name === "left") {
-      setCurrent((prev) => prev - 1);
+      setCurrent((prevIndex) =>
+        prevIndex === 0 ? items.length - 2 : prevIndex - 1
+      );
     } else {
-      setCurrent((prev) => prev + 1);
+      setCurrent((prevIndex) =>
+        prevIndex === items.length - 2 ? 0 : prevIndex + 1
+      );
     }
-
   };
+
+  useEffect(() => {
+    console.log("current ", current);
+    handleItems(items[current]);
+  }, [current]);
 
   return (
     <div id="carousel-container">

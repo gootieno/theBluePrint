@@ -15,7 +15,11 @@ const blueprintReducer = (state = initialState, action) => {
       newState = { ...state, currentBlueprint: stateArray[action.index] };
       return newState;
     case BLUEPRINTS_ADDED:
-      newState = action.blueprints;
+      newState = {
+        ...state,
+        ...action.blueprints,
+        ["currentBlueprint"]: Object.values(action.blueprints)[0],
+      };
       return newState;
     case BLUEPRINT_EDITED:
       newState = { ...state };
@@ -24,6 +28,12 @@ const blueprintReducer = (state = initialState, action) => {
     case BLUEPRINT_DELETED:
       newState = { ...state };
       delete newState[action.id];
+      if (newState.currentBlueprint[action.id])
+        newState.currentBlueprint = newState.blueprints[0];
+      return newState;
+    case CURRENT_BLUEPRINT_SET:
+      newState = { ...state };
+      newState.currentBlueprint = action.blueprint;
       return newState;
     case RESET_STORE:
       return initialState;

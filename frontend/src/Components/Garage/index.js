@@ -11,9 +11,11 @@ import Spec from "../Spec";
 import Blueprint from "../Blueprint";
 import Carousel from "../Carousel";
 import WorkBench from "../Workbench";
+import { setCurrentBlueprint } from "../../redux/actions/blueprintActions";
 
 const Garage = () => {
   const { garageId } = useParams();
+
   const [current, setCurrent] = useState(0);
 
   const garage = useSelector((state) => state.garage);
@@ -31,6 +33,7 @@ const Garage = () => {
     dispatch(loadGarage(garageId));
   }, [dispatch, garageId]);
 
+
   useEffect(() => {
     dispatch(setCurrentBlueprint(current));
   }, [dispatch, current]);
@@ -41,6 +44,10 @@ const Garage = () => {
       : (event.currentTarget.className = "scroll-hidden");
   };
 
+  const handleCarouselItems = (currentBlueprint) => {
+    console.log("blueprint ", blueprint);
+    dispatch(setCurrentBlueprint(currentBlueprint));
+  };
   return (
     <div id="garage-container">
       <div id="garage-heading-navigation-container">
@@ -64,6 +71,7 @@ const Garage = () => {
           onMouseLeave={handleScroll}
         ></section>
         <div id="garage-blueprints-container">
+
           <Carousel
             current={current}
             setCurrent={setCurrent}
